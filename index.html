@@ -31,26 +31,35 @@ var CONFIG = {
 window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">JiayiSpace</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/31/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">[ Untitled ]</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-10-31</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
 <p>title: 数据分析</p>
 </blockquote>
-<h1 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h1><blockquote>
+
+        <h1 id="Numpy"   >
+          <a href="#Numpy" class="heading-link"><i class="fas fa-link"></i></a><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h1>
+      <blockquote>
 <p>ndarray，具有矢量运算和复杂广播能力的多维数组</p>
 </blockquote>
 <blockquote>
 <p><code>ndarray</code>，是<code>n-dimensional array object</code>的缩写，用来存储单一数据类型的多维数组（后续章节统称为数组）。</p>
 <p><code>ufunc</code>是<code>universal function object</code>的缩写，是一组对ndarray中的数据进行元素级运算的函数。</p>
 </blockquote>
-<h4 id="numpy提供的常数"><a href="#numpy提供的常数" class="headerlink" title="numpy提供的常数"></a>numpy提供的常数</h4><p><code>Numpy</code>包提供由常用的数学常数：</p>
+
+        <h4 id="numpy提供的常数"   >
+          <a href="#numpy提供的常数" class="heading-link"><i class="fas fa-link"></i></a><a href="#numpy提供的常数" class="headerlink" title="numpy提供的常数"></a>numpy提供的常数</h4>
+      <p><code>Numpy</code>包提供由常用的数学常数：</p>
 <p><code>np.pi</code>: 圆周率<em>𝜋</em></p>
 <p><code>np.e</code>: 自然对数<em>𝑒</em></p>
 <p><code>np.euler_gamma</code>: 欧拉常数</p>
 <p><code>np.PZERO, np.NZERO</code>: 正数零，负数零</p>
 <p><code>np.nan, np.NaN, np.NAN</code>: 非数字</p>
 <p><code>np.inf, np.Inf, np.Infinity, np.PINF, np.NINF, np.infty</code>: 无穷大</p>
-<h4 id="数组（ndarray）"><a href="#数组（ndarray）" class="headerlink" title="数组（ndarray）"></a>数组（<code>ndarray</code>）</h4><p>​        数组(<code>ndarray</code>)对象是 Numpy 包中最重要的基础对象，Numpy  中所有函数都是围绕数组对象来进行处理。</p>
+
+        <h4 id="数组（ndarray）"   >
+          <a href="#数组（ndarray）" class="heading-link"><i class="fas fa-link"></i></a><a href="#数组（ndarray）" class="headerlink" title="数组（ndarray）"></a>数组（<code>ndarray</code>）</h4>
+      <p>​        数组(<code>ndarray</code>)对象是 Numpy 包中最重要的基础对象，Numpy  中所有函数都是围绕数组对象来进行处理。</p>
 <p>​        数组对象是数组类型的实例，是一种结构类型，用于存储多维数据集。与内置结构类型列表相比，数组对象同样是可变的、可重复的、有序的、无映射的数据集，区别在于数组对象是同质的。</p>
 <p>​        使用<code>np.ndarray()</code>来构造一个对象，但由于参数众多，初学时是会比较麻烦。</p>
 <p>​        通常使用Numpy的实用函数来创建数组对象</p>
 <p>​        可以使用Numpy函数<code>np.array()</code>来创建数组对象：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array(object, dtype=None, copy=True, order=None, subok=False, ndmin=0)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array(object, dtype=None, copy=True, order=None, subok=False, ndmin=0)</span><br></pre></td></tr></table></div></figure>
 
 <p>其中：</p>
 <ul>
@@ -58,7 +67,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <li><code>dtype</code>，指定数组类型</li>
 <li><code>order</code>，数组元素在内存中存储顺序：<code>C</code>表示行-列；F（Fortran）表示列行。</li>
 </ul>
-<h4 id="ndarray的属性"><a href="#ndarray的属性" class="headerlink" title="ndarray的属性"></a><code>ndarray</code>的属性</h4><ul>
+
+        <h4 id="ndarray的属性"   >
+          <a href="#ndarray的属性" class="heading-link"><i class="fas fa-link"></i></a><a href="#ndarray的属性" class="headerlink" title="ndarray的属性"></a><code>ndarray</code>的属性</h4>
+      <ul>
 <li><code>ndarray.ndim</code>：数组的维数（即数组轴的个数），等于秩。</li>
 <li><code>ndarray.shape</code>：数组的维度。用整数的元组来表示数组每个维度的大小。例如二维数组中，表示数组的“行数”和“列数”。</li>
 <li><code>ndarray.size</code>：数组元素的总数，等于shape属性中元组元素的乘积。</li>
@@ -66,7 +78,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <li><code>ndarray.itemsize</code>：数组中每个元素的字节大小。例如数组元素类型为float64(64bits)，则其值为8。</li>
 <li><code>ndarray.data</code>：包含实际数组元素的缓冲区。由于一般通过数组的位置索引获取元素。</li>
 </ul>
-<h2 id="通用函数（ufunc）"><a href="#通用函数（ufunc）" class="headerlink" title="通用函数（ufunc）"></a>通用函数（<code>ufunc</code>）</h2><p>Numpy通用函数是一组对数组进行元素级运算的函数，是数组运算最常用的操作。通用函数是一个函数的“矢量化”包装器，输入数组并产生特定数组输出。</p>
+
+        <h2 id="通用函数（ufunc）"   >
+          <a href="#通用函数（ufunc）" class="heading-link"><i class="fas fa-link"></i></a><a href="#通用函数（ufunc）" class="headerlink" title="通用函数（ufunc）"></a>通用函数（<code>ufunc</code>）</h2>
+      <p>Numpy通用函数是一组对数组进行元素级运算的函数，是数组运算最常用的操作。通用函数是一个函数的“矢量化”包装器，输入数组并产生特定数组输出。</p>
 <p>在Numpy中，通用函数是<code>numpy.ufunc</code>类的实例。通用函数可以对标量进行运算操作，也可以对数组（向量，矩阵）进行操作，数组不一致会进行广播。 使用<code>numpy.frompyfunc</code>工厂函数可以生成自定义ufunc实例。</p>
 <p>所有通用函数函数都使用可选的关键字参数。大多数代表高级用法，通常不会被使用。</p>
 <ul>
@@ -85,7 +100,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <li>比较函数</li>
 <li>浮点数运算函数</li>
 </ul>
-<h3 id="数学操作"><a href="#数学操作" class="headerlink" title="数学操作"></a>数学操作</h3><table>
+
+        <h3 id="数学操作"   >
+          <a href="#数学操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#数学操作" class="headerlink" title="数学操作"></a>数学操作</h3>
+      <div class="table-container"><table>
 <thead>
 <tr>
 <th align="left">函数</th>
@@ -124,11 +142,17 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <td align="left"><code>positive(x, /[, out, where, casting, order, …])</code></td>
 <td align="left"><code>+x1</code></td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 </div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/31/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">[ Untitled ]</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-10-31</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
 <p>title: 算法设计与分析</p>
 </blockquote>
-<h1 id="算法设计与分析"><a href="#算法设计与分析" class="headerlink" title="算法设计与分析"></a>算法设计与分析</h1><h2 id="排序算法回顾"><a href="#排序算法回顾" class="headerlink" title="排序算法回顾"></a>排序算法回顾</h2><table>
+
+        <h1 id="算法设计与分析"   >
+          <a href="#算法设计与分析" class="heading-link"><i class="fas fa-link"></i></a><a href="#算法设计与分析" class="headerlink" title="算法设计与分析"></a>算法设计与分析</h1>
+      
+        <h2 id="排序算法回顾"   >
+          <a href="#排序算法回顾" class="heading-link"><i class="fas fa-link"></i></a><a href="#排序算法回顾" class="headerlink" title="排序算法回顾"></a>排序算法回顾</h2>
+      <div class="table-container"><table>
 <thead>
 <tr>
 <th>Algorithm</th>
@@ -180,8 +204,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <td>O(n log n)</td>
 <td>swapping</td>
 </tr>
-</tbody></table>
-<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><ul>
+</tbody></table></div>
+
+        <h3 id="堆排序"   >
+          <a href="#堆排序" class="heading-link"><i class="fas fa-link"></i></a><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3>
+      <ul>
 <li>a heap can be given by an array H[0..n-1] and an integer t. </li>
 <li>The children of node H[h] are H[2h+1] and H[2h+2].</li>
 <li>The parent of node H[h] is H[(h-1)/2]</li>
@@ -196,28 +223,49 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 </ul>
 </li>
 </ul>
-<h4 id="FixHeap"><a href="#FixHeap" class="headerlink" title="FixHeap()"></a>FixHeap()</h4><ul>
+
+        <h4 id="FixHeap"   >
+          <a href="#FixHeap" class="heading-link"><i class="fas fa-link"></i></a><a href="#FixHeap" class="headerlink" title="FixHeap()"></a>FixHeap()</h4>
+      <ul>
 <li>FixHeap(H, t, i) takes <strong>time O(log n).</strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h ≠ root &amp; h &gt; its parent) </span><br><span class="line">      while (h ≠ root &amp; h &gt; its parent) \\插入到数组最后 </span><br><span class="line">         swap h and its parent;</span><br><span class="line">    else </span><br><span class="line">      while (h ≠ leaf &amp; h &lt; its larger child)</span><br><span class="line">         swap h and its larger child.</span><br><span class="line">         </span><br><span class="line">        </span><br><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h &gt; 0 &amp; H[h] &gt; H[⌊(h-1)/2⌋]) </span><br><span class="line">      while (h &gt; 0 &amp; H[h] &gt; H[⌊(h-1)/2⌋]) </span><br><span class="line">         H[h] ↔ H[⌊(h-1)/2⌋];</span><br><span class="line">         h = ⌊(h-1)/2⌋</span><br><span class="line">    else</span><br><span class="line">      while (2h+1 ≤ t)</span><br><span class="line">         H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">         if (H[h] &lt; H[g])</span><br><span class="line">            H[h] ↔ H[g];</span><br><span class="line">            h = g; </span><br><span class="line">         else h = t.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// In HeapSort, only FixHeapD is needed</span><br><span class="line">FixHeapD(H, t, i)   // FixHeapD only moves down along the root/leaf path. </span><br><span class="line">1. h = i; </span><br><span class="line">2. while (2h+1 ≤ t)</span><br><span class="line">       H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">       if (H[h] &lt; H[g])</span><br><span class="line">          H[h] ↔ H[g];</span><br><span class="line">          h = g; </span><br><span class="line">       else h = t.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h ≠ root &amp; h &gt; its parent) </span><br><span class="line">      while (h ≠ root &amp; h &gt; its parent) \\插入到数组最后 </span><br><span class="line">         swap h and its parent;</span><br><span class="line">    else </span><br><span class="line">      while (h ≠ leaf &amp; h &lt; its larger child)</span><br><span class="line">         swap h and its larger child.</span><br><span class="line">         </span><br><span class="line">        </span><br><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h &gt; 0 &amp; H[h] &gt; H[⌊(h-1)/2⌋]) </span><br><span class="line">      while (h &gt; 0 &amp; H[h] &gt; H[⌊(h-1)/2⌋]) </span><br><span class="line">         H[h] ↔ H[⌊(h-1)/2⌋];</span><br><span class="line">         h = ⌊(h-1)/2⌋</span><br><span class="line">    else</span><br><span class="line">      while (2h+1 ≤ t)</span><br><span class="line">         H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">         if (H[h] &lt; H[g])</span><br><span class="line">            H[h] ↔ H[g];</span><br><span class="line">            h = g; </span><br><span class="line">         else h = t.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// In HeapSort, only FixHeapD is needed</span><br><span class="line">FixHeapD(H, t, i)   // FixHeapD only moves down along the root/leaf path. </span><br><span class="line">1. h = i; </span><br><span class="line">2. while (2h+1 ≤ t)</span><br><span class="line">       H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">       if (H[h] &lt; H[g])</span><br><span class="line">          H[h] ↔ H[g];</span><br><span class="line">          h = g; </span><br><span class="line">       else h = t.</span><br></pre></td></tr></table></div></figure>
 
-<h4 id="SortHeap"><a href="#SortHeap" class="headerlink" title="SortHeap()"></a>SortHeap()</h4><ul>
+
+        <h4 id="SortHeap"   >
+          <a href="#SortHeap" class="heading-link"><i class="fas fa-link"></i></a><a href="#SortHeap" class="headerlink" title="SortHeap()"></a>SortHeap()</h4>
+      <ul>
 <li>Sorting a heap takes time O(n log n).</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">H[0..n-1] is a heap</span><br><span class="line">1. t = n-1; </span><br><span class="line">2. while (t &gt; 0) </span><br><span class="line">      H[1] ↔ H[t];</span><br><span class="line">      t = t – 1; </span><br><span class="line">      FixHeap(H, t, 0).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">H[0..n-1] is a heap</span><br><span class="line">1. t = n-1; </span><br><span class="line">2. while (t &gt; 0) </span><br><span class="line">      H[1] ↔ H[t];</span><br><span class="line">      t = t – 1; </span><br><span class="line">      FixHeap(H, t, 0).</span><br></pre></td></tr></table></div></figure>
 
-<h4 id="MakeHeap"><a href="#MakeHeap" class="headerlink" title="MakeHeap()"></a>MakeHeap()</h4><ul>
+
+        <h4 id="MakeHeap"   >
+          <a href="#MakeHeap" class="heading-link"><i class="fas fa-link"></i></a><a href="#MakeHeap" class="headerlink" title="MakeHeap()"></a>MakeHeap()</h4>
+      <ul>
 <li>time of MakeHeap: O(n log n)</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (i = ⌊(n-2)/2⌋; i ≥ 0; i--)</span><br><span class="line">      FixHeapD(H, n-1, i).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (i = ⌊(n-2)/2⌋; i ≥ 0; i--)</span><br><span class="line">      FixHeapD(H, n-1, i).</span><br></pre></td></tr></table></div></figure>
 
-<h4 id="Main"><a href="#Main" class="headerlink" title="Main()"></a>Main()</h4><ul>
+
+        <h4 id="Main"   >
+          <a href="#Main" class="heading-link"><i class="fas fa-link"></i></a><a href="#Main" class="headerlink" title="Main()"></a>Main()</h4>
+      <ul>
 <li><strong>HeapSort sorts an array of size n in time O(n log n).</strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">FixHeapD(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. while (2h+1 ≤ t)</span><br><span class="line">       H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">       if (H[h] &lt; H[g])</span><br><span class="line">          H[h] ↔ H[g];</span><br><span class="line">          h = g; </span><br><span class="line">       else h = t.</span><br><span class="line"></span><br><span class="line">MakeHeap(H[0..n-1])</span><br><span class="line">\\ make array H[0..n-1] a heap</span><br><span class="line">1. for (i = ⌊(n-2)/2⌋; i ≥ 0; i--)</span><br><span class="line">      FixHeapD(H, n-1, i).</span><br><span class="line"></span><br><span class="line">SortHeap(H[0..n-1])</span><br><span class="line">\\ H[0..n-1] is a heap</span><br><span class="line">1. t = n-1; </span><br><span class="line">2. while (t &gt; 0) </span><br><span class="line">      H[0] ↔ H[t];</span><br><span class="line">      t = t – 1; </span><br><span class="line">      FixHeapD(H, t, 0).</span><br><span class="line"></span><br><span class="line">main HeapSort(H[0..n-1])</span><br><span class="line">\\ sort the array H[0..n-1]</span><br><span class="line">1. MakeHeap(H[0..n-1]);</span><br><span class="line">2. SortHeap(H[0..n-1]). </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">FixHeapD(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. while (2h+1 ≤ t)</span><br><span class="line">       H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">       if (H[h] &lt; H[g])</span><br><span class="line">          H[h] ↔ H[g];</span><br><span class="line">          h = g; </span><br><span class="line">       else h = t.</span><br><span class="line"></span><br><span class="line">MakeHeap(H[0..n-1])</span><br><span class="line">\\ make array H[0..n-1] a heap</span><br><span class="line">1. for (i = ⌊(n-2)/2⌋; i ≥ 0; i--)</span><br><span class="line">      FixHeapD(H, n-1, i).</span><br><span class="line"></span><br><span class="line">SortHeap(H[0..n-1])</span><br><span class="line">\\ H[0..n-1] is a heap</span><br><span class="line">1. t = n-1; </span><br><span class="line">2. while (t &gt; 0) </span><br><span class="line">      H[0] ↔ H[t];</span><br><span class="line">      t = t – 1; </span><br><span class="line">      FixHeapD(H, t, 0).</span><br><span class="line"></span><br><span class="line">main HeapSort(H[0..n-1])</span><br><span class="line">\\ sort the array H[0..n-1]</span><br><span class="line">1. MakeHeap(H[0..n-1]);</span><br><span class="line">2. SortHeap(H[0..n-1]). </span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
 
-<h4 id="算法动图演示"><a href="#算法动图演示" class="headerlink" title="算法动图演示"></a>算法动图演示</h4><p><img src="/home/jay/%E5%9B%BE%E7%89%87/849589-20171015231308699-356134237.gif"> ‘</p>
-<h3 id="线性时间排序（Sorting-in-Linear-Time）"><a href="#线性时间排序（Sorting-in-Linear-Time）" class="headerlink" title="线性时间排序（Sorting in Linear Time）"></a>线性时间排序（Sorting in Linear Time）</h3><h4 id="计数排序（Courting-Sort）"><a href="#计数排序（Courting-Sort）" class="headerlink" title="计数排序（Courting Sort）"></a>计数排序（Courting Sort）</h4><blockquote>
+
+        <h4 id="算法动图演示"   >
+          <a href="#算法动图演示" class="heading-link"><i class="fas fa-link"></i></a><a href="#算法动图演示" class="headerlink" title="算法动图演示"></a>算法动图演示</h4>
+      <p><img src="/home/jay/%E5%9B%BE%E7%89%87/849589-20171015231308699-356134237.gif"> ‘</p>
+
+        <h3 id="线性时间排序（Sorting-in-Linear-Time）"   >
+          <a href="#线性时间排序（Sorting-in-Linear-Time）" class="heading-link"><i class="fas fa-link"></i></a><a href="#线性时间排序（Sorting-in-Linear-Time）" class="headerlink" title="线性时间排序（Sorting in Linear Time）"></a>线性时间排序（Sorting in Linear Time）</h3>
+      
+        <h4 id="计数排序（Courting-Sort）"   >
+          <a href="#计数排序（Courting-Sort）" class="heading-link"><i class="fas fa-link"></i></a><a href="#计数排序（Courting-Sort）" class="headerlink" title="计数排序（Courting Sort）"></a>计数排序（Courting Sort）</h4>
+      <blockquote>
 <ul>
 <li>Algorithm. CountingSort<ul>
 <li>Step 1. for each value v, count the number of copies of v in A[0..n-1]</li>
@@ -240,7 +288,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 </ul>
 </blockquote>
 <p><strong>伪代码：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Algorithm. CountingSort(A[0..n-1])</span><br><span class="line"></span><br><span class="line">1. for (h=0; h&lt;k; h++) C[h] = 0;</span><br><span class="line">    for (i=0; i&lt;n; i++)</span><br><span class="line">       C[A[i]] = C[A[i]] + 1; </span><br><span class="line">2. for (h=1; h&lt;k; h++)</span><br><span class="line">       C[i] = C[i-1] + C[i]; </span><br><span class="line">3. for (i=n-1; i&gt;=0; i--)</span><br><span class="line">       C[A[i]] = C[A[i]] – 1.</span><br><span class="line">       B[C[A[i]]] = A[i];</span><br><span class="line">       </span><br><span class="line">其中数组A[1~n]是待排序数组；数组B[1~n]用来存放已排好序的元素。C[0~k]用来存放上面所说的统计数（具体的说C[i]就表示在数组A中，小于或等于i的元素的总个数）</span><br><span class="line"></span><br><span class="line">Algorithm. CountingSort</span><br><span class="line"></span><br><span class="line">- Step 1. for each value v, count the number of copies of v in A[0..n-1]</span><br><span class="line">- Step 2. for each A[i], count the number of elements in A[0..n-1] that are not larger than A[i] </span><br><span class="line">- Step 3. use the information in step 2 to output a sorted list. </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Algorithm. CountingSort(A[0..n-1])</span><br><span class="line"></span><br><span class="line">1. for (h=0; h&lt;k; h++) C[h] = 0;</span><br><span class="line">    for (i=0; i&lt;n; i++)</span><br><span class="line">       C[A[i]] = C[A[i]] + 1; </span><br><span class="line">2. for (h=1; h&lt;k; h++)</span><br><span class="line">       C[i] = C[i-1] + C[i]; </span><br><span class="line">3. for (i=n-1; i&gt;=0; i--)</span><br><span class="line">       C[A[i]] = C[A[i]] – 1.</span><br><span class="line">       B[C[A[i]]] = A[i];</span><br><span class="line">       </span><br><span class="line">其中数组A[1~n]是待排序数组；数组B[1~n]用来存放已排好序的元素。C[0~k]用来存放上面所说的统计数（具体的说C[i]就表示在数组A中，小于或等于i的元素的总个数）</span><br><span class="line"></span><br><span class="line">Algorithm. CountingSort</span><br><span class="line"></span><br><span class="line">- Step 1. for each value v, count the number of copies of v in A[0..n-1]</span><br><span class="line">- Step 2. for each A[i], count the number of elements in A[0..n-1] that are not larger than A[i] </span><br><span class="line">- Step 3. use the information in step 2 to output a sorted list. </span><br></pre></td></tr></table></div></figure>
 
 <p><strong>模拟计数排序过程：</strong></p>
 <p><img src="/home/jay/%E5%9B%BE%E7%89%87/634705-20150923171340787-534665040.png"> </p>
@@ -249,17 +297,32 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <p>title: Hello World again,<br>date: 2013/7/13 20: 46: 25</p>
 </blockquote>
 <p>it is a test again</p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/28/hello-world/">Hello World</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-28</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-10-28</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/28/hello-world/">Hello World</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-28</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-10-28</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Welcome to <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>! This is your very first post. Check <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or you can ask me on <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+        <h2 id="Quick-Start"   >
+          <a href="#Quick-Start" class="heading-link"><i class="fas fa-link"></i></a><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
+      
+        <h3 id="Create-a-new-post"   >
+          <a href="#Create-a-new-post" class="heading-link"><i class="fas fa-link"></i></a><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></div></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+        <h3 id="Run-server"   >
+          <a href="#Run-server" class="heading-link"><i class="fas fa-link"></i></a><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></div></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="Generate-static-files"   >
+          <a href="#Generate-static-files" class="heading-link"><i class="fas fa-link"></i></a><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></div></figure>
+
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="Deploy-to-remote-sites"   >
+          <a href="#Deploy-to-remote-sites" class="heading-link"><i class="fas fa-link"></i></a><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3>
+      <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></div></figure>
+
+<p>More info: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 </div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">4</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Jiayi Liang</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
