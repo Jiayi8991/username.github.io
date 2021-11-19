@@ -20,28 +20,43 @@
     var CONFIG = {"hostname":"jiayi8991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="JiayiSpace">
-<meta property="og:url" content="https://jiayi8991.github.io/index.html">
+  <meta name="description" content="MPI学习Communicators Python下的实现   communicator &#x3D; process group + communication context   Predefined instances COMM_WORLD COMM_SELF COMM_NULL   Accessors rank &#x3D; comm.Get_rank() size &#x3D; comm.Get_size()  gr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MPI学习">
+<meta property="og:url" content="https://jiayi8991.github.io/2021/11/06/MPI%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="JiayiSpace">
+<meta property="og:description" content="MPI学习Communicators Python下的实现   communicator &#x3D; process group + communication context   Predefined instances COMM_WORLD COMM_SELF COMM_NULL   Accessors rank &#x3D; comm.Get_rank() size &#x3D; comm.Get_size()  gr">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/.config/Typora/typora-user-images/image-20211103165031842.png">
+<meta property="og:image" content="https://mpitutorial.com/tutorials/mpi-broadcast-and-collective-communication/broadcast_pattern.png">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/.config/Typora/typora-user-images/image-20211103170924810.png">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/.config/Typora/typora-user-images/image-20211103171734798.png">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/%E5%9B%BE%E7%89%87/allgather.png">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/%E5%9B%BE%E7%89%87/mpi_reduce_1.png">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/%E5%9B%BE%E7%89%87/mpi_reduce_2.png">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/%E5%9B%BE%E7%89%87/mpi_allreduce_1.png">
+<meta property="og:image" content="https://jiayi8991.github.io/home/jay/%E5%9B%BE%E7%89%87/comm_split.png">
+<meta property="article:published_time" content="2021-11-06T03:23:32.000Z">
+<meta property="article:modified_time" content="2021-11-06T03:26:11.837Z">
 <meta property="article:author" content="Jiayi Liang">
+<meta property="article:tag" content="MPI,数据分析">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiayi8991.github.io/home/jay/.config/Typora/typora-user-images/image-20211103165031842.png">
 
-<link rel="canonical" href="https://jiayi8991.github.io/">
+<link rel="canonical" href="https://jiayi8991.github.io/2021/11/06/MPI%E5%AD%A6%E4%B9%A0/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>JiayiSpace</title>
+  <title>MPI学习 | JiayiSpace</title>
   
 
 
@@ -154,9 +169,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -172,10 +188,9 @@
       <meta itemprop="name" content="JiayiSpace">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/06/MPI%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">MPI学习</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          MPI学习
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -208,7 +223,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="MPI学习"><a href="#MPI学习" class="headerlink" title="MPI学习"></a>MPI学习</h1><h2 id="Communicators"><a href="#Communicators" class="headerlink" title="Communicators"></a>Communicators</h2><blockquote>
+        <h1 id="MPI学习"><a href="#MPI学习" class="headerlink" title="MPI学习"></a>MPI学习</h1><h2 id="Communicators"><a href="#Communicators" class="headerlink" title="Communicators"></a>Communicators</h2><blockquote>
 <p>Python下的实现</p>
 </blockquote>
 <blockquote>
@@ -504,166 +519,33 @@
 
 <p>在此示例中，我们通过仅选择 <code>MPI_COMM_WORLD</code> 中的主要秩来构建通讯器。 这是通过 <code>MPI_Group_incl</code> 完成的，并将结果存储在 <code>prime_group</code> 中。 接下来，我们将该组传递给 <code>MPI_Comm_create_group</code> 以创建 <code>prime_comm</code>。 At the end, we have to be careful to not use <code>prime_comm</code> on processes which don’t have it, therefore we check to ensure that the communicator is not <code>MPI_COMM_NULL</code>, which is returned from <code>MPI_Comm_create_group</code> on the ranks not included in <code>ranks</code>. 最后，我们必须小心不要在没有 <code>prime_comm</code> 的进程上使用 <code>prime_comm</code>，因此我们要检查以确保通讯器不是 <code>MPI_COMM_NULL</code> 状态 —— 不在 <code>ranks</code> 中而从 <code>MPI_Comm_create_group</code> 返回的结果。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/MPI-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"># MPI,数据分析</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/11/02/GZHU/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Jiayi Liang">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JiayiSpace">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/02/GZHU/" class="post-title-link" itemprop="url">GZHU</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-02 18:59:33" itemprop="dateCreated datePublished" datetime="2021-11-02T18:59:33+08:00">2021-11-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-04 19:17:01" itemprop="dateModified" datetime="2021-11-04T19:17:01+08:00">2021-11-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Somethings-I-want-to-record"><a href="#Somethings-I-want-to-record" class="headerlink" title="Somethings  I want to record"></a>Somethings  I want to record</h2><p>I have been there two months, but I still not find the point of my postgraduate.</p>
-<p>I don’t know where I should go.</p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/02/GZHU/" rel="prev" title="GZHU">
+      <i class="fa fa-chevron-left"></i> GZHU
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/10/28/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Jiayi Liang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JiayiSpace">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/28/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-10-28 20:18:33" itemprop="dateCreated datePublished" datetime="2021-10-28T20:18:33+08:00">2021-10-28</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -716,6 +598,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MPI%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">MPI学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Communicators"><span class="nav-number">1.1.</span> <span class="nav-text">Communicators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MPI-%E7%9A%84%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E6%94%B6"><span class="nav-number">1.2.</span> <span class="nav-text">MPI 的发送和接收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80MPI%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.2.</span> <span class="nav-text">基础MPI数据结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MPI-%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E6%94%B6"><span class="nav-number">1.3.</span> <span class="nav-text">MPI 点对点发送和接收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MPI-%E4%B9%92%E4%B9%92"><span class="nav-number">1.3.1.</span> <span class="nav-text">MPI 乒乒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPI%E4%B9%92%E4%B9%93"><span class="nav-number">1.3.2.</span> <span class="nav-text">MPI乒乓</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPI-%E7%8E%AF"><span class="nav-number">1.3.3.</span> <span class="nav-text">MPI 环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MPI-%E5%B9%BF%E6%92%AD%E4%BB%A5%E5%8F%8A%E9%9B%86%E4%BD%93-collective-%E9%80%9A%E4%BF%A1"><span class="nav-number">1.4.</span> <span class="nav-text">MPI 广播以及集体(collective)通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E4%BD%93%E9%80%9A%E4%BF%A1%E4%BB%A5%E5%8F%8A%E5%90%8C%E6%AD%A5%E7%82%B9"><span class="nav-number">1.4.1.</span> <span class="nav-text">集体通信以及同步点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPI-Bcast-%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%B9%BF%E6%92%AD"><span class="nav-number">1.4.2.</span> <span class="nav-text">MPI_Bcast 来进行广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPI-Scatter-Gather-and-Allgather"><span class="nav-number">1.4.3.</span> <span class="nav-text">MPI Scatter, Gather, and Allgather</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MPI-Reduce-and-Allreduce"><span class="nav-number">2.</span> <span class="nav-text">MPI Reduce and Allreduce</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E7%BA%A6%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">归约简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MPI-Reduce"><span class="nav-number">2.2.</span> <span class="nav-text">MPI_Reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MPI-Allreduce"><span class="nav-number">2.3.</span> <span class="nav-text">MPI_Allreduce</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-to-Groups-and-Communicators"><span class="nav-number">3.</span> <span class="nav-text">Introduction to Groups and Communicators</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%AE%AF%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">通讯器概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E9%80%9A%E8%AE%AF%E5%99%A8%E7%9A%84%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">使用多个通讯器的示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%80%9A%E8%AE%AF%E5%99%A8%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">其他通讯器创建函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="nav-number">3.4.</span> <span class="nav-text">组的概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-MPI-groups"><span class="nav-number">3.5.</span> <span class="nav-text">Using MPI groups</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-of-using-groups"><span class="nav-number">3.6.</span> <span class="nav-text">Example of using groups</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
