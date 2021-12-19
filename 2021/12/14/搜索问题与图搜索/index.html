@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi8991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="状态图 1. 状态  状态就是问题在任一确定时刻的状况,它表征了问题特征和结构等。状态在状态图中表示为节点。状态一般用一组数据表示。在程序中用字符、数字、记录、数组、结构、对象等表示   2. 状态转换规则  状态转换规则就是能使问题状态改变的某种操作、规则、 行为、变换、关系、函数、算子、过程等等。状态转换规则也称为操作,问题的状态也只能经定义在其上的这种操作而改变。状态转换规则在状态图中表示为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索问题与图搜索">
+<meta property="og:url" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/index.html">
+<meta property="og:site_name" content="JiayiSpace">
+<meta property="og:description" content="状态图 1. 状态  状态就是问题在任一确定时刻的状况,它表征了问题特征和结构等。状态在状态图中表示为节点。状态一般用一组数据表示。在程序中用字符、数字、记录、数组、结构、对象等表示   2. 状态转换规则  状态转换规则就是能使问题状态改变的某种操作、规则、 行为、变换、关系、函数、算子、过程等等。状态转换规则也称为操作,问题的状态也只能经定义在其上的这种操作而改变。状态转换规则在状态图中表示为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1412-23-54.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1412-28-42.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1415-43-38.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1415-49-41.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-27-22.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-41-04.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-46-00.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-46-00.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-57-12.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190613062929330.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190613063108272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190613063120609.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190613063931341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190613063944722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1916-34-57.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1916-51-23.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-02-42.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-10-31.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-24-21.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-19.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-191.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-197-27-41.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-28.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-29-31.png">
+<meta property="article:published_time" content="2021-12-14T02:36:17.000Z">
+<meta property="article:modified_time" content="2021-12-19T09:50:44.283Z">
+<meta property="article:author" content="Jiayi Liang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1412-23-54.png">
+
+<link rel="canonical" href="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>搜索问题与图搜索 | JiayiSpace</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JiayiSpace</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搜索问题与图搜索
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-14 10:36:17" itemprop="dateCreated datePublished" datetime="2021-12-14T10:36:17+08:00">2021-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-19 17:50:44" itemprop="dateModified" datetime="2021-12-19T17:50:44+08:00">2021-12-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h1><ul>
+<li><strong>1. 状态</strong><ul>
+<li> 状态就是问题在任一确定时刻的状况,它表征了问题特征和结构等。状态在状态图中表示为节点。状态一般用一组数据表示。在程序中用字符、数字、记录、数组、结构、对象等表示</li>
+</ul>
+</li>
+<li><strong>2. 状态转换规则</strong><ul>
+<li> 状态转换规则就是能使问题状态改变的某种操作、规则、 行为、变换、关系、函数、算子、过程等等。状态转换规则也称为操作,问题的状态也只能经定义在其上的这种操作而改变。状态转换规则在状态图中表示为边。在程序中状态转换规则可用数据对、条件语句、规则、函数、过程等表示</li>
+</ul>
+</li>
+<li><strong>3. 状态图表示</strong><ul>
+<li>一个问题的状态图是一个三元组</li>
+<li>​           (<em>S, F, G</em>) </li>
+<li>其中S是问题的初始状态集合, F是问题的状态转换规则集合, G是问题的目标状态集合。 </li>
+<li>  一个问题的全体状态及其关系就构成一个空间, 称为状态空间。所以,状态图也称为状态空间图。</li>
+</ul>
+</li>
+</ul>
+<h2 id="启发式搜索"><a href="#启发式搜索" class="headerlink" title="启发式搜索"></a>启发式搜索</h2><p><strong>启发性信息：</strong></p>
+<ol>
+<li>用于扩展节点的选择, 即用于决定应先扩展哪一个节点, 以免盲目扩展。</li>
+<li>用于生成节点的选择,即用于决定应生成哪些后续节点,以免盲目地生成过多无用节点。</li>
+<li>用于删除节点的选择,即用于决定应删除哪些无用节点, 以免造成进一步的时空浪费。</li>
+</ol>
+<p><strong>启发函数（距离目标函数，表示与目标的距离，越小越好）：</strong></p>
+<ul>
+<li>启发函数是用来估计搜索树上节点<em>x</em>与目标节点<em>S**g</em>接近程度的一种函数, 通常记为<em>h</em>(<em>x</em>)。使用启发函数的搜索实际上也是一种深度优先搜索</li>
+</ul>
+<p><strong>启发式搜索算法：</strong></p>
+<ul>
+<li>全局择优搜索</li>
+<li>局部择优搜索</li>
+</ul>
+<p><strong>全局和局部：</strong></p>
+<ul>
+<li>全局：考虑Open表中所有节点</li>
+<li>局部： 仅仅考虑当前节点N的扩展子节点，且插入到Open表首部</li>
+</ul>
+<h3 id="全局择优搜索算法"><a href="#全局择优搜索算法" class="headerlink" title="全局择优搜索算法"></a>全局择优搜索算法</h3><ul>
+<li><strong>全局启发函数h(x)最小，即把当前节点子节点加入到Open表，再优选Open表中节点与目标节点距离小的节点）</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>步1 把初始节点<em>S</em>o放入<em>OPEN</em>表中,计算<em>h</em>(<em>S</em>o)。</li>
+<li>步2 若<em>OPEN</em>表为空,则搜索失败, 退出。 </li>
+<li>步3 移出<em>OPEN</em>表中第一个节点N放入CLOSED表中, 并冠以序号<em>n</em>。</li>
+<li>步4 若目标节点<em>S</em>g=<em>N</em>, 则搜索成功, 结束。 </li>
+<li>步5 若<em>N</em>不可扩展, 则转步2。</li>
+<li>步6 扩展<em>N</em>, 计算每个子节点<em>x</em>的函数值<em>h</em>(<em>x</em>), 并将所有子节点配以指向<em>N</em>的返回指针后放入<em>OPEN</em>表中, <strong>再对</strong><em><strong>OPEN</strong></em><strong>表中的所有节点按其启发函数值大小以升序排序</strong>,转步2。 </li>
+</ul>
+</blockquote>
+<p><strong>用全局择优搜索法解八数码难题（最好优先，实际上是一种深度优先搜索）</strong></p>
+<p><strong>例图：</strong></p>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1412-23-54.png">  </p>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1412-28-42.png">  </p>
+<h3 id="局部择优搜索算法"><a href="#局部择优搜索算法" class="headerlink" title="局部择优搜索算法"></a>局部择优搜索算法</h3><ul>
+<li><strong>局部启发函数h(x)最小，即优选当前节点子节点中与目标节点距离小的节点</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>步1 把初始节点<em>S</em>o放入<em>OPEN</em>表中,计算<em>h</em>(<em>S</em>o)。</li>
+<li> 步2 若<em>OPEN</em>表为空,则搜索失败, 退出。 </li>
+<li> 步3 移出<em>OPEN</em>表中第一个节点N放入CLOSED表中, 并冠以序号<em>n</em>。</li>
+<li> 步4 若目标节点<em>S</em>g=<em>N</em>, 则搜索成功, 结束。 </li>
+<li> 步5 若<em>N</em>不可扩展, 则转步2。</li>
+<li> 步6 扩展<em>N</em>, 计算每个子节点<em>x</em>的函数值<em>h</em>(<em>x</em>), 并将所有子节点配以指向<em>N</em>的返回指针后<strong>按照h(x)升序排序插入到OPEN表已有节点的前面</strong>,转步2。 </li>
+</ul>
+</blockquote>
+<h3 id="加权状态图搜索"><a href="#加权状态图搜索" class="headerlink" title="加权状态图搜索"></a>加权状态图搜索</h3><h4 id="分支界限法（全局代价最小）"><a href="#分支界限法（全局代价最小）" class="headerlink" title="分支界限法（全局代价最小）"></a>分支界限法（全局代价最小）</h4><ul>
+<li>基本思想是：<ul>
+<li>每次从<em>OPEN</em>表中选出**代价函数g(x)**值最小的节点进行考察, 而不管这个节点在搜索树的什么位置上。</li>
+</ul>
+</li>
+<li> 算法与前面的“全局择优法” 仅有引导搜索的函数不同，前者为启发函数<em>h</em>(<em>x</em>)，后者为代价<em>g</em>(<em>x</em>)。</li>
+<li> 但注意：代价值<em>g</em>(<em>x</em>)是从初始节点<em>S</em>o方向计算而来的,而启发函数值<em>h</em>(<em>x</em>)则是朝目标节点方向计算的。</li>
+</ul>
+<blockquote>
+<p> 所谓代价,可以是两点之间的距离、交通费用或所需时间等等</p>
+</blockquote>
+<blockquote>
+<p>通常用<em>g</em>(<em>x</em>)表示从初始节点<em>S</em>o到节点<em>x</em>的代价, 用<em>c</em>(<em>xi</em>,x j*)表示 父节点xi 到 子节点x j 的代价,即边(<em>xi</em>,<em>x</em>j)的代价, 所以</p>
+<ul>
+<li><em>g</em>(<em>x j</em>)＝<em>g</em>(<em>xi</em>)＋<em>c</em>(<em>x i</em>, <em>x j</em>) </li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>循环：</strong></li>
+<li><strong>每次处理Open表第一个节点，如果是目标节点就返回成功</strong></li>
+<li><strong>存下已处理的节点到Closed表</strong></li>
+<li><strong>找出当前节点的子节点，更新节点间关系</strong></li>
+<li><strong>按代价从小到大给选择下一个要处理的节点</strong></li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1415-43-38.png"> </p>
+<h4 id="最近择优法（瞎子爬山，局部代价最小）"><a href="#最近择优法（瞎子爬山，局部代价最小）" class="headerlink" title="最近择优法（瞎子爬山，局部代价最小）"></a>最近择优法（瞎子爬山，局部代价最小）</h4><ul>
+<li>把局部择优法算法中的<em>h</em>(<em>x</em>)换成<em>g</em>(<em>x</em>)就可得最近择优法的算法。 Open从右往前插入如右图</li>
+<li>这里由D计算出B的代价如果少于4，则应该代替Open表中原有的B并把B移动到前面来。这里从D算出来B的代价是3+2+4 &gt;4，所以不代替。</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1415-49-41.png"> </p>
+<h2 id="A算法和A-算法"><a href="#A算法和A-算法" class="headerlink" title="A算法和A*算法"></a>A算法和A*算法</h2><h3 id="估价函数"><a href="#估价函数" class="headerlink" title="估价函数"></a>估价函数</h3><ul>
+<li><em>f</em>(<em>x</em>)＝<em>g</em>(<em>x</em>)＋<em>h</em>(<em>x</em>) </li>
+</ul>
+<ol>
+<li>**代价函数g(x)**表示从起点到达目前节点x的代价函数，一般设置难度小，因为从起点到目前节点x的路径已经求出；</li>
+<li><strong>启发函数h(x</strong>)表示从目前节点到目标节点的距离函数，一般设置难度大，因为从目前节点到目标节点的路径正是我们要搜索的；</li>
+<li><strong>估价函数f(x)是代价函数g(x)和h(x)的折中</strong>。</li>
+</ol>
+<ol>
+<li>代价函数g(x)表示从起点到达目前节点x的代价函数，g(x)越小表示节点x越靠近初始节点，有利于搜索的横向搜索，可提高搜索的完备性，但影响搜索效率；</li>
+<li>启发函数h(x)表示从目前节点到目标节点的距离函数，h(x)越小表示距离目标越近，有利于搜索的纵向搜索，可提高搜索效率，但影响完备性；</li>
+<li>代价函数g(x)=0时，A算法退化成普通的启发式搜索，类似于深度优先；</li>
+<li>启发函数h(x)=0时，A算法退化成普通的加权状态图搜索，类似于广度优先。</li>
+</ol>
+<h3 id="A算法"><a href="#A算法" class="headerlink" title="A算法"></a>A算法</h3><ul>
+<li> <em>A</em> 算法是基于估价函数<em>f</em>(<em>x</em>)的一种加权状态图启发式搜索算法。其具体步骤如下： </li>
+<li>步1 把附有<em>f</em>(<em>S</em>o)的初始节点<em>S</em>o放入OPEN表。</li>
+<li> 步2 若OPEN表为空, 则搜索失败, 退出。 </li>
+<li> 步3 移出OPEN表中第一个节点<em>N</em>放入CLOSED表中, 并冠以顺序编号<em>n</em>。</li>
+<li> 步4 若目标节点<em>S**g</em>=<em>N</em>, 则搜索成功, 结束。 </li>
+<li> 步5 若<em>N</em>不可扩展, 则转步2。 </li>
+<li>步6 扩展<em>N</em>,生成一组附有<em>f</em>(<em>x</em>)的子节点,对这组子节点做如下处理： </li>
+<li> (1)考察是否有已在OPEN表或CLOSED表中存在的节点；若有则再考察其中有无N的先辈节点,若有则删除之；对于其余节点, 也删除之,但由于它们又被第二次生成, 因而需考虑是否修改已经存在于OPEN表或CLOSED表中的这些节点及其后裔的返回指针和<em>f</em>(<em>x</em>)值, 修改原则是“抄<em>f</em>(<em>x</em>)值小的路走”。</li>
+<li>   (2)对其余子节点配上指向<em>N</em>的返回指针后放入OPEN表中, 并对OPEN表按<em>f</em>(<em>x</em>)值以升序排序, 转步2。 </li>
+</ul>
+<h3 id="A-算法（最佳图搜索算法）"><a href="#A-算法（最佳图搜索算法）" class="headerlink" title="A*算法（最佳图搜索算法）"></a>A*算法（最佳图搜索算法）</h3><ul>
+<li>如果对上述A算法再限制其估价函数中的启发函数<em>h</em>(<em>x</em>)满足： 对所有的节点<em>x</em>均有<ul>
+<li>​                    <em>h</em>(<em>x</em>)≤d(<em>x</em>) </li>
+</ul>
+</li>
+<li>其中<strong>d(<em>x</em>)是最优解中从节点<em>x</em>到目标节点的启发函数（即节点x到目标节点的距离函数，最小启发函数值，实际上这个d(x)很难估计准确值）</strong>, <strong>即最佳路径上的实际代价</strong>，则它就称为A<em>算法。理论证明A</em>算法可以保证找到最优解。</li>
+<li>如果h(x)&lt; d(x)到目标状态的实际距离，这种情况下，搜索的点数多，搜索范围大，效率低。但能得到最优解。</li>
+<li>如果h(x)=d(x)，即距离估计h(x)等于最短距离，那么搜索将严格沿着最短路径进行， 此时的搜索效率是最高的。</li>
+<li>如果 h(x)&gt;d(x)，搜索的点数少，搜索范围小效率高，但不保证得到最优解。</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-27-22.png"> </p>
+<h2 id="小结：图的启发式搜索算法"><a href="#小结：图的启发式搜索算法" class="headerlink" title="小结：图的启发式搜索算法"></a>小结：图的启发式搜索算法</h2><ul>
+<li><strong>选择依据：</strong><ul>
+<li><strong>（1）启发函数（距离目标函数，表示与目标的距离）</strong></li>
+<li><strong>（2）代价函数 （表示已经付出代价的函数）</strong></li>
+</ul>
+</li>
+<li><strong>全局vs局部的在本课程状态图搜索中的不同：</strong><ul>
+<li><strong>全局：考虑Open表中所有节点</strong></li>
+<li><strong>局部：只考虑当前节点N的扩展子节点</strong></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>启发函数h(x)</th>
+<th><strong>代价函数</strong>g(x)</th>
+<th>估价函数f(x)=g(x)+h(x)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>全局</strong></td>
+<td><strong>全局择优</strong></td>
+<td><strong>分支界限</strong></td>
+<td><strong>A算法 ，A*算法</strong></td>
+</tr>
+<tr>
+<td><strong>局部</strong></td>
+<td><strong>局部择优</strong></td>
+<td><strong>最近择优</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="与或图"><a href="#与或图" class="headerlink" title="与或图"></a>与或图</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>状态图是与或图中的特例（与或图中的或图）  <ul>
+<li>搜索方式，解图（树）<ul>
+<li>状态图搜索只是简单不断扩展节点，与或图扩展子节点时需要判断初始节点是否可解</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> <img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-41-04.png"></p>
+<ul>
+<li>图中的弧线表示所连边为“与”关系,不带弧线的边为或关系。这个图中既有与关系又有或关系,因此被称为与或图</li>
+</ul>
+<h2 id="与或图搜索"><a href="#与或图搜索" class="headerlink" title="与或图搜索"></a>与或图搜索</h2><ul>
+<li><p><strong>1. 搜索方式,解图(树)</strong></p>
+<ul>
+<li> 整个状态图转换过程已知，搜索问题图的解图（树）。</li>
+<li>  解图（树）不一定是最优解。</li>
+</ul>
+</li>
+<li><p><strong>2. 可解性判别</strong></p>
+<ul>
+<li><strong>（参考右图：黑色节点表示可解）</strong></li>
+</ul>
+</li>
+<li><p> 一个节点的可解性判别准：</p>
+</li>
+<li><p>  (1) 一个节点是可解, 则节点须满足下列条件之一:     -   ① 终止节点是可解节点。（实心点，如t2, t3, t4)    -   ② 一个与节点可解, 当且仅当其子节点全都可解。(如5,2,1)    -   ③ 一个或节点可解, 只要其子节点至少有一个可解。(如4, 3) </p>
+</li>
+<li><p>  (2) 一个节点是不可解, 则节点须满足下列条件之一:     -   ① 非终止节点的端节点是不可解节点。 (空心叶子节点，如A, B)    -   ② 一个与节点不可解, 只要其子节点至少有一个不可解。（图中没有）    -   ③ 一个或节点不可解, 当且仅当其子节点全都不可解。 （图中没有）</p>
+</li>
+<li><p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-46-00.png"> </p>
+</li>
+<li><p><strong>3. 搜索策略</strong></p>
+<ul>
+<li> 与或图搜索也分为 盲目搜索 和 启发式搜索 两大类。</li>
+<li>前者又分为穷举搜索和盲目碰撞搜索。穷举搜索又分为深度优先和广度优先两种基本策略。</li>
+</ul>
+</li>
+<li><p><strong>4.状态变化需递推的穷举搜索算法</strong></p>
+<ul>
+<li> 步1 把初始节点Qo放入<em>OPEN</em>表。 </li>
+<li> 步2 移出<em>OPEN</em>表的第一个节点<em>N</em>放入<em>CLOSED</em>表, 并冠以序号<em>n</em>。 </li>
+<li> 步3 若节点N可扩展, 则做下列工作： </li>
+</ul>
+</li>
+<li><p> (1) 扩展N, 将其子节点配上指向父节点的指针后放入OPEN表。</p>
+</li>
+<li><p>放入尾部是宽度优先，放在前面是深度优先；</p>
+</li>
+<li><p>考虑Open表全部节点是全局算法，只考虑当前节点子节点是局部算法</p>
+</li>
+<li><p>  (2)<strong>判断可解性</strong>：考察这些子节点中是否有终止节点（从而有点类似深度优先）。 若有, 则标记它们为可解节点, 并将它们也放入CLOSED表, 然后由它们的可解反向推断其先辈节点的可解性, 并对其中的可解节点进行标记。 如果初始节点也被标记为可解节点, 则搜索成功,结束。</p>
+</li>
+<li><p> (3)删去OPEN表中那些具有可解先辈的节点(因为其先辈节点已经可解, 故已无再考察该节点的必要), 转步2。 </p>
+</li>
+<li><p>  步4 若N不可扩展, 则做下列工作：     -  (1)标记<em>N</em>为不可解节点, 然后由它的不可解反向推断其先辈节点的可解性, 并对其中的不可解节点进行标记。如果初始节点So也被标记为不可解节点, 则搜索失败, 退出。    -  (2)删去OPEN表中那些具有不可解先辈的节点(因为其先辈节点已不可解,故已无再考察这些节点的必要), 转步2。 </p>
+</li>
+</ul>
+<p><strong>穷举搜索算法例子：</strong></p>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-46-00.png"> </p>
+<ul>
+<li>设有与或树如图3-15所示, 其中1号节点为初始节点,<em>t</em>1、<em>t</em>2、<em>t</em>3、<em>t</em>4均为终止节点, A和B是不可解的端节点。 采用广度(优先)搜索策略, 搜索过程如下）： <ul>
+<li>（1）将初始节点1号节点移入Open表，再取出后扩展1号节点并移入Closed表, 得2号和3号节点, 依次放入OPEN表尾部。由于这两个节点都非终止节点, 所以接着扩展2号节点移入Closed表。此时OPEN表中只有3号节点。 </li>
+<li>（2）2号节点扩展后,得4号节点和<em>t</em>1节点。此时OPEN表中依次有3号、4号和<em>t</em>1节点。由于<em>t</em>1是终止节点,故标记它为可解节点, 并将<em>t</em>1从Open表移入CLOSED表, 再判断其先辈节点的可解性,但<em>t</em>1的父节点2是一个与节点, 故仅由t1的可解还不能确定2号节点可解。所以, 就继续搜索。</li>
+<li>(3) 扩展3号节点并移入Closed表,得5号节点和B节点加入到Open表。两者均非终止节点, 所以继续扩展4号节点。 </li>
+<li> (4) 4号节点扩展后得节点<em>A</em>和<em>t</em>2加入到Open表，<em>t</em>2是终止节点,标记为可解节点, 放入CLOSED表。这时其先辈节点4和2也为可解节点, 但1号节点还不能确定。这时从OPEN表中删去节点<em>A</em>,因为其父节点4已经可解。 </li>
+<li> (５) 扩展5号节点并移入Closed表得<em>t</em>3和<em>t</em>4。由于<em>t</em>3和<em>t</em>4都为终止节点(放入CLOSED表), 故可推得节点5、3、1均为可解节点。 搜索成功, 结束。 </li>
+<li> 这时,由CLOSED表便得到由节点1、2、3、4、5和<em>t</em>1、<em>t</em>2、 <em>t</em>3、<em>t</em>4构成的解树，如图3-15 中的粗线所示。</li>
+</ul>
+</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-57-12.png"> </li>
+</ul>
+<h2 id="启发式与或树搜索"><a href="#启发式与或树搜索" class="headerlink" title="启发式与或树搜索"></a>启发式与或树搜索</h2><p><strong>（针对图中根节点代价非完全已知，需要不停扩展）</strong></p>
+<ul>
+<li><strong>1. 解树的代价</strong></li>
+<li> <strong>2. 希望树</strong></li>
+<li>希望树的定义： <ul>
+<li>希望树是指搜索过程中最有可能成为最优解树的那棵树。</li>
+<li>与/或树的启发式搜索过程就是不断地选择、修正希望树的过程，在该过程中，希望树是不断变化的。它需要符合以下三个条件：<ol>
+<li>初始结点S0在希望树T</li>
+<li>如果n是具有子结点n1, n2, … , nk的或结点，则n的某个子结点ni在希望树T中的充分必要条件是<br><img src="https://img-blog.csdnimg.cn/20190613062929330.png" alt="在这里插入图片描述"> </li>
+<li>如果n是与结点，则n的全部子结点都在希望树T中。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>3. 与或树的有序搜索过程</strong></li>
+<li> 与或树的有序搜索过程是一个不断选择、修正希望树的过程。如果问题有解, 则经有序搜索将找到最优解树。 </li>
+<li> 其搜索过程如下： </li>
+<li> 步1 把初始节点Qo放入OPEN表中。 </li>
+<li> 步2 求出希望树T, 即根据当前搜索树中节点的代价g求出以Qo为根的希望树T。 </li>
+<li> 步3 依次把OPEN表中T的端节点N选出放入CLOSED表中。 </li>
+<li> 步4 如果节点N是终止节点, 则做下列工作： </li>
+<li>  (1) 标示N为可解节点。 </li>
+<li>  (2) 对T应用可解标记过程, 把N的先辈节点中的可解节点都标记为可解节点。 </li>
+<li>  (3) 若初始节点Qo能被标记为可解节点, 则T就是最优解树,成功退出。 </li>
+<li>  (4) 否则, 从OPEN表中删去具有可解先辈的所有节点</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20190613063108272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img"> </p>
+<p><img src="https://img-blog.csdnimg.cn/20190613063120609.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img">  </p>
+<p><img src="https://img-blog.csdnimg.cn/20190613063931341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img"> <img src="https://img-blog.csdnimg.cn/20190613063944722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img"> </p>
+<h1 id="博弈树"><a href="#博弈树" class="headerlink" title="博弈树"></a>博弈树</h1><p><strong>博弈树是一类特殊的与或图</strong></p>
+<ul>
+<li>节点交替分为Max，Min 2种。Max与Min价值取向正好相反（想象2个人下棋，一个人走一步）。</li>
+<li>不方便区分为与或节点。节点可以看为都是或节点，按照不同代价选择路径。（也有资料说初始节点是或节点，然后与节点、或节点逐层交替出现）</li>
+<li>应用广泛：下棋，故障诊断，风险投资</li>
+</ul>
+<p><strong>基本搜索策略</strong></p>
+<ul>
+<li>极小极大搜索，生成整个搜索树，从底往根倒推</li>
+</ul>
+<p><strong>为了提高搜索速度，用到了剪枝</strong></p>
+<ul>
+<li>α-β剪枝: 剪枝; 搜索和生成同时进行</li>
+</ul>
+<h2 id="博弈问题"><a href="#博弈问题" class="headerlink" title="博弈问题"></a>博弈问题</h2><ul>
+<li>特点：<ul>
+<li>双人对弈：轮流下，一人走一步。</li>
+<li>信息完备：双方看到的信息一样</li>
+<li>零和：双方利益冲突，对一方有利则对另一方不利。一般对节点N取一个估价函数f(N)，一共两类节点：    <ul>
+<li>叫Max的极大节点追求最大化，有选择时肯定选值最大的；</li>
+<li>叫Min的极小节点追求最小化，有选择时肯定选值最小的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>两位选手对垒，轮流走步。这时每一方不仅知道对方过去已经走过的棋步，而且还能估计出对方未来可能的走步。对弈的结果是一方赢（另一方则输），或者双方和局。如象棋，围棋，五子棋，…</li>
+</ul>
+</li>
+<li><strong>完全信息博弈任务原型：</strong><ul>
+<li>给出（或逐步生成）一个博弈树，求出在指定搜索深度（层数）下的最佳路径和相应估价分数。比如下象棋，Max先走一步，Min再走一步，再轮到Max走，这时Max遇到的各个局面可以估分，再倒推回去Max的第一步应该选择走哪步最佳</li>
+</ul>
+</li>
+<li>采用剪枝的方法加快极小极大搜索方法的速度，最主要的是α-β剪枝</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1916-34-57.png"> </p>
+<p><strong>不完全信息博弈</strong></p>
+<ul>
+<li>不完全信息博弈<ul>
+<li>大部分纸牌游戏（如斗地主、拖拉机）</li>
+<li>大部分即时策略游戏（如红警、星际、帝国）<ul>
+<li>需要探路</li>
+<li>游戏还受手速（APM）等影响</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>博弈问题常常不能简单穷举，如中国象棋</strong></p>
+<ul>
+<li>一盘棋平均走50步，总状态数约为10的161次方。</li>
+<li>假设1毫微秒走一步，约需10的145次方年。</li>
+<li>结论：不可能穷举。</li>
+</ul>
+<h2 id="极小极大搜索方法"><a href="#极小极大搜索方法" class="headerlink" title="极小极大搜索方法"></a>极小极大搜索方法</h2><ul>
+<li><p>极小极大搜索方法是博弈树搜索的基本方法 。</p>
+</li>
+<li><p>首先假定，有一个评价函数可以对所有的棋局进行评估。当评价函数值大于0时，表示棋局对我方有利，对对方不利。当评价函数小于0时，表示棋局对我方不利，对对方有利。</p>
+</li>
+<li><p>方法：</p>
+<ul>
+<li>当轮到我方走棋时，首先按照一定的搜索深度生成出给定深度d以内的所有状态，计算所有叶节点的评价函数值。</li>
+<li>然后从d-1层节点开始逆向计算：对于我方要走的节点（用MAX标记，称为极大节点）取其子节点中的最大值为该节点的值（因为我方总是选择对我方有利的棋）。<ul>
+<li>补充注意：生成了深度d以内的整棵树</li>
+</ul>
+</li>
+<li>对于对方要走的节点（用MIN标记，称为极小节点）取其子节点中的最小值为该节点的值（对方总是选择对我方不利的棋）。</li>
+<li>一直到计算出根节点的值为止。获得根节点取值的那一分枝，即为所选择的最佳走步。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1916-51-23.png"></p>
+<ul>
+<li>因此，极小极大过程是一种假定对手每次回应都正确的情况下，如何从中找出对我方最有利的走步的搜索方法。 </li>
+<li>值得注意的是，不管设定的搜索深度是多少层，经过一次搜索以后，只决定了我方一步棋的走法。等到对方回应一步棋之后，需要在新的棋局下重新进行搜索，来决定下一步棋如何走。</li>
+</ul>
+<h3 id="静态估计函数f（x）"><a href="#静态估计函数f（x）" class="headerlink" title="静态估计函数f（x）"></a>静态估计函数f（x）</h3><ul>
+<li>一般规定有利于MAX的势态，f(p)取正值，有利于MIN的势态，f(p)取负值，势均力敌的势态，f(p)取0值。<ul>
+<li>若f(p)＝＋∞，则表示MAX赢，若f(p)＝－∞，则表示MIN赢。下面的讨论规定：顶节点深度d＝0，MAX代表程序方，MIN代表对手方，MAX先走。</li>
+</ul>
+</li>
+<li>当用端节点的静态估计函数f（p）求倒推值时，两位选手应采取不同的策略，从下往上逐层交替使用极小和极大的选值方法，故称极小极大过程。</li>
+</ul>
+<h3 id="α-β剪枝搜索过程"><a href="#α-β剪枝搜索过程" class="headerlink" title="α-β剪枝搜索过程"></a>α-β剪枝搜索过程</h3><ul>
+<li>能否在搜索深度不变的情况下，利用已有的搜索信息减少生成的节点数呢？ <ul>
+<li>MIN-MAX过程是把搜索树的生成和格局估值这两个过程分开来进行，即先生成全部搜索树，然后再进行端节点静态估值和倒推值计算，这显然会导致低效率。</li>
+</ul>
+</li>
+<li>实际上<strong>把生成和倒推估值结合起来进行，再根据一定的条件判定，有可能尽早修剪掉一些无用的分枝，同样可获得类似的效果，这就是α-β过程的基本思想</strong>。<ul>
+<li>注意： α-β剪枝搜索和生成扩展子节点是同步的。其得到的最优解结果与Min-Max过程一致</li>
+</ul>
+</li>
+<li>Min-Max过程和α-β剪枝搜索的结果都受生成/搜索策略顺序有关（比如选择广度优先或者深度优先，结果可能不一样） </li>
+</ul>
+<p><strong>例子</strong></p>
+<ul>
+<li>左边为原搜索树，右边为α-β剪枝搜索<ul>
+<li>极小值节点I的N子树被剪枝了（ α剪枝）</li>
+<li>极大值节点G的L子树被剪枝了（β剪枝）</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-02-42.png"> </p>
+<ul>
+<li><p>定义：</p>
+<ul>
+<li>Max节点的下界为，即Max确保能获得的最小得益。初始化为-inf。</li>
+<li>Min节点的上界为，即Min付出的上界代价保障。初始化为+inf。</li>
+<li>对于节点N的估计函数值f(N)，初始化α =-inf ≤ f(N) ≤ β=+inf</li>
+<li>若 α ≤ β则N有解。若 α &gt; β 则N无解，该节点N的其他未访问子树会被剪枝</li>
+<li>如图中节点I，从左子树DBE可以获得下界=3，并传送到右边的极小节点I，此时I的子节点M给了个上界=1。所以=3&gt; =1，下界大于上界 ，无解。搜索的目标就是确定尽可能紧的取值区间[α, β]</li>
+</ul>
+</li>
+<li><p> <img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-10-31.png"> </p>
+</li>
+<li><p>理解：</p>
+<ul>
+<li>极大节点N，从一个子树获得的α值和β值，可以传送给其子节点</li>
+<li>极大节点N 的α值只可能越改越大，否则极大节点N可以还选择原有α值</li>
+<li>极小节点M的β值只可能越改越小，否则极小节点M可以还选择原有β值</li>
+<li>从单边子节点往父节点推，极大值父节点只更改α值，极小值父节点只更改β值。</li>
+</ul>
+</li>
+</ul>
+<p><strong>α剪枝（发生在极小层节点，如图中的节点I， α 值来自父辈等祖先节点）</strong></p>
+<ul>
+<li>（1）α剪枝：若任一极小值层节点的β值小于或等于它任一先辈极大值层节点的α值，即α（先辈层）≥β（后继层），则可中止该极小值层中这个MIN节点以下的搜索过程。这个MIN节点最终的倒推值就确定为这个β值。</li>
+<li>从一个子树获得的极大节点的α值，可以传送给该节点的其他子树，从而选择α剪枝机会（课本说法，和“先辈”节点α值比较，是和所有先辈节点比较，而不是仅仅和父节点比较）。</li>
+<li>从单边子节点往父节点推，极大值父节点只更改α值，极小值父节点只更改β值。</li>
+</ul>
+<p><strong>β剪枝（发生在极大层节点，如图中的节点G ，β 值来自父辈等祖先节点）</strong></p>
+<ul>
+<li>（2）β剪枝：若任一极大值层节点的α值大于或等于它任一先辈极小值层节点的β值，即α（后继层）≥β（先辈层），则可以中止该极大值层中这个MAX节点以下的搜索过程。这个MAX节点的最终倒推值就确定为这个α值。</li>
+<li>从一个子树获得的极小节点的β值，可以传送给该节点的其他子节点，从而选择β剪枝机会（课本说法，和“先辈”节点β值比较，是和所有先辈节点比较，而不是仅仅和父节点比较）。</li>
+<li>从单边子节点往父节点推，极大值父节点只更改α值，极小值父节点只更改β值。</li>
+</ul>
+<blockquote>
+<p>整体过程：</p>
+</blockquote>
+<ul>
+<li><p>α - β搜索过程步骤1</p>
+<ul>
+<li>从根节点开始，初始化根节点的 α=-∞，β=∞，向左边的子节点展开。到D节点时，得到D的值为3（实际为估计而得），返回B节点，由于B节点是Min节点，所以更新B节点的β值为min(∞, 3)=3，如下图：</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-24-21.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤2</p>
+<ul>
+<li>接下来从B到E，E的值是6，再从E返回MIN节点B，min(3,6)仍为3。从B返回根节点A，A是 Max 节点，更新A的α值为 max(-∞, 3[B的β值])=3，如下图：</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-19.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤3</p>
+<ul>
+<li>接下来从根节点往右深入，把根节点的 β=∞, α=3 依次传给C、F、I，从 I 深入 M再返回时，I 是 MIN节点，更新 I 的 β = min(∞, 1) = 1。留意到此时 I 的 α=3 ＞ β，所以无需再探索 I 的剩余子节点，把未探索的子节点剪掉，如图3：</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-191.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤4</p>
+<ul>
+<li>从节点 I 返回到F，F 的 α 值仍为 max(3, 1)=3不变。从F到J再返回，更新 F 的 α = max(3, 5) = 5。从 F 返回 C，更新 C 的 β = min(∞, 5) = 5，如图4： </li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-197-27-41.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤5</p>
+<ul>
+<li>从 C 到 G，把 C 的 β=5, α=3 传给 G，从 G 到 K 再返回 G，更新 G 的 α = max(3, 6) = 6。注意到 G 的 α=6 ＞β，把 G 的其余子节点剪掉，如图5： </li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-28.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤6</p>
+<ul>
+<li>从 G 返回 C，C 的 β = min(5, 6) = 5 不变。从 C 到 H 然后返回，C 的 β = min(5, 4) = 4。最后，从 C 返回根节点 A，A 是 Max 节点，A 的 α = max(3, 4[C的β值]) = 4，如图6。 实际上可以更精确，极大节点A的两个子节点范围(-inf, 3]和[3, 4]都确定了，所以此时A的α = β=4</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-29-31.png"> </li>
+</ul>
+</li>
+</ul>
+<p>视频：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1a7411K7g1/?spm_id_from=333.788.recommend_more_video.1">https://www.bilibili.com/video/BV1a7411K7g1/?spm_id_from=333.788.recommend_more_video.1</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/" rel="prev" title="算法设计与分析">
+      <i class="fa fa-chevron-left"></i> 算法设计与分析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">状态图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2"><span class="nav-number">1.1.</span> <span class="nav-text">启发式搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E6%8B%A9%E4%BC%98%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">全局择优搜索算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%8B%A9%E4%BC%98%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">局部择优搜索算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%9D%83%E7%8A%B6%E6%80%81%E5%9B%BE%E6%90%9C%E7%B4%A2"><span class="nav-number">1.1.3.</span> <span class="nav-text">加权状态图搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%95%8C%E9%99%90%E6%B3%95%EF%BC%88%E5%85%A8%E5%B1%80%E4%BB%A3%E4%BB%B7%E6%9C%80%E5%B0%8F%EF%BC%89"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">分支界限法（全局代价最小）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E8%BF%91%E6%8B%A9%E4%BC%98%E6%B3%95%EF%BC%88%E7%9E%8E%E5%AD%90%E7%88%AC%E5%B1%B1%EF%BC%8C%E5%B1%80%E9%83%A8%E4%BB%A3%E4%BB%B7%E6%9C%80%E5%B0%8F%EF%BC%89"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">最近择优法（瞎子爬山，局部代价最小）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A%E7%AE%97%E6%B3%95%E5%92%8CA-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">A算法和A*算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%B0%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">估价函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">A算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%E7%AE%97%E6%B3%95%EF%BC%88%E6%9C%80%E4%BD%B3%E5%9B%BE%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">A*算法（最佳图搜索算法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A%E5%9B%BE%E7%9A%84%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">小结：图的启发式搜索算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E%E6%88%96%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">与或图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E6%88%96%E5%9B%BE%E6%90%9C%E7%B4%A2"><span class="nav-number">2.2.</span> <span class="nav-text">与或图搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E4%B8%8E%E6%88%96%E6%A0%91%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.</span> <span class="nav-text">启发式与或树搜索</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">博弈树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">博弈问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%81%E5%B0%8F%E6%9E%81%E5%A4%A7%E6%90%9C%E7%B4%A2%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">极小极大搜索方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E4%BC%B0%E8%AE%A1%E5%87%BD%E6%95%B0f%EF%BC%88x%EF%BC%89"><span class="nav-number">3.2.1.</span> <span class="nav-text">静态估计函数f（x）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%CE%B1-%CE%B2%E5%89%AA%E6%9E%9D%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.2.</span> <span class="nav-text">α-β剪枝搜索过程</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiayi Liang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Jiayi Liang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayi Liang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
