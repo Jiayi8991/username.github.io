@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"jiayi8991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="算法设计与分析排序算法回顾   Algorithm (worst) time (best) time (avg) time method    MergeSort O(n log n) O(n log n) O(n log n) divide &amp; conquer   QuickSort n2 O(n log n) O(n log n) divide &amp; conquer   Inse">
+  <meta name="description" content="排序算法回顾   Algorithm (worst) time (best) time (avg) time method    MergeSort O(n log n) O(n log n) O(n log n) divide &amp; conquer   QuickSort n2 O(n log n) O(n log n) divide &amp; conquer   InsertSort">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法设计与分析">
 <meta property="og:url" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="JiayiSpace">
-<meta property="og:description" content="算法设计与分析排序算法回顾   Algorithm (worst) time (best) time (avg) time method    MergeSort O(n log n) O(n log n) O(n log n) divide &amp; conquer   QuickSort n2 O(n log n) O(n log n) divide &amp; conquer   Inse">
+<meta property="og:description" content="排序算法回顾   Algorithm (worst) time (best) time (avg) time method    MergeSort O(n log n) O(n log n) O(n log n) divide &amp; conquer   QuickSort n2 O(n log n) O(n log n) divide &amp; conquer   InsertSort">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-07-16-23-32.png">
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/image-20211031131444192.png">
@@ -47,8 +47,10 @@
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/20191127135244696.gif">
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2019112716422925.gif">
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-0815-37-08.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144326901-1530781288.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144340448-1796643731.png">
 <meta property="article:published_time" content="2021-12-07T08:10:39.000Z">
-<meta property="article:modified_time" content="2021-12-08T08:37:02.923Z">
+<meta property="article:modified_time" content="2021-12-27T12:11:52.614Z">
 <meta property="article:author" content="Jiayi Liang">
 <meta property="article:tag" content="学习, 算法">
 <meta name="twitter:card" content="summary">
@@ -217,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 16:37:02" itemprop="dateModified" datetime="2021-12-08T16:37:02+08:00">2021-12-08</time>
+                <time title="修改时间：2021-12-27 20:11:52" itemprop="dateModified" datetime="2021-12-27T20:11:52+08:00">2021-12-27</time>
               </span>
 
           
@@ -231,7 +233,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="算法设计与分析"><a href="#算法设计与分析" class="headerlink" title="算法设计与分析"></a>算法设计与分析</h1><h2 id="排序算法回顾"><a href="#排序算法回顾" class="headerlink" title="排序算法回顾"></a>排序算法回顾</h2><table>
+        <h1 id="排序算法回顾"><a href="#排序算法回顾" class="headerlink" title="排序算法回顾"></a>排序算法回顾</h1><table>
 <thead>
 <tr>
 <th>Algorithm</th>
@@ -404,7 +406,7 @@
 <li>桶排序：每个桶存储一定范围的数值；</li>
 </ul>
 <p>基数排序不是直接根据元素整体的大小进行元素比较，而是将原始列表元素分成多个部分，对每一部分按一定的规则进行排序，进而形成最终的有序列表。</p>
-<h2 id="图算法"><a href="#图算法" class="headerlink" title="图算法"></a>图算法</h2><h3 id="一些容易忘记的概念"><a href="#一些容易忘记的概念" class="headerlink" title="一些容易忘记的概念"></a>一些容易忘记的概念</h3><p><strong>连通</strong></p>
+<h1 id="图论部分算法"><a href="#图论部分算法" class="headerlink" title="图论部分算法"></a>图论部分算法</h1><h2 id="一些容易忘记的概念"><a href="#一些容易忘记的概念" class="headerlink" title="一些容易忘记的概念"></a>一些容易忘记的概念</h2><p><strong>连通</strong></p>
 <ul>
 <li>An undirected graph is connected if every pair of vertices is connected by a path. <ul>
 <li>如果每一对顶点都由一条路径连接，则无向图是连通的。</li>
@@ -452,7 +454,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="图的表示方法"><a href="#图的表示方法" class="headerlink" title="图的表示方法"></a>图的表示方法</h3><blockquote>
+<h2 id="图的表示方法"><a href="#图的表示方法" class="headerlink" title="图的表示方法"></a>图的表示方法</h2><blockquote>
 <p>Graphs can be given by adjacency matrix or adjacency list. </p>
 </blockquote>
 <ul>
@@ -481,7 +483,7 @@
 </li>
 </ul>
 <p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-086-03-05.png"> </p>
-<h3 id="图的遍历（Traversing-a-graph）"><a href="#图的遍历（Traversing-a-graph）" class="headerlink" title="图的遍历（Traversing a graph）"></a>图的遍历（Traversing a graph）</h3><h4 id="广度优先遍历（BFS）"><a href="#广度优先遍历（BFS）" class="headerlink" title="广度优先遍历（BFS）"></a>广度优先遍历（BFS）</h4><ul>
+<h2 id="图的遍历（Traversing-a-graph）"><a href="#图的遍历（Traversing-a-graph）" class="headerlink" title="图的遍历（Traversing a graph）"></a>图的遍历（Traversing a graph）</h2><h3 id="广度优先遍历（BFS）"><a href="#广度优先遍历（BFS）" class="headerlink" title="广度优先遍历（BFS）"></a>广度优先遍历（BFS）</h3><ul>
 <li>Breadth-First-Search (BFS). Starting from a vertex s, traverse the graph vertices “level by level.”<ul>
 <li>广度优先搜索(BFS)。从顶点s开始，逐层遍历图顶点。</li>
 </ul>
@@ -492,7 +494,7 @@
 
 <p><strong>动画展示</strong></p>
 <p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/20191127135310793.gif"> </p>
-<h4 id="深度优先遍历（DFS）"><a href="#深度优先遍历（DFS）" class="headerlink" title="深度优先遍历（DFS）"></a>深度优先遍历（DFS）</h4><ul>
+<h3 id="深度优先遍历（DFS）"><a href="#深度优先遍历（DFS）" class="headerlink" title="深度优先遍历（DFS）"></a>深度优先遍历（DFS）</h3><ul>
 <li>Depth-First-Search (DFS). Starting from a vertex s, explore the graph vertices as far as possible before backing tracking<ul>
 <li>深度优先搜索(DFS)。从一个顶点开始，在回溯跟踪之前尽可能地探索图的顶点</li>
 </ul>
@@ -522,8 +524,47 @@
 <p>bfs 和 dfs的非递归遍历比较，可以看出，很相似，只不过一个用的栈一个用的队列</p>
 </blockquote>
 <p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-0815-37-08.png"> </p>
-<h4 id="DFS-在有向图中的应用"><a href="#DFS-在有向图中的应用" class="headerlink" title="DFS 在有向图中的应用"></a>DFS 在有向图中的应用</h4><p><strong>寻找强连通分量</strong></p>
+<h2 id="DFS和DAG（有向无环图）"><a href="#DFS和DAG（有向无环图）" class="headerlink" title="DFS和DAG（有向无环图）"></a>DFS和DAG（有向无环图）</h2><h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><ul>
+<li>Topological Sorting</li>
+<li>Given a directed graph G, order the vertices of G into an array T[1..n] such that if [T[i], T[j]] is an arc, then i &lt; j, or report no such an order exists.<ul>
+<li>给定有向图G，将G的顶点排序到数组T[1..]n]这样，如果[T[i]， T[j]是一个弧，则i &lt; j，或报告不存在这样的顺序。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>拓扑排序是对DAG的顶点进行排序，使得对每一条有向边(u, v)，均有u（在排序记录中）比v先出现。亦可理解为对某点v而言，只有当v的所有源点均出现了，v才能出现。</li>
+</ul>
+<p>下图给出有向无环图的拓扑排序：</p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144326901-1530781288.png"> </p>
+<p>下图给出的顶点排序不是拓扑排序，因为顶点<code>D</code>的邻接点<code>E</code>比其先出现：</p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144340448-1796643731.png"> </p>
+<blockquote>
+<p>DFS判断是否有拓扑排序</p>
+<ul>
+<li>算法思想：</li>
+<li>let [v, w] be an arc in G.</li>
+<li>When we call DFS(v) on v, what is the color of w?<ul>
+<li>当我们对v调用DFS(v)时，w的颜色是什么</li>
+</ul>
+</li>
+<li>If color[w] = black, then w becomes black before v.<ul>
+<li>如果color[w] = black，则w在v之前变为黑色。</li>
+</ul>
+</li>
+<li>If color[w] = white, DFS(v) calls DFS(w), so w becomes black before v.<ul>
+<li>如果color[w] = white, DFS(v)调用DFS(w)，那么w在v之前变成黑色。</li>
+</ul>
+</li>
+<li>If color[w] = gray, then DFS(w) (recursively) calls DFS(v), so there is a path from w to v, which plus the arc [v, w] gives a cycle. So there is no topological order<ul>
+<li>如果color[w] = gray，那么DFS(w)(递归地)调用DFS(v)，所以有一条从w到v的路径，加上弧[v, w]就得到一个循环。所以没有拓扑顺序</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>代码实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">DFS(v)</span><br><span class="line">1. color[v] = gray; </span><br><span class="line">2. for (each arc [v, w])</span><br><span class="line">     if (color[w] == white) DFS(w)</span><br><span class="line">     else if (color[w] == gray)</span><br><span class="line">        Stop (“no topological order”); </span><br><span class="line">3. color[v] = black; T[t] = v; t = t - 1.</span><br><span class="line"></span><br><span class="line">T-Sort() \\ T[1..n] is the output array</span><br><span class="line">1. for (each vertex v) </span><br><span class="line">      color[v] = white;</span><br><span class="line">2. t = n; </span><br><span class="line">3. for (each vertex v)</span><br><span class="line">     if (color[v] == white) DFS(v).   </span><br></pre></td></tr></table></figure>
 
+<h3 id="寻找强连通分量"><a href="#寻找强连通分量" class="headerlink" title="寻找强连通分量"></a><strong>寻找强连通分量</strong></h3>
     </div>
 
     
@@ -606,7 +647,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">算法设计与分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.1.</span> <span class="nav-text">排序算法回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FixHeap"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">FixHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SortHeap"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">SortHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MakeHeap"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">MakeHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">Main()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">算法动图演示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%97%B6%E9%97%B4%E6%8E%92%E5%BA%8F%EF%BC%88Sorting-in-Linear-Time%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">线性时间排序（Sorting in Linear Time）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Courting-Sort%EF%BC%89"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">计数排序（Courting Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Radix-Sort%EF%BC%89"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">基数排序（Radix Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%B6%E6%8E%92%E5%BA%8F%EF%BC%88Bucket-sort%EF%BC%89"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">桶排序（Bucket sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E8%BF%B0%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">上述三种排序算法小结：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">图算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%B9%E6%98%93%E5%BF%98%E8%AE%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">一些容易忘记的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">图的表示方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%88Traversing-a-graph%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">图的遍历（Traversing a graph）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88BFS%EF%BC%89"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">广度优先遍历（BFS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88DFS%EF%BC%89"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">深度优先遍历（DFS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DFS-%E5%9C%A8%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">DFS 在有向图中的应用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">排序算法回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FixHeap"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">FixHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SortHeap"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">SortHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MakeHeap"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">MakeHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">Main()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">算法动图演示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%97%B6%E9%97%B4%E6%8E%92%E5%BA%8F%EF%BC%88Sorting-in-Linear-Time%EF%BC%89"><span class="nav-number">1.0.2.</span> <span class="nav-text">线性时间排序（Sorting in Linear Time）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Courting-Sort%EF%BC%89"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">计数排序（Courting Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Radix-Sort%EF%BC%89"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">基数排序（Radix Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%B6%E6%8E%92%E5%BA%8F%EF%BC%88Bucket-sort%EF%BC%89"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">桶排序（Bucket sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E8%BF%B0%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">上述三种排序算法小结：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA%E9%83%A8%E5%88%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">图论部分算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%B9%E6%98%93%E5%BF%98%E8%AE%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">一些容易忘记的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">图的表示方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%88Traversing-a-graph%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">图的遍历（Traversing a graph）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88BFS%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">广度优先遍历（BFS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88DFS%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">深度优先遍历（DFS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS%E5%92%8CDAG%EF%BC%88%E6%9C%89%E5%90%91%E6%97%A0%E7%8E%AF%E5%9B%BE%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">DFS和DAG（有向无环图）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="nav-number">2.4.1.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="nav-number">2.4.2.</span> <span class="nav-text">寻找强连通分量</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -622,7 +663,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -631,7 +672,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

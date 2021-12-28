@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi8991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="数据处理的主要任务：  Data cleaning Handle missing data, smooth noisy data, identify or remove outliers, and resolve inconsistencies   Data integration ​    Integration of multiple databases, data cubes, or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据处理">
+<meta property="og:url" content="https://jiayi8991.github.io/2021/12/22/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="JiayiSpace">
+<meta property="og:description" content="数据处理的主要任务：  Data cleaning Handle missing data, smooth noisy data, identify or remove outliers, and resolve inconsistencies   Data integration ​    Integration of multiple databases, data cubes, or">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/22/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/2021-12-2214-00-09.png">
+<meta property="article:published_time" content="2021-12-22T05:54:16.000Z">
+<meta property="article:modified_time" content="2021-12-22T12:42:15.147Z">
+<meta property="article:author" content="Jiayi Liang">
+<meta property="article:tag" content="学习 数据挖掘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiayi8991.github.io/2021/12/22/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/2021-12-2214-00-09.png">
+
+<link rel="canonical" href="https://jiayi8991.github.io/2021/12/22/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据处理 | JiayiSpace</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JiayiSpace</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/22/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-22 13:54:16 / 修改时间：20:42:15" itemprop="dateCreated datePublished" datetime="2021-12-22T13:54:16+08:00">2021-12-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/2021/12/22/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/2021-12-2214-00-09.png"> </p>
+<blockquote>
+<p>数据处理的主要任务：</p>
+<ol>
+<li><p>Data cleaning</p>
+<pre><code>Handle missing data, smooth noisy data, identify or remove outliers, and resolve inconsistencies
+</code></pre>
+</li>
+<li><p>Data integration</p>
+<p>​    Integration of multiple databases, data cubes, or files</p>
+</li>
+<li><p>Data reduction</p>
+<p>​    Dimensionality reduction<br>​    Numerosity reduction<br>​    Data compression</p>
+</li>
+<li><p>Data transformation and data discretization</p>
+<p>​    Normalization</p>
+<p>​    Concept hierarchy generation</p>
+</li>
+</ol>
+</blockquote>
+<h1 id="Data-Cleaning"><a href="#Data-Cleaning" class="headerlink" title="Data Cleaning"></a>Data Cleaning</h1><ul>
+<li> 生活中的数据通常“Dirty”，比如格式的错误，人和电脑的错误或是什么</li>
+<li>Incomplete: lacking attribute values, lacking certain attributes of interest, or containing only aggregate data<ul>
+<li>e.g., <em>Occupation</em> = “ ” (missing data)</li>
+</ul>
+</li>
+<li>Noisy: containing noise, errors, or outliers<ul>
+<li>e.g., <em>Salary</em> = “−10” (an error)</li>
+</ul>
+</li>
+<li>Inconsistent: containing discrepancies in codes or names, <ul>
+<li>e.g.,</li>
+<li><em>Age</em> = “42”, <em>Birthday</em> = “03/07/2010”</li>
+<li>Was rating “1, 2, 3”, now rating “A, B, C”</li>
+<li>discrepancy between duplicate records</li>
+</ul>
+</li>
+<li>Intentional (e.g., <em>disguised missing</em> data)<ul>
+<li>Jan. 1 as everyone’s birthday?用户故意的输入不正确值（比如选用默认的生日）</li>
+</ul>
+</li>
+</ul>
+<h2 id="不完整数据（Incomplete-Data）"><a href="#不完整数据（Incomplete-Data）" class="headerlink" title="不完整数据（Incomplete Data）"></a>不完整数据（Incomplete Data）</h2><ul>
+<li>Data is not always available<ul>
+<li>E.g., many tuples have no recorded value for several attributes, such as customer income in sales data</li>
+</ul>
+</li>
+<li>Missing data may be due to <ul>
+<li>Equipment malfunction</li>
+<li>Inconsistent with other recorded data and thus deleted</li>
+<li>Data were not entered due to misunderstanding</li>
+<li>Certain data may not be considered important at the time of entry</li>
+<li>Did not register history or changes of the data</li>
+</ul>
+</li>
+<li>Missing data may need to be inferred</li>
+</ul>
+<blockquote>
+<p>How to deal with them ? 怎样处理缺失数据</p>
+</blockquote>
+<ul>
+<li>Ignore the tuple: usually done when class label is missing (when doing classification)—not effective when the % of missing values per attribute varies considerably</li>
+<li>Fill in the missing value manually: tedious + infeasible?</li>
+<li>Fill in it automatically with<ul>
+<li>a global constant : e.g., “unknown”, a new class?! </li>
+<li>the attribute mean</li>
+<li>the attribute mean for all samples belonging to the same class: smarter</li>
+<li><strong>the most probable value: inference-based such as Bayesian formula or decision tree</strong>最可能值:基于推理的，如贝叶斯公式或决策树</li>
+</ul>
+</li>
+</ul>
+<h2 id="Noisy-Data"><a href="#Noisy-Data" class="headerlink" title="Noisy Data"></a>Noisy Data</h2><ul>
+<li><strong>Noise:</strong> random error or variance in a measured variable (被测变量的随机误差或方差)</li>
+<li><strong>Incorrect attribute values</strong> may be due to<ul>
+<li>Faulty data collection instruments</li>
+<li>Data entry problems</li>
+<li>Data transmission problems</li>
+<li>Technology limitation</li>
+<li>Inconsistency in naming convention </li>
+</ul>
+</li>
+<li><strong>Other data</strong> <strong>problems</strong><ul>
+<li>Duplicate records</li>
+<li>Incomplete data</li>
+<li>Inconsistent data</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>How to Handle Noisy Data? </p>
+</blockquote>
+<ul>
+<li>Binning 分箱：按大小分箱，以各箱均值或中位值或边界值等代替箱内数据<ul>
+<li>First sort data and partition into (equal-frequency) bins</li>
+<li>Then one can <strong>smooth by bin means, smooth by bin median, smooth by bin boundaries</strong>, etc.</li>
+</ul>
+</li>
+<li>Regression 回归<ul>
+<li>Smooth by fitting the data into regression functions</li>
+</ul>
+</li>
+<li>Clustering 聚类<ul>
+<li>Detect and remove outliers</li>
+</ul>
+</li>
+<li>Semi-supervised: Combined computer and human inspection  半监督<ul>
+<li>Detect suspicious values and check by human (e.g., deal with possible outliers)</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据清洗的过程"><a href="#数据清洗的过程" class="headerlink" title="数据清洗的过程"></a>数据清洗的过程</h2><ul>
+<li><strong>Data discrepancy</strong> <strong>detection</strong> <strong>数据偏差检测</strong><ul>
+<li>Use metadata (e.g., domain, range, dependency, distribution)</li>
+<li>Check field overloading </li>
+<li>Check uniqueness rule, consecutive rule and null rule</li>
+<li>Use commercial tools<ul>
+<li>Data scrubbing: use simple domain knowledge (e.g., postal code, spell-check) to detect errors and make corrections  数据清洗</li>
+<li>Data auditing: by analyzing data to discover rules and relationship to detect violators (e.g., correlation and clustering to find outliers) 数据审计</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Data migration and</strong> <strong>integration</strong> <strong>数据迁移和集成</strong><ul>
+<li>Data migration tools: allow transformations to be specified</li>
+<li>ETL (Extraction/Transformation/Loading) tools: allow users to specify transformations through a graphical user interface</li>
+</ul>
+</li>
+<li>Integration of the two processes （合并数据偏差和数据变换）<ul>
+<li>Iterative and interactive (e.g., Potter’s Wheels)</li>
+</ul>
+</li>
+</ul>
+<h1 id="Data-Integration"><a href="#Data-Integration" class="headerlink" title="Data Integration"></a>Data Integration</h1><ul>
+<li>Data integration 数据集成<ul>
+<li>Combining data from multiple sources into a coherent store（将来自多个来源的数据合并到一个连贯的存储中）</li>
+</ul>
+</li>
+<li>Schema integration: e.g., A.cust-id  B.cust-# 模式集成<ul>
+<li>Integrate metadata from different sources</li>
+</ul>
+</li>
+<li><strong>Entity</strong> <strong>identification:</strong>  <strong>实体识别</strong><ul>
+<li>Identify real world entities from multiple data sources, e.g., Bill Clinton = William Clinton</li>
+</ul>
+</li>
+<li>Detecting and resolving data value conflicts 检测和解决数值冲突<ul>
+<li>For the same real world entity, attribute values from different sources are different</li>
+<li>Possible reasons: different representations, different scales, e.g., metric vs. British units</li>
+</ul>
+</li>
+</ul>
+<h2 id="Handling-Redundancy-in-Integration"><a href="#Handling-Redundancy-in-Integration" class="headerlink" title="Handling Redundancy in Integration"></a>Handling Redundancy in Integration</h2><ul>
+<li>Redundant data occur often when integration of multiple databases<ul>
+<li><em>Object identification</em>: The same attribute or object may have different names in different databases<ul>
+<li>对象标识:相同的属性或对象在不同的数据库中可能有不同的名称</li>
+</ul>
+</li>
+<li><em>Derivable data:</em> One attribute may be a “derived” attribute in another table, e.g., annual revenue<ul>
+<li>派生数据:一个属性可能是另一个表中的派生属性，例如年收入</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Redundant attributes may be able to be detected by</strong> <em><strong>correlation analysis</strong></em> <strong>and</strong> <em><strong>covariance analysis</strong></em>（通过相关分析和协方差分析可以发现冗余属性）</li>
+<li>Careful integration of the data from multiple sources may help reduce/avoid redundancies and inconsistencies and improve mining speed and quality</li>
+</ul>
+<h2 id="相关性分析Correlation-Analysis-for-Categorical-Data"><a href="#相关性分析Correlation-Analysis-for-Categorical-Data" class="headerlink" title="相关性分析Correlation Analysis (for Categorical Data)"></a>相关性分析Correlation Analysis (for Categorical Data)</h2><ul>
+<li>Null hypothesis: The two distributions are independent<ul>
+<li>零假设:两个分布是独立的</li>
+</ul>
+</li>
+<li>The cells that contribute the most to the Χ<sup>2</sup> value are those whose actual count is very different from the expected count<ul>
+<li>The larger the Χ<sup>2</sup> value, the more likely the variables are related</li>
+</ul>
+</li>
+<li>Note: Correlation does not imply causality 注:相关性并不意味着因果关系<ul>
+<li># of hospitals and # of car-theft in a city are correlated</li>
+<li>Both are causally linked to the third variable: population</li>
+</ul>
+</li>
+</ul>
+<h1 id="Data-Reduction-and-Transformation"><a href="#Data-Reduction-and-Transformation" class="headerlink" title="Data Reduction and Transformation"></a>Data Reduction and Transformation</h1><h2 id="Data-Reduction"><a href="#Data-Reduction" class="headerlink" title="Data Reduction"></a>Data Reduction</h2><ul>
+<li><strong>Data reduction</strong>: <ul>
+<li>Obtain a reduced representation of the data set <ul>
+<li>much smaller in volume but yet produces <em>almost</em> the same analytical results</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Why data reduction?—A database/data warehouse may store terabytes of data<ul>
+<li>Complex analysis may take a very long time to run on the complete data set</li>
+</ul>
+</li>
+<li><strong>Methods for data</strong> <strong>reduction</strong> (also <em>data size reduction</em> or <em>numerosity</em> <em>reduction</em>) <ul>
+<li>Regression and Log-Linear Models</li>
+<li>Histograms, clustering, sampling</li>
+<li>Data cube aggregation</li>
+<li>Data compression</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Data Reduction: <strong>Parametric vs. Non-Parametric Methods</strong></p>
+</blockquote>
+<ul>
+<li>Reduce data volume by choosing alternative, <em>smaller forms</em> of data representation</li>
+<li><strong>Parametric methods</strong> (e.g., regression)<ul>
+<li>Assume the data fits some model, estimate model parameters, store only the parameters, and discard the data (except possible outliers)假设数据符合某个模型，估计模型参数，只存储参数，并丢弃数据(可能的离群值除外)</li>
+<li>Ex.: Log-linear models—obtain value at a point in <em>m</em>-D space as the product on appropriate marginal subspaces 例如:对数线性模型获得m-D空间中某一点的值作为相应边际子空间上的乘积</li>
+</ul>
+</li>
+<li><strong>Non-parametric</strong> methods <ul>
+<li>Do not assume models</li>
+<li>Major families: histograms, clustering, sampling, … </li>
+</ul>
+</li>
+</ul>
+<h3 id="参数化方法"><a href="#参数化方法" class="headerlink" title="参数化方法"></a>参数化方法</h3><h3 id="非参数化方法"><a href="#非参数化方法" class="headerlink" title="非参数化方法"></a>非参数化方法</h3><h2 id="Data-Transformation"><a href="#Data-Transformation" class="headerlink" title="Data Transformation"></a>Data Transformation</h2><ul>
+<li>A function that maps the entire set of values of a given attribute to a new set of replacement values s.t. each old value can be identified with one of the new values  将给定属性的整个值集映射到一组新的替换值s.t的函数。每个旧值可以用一个新值来标识</li>
+<li>Methods<ul>
+<li>Smoothing: Remove noise from data</li>
+<li>Attribute/feature construction<ul>
+<li>New attributes constructed from the given ones</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Aggregation: Summarization, data cube construction</li>
+<li>Normalization: Scaled to fall within a smaller, specified range<ul>
+<li>min-max normalization</li>
+<li>z-score normalization</li>
+<li>normalization by decimal scaling</li>
+</ul>
+</li>
+<li>Discretization: Concept hierarchy climbing</li>
+</ul>
+<h3 id="Discretization（离散化）"><a href="#Discretization（离散化）" class="headerlink" title="Discretization（离散化）"></a>Discretization（离散化）</h3><ul>
+<li>Three types of attributes<ul>
+<li>Nominal—values from an unordered set, e.g., color, profession</li>
+<li>Ordinal—values from an ordered set, e.g., military or academic rank </li>
+<li>Numeric—real numbers, e.g., integer or real numbers</li>
+</ul>
+</li>
+<li>Discretization: Divide the range of a continuous attribute into intervals<ul>
+<li>Interval labels can then be used to replace actual data values </li>
+<li>Reduce data size by discretization</li>
+<li>Supervised vs. unsupervised</li>
+<li>Split (top-down) vs. merge (bottom-up)</li>
+<li>Discretization can be performed recursively on an attribute</li>
+<li>Prepare for further analysis, e.g., classification</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>离散化的方式</p>
+</blockquote>
+<ul>
+<li>Binning <ul>
+<li>Top-down split, unsupervised</li>
+</ul>
+</li>
+<li>Histogram analysis<ul>
+<li>Top-down split, unsupervised</li>
+</ul>
+</li>
+<li>Clustering analysis <ul>
+<li>Unsupervised, top-down split or bottom-up merge</li>
+</ul>
+</li>
+<li>Decision-tree analysis<ul>
+<li>Supervised, top-down split</li>
+</ul>
+</li>
+<li>Correlation (e.g., 2) analysis <ul>
+<li>Unsupervised, bottom-up merge</li>
+</ul>
+</li>
+<li>Note: All the methods can be applied recursively</li>
+</ul>
+<h3 id="Concept-Hierarchy-Generation-概念分层"><a href="#Concept-Hierarchy-Generation-概念分层" class="headerlink" title="Concept Hierarchy Generation  概念分层"></a>Concept Hierarchy Generation  概念分层</h3><ul>
+<li><strong>Concept hierarchy</strong> organizes concepts (i.e., attribute values) hierarchically and is usually associated with each dimension in a data warehouse概念层次按层次组织概念(即属性值)，通常与数据仓库中的每个维度相关联</li>
+<li>Concept hierarchies facilitate drilling and rolling in data warehouses to view data in multiple granularity 概念层次结构便于在数据仓库中钻取和滚动，以便以多种粒度查看数据</li>
+<li>Concept hierarchy formation: Recursively reduce the data by collecting and replacing low level concepts (such as numeric values for <em>age</em>) by higher level concepts (such as <em>youth, adult</em>, or <em>senior</em>) 概念层次结构的形成:通过收集和替换低级概念(如年龄的数值)，递归地减少数据(如青年、成人或老年人)</li>
+<li>Concept hierarchies can be explicitly specified by domain experts and/or data warehouse designers  概念层次结构可以由领域专家和/或数据仓库设计者显式指定</li>
+<li>Concept hierarchy can be automatically formed for both numeric and nominal data—For numeric data, use discretization methods shown  对于数值数据，可以使用所示的离散化方法</li>
+</ul>
+<h1 id="Dimensionality-Reduction"><a href="#Dimensionality-Reduction" class="headerlink" title="Dimensionality Reduction"></a>Dimensionality Reduction</h1><ul>
+<li><strong>Curse of dimensionality</strong><ul>
+<li>When dimensionality increases, data becomes increasingly sparse</li>
+<li>Density and distance between points, which is critical to clustering, outlier analysis, becomes less meaningful</li>
+<li>The possible combinations of subspaces will grow exponentially</li>
+</ul>
+</li>
+<li><strong>Dimensionality reduction</strong><ul>
+<li>Reducing the number of random variables under consideration, via obtaining a set of principal variables 通过获取一组主变量，减少考虑的随机变量的数量</li>
+</ul>
+</li>
+<li><strong>Advantages of dimensionality reduction</strong><ul>
+<li>Avoid the curse of dimensionality</li>
+<li>Help eliminate irrelevant features and reduce noise</li>
+<li>Reduce time and space required in data mining</li>
+<li>Allow easier visualization</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Dimensionality Reduction Techniques</p>
+</blockquote>
+<ul>
+<li>Dimensionality reduction methodologies<ul>
+<li><strong>Feature selection</strong>: Find a subset of the original variables (or features, attributes)</li>
+<li><strong>Feature extraction</strong>: Transform the data in the high-dimensional space to a space of fewer dimensions</li>
+</ul>
+</li>
+<li>Some typical dimensionality methods<ul>
+<li>Principal Component Analysis</li>
+<li>Supervised and nonlinear techniques <ul>
+<li>Feature subset selection</li>
+<li>Feature creation</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Principal-Component-Analysis-PCA"><a href="#Principal-Component-Analysis-PCA" class="headerlink" title="Principal Component Analysis (PCA)"></a>Principal Component Analysis (PCA)</h2><ul>
+<li>PCA: A statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called <em><strong>principal</strong></em> <em><strong>components</strong></em><ul>
+<li>主成分分析(PCA):一种统计方法，它利用正交变换将一组可能相关变量的观测值转换为一组线性不相关变量的值，称为主成分</li>
+</ul>
+</li>
+<li>The original data are projected onto a much smaller space, resulting in dimensionality reduction将原始数据投影到一个小得多的空间，从而进行降维</li>
+<li>Method: Find the eigenvectors of the covariance matrix, and these eigenvectors define the new space  方法:求协方差矩阵的特征向量，用这些特征向量定义新空间</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" rel="tag"># 学习 数据挖掘</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/21/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9A%8F%E6%9C%BA%E4%BC%98%E5%8C%96%E6%90%9C%E7%B4%A2/" rel="prev" title="基于遗传算法的随机优化搜索">
+      <i class="fa fa-chevron-left"></i> 基于遗传算法的随机优化搜索
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Cleaning"><span class="nav-number">1.</span> <span class="nav-text">Data Cleaning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%AE%8C%E6%95%B4%E6%95%B0%E6%8D%AE%EF%BC%88Incomplete-Data%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">不完整数据（Incomplete Data）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Noisy-Data"><span class="nav-number">1.2.</span> <span class="nav-text">Noisy Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">数据清洗的过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Integration"><span class="nav-number">2.</span> <span class="nav-text">Data Integration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Handling-Redundancy-in-Integration"><span class="nav-number">2.1.</span> <span class="nav-text">Handling Redundancy in Integration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90Correlation-Analysis-for-Categorical-Data"><span class="nav-number">2.2.</span> <span class="nav-text">相关性分析Correlation Analysis (for Categorical Data)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Reduction-and-Transformation"><span class="nav-number">3.</span> <span class="nav-text">Data Reduction and Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Reduction"><span class="nav-number">3.1.</span> <span class="nav-text">Data Reduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.1.</span> <span class="nav-text">参数化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%8F%82%E6%95%B0%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">非参数化方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Transformation"><span class="nav-number">3.2.</span> <span class="nav-text">Data Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Discretization%EF%BC%88%E7%A6%BB%E6%95%A3%E5%8C%96%EF%BC%89"><span class="nav-number">3.2.1.</span> <span class="nav-text">Discretization（离散化）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Concept-Hierarchy-Generation-%E6%A6%82%E5%BF%B5%E5%88%86%E5%B1%82"><span class="nav-number">3.2.2.</span> <span class="nav-text">Concept Hierarchy Generation  概念分层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dimensionality-Reduction"><span class="nav-number">4.</span> <span class="nav-text">Dimensionality Reduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Principal-Component-Analysis-PCA"><span class="nav-number">4.1.</span> <span class="nav-text">Principal Component Analysis (PCA)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiayi Liang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Jiayi Liang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayi Liang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
