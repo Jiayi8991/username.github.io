@@ -49,8 +49,13 @@
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-0815-37-08.png">
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144326901-1530781288.png">
 <meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144340448-1796643731.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-1115-52-29.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-116-20-00.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-1115-52-29.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-124-18-54.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-14-19-39.png">
 <meta property="article:published_time" content="2021-12-07T08:10:39.000Z">
-<meta property="article:modified_time" content="2021-12-27T12:11:52.614Z">
+<meta property="article:modified_time" content="2022-01-13T03:54:00.853Z">
 <meta property="article:author" content="Jiayi Liang">
 <meta property="article:tag" content="学习, 算法">
 <meta name="twitter:card" content="summary">
@@ -219,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-27 20:11:52" itemprop="dateModified" datetime="2021-12-27T20:11:52+08:00">2021-12-27</time>
+                <time title="修改时间：2022-01-13 11:54:00" itemprop="dateModified" datetime="2022-01-13T11:54:00+08:00">2022-01-13</time>
               </span>
 
           
@@ -295,7 +300,7 @@
 <p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/image-20211031131444192.png" alt="image-20211031131444192.png">  </p>
 <ul>
 <li>The height of a heap of n nodes is ≤ log<sub>2</sub> n .<ul>
-<li>  <img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-07-16-21-29.png" alt="2021-12-07-16-21-29.png"></li>
+<li>  <img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-07-16-21-29.png" alt="2021-12-07-16-21-29.png"> </li>
 <li>1 + 2 + 22 + 23 + ‧‧‧ + 2h-1 = 2h - 1</li>
 <li>So n ≥ 2h – 1 + 1 = 2h, and h ≤ log<sub>2</sub> n </li>
 </ul>
@@ -321,15 +326,13 @@
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">FixHeapD(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. while (2h+1 ≤ t)</span><br><span class="line">       H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">       if (H[h] &lt; H[g])</span><br><span class="line">          H[h] ↔ H[g];</span><br><span class="line">          h = g; </span><br><span class="line">       else h = t.</span><br><span class="line"></span><br><span class="line">MakeHeap(H[0..n-1])</span><br><span class="line">\\ make array H[0..n-1] a heap</span><br><span class="line">1. for (i = ⌊(n-2)/2⌋; i ≥ 0; i--)</span><br><span class="line">      FixHeapD(H, n-1, i).</span><br><span class="line"></span><br><span class="line">SortHeap(H[0..n-1])</span><br><span class="line">\\ H[0..n-1] is a heap</span><br><span class="line">1. t = n-1; </span><br><span class="line">2. while (t &gt; 0) </span><br><span class="line">      H[0] ↔ H[t];</span><br><span class="line">      t = t – 1; </span><br><span class="line">      FixHeapD(H, t, 0).</span><br><span class="line"></span><br><span class="line">main HeapSort(H[0..n-1])</span><br><span class="line">\\ sort the array H[0..n-1]</span><br><span class="line">1. MakeHeap(H[0..n-1]);</span><br><span class="line">2. SortHeap(H[0..n-1]). </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h4 id="算法动图演示"><a href="#算法动图演示" class="headerlink" title="算法动图演示"></a>算法动图演示</h4><p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/849589-20171015231308699-356134237.gif" alt="849589-20171015231308699-356134237.gif"> ‘ </p>
+<h4 id="算法动图演示"><a href="#算法动图演示" class="headerlink" title="算法动图演示"></a>算法动图演示</h4><p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/849589-20171015231308699-356134237.gif" alt="849589-20171015231308699-356134237.gif"> ‘ ``</p>
 <h3 id="线性时间排序（Sorting-in-Linear-Time）"><a href="#线性时间排序（Sorting-in-Linear-Time）" class="headerlink" title="线性时间排序（Sorting in Linear Time）"></a>线性时间排序（Sorting in Linear Time）</h3><h4 id="计数排序（Courting-Sort）"><a href="#计数排序（Courting-Sort）" class="headerlink" title="计数排序（Courting Sort）"></a>计数排序（Courting Sort）</h4><blockquote>
 <ul>
-<li>Algorithm. CountingSort<ul>
+<li> `〔筆畫〕Algorithm. CountingSort</li>
 <li>Step 1. for each value v, count the number of copies of v in A[0..n-1]</li>
 <li>Step 2. for each A[i], count the number of elements in A[0..n-1] that are not larger than A[i] </li>
 <li>Step 3. use the information in step 2 to output a sorted list. </li>
-</ul>
-</li>
 <li>计数排序的思想是：<ul>
 <li>在待排序序列中，如果我们能统计出有多少元素小于或等于某一个元素，我们也就知道了该元素的正确位置。</li>
 <li>例如，对于待排序序列{2,5,3,0,2,3,0,3}，我们统计出有8个元素小于等于5（包括5自己），那么5这个元素就应该被排序到第8位</li>
@@ -564,7 +567,188 @@
 <p>代码实现：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">DFS(v)</span><br><span class="line">1. color[v] = gray; </span><br><span class="line">2. for (each arc [v, w])</span><br><span class="line">     if (color[w] == white) DFS(w)</span><br><span class="line">     else if (color[w] == gray)</span><br><span class="line">        Stop (“no topological order”); </span><br><span class="line">3. color[v] = black; T[t] = v; t = t - 1.</span><br><span class="line"></span><br><span class="line">T-Sort() \\ T[1..n] is the output array</span><br><span class="line">1. for (each vertex v) </span><br><span class="line">      color[v] = white;</span><br><span class="line">2. t = n; </span><br><span class="line">3. for (each vertex v)</span><br><span class="line">     if (color[v] == white) DFS(v).   </span><br></pre></td></tr></table></figure>
 
-<h3 id="寻找强连通分量"><a href="#寻找强连通分量" class="headerlink" title="寻找强连通分量"></a><strong>寻找强连通分量</strong></h3>
+<blockquote>
+<p>附： 非DFS方法</p>
+</blockquote>
+<p>动画演示：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html">https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html</a></p>
+<h3 id="寻找强连通分量"><a href="#寻找强连通分量" class="headerlink" title="寻找强连通分量"></a><strong>寻找强连通分量</strong></h3><h2 id="单源最短路径问题（Single-Source-Shortest-Path-Problem）"><a href="#单源最短路径问题（Single-Source-Shortest-Path-Problem）" class="headerlink" title="单源最短路径问题（Single-Source Shortest Path Problem）"></a>单源最短路径问题（Single-Source Shortest Path Problem）</h2><h3 id="Dijikstra算法"><a href="#Dijikstra算法" class="headerlink" title="Dijikstra算法"></a>Dijikstra算法</h3><ul>
+<li><p>Problem. Given a weighted graph G and two vertices s and t in G, find a shortest path from s to t in G</p>
+<ul>
+<li>问题: 给定一个加权图G和G中的两个顶点s和t，找出G中s到t的一条最短路径</li>
+</ul>
+</li>
+<li><p>Dijkstra’s Idea: start from the vertex s, gradually grow a tree rooted at s, by adding the vertex that currently “looks” the best</p>
+<ul>
+<li>Dijkstra的想法:从顶点s开始，通过添加当前看起来最好的顶点，逐渐生长出以s为根的树</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Dijkstra算法：</p>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-1115-52-29.png">  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Dijkstra(G, s, t)                                 complexity</span><br><span class="line">1. for (v=1; v≤n; v++) status[v] = unseen;           〇(n)</span><br><span class="line">2. status[s] = in-tree; dist[s] = 0;				 〇（1）</span><br><span class="line">3. for (each edge [s, w])							 〇（n）</span><br><span class="line">      status[w] = fringe; dad[w] = s;</span><br><span class="line">      dist[w] = wt(s, w);</span><br><span class="line">4. While (there are fringes)</span><br><span class="line">4.1   pick the fringe v of minimum dist[v];</span><br><span class="line">4.2   status[v] = in-tree;						   &lt;=n times</span><br><span class="line">4.3   for (each edge [v, w])						 〇（n）</span><br><span class="line">4.3.1   if (status[w] == unseen)					 〇（1）</span><br><span class="line">             status[w] = fringe; dad[w] = v; 		 〇（n）</span><br><span class="line">             dist[w] = dist[v] + wt(v, w);</span><br><span class="line">4.3.2   else if (status[w] == fringe) &amp; </span><br><span class="line">             (dist[w] &gt; dist[v] + wt(v, w))</span><br><span class="line">             dad[w] = v; </span><br><span class="line">             dist[w] = dist[v] + wt(v, w);</span><br><span class="line">5. The array dad[1..n] gives the path from s.  </span><br><span class="line">												Time= 〇(n^2)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 如果使用 min-heap 来存储 fringe</p>
+</blockquote>
+<ol>
+<li>RetrieveMin(H): find the minimum, and restore the heap; </li>
+<li>Insert(H, v): add a new fringe v and restore the heap;</li>
+<li>Delete(H, v): delete v and restore the heap.</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h&gt;0 &amp; H[h]&lt;H[⌊(h-1)/2⌋]) </span><br><span class="line">      while (h&gt;0 &amp; H[h]&lt;H[⌊(h-1)/2⌋]) </span><br><span class="line">         H[h] ↔ H[⌊(h-1)/2⌋];</span><br><span class="line">         h = ⌊(h-1)/2⌋</span><br><span class="line">    else</span><br><span class="line">      while (2h+1 ≤ t)</span><br><span class="line">         if (2h+1=t or H[2h+1]&lt;H[2h+2])</span><br><span class="line">            g = 2h+1;</span><br><span class="line">         else g = 2h+2;</span><br><span class="line">         if (H[h] &gt; H[g])</span><br><span class="line">            H[h] ↔ H[g];</span><br><span class="line">            h = g; </span><br><span class="line">         else break.                       time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RerieveMin(H, t)</span><br><span class="line">\\ get the minimum &amp; delete</span><br><span class="line">\\ it from the heap H[0..t]</span><br><span class="line">1. min = H[0]; </span><br><span class="line">2. H[0] = H[t]; t = t – 1;</span><br><span class="line">3. FixHeap(H, t, 0);</span><br><span class="line">4. output(min).                            time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Insert(H, t, v)</span><br><span class="line">\\ insert value v into</span><br><span class="line">\\ the heap H[0..t].</span><br><span class="line">1. t = t + 1;</span><br><span class="line">2. H[t] = v; </span><br><span class="line">3. FixHeap(H, t, t).				   	   time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Delete(H, t, i)</span><br><span class="line">\\ delete H[i] from</span><br><span class="line">\\ the heap H[0..t].</span><br><span class="line">1. H[i] = H[t];</span><br><span class="line">2. t = t - 1; </span><br><span class="line">3. FixHeap(H, t, i).                       time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-116-20-00.png">   </p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Dijkstra(G, s, t)</span><br><span class="line">1. for (v=1; v≤n; v++) status[v] = unseen;</span><br><span class="line">2. status[s] = in-tree; dist[s] = 0; H = Φ;</span><br><span class="line">3. for (each edge [s, w])</span><br><span class="line">      status[w] = fringe; dad[w] = s;</span><br><span class="line">      dist[w] = wt(s, w); Insert(H, w); </span><br><span class="line">4. While (there are fringes)</span><br><span class="line">4.1   v = RetrieveMin(H);</span><br><span class="line">4.2   status[v] = in-tree;</span><br><span class="line">4.3   for (each edge [v, w])</span><br><span class="line">4.3.1   if (status[w] == unseen)</span><br><span class="line">             status[w] = fringe; dad[w] = v; </span><br><span class="line">             dist[w] = dist[v] + wt(v, w); </span><br><span class="line">             Insert(H, w);</span><br><span class="line">4.3.2   else if (status[w] == fringe) &amp;    </span><br><span class="line">             Delete(H, w); dad[w] = v;</span><br><span class="line">             dist[w] = dist[v] + wt(v, w);</span><br><span class="line">             Insert(H, v);</span><br><span class="line">5. The array dad[1..n] gives the path from s.         </span><br><span class="line"></span><br><span class="line">Time= 〇（m log n）</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Bellman-Ford算法"><a href="#Bellman-Ford算法" class="headerlink" title="Bellman-Ford算法"></a>Bellman-Ford算法</h3><p>如果图上出现了负的权值，那么使用dijikstra算法就会出错，这里介绍另外一个算法：</p>
+<ul>
+<li>Theorem. If there is no negative cycles in the graph G, then for a vertex v to which a shortest path from s consists of k edges, after at most k iterations of step 3, dist[v] becomes the length of the shortest path from s to v. <ul>
+<li>如果图 G 中不存在负环，则对于从 s 到t的最短路径由 k 条边组成的顶点 v，经过步骤 3 的最多 k 次迭代，dist[v] 变为从 s 到t的最短路径的长度v.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Therefore, n-1 iterations of step 3 will be sufficient to find a shortest path to every vertex from s. <ul>
+<li>因此，第3步的n-1次迭代将足以找到从s到每个顶点的最短路径。</li>
+</ul>
+</li>
+</ul>
+<p>TIps：The problem is meaningful only for directed graphs with no negative cycles.</p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Bellman-Ford(G, s, t)</span><br><span class="line">1. for (v=1; v≤n; v++) dist[v] = ∞;</span><br><span class="line">2. dist[s] = 0;</span><br><span class="line">3. loop n-1 times</span><br><span class="line">      for (each edge [v, w])</span><br><span class="line">         if (dist[w] &gt; dist[v] + wt(v, w))   </span><br><span class="line">                 dad[w] = v;</span><br><span class="line">                 dist[w] = dist[v] + wt(v, w);</span><br><span class="line">4. for (each edge [v, w])</span><br><span class="line">         if (dist[w] &gt; dist[v] + wt(v, w))   </span><br><span class="line">                 stop(“negative cycle”); </span><br><span class="line">5. The array dad[1..n] gives the path from s. </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="多源最短路径问题（All-Pairs-Shortest-Paths-Problem）"><a href="#多源最短路径问题（All-Pairs-Shortest-Paths-Problem）" class="headerlink" title="多源最短路径问题（All-Pairs Shortest Paths Problem）"></a>多源最短路径问题（All-Pairs Shortest Paths Problem）</h2><ul>
+<li>Problem. Given a (possibly negatively) weighted graph G in an adjacency matrix M, find the shortest path from s to t for all vertex pairs (s, t). <ul>
+<li>问题： 给定邻接矩阵M中的一个(可能是负的)加权图G，找出所有顶点对(s, t)，从s到t的最短路径。</li>
+<li>即给定任意两个点，一个出发点，一个到达点，求这两个点的之间的最短路径，就是任意两点最短路径问题，多源最短路径</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Fyd</p>
+</blockquote>
+<h2 id="最小生成树Minimun-Spanning-Tree"><a href="#最小生成树Minimun-Spanning-Tree" class="headerlink" title="最小生成树Minimun Spanning Tree"></a>最小生成树Minimun Spanning Tree</h2><blockquote>
+<p>参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Eb41177d1?from=search&amp;seid=9147041630400351432&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Eb41177d1?from=search&amp;seid=9147041630400351432&amp;spm_id_from=333.337.0.0</a></p>
+</blockquote>
+<ul>
+<li>Definition. Let G be a weighted graph. A spanning tree of G is a subgraph of G that is a tree and contains all vertices of G. The weight of a spanning tree T is the sum of weights of edges in T. <ul>
+<li>定义。设G是一个加权图。G的生成树是G的一个子图，它是一棵树，包含G的所有顶点。生成树T的权值是T中各边的权值之和</li>
+</ul>
+</li>
+<li>MST Problem. Given a weighted and undirected graph G, construct a minimum spanning tree of G, i.e., a spanning tree of G whose weight is the smallest over all spanning trees of G. <ul>
+<li>MST的问题。给定一个加权无向图G，构造G的最小生成树，即G的所有生成树中权值最小的生成树。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Dijkstra’s approach</p>
+<ul>
+<li>starting from any vertex s, grow a tree using the lightest edges</li>
+</ul>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-1115-52-29.png">  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Prim(G)</span><br><span class="line">1. for (v=1; v≤n; v++) status[v] = unseen;</span><br><span class="line">2. pick any vertex s; status[s] = in-tree; </span><br><span class="line">3. for (each edge [s, w])</span><br><span class="line">      status[w] = fringe; dad[w] = s;</span><br><span class="line">      WEIGHT[w] = wt(s, w);</span><br><span class="line">4. While (there are fringes)</span><br><span class="line">4.1   pick the fringe v of minimum WEIGHT[v];</span><br><span class="line">4.2   status[v] = in-tree;</span><br><span class="line">4.3   for (each edge [v, w])</span><br><span class="line">4.3.1   if (status[w] == unseen)</span><br><span class="line">             status[w] = fringe; dad[w] = v; </span><br><span class="line">             WEIGHT[w] = wt(v, w);</span><br><span class="line">4.3.2   else if (status[w] == fringe) &amp; </span><br><span class="line">             (WEIGHT[w] &gt; wt(v, w))</span><br><span class="line">             dad[w] = v; </span><br><span class="line">             WEIGHT[w] = wt(v, w);</span><br><span class="line">5. The array dad[1..n] gives the path from s.      </span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>Kruskal’s approach</p>
+<ul>
+<li>Idea: repeatedly add the lightest edges to make a connected and acyclic graph that covers all vertices (i.e., a spanning tree).</li>
+<li>重复添加最轻的边，生成一个覆盖所有顶点的连通无环图(即生成树)</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Kruskal(G)</span><br><span class="line">1. sort the edges in nondecreasing order: </span><br><span class="line">      e1, e2, …, em;</span><br><span class="line">2. T = Φ;</span><br><span class="line">3. for (i = 1; i &lt;= m; i++) </span><br><span class="line">       let ei = [ui, vi]; </span><br><span class="line">       if (T + ei does not contain a cycle)</span><br><span class="line">           T = T + ei;</span><br><span class="line">4. return(T).</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>Questions:</p>
+</blockquote>
+<ol>
+<li><p>How do we represent T so that we can test efficiently if T + ei contains a cycle?</p>
+<p>我们如何表示T以便我们能有效地测试T + ei是否包含一个循环</p>
+<p>Q1: Since T is acyclic, a component of T is a tree. Thus, adding an edge to the same component makes a cycle while adding an edge connecting two different components does not make a cycle. Thus, for the edge to be added, we only need to check if its two ends are in the same component.</p>
+<p>因为T是无环的，所以T的一个分量就是树。因此，向同一个组件添加一条边构成一个循环，而向两个不同组件添加一条边则不构成一个循环。因此，对于要添加的边，我们只需要检查它的两端是否在同一个组件中。</p>
+</li>
+</ol>
+<ul>
+<li>We represent each component of T in a tree structure so that we can test if the two ends of an edge are in the component. 我们用树形结构表示T的每个分量，这样我们就可以测试一条边的两端是否在这个分量中</li>
+</ul>
+<h2 id="图匹配问题（Graph-Matching-（on-undirected-graph））"><a href="#图匹配问题（Graph-Matching-（on-undirected-graph））" class="headerlink" title="图匹配问题（Graph Matching （on undirected graph））"></a>图匹配问题（Graph Matching （on undirected graph））</h2><p>在无向图中匹配的定义：</p>
+<ul>
+<li>Definition. An edge set M in an undirected graph G is a matching in G if no two edges in M share a common end<ul>
+<li>定义。如果无向图G中没有两条边共用一个端点，则无向图G中的边集M就是一个匹配</li>
+<li><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-124-18-54.png">  </li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>The Maximum Matching Problem.</p>
+<p>最大匹配问题</p>
+<ul>
+<li>Given an undirected graph G, construct a maximum matching in G.</li>
+<li>给出一个无向图G，构造一个最大匹配。</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>Definitions. M: a matching in G. A vertex is matched if it is an end of an edge in M, otherwise, unmatched.</p>
+<ul>
+<li>定义。如果一个顶点是M中某条边的末端，那么它就被匹配，否则就是不匹配。</li>
+</ul>
+</li>
+<li><p>Definition. An augmenting path (w.r.t a matching M) starts and ends at unmatched vertices and goes alternatively with edges not in M and in M</p>
+<ul>
+<li>定义。一条增广路径(w.r.t，匹配M)开始和结束于不匹配的顶点，并交替地到达不在M和M中的边</li>
+<li><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-14-19-39.png">  </li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>Theorem. A matching M is maximum if and only if there is no augmenting path w.r.t. M in G. <ul>
+<li>定理。当且仅当G中没有增广路径w.r.t. M时，匹配的M是最大的。</li>
+</ul>
+</li>
+<li>Proof. If M is max, then there is no augmenting path  otherwise, we would be able to construct a larger matching.<ul>
+<li>证明。如果M是最大值，那么就没有增广路径，否则我们就可以构造一个更大的匹配。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>Finding an augmenting path:  start from an unmatched vertex, try to find an augmenting path ending at another unmatched vertex.</p>
+<ul>
+<li>寻找增广路径:从一个不匹配的顶点开始，尝试找到一个在另一个不匹配的顶点结束的增广路径。</li>
+</ul>
+</li>
+<li><p>Pretty much similar to BFS but: at even levels, expand all possible ways, but at odd levels, expand on a single matching edge.</p>
+<ul>
+<li>与BFS非常相似，但是:在偶数层，扩展所有可能的方式，但在奇数层，扩展单个匹配边。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Augment(G, M) \\ Q is a queue</span><br><span class="line">1. for (each vertex v of G) level[v] = -1; </span><br><span class="line">2. for (each unmatched vertex v)</span><br><span class="line">       level[v] = 0; dad[v] = -1; Q ← v; </span><br><span class="line">3. while (Q ≠ Φ)</span><br><span class="line">      v ← Q; </span><br><span class="line">      if (level[v] is even)</span><br><span class="line">         for (each edge [v, w]) </span><br><span class="line">            if (level[w] == -1)</span><br><span class="line">               level[w] = level[v]+1; </span><br><span class="line">               dad[w] = v;  Q ← w; </span><br><span class="line">            else if (level[v] == level[w]) </span><br><span class="line">               return an augmenting path;</span><br><span class="line">      else \\ level[v] is odd</span><br><span class="line">         let [v, w] be the edge in M;</span><br><span class="line">         if (level[v] == level[w]) </span><br><span class="line">            return an augmenting path;</span><br><span class="line">         else level[w] = level[v]+1; </span><br><span class="line">                dad[w] = v;  Q ← w; </span><br><span class="line">4. Return (false)</span><br><span class="line"> </span><br><span class="line"> Time=〇（n+m）</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -647,7 +831,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">排序算法回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FixHeap"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">FixHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SortHeap"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">SortHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MakeHeap"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">MakeHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">Main()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">算法动图演示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%97%B6%E9%97%B4%E6%8E%92%E5%BA%8F%EF%BC%88Sorting-in-Linear-Time%EF%BC%89"><span class="nav-number">1.0.2.</span> <span class="nav-text">线性时间排序（Sorting in Linear Time）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Courting-Sort%EF%BC%89"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">计数排序（Courting Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Radix-Sort%EF%BC%89"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">基数排序（Radix Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%B6%E6%8E%92%E5%BA%8F%EF%BC%88Bucket-sort%EF%BC%89"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">桶排序（Bucket sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E8%BF%B0%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">上述三种排序算法小结：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA%E9%83%A8%E5%88%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">图论部分算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%B9%E6%98%93%E5%BF%98%E8%AE%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">一些容易忘记的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">图的表示方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%88Traversing-a-graph%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">图的遍历（Traversing a graph）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88BFS%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">广度优先遍历（BFS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88DFS%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">深度优先遍历（DFS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS%E5%92%8CDAG%EF%BC%88%E6%9C%89%E5%90%91%E6%97%A0%E7%8E%AF%E5%9B%BE%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">DFS和DAG（有向无环图）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="nav-number">2.4.1.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="nav-number">2.4.2.</span> <span class="nav-text">寻找强连通分量</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">排序算法回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FixHeap"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">FixHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SortHeap"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">SortHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MakeHeap"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">MakeHeap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">Main()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">算法动图演示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%97%B6%E9%97%B4%E6%8E%92%E5%BA%8F%EF%BC%88Sorting-in-Linear-Time%EF%BC%89"><span class="nav-number">1.0.2.</span> <span class="nav-text">线性时间排序（Sorting in Linear Time）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Courting-Sort%EF%BC%89"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">计数排序（Courting Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%EF%BC%88Radix-Sort%EF%BC%89"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">基数排序（Radix Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%B6%E6%8E%92%E5%BA%8F%EF%BC%88Bucket-sort%EF%BC%89"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">桶排序（Bucket sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E8%BF%B0%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">上述三种排序算法小结：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA%E9%83%A8%E5%88%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">图论部分算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%B9%E6%98%93%E5%BF%98%E8%AE%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">一些容易忘记的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">图的表示方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%88Traversing-a-graph%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">图的遍历（Traversing a graph）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88BFS%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">广度优先遍历（BFS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88DFS%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">深度优先遍历（DFS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS%E5%92%8CDAG%EF%BC%88%E6%9C%89%E5%90%91%E6%97%A0%E7%8E%AF%E5%9B%BE%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">DFS和DAG（有向无环图）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="nav-number">2.4.1.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="nav-number">2.4.2.</span> <span class="nav-text">寻找强连通分量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98%EF%BC%88Single-Source-Shortest-Path-Problem%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">单源最短路径问题（Single-Source Shortest Path Problem）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijikstra%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.1.</span> <span class="nav-text">Dijikstra算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bellman-Ford%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.2.</span> <span class="nav-text">Bellman-Ford算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98%EF%BC%88All-Pairs-Shortest-Paths-Problem%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">多源最短路径问题（All-Pairs Shortest Paths Problem）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91Minimun-Spanning-Tree"><span class="nav-number">2.7.</span> <span class="nav-text">最小生成树Minimun Spanning Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98%EF%BC%88Graph-Matching-%EF%BC%88on-undirected-graph%EF%BC%89%EF%BC%89"><span class="nav-number">2.8.</span> <span class="nav-text">图匹配问题（Graph Matching （on undirected graph））</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -663,7 +847,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -672,7 +856,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -699,7 +883,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
