@@ -160,6 +160,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/04/21/New-Computer-s-Test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/21/New-Computer-s-Test/" class="post-title-link" itemprop="url">New Computer's Test</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-21 10:42:06" itemprop="dateCreated datePublished" datetime="2022-04-21T10:42:06+08:00">2022-04-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/03/02/Octave%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3291,364 +3348,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Jiayi Liang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JiayiSpace">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">MPI学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-11-19 16:15:25 / 修改时间：19:09:04" itemprop="dateCreated datePublished" datetime="2021-11-19T16:15:25+08:00">2021-11-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="MPI学习"><a href="#MPI学习" class="headerlink" title="MPI学习"></a>MPI学习</h1><h2 id="Communicators"><a href="#Communicators" class="headerlink" title="Communicators"></a>Communicators</h2><blockquote>
-<p>Python下的实现</p>
-</blockquote>
-<blockquote>
-<p>communicator = process group + communication context</p>
-</blockquote>
-<ul>
-<li>Predefined instances<ul>
-<li>COMM_WORLD</li>
-<li>COMM_SELF</li>
-<li>COMM_NULL</li>
-</ul>
-</li>
-<li>Accessors<ul>
-<li>rank = comm.Get_rank()</li>
-<li>size = comm.Get_size() </li>
-<li>group = comm.Get_group()</li>
-</ul>
-</li>
-<li>Constructors<ul>
-<li>newcomm = comm.Dup()</li>
-<li>newcomm = comm.Create(group)</li>
-<li>newcomm = comm.Split(color, key)</li>
-</ul>
-</li>
-</ul>
-<h2 id="MPI-的发送和接收"><a href="#MPI-的发送和接收" class="headerlink" title="MPI 的发送和接收"></a>MPI 的发送和接收</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>MPI 的发送和接收方法是按以下方式进行的：</p>
-<ol>
-<li>开始的时候，<em>A</em> 进程决定要发送一些消息给 <em>B</em> 进程。A进程就会把需要发送给B进程的所有数据打包好，放到一个缓存里面。<ul>
-<li>因为所有数据会被打包到一个大的信息里面，因此缓存常常会被比作<em>信封</em>（就像我们把好多信纸打包到一个信封里面然后再寄去邮局）。</li>
-</ul>
-</li>
-<li>数据打包进缓存之后，通信设备（通常是网络）就需要负责把信息传递到正确的地方。这个正确的地方也就是根据特定秩确定的那个进程。</li>
-<li>尽管数据已经被送达到 B 了，但是进程 B 依然需要确认它想要接收 A 的数据。一旦它确定了这点，数据就被传输成功了。</li>
-<li>进程 A 会接收到数据传递成功的信息，然后去干其他事情。</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MPI_Send(</span><br><span class="line"> void* data,</span><br><span class="line"> int count,</span><br><span class="line"> MPI_Datatype datatype,</span><br><span class="line"> int destination,</span><br><span class="line"> int tag,</span><br><span class="line"> MPI_Comm communicator)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MPI_Recv(</span><br><span class="line"> void* data,</span><br><span class="line"> int count,</span><br><span class="line"> MPI_Datatype datatype,</span><br><span class="line"> int source,</span><br><span class="line"> int tag,</span><br><span class="line"> MPI_Comm communicator,</span><br><span class="line"> MPI_Status* status)</span><br></pre></td></tr></table></figure>
-
-<p>第一个参数是数据缓存。</p>
-<p>第二个和第三个参数分别描述了数据的数量和类型。</p>
-<ul>
-<li><code>MPI_send</code> 会精确地发送 count 指定的数量个元素，<code>MPI_Recv</code> 会<strong>最多</strong>接受 count 个元素</li>
-</ul>
-<p>第四个和第五个参数指定了发送方/接受方进程的秩以及信息的标签</p>
-<p>第六个参数指定了使用的 communicator</p>
-<ul>
-<li><code>MPI_Recv</code> 方法特有的最后一个参数提供了接受到的信息的状态</li>
-</ul>
-</blockquote>
-<h3 id="基础MPI数据结构"><a href="#基础MPI数据结构" class="headerlink" title="基础MPI数据结构"></a>基础MPI数据结构</h3><p><code>MPI_send</code> 和 <code>MPI_Recv</code> 方法使用了 MPI 的数据结构作为一种在更高层次指定消息结构的方法</p>
-<p>举例来说，如果一个进程想要发送一个整数给另一个进程，它会指定 count 为 1，数据结构为 <code>MPI_INT</code></p>
-<p>其他的 MPI 数据结构以及它们在 C 语言里对应的结构如下：</p>
-<table>
-<thead>
-<tr>
-<th>MPI datatype</th>
-<th>C equivalent</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>MPI_SHORT</td>
-<td>short int</td>
-</tr>
-<tr>
-<td>MPI_INT</td>
-<td>int</td>
-</tr>
-<tr>
-<td>MPI_LONG</td>
-<td>long int</td>
-</tr>
-<tr>
-<td>MPI_LONG_LONG</td>
-<td>long long int</td>
-</tr>
-<tr>
-<td>MPI_UNSIGNED_CHAR</td>
-<td>unsigned char</td>
-</tr>
-<tr>
-<td>MPI_UNSIGNED_SHORT</td>
-<td>unsigned short int</td>
-</tr>
-<tr>
-<td>MPI_UNSIGNED</td>
-<td>unsigned int</td>
-</tr>
-<tr>
-<td>MPI_UNSIGNED_LONG</td>
-<td>unsigned long int</td>
-</tr>
-<tr>
-<td>MPI_UNSIGNED_LONG_LONG</td>
-<td>unsigned long long int</td>
-</tr>
-<tr>
-<td>MPI_FLOAT</td>
-<td>float</td>
-</tr>
-<tr>
-<td>MPI_DOUBLE</td>
-<td>double</td>
-</tr>
-<tr>
-<td>MPI_LONG_DOUBLE</td>
-<td>long double</td>
-</tr>
-<tr>
-<td>MPI_BYTE</td>
-<td>char</td>
-</tr>
-</tbody></table>
-<h2 id="MPI-点对点发送和接收"><a href="#MPI-点对点发送和接收" class="headerlink" title="MPI 点对点发送和接收"></a>MPI 点对点发送和接收</h2><h3 id="MPI-乒乒"><a href="#MPI-乒乒" class="headerlink" title="MPI 乒乒"></a>MPI 乒乒</h3><h3 id="MPI乒乓"><a href="#MPI乒乓" class="headerlink" title="MPI乒乓"></a>MPI乒乓</h3><h3 id="MPI-环"><a href="#MPI-环" class="headerlink" title="MPI 环"></a>MPI 环</h3><h2 id="MPI-广播以及集体-collective-通信"><a href="#MPI-广播以及集体-collective-通信" class="headerlink" title="MPI 广播以及集体(collective)通信"></a>MPI 广播以及集体(collective)通信</h2><h3 id="集体通信以及同步点"><a href="#集体通信以及同步点" class="headerlink" title="集体通信以及同步点"></a>集体通信以及同步点</h3><p>​        关于集体通信需要记住的一点是它在进程间引入了同步点的概念。这意味着所有的进程在执行代码的时候必须首先<em>都</em>到达一个同步点才能继续执行后面的代码。</p>
-<blockquote>
-<p>MPI_Barrier(MPI_Comm communicator)     同步进程</p>
-</blockquote>
-<p>​        这个函数的名字十分贴切（Barrier，屏障）- 这个方法会构建一个屏障，任何进程都没法跨越屏障，直到所有的进程都到达屏障。这边有一个示意图。假设水平的轴代表的是程序的执行，小圆圈代表不同的进程。</p>
-<p><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/image-20211103165031842.png" alt="image-20211103165031842"> </p>
-<pre><code>     进程0在时间点 (T 1) 首先调用 `MPI_Barrier`。然后进程0就一直等在屏障之前，之后进程1和进程3在 (T 2) 时间点到达屏障。当进程2最终在时间点 (T 3) 到达屏障的时候，其他的进程就可以在 (T 4) 时间点再次开始运行。
-</code></pre>
-<blockquote>
-<p><code>MPI_Barrier</code> 在很多时候很有用。其中一个用途是用来同步一个程序，使得分布式代码中的某一部分可以被精确的计时</p>
-</blockquote>
-<h3 id="MPI-Bcast-来进行广播"><a href="#MPI-Bcast-来进行广播" class="headerlink" title="MPI_Bcast 来进行广播"></a>MPI_Bcast 来进行广播</h3><blockquote>
-<p><em>广播</em> (broadcast) 是标准的集体通信技术之一</p>
-</blockquote>
-<p>​        <strong>一个广播发生的时候，一个进程会把同样一份数据传递给一个 communicator 里的所有其他进程</strong>。广播的主要用途之一是把用户输入传递给一个分布式程序，或者把一些配置参数传递给所有的进程。</p>
-<blockquote>
-<p>广播的通信模式看起来像这样：</p>
-</blockquote>
-<p><img src="https://mpitutorial.com/tutorials/mpi-broadcast-and-collective-communication/broadcast_pattern.png" alt="MPI_Bcast 模式"></p>
-<ul>
-<li>在这个例子里，进程0是我们的<em>根</em>进程，它持有一开始的数据。其他所有的进程都会从它这里接受到一份数据的副本</li>
-</ul>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MPI_Bcast(</span><br><span class="line"> void* data,</span><br><span class="line"> int count,</span><br><span class="line"> MPI_Datatype datatype,</span><br><span class="line"> int root,</span><br><span class="line"> MPI_Comm communicator)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>尽管根节点和接收节点做不同的事情，它们都是调用同样的这个 <code>MPI_Bcast</code> 函数来实现广播。当根节点(在我们的例子是节点0)调用 <code>MPI_Bcast</code> 函数的时候，<code>data</code> 变量里的值会被发送到其他的节点上。当其他的节点调用 <code>MPI_Bcast</code> 的时候，<code>data</code> 变量会被赋值成从根节点接受到的数据.</p>
-</li>
-<li><p><code>MPI_Bcast</code> 的实现使用了一个类似的树形广播算法来获得比较好的网络利用率。</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="MPI-Scatter-Gather-and-Allgather"><a href="#MPI-Scatter-Gather-and-Allgather" class="headerlink" title="MPI Scatter, Gather, and Allgather"></a>MPI Scatter, Gather, and Allgather</h3><p>​        <strong><code>MPI_Scatter</code> 的操作会设计一个指定的根进程，根进程会将数据发送到 communicator 里面的所有进程</strong></p>
-<ul>
-<li><p><code>MPI_Bcast</code> 和 <code>MPI_Scatter</code> 的主要区别很小但是很重要。</p>
-</li>
-<li><p><code>MPI_Bcast</code> 给每个进程发送的是<em>同样</em>的数据，然而 <code>MPI_Scatter</code> 给每个进程发送的是<em>一个数组的一部分数据</em></p>
-<ul>
-<li><p>下图进一步展示了这个区别</p>
-</li>
-<li><p><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/image-20211103170924810.png" alt="image-20211103170924810"> </p>
-</li>
-<li><p><strong>尽管根进程（进程0）拥有整个数组的所有元素，<code>MPI_Scatter</code> 还是会把正确的属于进程0的元素放到这个进程的接收缓存中</strong></p>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MPI_Scatter(</span><br><span class="line"> void* send_data,</span><br><span class="line"> int send_count,</span><br><span class="line"> MPI_Datatype send_datatype,</span><br><span class="line"> void* recv_data,</span><br><span class="line"> int recv_count,</span><br><span class="line"> MPI_Datatype recv_datatype,</span><br><span class="line"> int root,</span><br><span class="line"> MPI_Comm communicator)</span><br></pre></td></tr></table></figure>
-
-<p>第一个参数，<code>send_data</code>，是在根进程上的一个数据数组。</p>
-<p>第二个和第三个参数，<code>send_count</code> 和 <code>send_datatype</code> 分别描述了发送给每个进程的数据数量和数据类型。</p>
-<ul>
-<li>如果 <code>send_count</code> 是1，<code>send_datatype</code> 是 <code>MPI_INT</code>的话，进程0会得到数据里的第一个整数，以此类推。如果<code>send_count</code>是2的话，进程0会得到前两个整数，进程1会得到第三个和第四个整数，以此类推。</li>
-<li>在实践中，一般来说<code>send_count</code>会等于数组的长度除以进程的数量</li>
-</ul>
-<p>最后两个参数，<code>root</code> 和 <code>communicator</code> 分别指定开始分发数组的根进程以及对应的communicator</p>
-</blockquote>
-<blockquote>
-<p> <strong>MPI_Gather</strong></p>
-</blockquote>
-<p>​        <strong><code>MPI_Gather</code> 跟 <code>MPI_Scatter</code> 是相反的。</strong></p>
-<ul>
-<li><code>MPI_Gather</code> 从好多进程里面收集数据到一个进程上面而不是从一个进程分发数据到多个进程</li>
-<li>这个机制对很多平行算法很有用，比如<code>并行的排序和搜索</code><ul>
-<li>下图是这个算法的一个示例。</li>
-<li><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/image-20211103171734798.png" alt="image-20211103171734798">  </li>
-</ul>
-</li>
-</ul>
-<p>跟<code>MPI_Scatter</code>类似，<code>MPI_Gather</code>从其他进程收集元素到根进程上面。元素是根据接收到的进程的秩排序的。</p>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MPI_Gather(</span><br><span class="line"> void* send_data,</span><br><span class="line"> int send_count,</span><br><span class="line"> MPI_Datatype send_datatype,</span><br><span class="line"> void* recv_data,</span><br><span class="line"> int recv_count,</span><br><span class="line"> MPI_Datatype recv_datatype,</span><br><span class="line"> int root,</span><br><span class="line"> MPI_Comm communicator)</span><br></pre></td></tr></table></figure>
-
-<p>在<code>MPI_Gather</code>中，只有根进程需要一个有效的接收缓存</p>
-<p>所有其他的调用进程可以传递<code>NULL</code>给<code>recv_data</code></p>
-<p>另外，别忘记<em>recv_count</em>参数是从<strong><em>每个进程</em>接收到的数据数量，而不是所有进程的数据总量之和</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>MPI_Allgather</strong> </p>
-</blockquote>
-<p>​        <strong>发送多个元素到多个进程也很有用（也就是<em>多对多</em>通信模式）。<code>MPI_Allgather</code>就是这个作用</strong></p>
-<ul>
-<li><p>对于分发在所有进程上的一组数据来说，<code>MPI_Allgather</code>会收集所有数据到所有进程上</p>
-</li>
-<li><p><strong>从最基础的角度来看，<code>MPI_Allgather</code>相当于一个<code>MPI_Gather</code>操作之后跟着一个<code>MPI_Bcast</code>操作。</strong></p>
-<ul>
-<li>下面的示意图显示了<code>MPI_Allgather</code>调用之后数据是如何分布的</li>
-<li><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/allgather.png">  </li>
-</ul>
-</li>
-</ul>
-<p><code>MPI_Allgather</code>的方法定义跟<code>MPI_Gather</code>几乎一样，只不过<code>MPI_Allgather</code>不需要root这个参数来指定根节点。</p>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MPI_Allgather(</span><br><span class="line"> void* send_data,</span><br><span class="line"> int send_count,</span><br><span class="line"> MPI_Datatype send_datatype,</span><br><span class="line"> void* recv_data,</span><br><span class="line"> int recv_count,</span><br><span class="line"> MPI_Datatype recv_datatype,</span><br><span class="line"> MPI_Comm communicator)</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h1 id="MPI-Reduce-and-Allreduce"><a href="#MPI-Reduce-and-Allreduce" class="headerlink" title="MPI Reduce and Allreduce"></a>MPI Reduce and Allreduce</h1><h2 id="归约简介"><a href="#归约简介" class="headerlink" title="归约简介"></a>归约简介</h2><p><em>归约</em> 是函数式编程中的经典概念。 数据归约包括通过函数将一组数字归约为较小的一组数字。</p>
-<p>例如，假设我们有一个数字列表 <code>[1,2,3,4,5]</code>。 用 sum 函数归约此数字列表将产生 <code>sum([1、2、3、4、5]) = 15</code>。 类似地，乘法归约将产生 <code>multiply([1、2、3、4、5]) = 120</code>。</p>
-<h2 id="MPI-Reduce"><a href="#MPI-Reduce" class="headerlink" title="MPI_Reduce"></a>MPI_Reduce</h2><p>与 <code>MPI_Gather</code> 类似，<code>MPI_Reduce</code> 在每个进程上获取一个输入元素数组，并将输出元素数组返回给根进程。 输出元素包含减少的结果。 <code>MPI_Reduce</code> 的原型如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MPI_Reduce(</span><br><span class="line">    void* send_data,</span><br><span class="line">    void* recv_data,</span><br><span class="line">    int count,</span><br><span class="line">    MPI_Datatype datatype,</span><br><span class="line">    MPI_Op op,</span><br><span class="line">    int root,</span><br><span class="line">    MPI_Comm communicator)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>send_data</code> 参数是每个进程都希望归约的 <code>datatype</code> 类型元素的数组。</p>
-<p><code>recv_data</code> 仅与具有 <code>root</code> 秩的进程相关。 <code>recv_data</code> 数组包含归约的结果，大小为<code>sizeof（datatype）* count</code>。</p>
-<p><code>op</code> 参数是您希望应用于数据的操作。</p>
-</blockquote>
-<p>下面是 <code>MPI_Reduce</code> 通信模式的说明。</p>
-<p>在上图中，每个进程包含一个整数。 调用 <code>MPI_Reduce</code> 的根进程为 0，并使用 <code>MPI_SUM</code> 作为归约运算。 这四个数字相加后将结果存储在根进程中。</p>
-<p><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/mpi_reduce_1.png"> </p>
-<p>查看当进程拥有多个元素时会发生什么也很有用。 下图显示了每个进程归约多个数字的情况。</p>
-<p><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/mpi_reduce_2.png"> </p>
-<p>上图中的每个进程都有两个元素。 结果求和基于每个元素进行。 换句话说，不是将所有数组中的所有元素累加到一个元素中，而是将每个数组中的第 i 个元素累加到进程 0 结果数组中的第 i 个元素中。</p>
-<h2 id="MPI-Allreduce"><a href="#MPI-Allreduce" class="headerlink" title="MPI_Allreduce"></a>MPI_Allreduce</h2><p>许多并行程序中，需要在所有进程而不是仅仅在根进程中访问归约的结果。 以与 <code>MPI_Gather</code> 相似的补充方式，<code>MPI_Allreduce</code> 将归约值并将结果分配给所有进程。 </p>
-<p>函数原型如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MPI_Allreduce(</span><br><span class="line">    void* send_data,</span><br><span class="line">    void* recv_data,</span><br><span class="line">    int count,</span><br><span class="line">    MPI_Datatype datatype,</span><br><span class="line">    MPI_Op op,</span><br><span class="line">    MPI_Comm communicator)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>MPI_Allreduce</code> 与 <code>MPI_Reduce</code> 相同，不同之处在于它不需要根进程 ID（因为结果分配给所有进程）</p>
-</blockquote>
-<p>下图介绍了 <code>MPI_Allreduce</code> 的通信模式：</p>
-<p><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/mpi_allreduce_1.png">   </p>
-<p>类似于先 MPI_Reduce 后 MPI_Bcoast</p>
-<h1 id="Introduction-to-Groups-and-Communicators"><a href="#Introduction-to-Groups-and-Communicators" class="headerlink" title="Introduction to Groups and Communicators"></a>Introduction to Groups and Communicators</h1><h2 id="通讯器概述"><a href="#通讯器概述" class="headerlink" title="通讯器概述"></a>通讯器概述</h2><p>正如我们在学习集体例程时所看到的那样，MPI 允许您立即与通讯器中的所有进程进行对话，以执行诸如使用 <code>MPI_Scatter</code> 将数据从一个进程分发到多个进程或使用 <code>MPI_Reduce</code> 执行数据归约的操作。 </p>
-<p>对于简单的应用程序，使用 <code>MPI_COMM_WORLD</code> 进行所有操作并不罕见，但是对于更复杂的用例，拥有更多的通讯器可能会有所帮助。</p>
-<p>例如，如果您想对网格中进程的子集执行计算。 </p>
-<p>例如，每一行中的所有进程都可能希望对一个值求和。</p>
-<p>这将是第一个也是最常见的用于创建新的通讯器的函数：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MPI_Comm_split(</span><br><span class="line">	MPI_Comm comm,</span><br><span class="line">	int color,</span><br><span class="line">	int key,</span><br><span class="line">	MPI_Comm* newcomm)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>MPI_Comm_split</code> 通过基于输入值 <code>color</code> 和 <code>key</code> 将通讯器“拆分”为一组子通讯器来创建新的通讯器。</p>
-<p>需要注意的是，原始的通讯器并没有消失，但是在每个进程中都会创建一个新的通讯器。</p>
-<p>第一个参数 <code>comm</code> 是通讯器，它将用作新通讯器的基础。 这可能是 <code>MPI_COMM_WORLD</code>，但也可能是其他任何通讯器。</p>
-<p>第二个参数 <code>color</code> 确定每个进程将属于哪个新的通讯器。 为 <code>color</code> 传递相同值的所有进程都分配给同一通讯器。 如果 <code>color</code> 为 <code>MPI_UNDEFINED</code>，则该进程将不包含在任何新的通讯器中。</p>
-<p>第三个参数 <code>key</code> 确定每个新通讯器中的顺序（秩）。 传递 <code>key</code> 最小值的进程将为 0，下一个最小值将为 1，依此类推。 如果存在平局，则在原始通讯器中秩较低的进程将是第一位。</p>
-<p>最后一个参数 <code>newcomm</code> 是 MPI 如何将新的通讯器返回给用户。</p>
-</blockquote>
-<h2 id="使用多个通讯器的示例"><a href="#使用多个通讯器的示例" class="headerlink" title="使用多个通讯器的示例"></a>使用多个通讯器的示例</h2><p>在该示例中，我们尝试将单个全局通讯器拆分为一组较小的通讯器。 </p>
-<p>在此示例中，我们将想象我们已经在逻辑上将原始通讯器布局为共 16 个进程的 4x4 网格，并且希望按行划分网格。 为此，每一行将获得自己的颜色（参数 <code>color</code>）。</p>
-<p>在下图中，您可以看到左图具有相同颜色的每组进程如何最终变成右图的自己的通讯器。</p>
-<p><img src="/2021/11/19/MPI%E5%AD%A6%E4%B9%A0/comm_split.png">  </p>
-<p>让我们看一下代码。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 获取原始通讯器的秩和大小</span><br><span class="line">int world_rank, world_size;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;world_rank);</span><br><span class="line">MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size);</span><br><span class="line"></span><br><span class="line">int color = world_rank / 4; // 根据行确定颜色</span><br><span class="line"></span><br><span class="line">// 根据颜色拆分通讯器，然后调用</span><br><span class="line">// 利用原始秩</span><br><span class="line">MPI_Comm row_comm;</span><br><span class="line">MPI_Comm_split(MPI_COMM_WORLD, color, world_rank, &amp;row_comm);</span><br><span class="line"></span><br><span class="line">int row_rank, row_size;</span><br><span class="line">MPI_Comm_rank(row_comm, &amp;row_rank);</span><br><span class="line">MPI_Comm_size(row_comm, &amp;row_size);</span><br><span class="line"></span><br><span class="line">printf(&quot;WORLD RANK/SIZE: %d/%d \t ROW RANK/SIZE: %d/%d\n&quot;,</span><br><span class="line">	world_rank, world_size, row_rank, row_size);</span><br><span class="line"></span><br><span class="line">MPI_Comm_free(&amp;row_comm);</span><br></pre></td></tr></table></figure>
-
-<p>前几行获得原始通讯器 <code>MPI_COMM_WORLD</code> 的秩和大小。 下一行执行确定局部进程 <code>color</code> 的重要操作。 请记住，<code>color</code> 决定了拆分后该进程所属的通讯器。 接下来，我们将看到所有重要的拆分操作。 这里的新事物是，我们使用原始秩（<code>world_rank</code>）作为拆分操作的 <code>key</code>。 由于我们希望新通讯器中的所有进程与原始通讯器中的所有进程处于相同的顺序，因此在这里使用原始等级值最有意义，因为它已经正确地排序了。 之后，我们将打印出新的等级和大小以确保其有效。 您的输出应如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">WORLD RANK/SIZE: 0/16 	 ROW RANK/SIZE: 0/4</span><br><span class="line">WORLD RANK/SIZE: 1/16 	 ROW RANK/SIZE: 1/4</span><br><span class="line">WORLD RANK/SIZE: 2/16 	 ROW RANK/SIZE: 2/4</span><br><span class="line">WORLD RANK/SIZE: 3/16 	 ROW RANK/SIZE: 3/4</span><br><span class="line">WORLD RANK/SIZE: 4/16 	 ROW RANK/SIZE: 0/4</span><br><span class="line">WORLD RANK/SIZE: 5/16 	 ROW RANK/SIZE: 1/4</span><br><span class="line">WORLD RANK/SIZE: 6/16 	 ROW RANK/SIZE: 2/4</span><br><span class="line">WORLD RANK/SIZE: 7/16 	 ROW RANK/SIZE: 3/4</span><br><span class="line">WORLD RANK/SIZE: 8/16 	 ROW RANK/SIZE: 0/4</span><br><span class="line">WORLD RANK/SIZE: 9/16 	 ROW RANK/SIZE: 1/4</span><br><span class="line">WORLD RANK/SIZE: 10/16 	 ROW RANK/SIZE: 2/4</span><br><span class="line">WORLD RANK/SIZE: 11/16 	 ROW RANK/SIZE: 3/4</span><br><span class="line">WORLD RANK/SIZE: 12/16 	 ROW RANK/SIZE: 0/4</span><br><span class="line">WORLD RANK/SIZE: 13/16 	 ROW RANK/SIZE: 1/4</span><br><span class="line">WORLD RANK/SIZE: 14/16 	 ROW RANK/SIZE: 2/4</span><br><span class="line">WORLD RANK/SIZE: 15/16 	 ROW RANK/SIZE: 3/4</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>最后，我们使用 <code>MPI_Comm_free</code> 释放通讯器。 这似乎不是一个重要的步骤，但与在其他任何程序中使用完内存后释放内存一样重要。 当不再使用 MPI 对象时，应将其释放，以便以后重用。 MPI 一次可以创建的对象数量有限，如果 MPI 用完了可分配对象，则不释放对象可能会导致运行时错误。</p>
-</blockquote>
-<h2 id="其他通讯器创建函数"><a href="#其他通讯器创建函数" class="headerlink" title="其他通讯器创建函数"></a>其他通讯器创建函数</h2><p>尽管 <code>MPI_Comm_split</code> 是最常见的通讯器创建函数，但还有许多其他函数。</p>
-<p> <code>MPI_Comm_dup</code> 是最基本的，它创建了一个通讯器的副本。 似乎存在一个仅创建副本的函数似乎很奇怪，但这对于使用库执行特殊函数的应用（例如数学库）非常有用。 </p>
-<p>在这类应用中，重要的是用户代码和库代码不要互相干扰。 为了避免这种情况，每个应用程序应该做的第一件事是创建 <code>MPI_COMM_WORLD</code> 的副本，这将避免其他使用 <code>MPI_COMM_WORLD</code> 的库的问题。 库本身也应该复制 <code>MPI_COMM_WORLD</code> 以避免相同的问题。</p>
-<p>另一个功能是 <code>MPI_Comm_create</code>。 乍一看，此功能与 <code>MPI_Comm_create_group</code> 非常相似。 其原型几乎相同：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MPI_Comm_create(</span><br><span class="line">	MPI_Comm comm,</span><br><span class="line">	MPI_Group group,</span><br><span class="line">    MPI_Comm* newcomm)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>然而，<strong>主要区别（除了缺少 <code>tag</code> 参数之外）是，<code>MPI_Comm_create_group</code> 仅是 <code>group</code> 中包含的一组进程的集合，而 <code>MPI_Comm_create</code> 是 <code>comm</code> 中每个进程的集合。</strong> 当通讯器的规模很大时，这是一个重要的区别。 如果尝试在运行 1,000,000 个进程时创建 <code>MPI_COMM_WORLD</code> 的子集，则重要的是使用尽可能少的进程来执行该操作，因为大型集的开销会变得非常昂贵。</p>
-</blockquote>
-<h2 id="组的概述"><a href="#组的概述" class="headerlink" title="组的概述"></a>组的概述</h2><p><strong>尽管 <code>MPI_Comm_split</code> 是创建新通讯器的最简单的方法，但并非唯一的方法。 创建通讯器有更灵活的方法，但是它们使用一种新的 MPI 对象 <code>MPI_Group</code>。</strong></p>
-<p>在详细讨论组之前，让我们再回顾一下通讯器的实际含义。 在内部，MPI 必须（除其他事项外）保持通讯器的两个主要部分，即区分一个通讯器与另一个通讯器的上下文（或 ID）以及该通讯器包含的一组进程。</p>
-<p>The context is what prevents an operation on one communicator from matching with a similar operation on another communicator. 上下文阻止了与一个通讯器上的操作匹配的另一通讯器上的类似操作。</p>
-<p>MPI 在内部为每个通讯器保留一个 ID，以防止混淆。 </p>
-<p>组更易于理解，因为它只是通讯器中所有进程的集合。 对于 <code>MPI_COMM_WORLD</code>，这是由 <code>mpiexec</code> 启动的所有进程。 对于其他通讯器，组将有所不同。 在上面的示例代码中，组是所有以相同的 <code>color</code> 传参给 <code>MPI_Comm_split</code> 的进程。</p>
-<h2 id="Using-MPI-groups"><a href="#Using-MPI-groups" class="headerlink" title="Using MPI groups"></a>Using MPI groups</h2><p>现在，我们了解了组工作原理的基础，让我们看看如何将其应用于 MPI 操作。 在 MPI 中，很容易通过 API 调用 <code>MPI_Comm_group</code> 来获取通讯器中的进程组。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MPI_Comm_group(</span><br><span class="line">	MPI_Comm comm,</span><br><span class="line">	MPI_Group* group)</span><br></pre></td></tr></table></figure>
-
-<p>如上所述，通讯器包含一个上下文或 ID，以及一个组。 调用 <code>MPI_Comm_group</code> 会得到对该组对象的引用。 组对象的工作方式与通讯器对象相同，不同之处在于您不能使用它与其他秩进行通信（因为它没有附加上下文）。 您仍然可以获取组的秩和大小（分别为 <code>MPI_Group_rank</code> 和 <code>MPI_Group_size</code>）。 但是，组特有的功能而通讯器无法完成的工作是可以使用组在本地构建新的组。 在此记住本地操作和远程操作之间的区别很重要。 远程操作涉及与其他秩的通信，而本地操作则没有。 创建新的通讯器是一项远程操作，因为所有进程都需要决定相同的上下文和组，而在本地创建组是因为它不用于通信，因此每个进程不需要具有相同的上下文。 您可以随意操作一个组，而无需执行任何通信。</p>
-<p>一旦有一个或两个组，对它们执行操作就很简单。 <strong>并</strong>看起来像这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MPI_Group_union(</span><br><span class="line">	MPI_Group group1,</span><br><span class="line">	MPI_Group group2,</span><br><span class="line">	MPI_Group* newgroup)</span><br></pre></td></tr></table></figure>
-
-<p>您可能会猜到<strong>交</strong>看起来像这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MPI_Group_intersection(</span><br><span class="line">	MPI_Group group1,</span><br><span class="line">	MPI_Group group2,</span><br><span class="line">	MPI_Group* newgroup)</span><br></pre></td></tr></table></figure>
-
-<p>在这两种情况下，操作均在 <code>group1</code> 和 <code>group2</code> 上执行，结果存储在 <code>newgroup</code> 中。</p>
-<p>MPI 中有许多关于组的用法。 您可以比较组以查看它们是否相同，从另一个组中减去一个组，从组中排除特定秩，或使用一个组将一个组的秩转换为另一组。 但是，MPI 中可能是最有用的一个函数是 <code>MPI_Comm_create_group</code>。 这是一个用于创建新通讯器的函数，但无需像 <code>MPI_Comm_split</code> 之类那样需要进行计算以决定组成，该函数将使用一个 <code>MPI_Group</code> 对象并创建一个与组具有相同进程的新通讯器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MPI_Comm_create_group(</span><br><span class="line">	MPI_Comm comm,</span><br><span class="line">	MPI_Group group,</span><br><span class="line">	int tag,</span><br><span class="line">	MPI_Comm* newcomm)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Example-of-using-groups"><a href="#Example-of-using-groups" class="headerlink" title="Example of using groups"></a>Example of using groups</h2><p>让我们看一下使用组的简单示例。 在这里，我们将使用另一个函数，该函数允许您选择组中的特定秩并构建为新组，即 <code>MPI_Group_incl</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MPI_Group_incl(</span><br><span class="line">	MPI_Group group,</span><br><span class="line">	int n,</span><br><span class="line">	const int ranks[],</span><br><span class="line">	MPI_Group* newgroup)</span><br></pre></td></tr></table></figure>
-
-<p>该函数中，<code>newgroup</code> 将包含 <code>group</code> 中的秩存在于 <code>ranks</code> 数组中的 <code>n</code> 个进程。 想看看它是如何工作的？ 让我们尝试创建一个包含来自 <code>MPI_COMM_WORLD</code> 的主要秩的通讯器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 获取原始通讯器的等级和大小</span><br><span class="line">int world_rank, world_size;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;world_rank);</span><br><span class="line">MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size);</span><br><span class="line"></span><br><span class="line">// 获取 MPI_COMM_WORLD 中的进程组</span><br><span class="line">MPI_Group world_group;</span><br><span class="line">MPI_Comm_group(MPI_COMM_WORLD, &amp;world_group);</span><br><span class="line"></span><br><span class="line">int n = 7;</span><br><span class="line">const int ranks[7] = &#123;1, 2, 3, 5, 7, 11, 13&#125;;</span><br><span class="line"></span><br><span class="line">// 构造一个包含 world_group 中所有主要秩的组</span><br><span class="line">MPI_Group prime_group;</span><br><span class="line">MPI_Group_incl(world_group, 7, ranks, &amp;prime_group);</span><br><span class="line"></span><br><span class="line">// 根据组创建一个新的通讯器</span><br><span class="line">MPI_Comm prime_comm;</span><br><span class="line">MPI_Comm_create_group(MPI_COMM_WORLD, prime_group, 0, &amp;prime_comm);</span><br><span class="line"></span><br><span class="line">int prime_rank = -1, prime_size = -1;</span><br><span class="line">// 如果此秩不在新的通讯器中，则为</span><br><span class="line">// MPI_COMM_NULL。使用 MPI_COMM_NULL 作为 MPI_Comm_rank 或</span><br><span class="line">// MPI_Comm_size 的错误</span><br><span class="line">if (MPI_COMM_NULL != prime_comm) &#123;</span><br><span class="line">	MPI_Comm_rank(prime_comm, &amp;prime_rank);</span><br><span class="line">	MPI_Comm_size(prime_comm, &amp;prime_size);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printf(&quot;WORLD RANK/SIZE: %d/%d \t PRIME RANK/SIZE: %d/%d\n&quot;,</span><br><span class="line">	world_rank, world_size, prime_rank, prime_size);</span><br><span class="line"></span><br><span class="line">MPI_Group_free(&amp;world_group);</span><br><span class="line">MPI_Group_free(&amp;prime_group);</span><br><span class="line">MPI_Comm_free(&amp;prime_comm);</span><br></pre></td></tr></table></figure>
-
-<p>在此示例中，我们通过仅选择 <code>MPI_COMM_WORLD</code> 中的主要秩来构建通讯器。 这是通过 <code>MPI_Group_incl</code> 完成的，并将结果存储在 <code>prime_group</code> 中。 接下来，我们将该组传递给 <code>MPI_Comm_create_group</code> 以创建 <code>prime_comm</code>。 At the end, we have to be careful to not use <code>prime_comm</code> on processes which don’t have it, therefore we check to ensure that the communicator is not <code>MPI_COMM_NULL</code>, which is returned from <code>MPI_Comm_create_group</code> on the ranks not included in <code>ranks</code>. 最后，我们必须小心不要在没有 <code>prime_comm</code> 的进程上使用 <code>prime_comm</code>，因此我们要检查以确保通讯器不是 <code>MPI_COMM_NULL</code> 状态 —— 不在 <code>ranks</code> 中而从 <code>MPI_Comm_create_group</code> 返回的结果。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -3720,7 +3419,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
