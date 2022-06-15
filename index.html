@@ -160,6 +160,813 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/06/09/OpenStack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/09/OpenStack/" class="post-title-link" itemprop="url">OpenStack</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-09 17:10:22" itemprop="dateCreated datePublished" datetime="2022-06-09T17:10:22+08:00">2022-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-13 16:10:10" itemprop="dateModified" datetime="2022-06-13T16:10:10+08:00">2022-06-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="OpenStack-云计算平台学习与实践"><a href="#OpenStack-云计算平台学习与实践" class="headerlink" title="OpenStack 云计算平台学习与实践"></a>OpenStack 云计算平台学习与实践</h1><h1 id="云计算-和-OpenStack"><a href="#云计算-和-OpenStack" class="headerlink" title="云计算 和 OpenStack"></a>云计算 和 OpenStack</h1><blockquote>
+<p>注：全文摘自CloudMan</p>
+</blockquote>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqF6TzeFS35dvTgauaRJ6AYOr7vOIFRNygXlHmjWfiaC9MicXIicZ5d44ibgyp96PPGbpBJ9bc62UMyD0g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>IT系统架构的发展到目前为止大致可以分为3个阶段：</p>
+<ol>
+<li><p>物理机架构 这一阶段，应用部署和运行在物理机上。 比如企业要上一个ERP系统，如果规模不大，可以找3台物理机，分别部署Web服务器、应用服务器和数据库服务器。 如果规模大一点，各种服务器可以采用集群架构，但每个集群成员也还是直接部署在物理机上。 我见过的客户早期都是这种架构，一套应用一套服务器，通常系统的资源使用率都很低，达到20%的都是好的。</p>
+</li>
+<li><p>虚拟化架构 摩尔定律决定了物理服务器的计算能力越来越强，虚拟化技术的发展大大提高了物理服务器的资源使用率。 这个阶段，物理机上运行若干虚拟机，应用系统直接部署到虚拟机上。 虚拟化的好处还体现在减少了需要管理的物理机数量，同时节省了维护成本。</p>
+</li>
+<li><p>云计算架构 虚拟化提高了单台物理机的资源使用率，随着虚拟化技术的应用，IT环境中有越来越多的虚拟机，这时新的需求产生了： 如何对IT环境中的虚拟机进行统一和高效的管理。 有需求就有供给，云计算登上了历史舞台。</p>
+</li>
+</ol>
+<p>计算（CPU/内存）、存储和网络是 IT 系统的三类资源。 通过云计算平台，这三类资源变成了三个池子 当需要虚机的时候，只需要向平台提供虚机的规格。 平台会快速从三个资源池分配相应的资源，部署出这样一个满足规格的虚机。 虚机的使用者不再需要关心虚机运行在哪里，存储空间从哪里来，IP是如何分配，这些云平台都搞定了。</p>
+<p>云平台是一个面向服务的架构，按照提供服务的不同分为 IaaS、PaaS 和 SaaS。 请看下图</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqF6TzeFS35dvTgauaRJ6AYOmLnZAQqNfOm6wVVZ8PhDVxK2F0c6G7k91R4JVrT5hDFaCrH8n5OI3Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">  </p>
+<ul>
+<li><strong>IaaS</strong>（Infrastructure as a Service）提供的服务是虚拟机。 IaaS 负责管理虚机的生命周期，包括创建、修改、备份、启停、销毁等。 使用者从云平台得到的是一个已经安装好镜像（操作系统+其他预装软件）的虚拟机。 使用者需要关心虚机的类型（OS）和配置（CPU、内存、磁盘），并且自己负责部署上层的中间件和应用。 IaaS 的使用者通常是数据中心的系统管理员。 典型的 IaaS 例子有 AWS、Rackspace、阿里云等。</li>
+</ul>
+<ul>
+<li><strong>PaaS</strong>（Platform as a Service）提供的服务是应用的运行环境和一系列中间件服务（比如数据库、消息队列等）。 使用者只需专注应用的开发，并将自己的应用和数据部署到PaaS环境中。 PaaS负责保证这些服务的可用性和性能。 PaaS的使用者通常是应用的开发人员。 典型的 PaaS 有 Heroku、Google App Engine、IBM BlueMix 等。</li>
+</ul>
+<ul>
+<li><strong>SaaS</strong>（Software as a Service）提供的是应用服务。 使用者只需要登录并使用应用，无需关心应用使用什么技术实现，也不需要关系应用部署在哪里。 SaaS的使用者通常是应用的最终用户。 典型的 SaaS 有 Google Gmail、Salesforce 等。</li>
+</ul>
+<blockquote>
+<p>OpenStack is a cloud operating system that controls large pools of compute, storage, and networking resources throughout a datacenter, all managed through a dashboard that gives administrators control while empowering their users to provision resources through a web interface.</p>
+</blockquote>
+<h1 id="OpenStack架构"><a href="#OpenStack架构" class="headerlink" title="OpenStack架构"></a>OpenStack架构</h1><p>OpenStack的核心：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqgAa9OJl30dqPYe5PbT3Ye6MdB4H0HLABVb2eZqkgLibkxNuxR7z4wgw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">  </p>
+<p>作为 IaaS 层的云操作系统，OpenStack 为虚机提供并管理三大类资源：计算、网络和存储。</p>
+<p>这三个就是核心，所以我们的学习重点就是： 搞清楚 OpenStack 是如何对计算、网络和存储资源进行管理的。 在 20+ 模块中，管理这三类资源的核心模块其实不多，这几个模块就是我们的重点了。</p>
+<p>要达到这个目的，我们自然需要研究 OpenStack 的整体架构。 架构里哪些核心模块负责管理计算资源、网络资源和存储资源？模块之间如何协调工作？ 同时我们会构建一个实验环境，进到各个模块的内部，通过实际操作真正理解和掌握 OpenStack。</p>
+<p>OpenStack的架构：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcq1snxN7gKt4eV1Licgib1xSfEgQxkHykruS96YuiabakkL4gRwRkWrJYgw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>中间菱形<img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqe6TUoXLp9hkwWI4zDS7Np17dVv5ofHUK9iacibzAx5CuhVIPntEolJjQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">是虚拟机，围绕 VM 的那些长方形代表 OpenStack 不同的模块（OpenStack 叫服务，后面都用服务这个术语），下面来分别介绍。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqOde9JicQFubwIP7qpIuCc3IUONoExsWkOzcviaLIPPwYnkm4ibiaenlSKw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Nova：管理 VM 的生命周期，是 OpenStack 中最核心的服务。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqH0wYMryzypMrfAsbPicKYibgtgQW9xvZtD6xniaLicEmbKboYpHyicJTBgQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Neutron：为 OpenStack 提供网络连接服务，负责创建和管理L2、L3 网络，为 VM 提供虚拟网络和物理网络连接。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqmbLTpI7E2fnK7Zvdibdt6jR3geZ8099m4cHcVw1gDq9BGCG9U2gIlOA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Glance：管理 VM 启动镜像，Nova 创建 VM 时将使用 Glance 提供的镜像。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqRV3kyJ5RosdVianHHP8yQ06elhjJhgnHPmekTOkOjP1wopmUOSdK7Rg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Cinder：为 VM 提供块存储服务。Cinder 提供的每一个 Volume 在 VM 看来就是一块虚拟硬盘，一般用作数据盘。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqbia1SvK6ib6gOPpfeNaj6KEiaaw2Q4IpYTNO02RibQ9aYNhdfAQ0xvrM6g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Swift：提供对象存储服务。VM 可以通过 RESTful API 存放对象数据。作为可选的方案，Glance 可以将镜像存放在 Swift 中；Cinder 也可以将 Volume 备份到 Swift 中。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqFic1hgb6ibhPR4rqdf1vkjye02icyWnC56yyCGtaONI6UACUIib4LHrvjw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Keystone：为 OpenStack 的各种服务提供认证和权限管理服务。简单的说，OpenStack 上的每一个操作都必须通过 Keystone 的审核。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqhHBGEcDMFEraRKSSBJINBIibf1gUy9RAOQfByCz5H3zOI3sKhRbqkWQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Ceilometer：提供 OpenStac k监控和计量服务，为报警、统计或计费提供数据。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqsGyPwjQvONfXEWhbsu1x3EqxYvqYicew2YnRqc3CLArjvlcV7uADwUQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> Horizon：为 OpenStack 用户提供一个 Web 的自服务 Portal。</p>
+<p>在上面的这些服务中，哪些是 OpenStack 的核心服务呢？ 核心服务就是如果没有它，OpenStack 就跑不起来。 很显然：</p>
+<ol>
+<li>Nova 管理计算资源，是核心服务。</li>
+<li>Neutron 管理网络资源，是核心服务。</li>
+<li>Glance 为 VM 提供 OS 镜像，属于存储范畴，是核心服务。</li>
+<li>Cinder 提供块存储，VM怎么也得需要数据盘吧，是核心服务。</li>
+<li>Swift 提供对象存储，不是必须的，是可选服务。</li>
+<li>Keystone 认证服务，没它 OpenStack 转不起来，是核心服务。</li>
+<li>Ceilometer 监控服务，不是必须的，可选服务。</li>
+<li>Horizon 大家都需要一个操作界面吧。</li>
+</ol>
+<p>现在核心服务有了，接下来我们将镜头拉近点，看看核心服务内部的组成结构。</p>
+<p><strong>Logical Architecture</strong></p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcq2Zgu4WuejxFZCJR6zPgspp7ibB81xX7Tic0tfrLpIrcwKLo31KZs8PeA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">  </p>
+<p>在 Logical Architecture 中，可以看到每个服务又由若干组件组成。 以 Neutron 为例，包含</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFy6CxsBRVHeE5iatp5e5vcqA1GBGVtuNMU2yn5QshpDjrtMpCg6bxRS0qUyriaTk5wibul6AIRVibHrw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<ol>
+<li>Neutron Server、Neutron plugins 和 Neutron agents</li>
+<li>Network provider</li>
+<li>消息队列 Queue</li>
+<li>数据库 Neutron Database</li>
+</ol>
+<p>在后面 Neutron 章节会展开学习这些组件。</p>
+<p>这里想要强调一点： 上面是 Logical Architecture，描述的是 Neutron 服务各个组成部分以及各组件之间的逻辑关系。 而在实际的部署方案上，各个组件可以部署到不同的物理节点上。</p>
+<p>OpenStack 本身是一个分布式系统，不但各个服务可以分布部署，服务中的组件也可以分布部署。 这种分布式特性让 OpenStack 具备极大的灵活性、伸缩性和高可用性。 当然从另一个角度讲，这也使得 OpenStack 比一般系统复杂，学习难度也更大。</p>
+<p>![image-20220610142857117](/Users/jiayi/Library/Application Support/typora-user-images/image-20220610142857117.png) </p>
+<h1 id="认证Keystone"><a href="#认证Keystone" class="headerlink" title="认证Keystone"></a>认证Keystone</h1><p>作为 OpenStack 的基础支持服务，Keystone 做下面这几件事情：</p>
+<ol>
+<li>管理用户及其权限</li>
+<li>维护 OpenStack Services 的 Endpoint</li>
+<li>Authentication（认证）和 Authorization（鉴权）</li>
+</ol>
+<p>学习 Keystone，得理解下面这些概念：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWa2KibqTdaff9tvEANsMjp0BCynsgfc70Xwsm27t8UadFCZDzfqVFrBRA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>User</strong></p>
+<p>User 指代任何使用 OpenStack 的实体，可以是真正的用户，其他系统或者服务。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWawibNBibEX5aYMXl6FvDhyIqhAQibk4BDd3cYYnWhy2LkTNQc5WQVF1JJQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>当 User 请求访问 OpenStack 时，Keystone 会对其进行验证。Horizon 在 Identity-&gt;Users 管理 User</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWamX925ARyEMyX6RvkBuqsxM7lteia9XY7jPqW5LxCZXF9nzicsicvMFjEw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>除了 admin 和 demo，OpenStack 也为 nova、cinder、glance、neutron 服务创建了相应的 User。 admin 也可以管理这些 User。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWavEdMFN4jPkNTXDK54fAoM4XgI8ZBuItNTjDhuK6Vcr7ibZicZBDE5zOg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>Credentials</strong></p>
+<p>Credentials 是 User 用来证明自己身份的信息，可以是：</p>
+<p>\1. 用户名/密码<br>\2. Token<br>\3. API Key<br>\4. 其他高级方式</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaF68soIpKKAxyicqzUU1liacwNeJ4gibtZph0Agw6cibyCdEhJoEunYib2ng/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>Authentication</strong></p>
+<p>Authentication 是 Keystone 验证 User 身份的过程。User 访问 OpenStack 时向 Keystone 提交用户名和密码形式的 Credentials，Keystone 验证通过后会给 User 签发一个 Token 作为后续访问的 Credential。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaNLPLcmEFEBHH7Yvb3hAqBfoeksoQg8Rhc6umRhJZpFsEkP4ExvbgAw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>Token</strong></p>
+<p>Token 是由数字和字母组成的字符串，User 成功 Authentication 后 Keystone 生成 Token 并分配给 User。</p>
+<ol>
+<li><p>Token 用做访问 Service 的 Credential</p>
+</li>
+<li><p>Service 会通过 Keystone 验证 Token 的有效性</p>
+</li>
+<li><p>Token 的有效期默认是 24 小时</p>
+</li>
+</ol>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaezgaPs2ygAsU0ibNcRHQqGmVMXlhic1QiclHFCNic9WGeibsdh60q1hfbVg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>Project</strong></p>
+<p>Project 用于将 OpenStack 的资源（计算、存储和网络）进行分组和隔离。</p>
+<p>根据 OpenStack 服务的对象不同，Project 可以是一个客户（公有云，也叫租户）、部门或者项目组（私有云）。</p>
+<p>这里请注意：</p>
+<ol>
+<li>资源的所有权是属于 Project 的，而不是 User。</li>
+<li>在 OpenStack 的界面和文档中，Tenant / Project / Account 这几个术语是通用的，但长期看会倾向使用 Project</li>
+<li>每个 User（包括 admin）必须挂在 Project 里才能访问该 Project 的资源。 一个User可以属于多个 Project。</li>
+<li>admin 相当于 root 用户，具有最高权限</li>
+</ol>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaQVuygKUakA7VnrutH5h0OmdUicZ3uUNVSSAtXQeQCH1yibiaQd0SWz1QQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Horizon 在 Identity-&gt;Projects 中管理 Project</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaicNVhtiaHt5Cgg7o2GrrtDVJHQiaGW7iagWCM0OYG1CQ7T17H0XW5YISng/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>通过 Manage Members 将 User 添加到 Project</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWakxB3z8MicuPa8v9vymY5XZDjhZwEPPJsUI3608nMuoGicQjR30qWic3rQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWadKJp3AncCubsUSXTVq5hsKViaErAHeiciaicHjWDyuSfV71ExRnOWia0g1g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>Service</strong></p>
+<p>OpenStack 的 Service 包括 Compute (Nova)、Block Storage (Cinder)、Object Storage (Swift)、Image Service (Glance) 、Networking Service (Neutron) 等。每个 Service 都会提供若干个 Endpoint，User 通过 Endpoint 访问资源和执行操作。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaI7wKjbq1vZCz6VZL9L1PWIHIVHRXHsibK1gMklFg9uibjsJnquWBiaJFg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>Endpoint</strong></p>
+<p>Endpoint 是一个网络上可访问的地址，通常是一个 URL。Service 通过 Endpoint 暴露自己的 API。 Keystone 负责管理和维护每个 Service 的 Endpoint。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaoiabnooGYCurrphFx1H1ibHfVpUTeFY1Jqgh6cxy9xoM1PCz4IWzLAvg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>可以使用下面的命令来查看 Endpoint。</p>
+<blockquote>
+<p># source devstack/openrc admin admin<br># openstack catalog list</p>
+</blockquote>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWa4LOnib0Ev8fXLrGX0vCZJHVrFaLdkib9ibgrvyuKRRbBCsGhiaw4oZIoJQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>Role</strong></p>
+<p>安全包含两部分：Authentication（认证）和 Authorization（鉴权）</p>
+<p>Authentication 解决的是“你是谁？”的问题<br>Authorization 解决的是“你能干什么？”的问题</p>
+<p>Keystone 借助 Role 实现 Authorization：</p>
+<ol>
+<li><p>Keystone定义Role<img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWa4g1Lo2bT0Qr8icAANReoib7RGstCFT2CBtDeKOIoWRZ4gUO5vOum2w2w/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+</li>
+<li><p>可以为 User 分配一个或多个 Role，Horizon 的菜单为 Identity-&gt;Project-&gt;Manage Members<img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaLZFW0PTibkq4N67D3FzvgQZmZTV4UAA19NQejTGvVnHlddpBul6zomw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+</li>
+<li><p>Service 决定每个 Role 能做什么事情 Service 通过各自的 policy.json 文件对 Role 进行访问控制。 下面是 Nova 服务 /etc/nova/policy.json 中的示例<img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEd6YBwKj2W1WwdwqkscXWaCA7OcpYVDYSurGCPRtibLrq3xjKmSuicibeQicyDFv1svQp4Ycmmwcx2lQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+</li>
+</ol>
+<p>上面配置的含义是：对于 create、attach_network 和 attach_volume 操作，任何Role的 User 都可以执行； 但只有 admin 这个 Role 的 User 才能执行 forced_host 操作。</p>
+<p>以下是Keystone运作的例子：</p>
+<p><strong>第 1 步 登录</strong></p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxleSFk8sxVTUxuibcQyicibaSCTvbjlb0WxiaMBIR4icdhyic5mJ97oc8Ld6Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>当点击<img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxwjzH7jyFGEYpbaGt3defG7DW9HnuHjhXRUtXw6208wflf6G6S541Vg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">时，OpenStack 内部发生了哪些事情？请看下面</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxbibiaxgJU3lPxbllrLobtc0O1unT1zau0hYJEFqkqpI3r4HU13ibP2x4A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Token 中包含了 User 的 Role 信息</p>
+<p><strong>第 2 步 显示操作界面</strong></p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxSibOG7PwlWGToOrxulMXx6XembGB2uKMlQCYOI3oEx88dakWAibBWmVQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>请注意，顶部显示 admin 可访问的  Project 为 “admin” 和 “demo”。 其实在此之前发生了一些事情：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxbm2acjkegnZOcZk1r2e27Y2FyBiauRnNz0icV1TnsughYEflBVIBlKOw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>同时，admin 可以访问 Intance, Volume, Image 等服务</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxdLKxHd2bmhsAl23Yv9T6icoT9qRmRom8kOPUrsw669CU49E2N0FgG4A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这是因为 admin 已经从 Keystone 拿到了各 Service 的 Endpoints</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxNjSVFicMrzicW9vT7hG6WZ81ohZxNFrS3OqNDwbVtP4Nd5CvRhTHzS8A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>第 3 步 显示 image 列表</strong></p>
+<p>点击 “Images”，会显示 image 列表</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSx9fNGZKjvHqCichIXPN0B1hTZd4rmPsCqPTGNQ0ueOmcA1ic35669Wsrw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>背后发生了这些事：</p>
+<p>首先 admin 将请求发送到 Glance 的 Endpoint</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxAtRkENfMOcEccZuKVEM9x5zZ8Zu9jvWeGJcBicPVNSQTOBmRFRHS5Ng/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Glance 向 Keystone 询问 admin 身份是否有效</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxnVgRLtf0KjqeWQ1BeOR00kddTNgHJTYPFrbAqyxmiapHFotz4qr5Fdg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>接下来 Glance 会查看 /etc/glance/policy.json 判断 admin 是否有查看 image 的权限</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHWhcQFiaKFEmUJcBtQ58fSxDwkYzcnY04u4XQ7XPvAbXxc2sHjpjsEOlPS0oSic7MIXwdCmQjoIsLA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>权限判定通过，Glance 将 image 列表发给 admin。</p>
+<h1 id="镜像Glance"><a href="#镜像Glance" class="headerlink" title="镜像Glance"></a>镜像Glance</h1><p>OpenStack 由 Glance 提供 Image 服务。</p>
+<blockquote>
+<p> <strong>理解 Image</strong></p>
+</blockquote>
+<p>要理解 Image Service，先得搞清楚什么是 Image 以及为什么要用 Image？</p>
+<p>在传统 IT 环境下，安装一个系统要么从安装 CD 从头安装，要么用 Ghost 等克隆工具恢复。这两种方式有如下几个问题：</p>
+<ol>
+<li>如果要安装的系统多了效率就很低</li>
+<li>时间长，工作量大</li>
+<li>安装完还要进行手工配置，比如安装其他的软件，设置 IP 等</li>
+<li>备份和恢复系统不灵活</li>
+</ol>
+<p>云环境下需要更高效的方案，这就是 Image。 Image 是一个模板，里面包含了基本的操作系统和其他的软件。</p>
+<p>举例来说，有家公司需要为每位员工配置一套办公用的系统，一般需要一个 Win7 系统再加 MS office 软件。 OpenStack 是这么玩的：</p>
+<ol>
+<li><p>先手工安装好这么一个虚机</p>
+</li>
+<li><p>然后对虚机执行 snapshot，这样就得到了一个 image</p>
+</li>
+<li><p>当有新员工入职需要办公环境时，立马启动一个或多个该 image 的 instance（虚机）就可以了</p>
+</li>
+</ol>
+<p>在这个过程中，第 1 步跟传统方式类似，需要手工操作和一定时间，但第 2、3 步非常快，全自动化，一般都是秒级别。而且 2、3 步可以循环做。 比如公司新上了一套 OA 系统，每个员工的 PC 上都得有客户端软件。 那么可以在某个现有虚机中先手工安装好 OA 客户端，然后执行 snapshot 操作，得到新的 image，以后可以就直接使用新 image 创建虚机了。另外，snapshot 还有备份的作用，能够非常方便的恢复系统。</p>
+<blockquote>
+<p><strong>理解Image Service</strong></p>
+</blockquote>
+<p>Image Service 的功能是管理 Image，让用户能够发现、获取和保存 Image。在 OpenStack 中，提供 Image Service 的是 Glance，其具体功能如下：</p>
+<ol>
+<li>提供 REST API 让用户能够查询和获取 image 的元数据和 image 本身</li>
+<li>支持多种方式存储 image，包括普通的文件系统、Swift、Amazon S3 等</li>
+<li>对 Instance 执行 Snapshot 创建新的 image</li>
+</ol>
+<h3 id="Glance架构"><a href="#Glance架构" class="headerlink" title="Glance架构"></a><strong>Glance架构</strong></h3><p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPNTNNp6sY0DicaymCAuHMsAjvUrxuB9DdYiaFAPuVIHKYDxibUrXabCzUjQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">  </p>
+<p>上面是 Glance 的架构图</p>
+<h4 id="glance-api"><a href="#glance-api" class="headerlink" title="glance-api"></a><strong>glance-api</strong></h4><p>glance-api 是系统后台运行的服务进程。 对外提供 REST API，响应 image 查询、获取和存储的调用。</p>
+<p>glance-api 不会真正处理请求。 如果操作是与 image metadata（元数据）相关，glance-api 会把请求转发给 glance-registry； 如果操作是与 image 自身存取相关，glance-api 会把请求转发给该 image 的 store backend。</p>
+<p>在控制节点上可以查看 glance-api 进程</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPNytPPuKCkITlL30ac6LlgFGJMoqRCOEfdBCqbB5ffj6sFwWRibXXc4Rg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="glance-registry"><a href="#glance-registry" class="headerlink" title="glance-registry"></a><strong>glance-registry</strong></h4><p>glance-registry 是系统后台运行的服务进程。 负责处理和存取 image 的 metadata，例如 image 的大小和类型。在控制节点上可以查看 glance-registry 进程</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPNkRicyFx3ALNxOKlicibuwxR01XWbJicajicF1yAAnCKVDIQMx4XrOuZACFA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Glance 支持多种格式的 image，包括</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPNykY5eXxtnQiaUnHhMR7x2sAQ3sNd9VgptlVjMZib6GOZPkw21fnUuZOQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="Database"><a href="#Database" class="headerlink" title="Database"></a><strong>Database</strong></h4><p>Image 的 metadata 会保持到 database 中，默认是 MySQL。 在控制节点上可以查看 glance 的 database 信息</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPNB38ZPb2w8xMVUs8XZZZ3aJ4TpIy7PTsv68Sg1WhhXQPeZJStAciaNKw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="Store-backend"><a href="#Store-backend" class="headerlink" title="Store backend"></a><strong>Store backend</strong></h4><p>Glance 自己并不存储 image。 真正的 image 是存放在 backend 中的。 Glance 支持多种 backend，包括：</p>
+<ol>
+<li>A directory on a local file system（这是默认配置）</li>
+<li>GridFS</li>
+<li>Ceph RBD</li>
+<li>Amazon S3</li>
+<li>Sheepdog</li>
+<li>OpenStack Block Storage (Cinder)</li>
+<li>OpenStack Object Storage (Swift)</li>
+<li>VMware ESX</li>
+</ol>
+<p>具体使用哪种 backend，是在 /etc/glance/glance-api.conf 中配置的<br>在我们的 devstack 环境中，image 存放在控制节点本地目录 /opt/stack/data/glance/images/ 中</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPNiaU5wkNHXPNHlLNzLAyz8VricN8XxG7B6n0T8UupITiboz0oAWpeFJhaw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>其他 backend 的配置可参考<a target="_blank" rel="noopener" href="http://docs.openstack.org/liberty/config-reference/content/configuring-image-service-backends.html">http://docs.openstack.org/liberty/config-reference/content/configuring-image-service-backends.html</a></p>
+<p>查看目前已经存在的 image</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPNYywoRibibobzDHUkibR1y1wexueDmQnDcelsa2jgv0Nnyt812kuVCFM5g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>查看保存目录</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGf6K2mibNIzz9NGgW1sAfPN51bK22FuiaUicc4ES3WneFxvIfkj69rtCKtSzzvWDqlur3yL1QQsFiaFg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>每个 image 在目录下都对应有一个文件，文件以 image 的 ID 命名。</p>
+<h3 id="CLI-创建-image"><a href="#CLI-创建-image" class="headerlink" title="CLI 创建 image"></a>CLI 创建 image</h3><p>cirros 这个 linux 镜像很小，通过 Web UI 上传很快，操作会很顺畅。但如果我们要上传的镜像比较大（比如好几个 G ），那么操作会长时间停留在上传的 Web 界面，我们也不知道目前到底处于什么状态。 对于这样的操作，CLI 是更好的选择。</p>
+<ol>
+<li><p>将 image 上传到控制节点的文件系统中，例如 /tmp/cirros-0.3.4-x86_64-disk.img</p>
+</li>
+<li><p>设置环境变量<br><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFw4ICM9axnNmF0hriaVdzGFkw04rhxv4kibV9jcBbhxOayLOVeNudtblkrJMG8sZuDXEibDS1JkqLzw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"><br>Devstack 的安装目录下有个 openrc 文件。source 该文件就可以配置 CLI 的环境变量。这里我们传入了两个参数，第一个参数是 OpenStack 用户名 admin；第二个参数是 Project 名 admin</p>
+</li>
+<li><p>执行 image 创建命令</p>
+</li>
+</ol>
+<blockquote>
+<p>glance image-create –name cirros –file /tmp/cirros-0.3.4-x86_64-disk.img –disk-format qcow2 –container-format bare –progress</p>
+</blockquote>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFw4ICM9axnNmF0hriaVdzGF77o6825q5KpNs4oLOWecxXOYCgAT23sxJ8TSgwKKyMsskibAmhxeibtA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在创建 image 的 CLI 参数中我们用 –progress 让其显示文件上传的百分比 %，是不是比 Web UI更直观呢？</p>
+<p>在 /opt/stack/data/glance/images/ 下查看新的 Image<br><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFw4ICM9axnNmF0hriaVdzGFSCgUvvRBK3EuJuoOFNbYavs1Jppa12wdtel2mblzHH4tgt682kqp4g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h1 id="计算Nova"><a href="#计算Nova" class="headerlink" title="计算Nova"></a>计算Nova</h1><p>Compute Service Nova 是 OpenStack 最核心的服务，负责维护和管理云环境的计算资源。OpenStack 作为 IaaS 的云操作系统，虚拟机生命周期管理也就是通过 Nova 来实现的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGJPebq3Rz7Ng3ibj5FlecmqKgwxsIhShOn3DcoSGyyCKDnQINagzSrmpUHdBNDz5pROg4b8t2c9Bw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>在上图中可以看到，Nova 处于 Openstak 架构的中心，其他组件都为 Nova 提供支持： Glance 为 VM 提供 image ；Cinder 和 Swift 分别为 VM 提供块存储和对象存储； Neutron 为 VM 提供网络连接。Nova 架构如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGJPebq3Rz7Ng3ibj5FlecmqHNp317xLg3wSRZdbM0zMbKzXmplOrWpVEvqNZvCm37LmcbbCPdLMFw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>Nova 的架构比较复杂，包含很多组件。 这些组件以子服务（后台 deamon 进程）的形式运行，可以分为以下几类：</p>
+<ol>
+<li><strong>API</strong></li>
+</ol>
+<p><strong>nova-api</strong></p>
+<p>接收和响应客户的 API 调用。 除了提供 OpenStack 自己的API，nova-api 还支持 Amazon EC2 API。 也就是说，如果客户以前使用 Amazon EC2，并且用 EC2 的 API 开发了些工具来管理虚机，那么如果现在要换成 OpenStack，这些工具可以无缝迁移到 OpenStack，因为 nova-api 兼容 EC2 API，无需做任何修改。</p>
+<ol start="2">
+<li><strong>Compute Core</strong></li>
+</ol>
+<p>**nova-scheduler<br>**</p>
+<p>虚机调度服务，负责决定在哪个计算节点上运行虚机</p>
+<p>**nova-compute<br>**</p>
+<p>管理虚机的核心服务，通过调用 Hypervisor API 实现虚机生命周期管理</p>
+<p><strong>Hypervisor</strong><br>计算节点上跑的虚拟化管理程序，虚机管理最底层的程序。 不同虚拟化技术提供自己的 Hypervisor。 常用的 Hypervisor 有 KVM，Xen， VMWare 等</p>
+<p>**nova-conductor<br>**nova-compute 经常需要更新数据库，比如更新虚机的状态。 出于安全性和伸缩性的考虑，nova-compute 并不会直接访问数据库，而是将这个任务委托给 nova-conductor，这个我们后面详细讨论。</p>
+<ol start="3">
+<li><strong>Console Interface</strong></li>
+</ol>
+<p>**nova-console<br>**用户可以通过多种方式访问虚机的控制台：<br>nova-novncproxy，基于 Web 浏览器的 VNC 访问<br>nova-spicehtml5proxy，基于 HTML5 浏览器的 SPICE 访问<br>nova-xvpnvncproxy，基于 Java 客户端的 VNC 访问</p>
+<p>**nova-consoleauth<br>**负责对访问虚机控制台请求提供 Token 认证</p>
+<p>**nova-cert<br>**</p>
+<p>提供 x509 证书支持</p>
+<p><strong>Database</strong></p>
+<p>Nova 会有一些数据需要存放到数据库中，一般使用 MySQL。数据库安装在控制节点上。 Nova 使用命名为 “nova” 的数据库。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGJPebq3Rz7Ng3ibj5FlecmqXXgZK8iasQUn19266AU5OjrBEBia04XWiayibdSEt9HuyicicfWSMmiaphaVA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ol start="4">
+<li><strong>Message Queue</strong></li>
+</ol>
+<p>在前面我们了解到 Nova 包含众多的子服务，这些子服务之间需要相互协调和通信。为解耦各个子服务，Nova 通过 Message Queue 作为子服务的信息中转站。 所以在架构图上我们看到了子服务之间没有直接的连线，是通过 Message Queue 联系的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGJPebq3Rz7Ng3ibj5Flecmq1MnOd7sk1MQ9qaqGnblVDIO3AWldVC272H8moOq1jWOrXc9vKNEtLQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>OpenStack 默认是用 RabbitMQ 作为 Message Queue。 MQ 是 OpenStack 的核心基础组件，我们后面也会详细介绍。</p>
+<h3 id="Nova物理部署方案"><a href="#Nova物理部署方案" class="headerlink" title="Nova物理部署方案"></a>Nova物理部署方案</h3><p>前面大家已经看到 Nova 由很多子服务组成，我们也知道 OpenStack 是一个分布式系统，可以部署到若干节点上，那么接下来大家可能就会问：Nova 的这些服务在物理上应该如何部署呢？</p>
+<p>对于 Nova，这些服务会部署在两类节点上：计算节点和控制节点。</p>
+<p>计算节点上安装了 Hypervisor，上面运行虚拟机。 由此可知：</p>
+<ol>
+<li>只有 nova-compute 需要放在计算节点上。</li>
+<li>其他子服务则是放在控制节点上的。</li>
+</ol>
+<p>下面我们可以看看实验环境的具体部署情况。 通过在计算节点和控制节点上运行 ps -elf|grep nova 来查看运行的 nova 子服务</p>
+<p><strong>计算节点</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFibI6JwibQfktJ1WaTjzzf4T4YbLP6QicpCdZVb7E9rMQV42cQM5icDonQ52Ria5Wc9Pla3YBWqHdqeDg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>计算节点 devstack-compute1 上只运行了 nova-compute 子服务</p>
+<p><strong>控制节点</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFibI6JwibQfktJ1WaTjzzf4TGzZZyOaLQ0rKQ4z32uSOoZal6VPLVKMVAdhSS2hAurER56ctOjT30A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>控制节点 devstack-controller 上运行了若干 nova-* 子服务</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFibI6JwibQfktJ1WaTjzzf4TDwBbic4NWnDw7lWXWuAsH5ibS5JP9dWR7q0oaVxCzKM1yD0IXNmJOicWA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>RabbitMQ 和 MySQL 也是放在控制节点上的。可能细心的同学已经发现我们的控制节点上也运行了 nova-compute。 这实际上也就意味着 devstack-controller 既是一个控制节点，同时也是一个计算节点，也可以在上面运行虚机。</p>
+<p>这也向我们展示了 OpenStack 这种分布式架构部署上的灵活性： 可以将所有服务都放在一台物理机上，作为一个 All-in-One 的测试环境； 也可以将服务部署在多台物理机上，获得更好的性能和高可用。</p>
+<p>另外，也可以用 nova service-list 查看 nova-* 子服务都分布在哪些节点上</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFibI6JwibQfktJ1WaTjzzf4TnljsTN8FSxnMLQkHNM7azuDgZZQLoIGgSy4D8HxlLlCjKQuib7BBsiaQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="从虚拟机创建流程看-nova-子服务如何协同工作"><a href="#从虚拟机创建流程看-nova-子服务如何协同工作" class="headerlink" title="从虚拟机创建流程看 nova-* 子服务如何协同工作"></a>从虚拟机创建流程看 nova-* 子服务如何协同工作</h3><p>从学习 Nova 的角度看，虚机创建是一个非常好的场景，涉及的 nova-* 子服务很全，下面是流程图。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFibI6JwibQfktJ1WaTjzzf4TRWKlXWqV4VregAMebcImDmjicJBaMskoSOz7Qxvn0tQUGpovezyusibA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ol>
+<li><p>客户（可以是 OpenStack 最终用户，也可以是其他程序）向 API（nova-api）发送请求：“帮我创建一个虚机”</p>
+</li>
+<li><p>API 对请求做一些必要处理后，向 Messaging（RabbitMQ）发送了一条消息：“让 Scheduler 创建一个虚机”</p>
+</li>
+<li><p>Scheduler（nova-scheduler）从 Messaging 获取到 API 发给它的消息，然后执行调度算法，从若干计算节点中选出节点 A</p>
+</li>
+<li><p>Scheduler 向 Messaging 发送了一条消息：“在计算节点 A 上创建这个虚机”</p>
+</li>
+<li><p>计算节点 A 的 Compute（nova-compute）从 Messaging 中获取到 Scheduler 发给它的消息，然后在本节点的 Hypervisor 上启动虚机。</p>
+</li>
+<li><p>在虚机创建的过程中，Compute 如果需要查询或更新数据库信息，会通过 Messaging 向 Conductor（nova-conductor）发送消息，Conductor 负责数据库访问。</p>
+</li>
+</ol>
+<p>以上是创建虚机最核心的步骤，当然省略了很多细节，我们会在后面的章节详细讨论。 这几个步骤向我们展示了 nova-* 子服务之间的协作的方式，也体现了 OpenStack 整个系统的分布式设计思想，掌握这种思想对我们深入理解 OpenStack 会非常有帮助。</p>
+<h3 id="OpenStack通用设计思路"><a href="#OpenStack通用设计思路" class="headerlink" title="OpenStack通用设计思路"></a>OpenStack通用设计思路</h3><p><strong>API 前端服务</strong></p>
+<p>每个 OpenStack 组件可能包含若干子服务，其中必定有一个 API 服务负责接收客户请求。</p>
+<p>以 Nova 为例，nova-api 作为 Nova 组件对外的唯一窗口，向客户暴露 Nova 能够提供的功能。 当客户需要执行虚机相关的操作，能且只能向 nova-api 发送 REST 请求。 这里的客户包括终端用户、命令行和 OpenStack 其他组件。</p>
+<p>设计 API 前端服务的好处在于：</p>
+<ol>
+<li>对外提供统一接口，隐藏实现细节</li>
+<li>API 提供 REST 标准调用服务，便于与第三方系统集成</li>
+<li>可以通过运行多个 API 服务实例轻松实现 API 的高可用，比如运行多个 nova-api 进程</li>
+</ol>
+<p><strong>Scheduler 调度服务</strong></p>
+<p>对于某项操作，如果有多个实体都能够完成任务，那么通常会有一个 scheduler 负责从这些实体中挑选出一个最合适的来执行操作。</p>
+<p>在前面的例子中，Nova 有多个计算节点。 当需要创建虚机时，nova-scheduler 会根据计算节点当时的资源使用情况选择一个最合适的计算节点来运行虚机。</p>
+<p>调度服务好比是开发团队中的项目经理，当接到新的开发任务后，项目经理会评估任务的难度，考察团队成员目前的工作负荷和技能水平，然后将任务分配给最合适的开发人员。除了 Nova，块服务组件 Cinder 也有 scheduler 子服务，后面我们会详细讨论。</p>
+<p><strong>Worker 工作服务</strong></p>
+<p>调度服务只管分配任务，真正执行任务的是 Worker 工作服务。在 Nova 中，这个 Worker 就是 nova-compute 了。 将 Scheduler 和 Worker 从职能上进行划分使得 OpenStack 非常容易扩展：</p>
+<ol>
+<li><p>当计算资源不够了无法创建虚机时，可以增加计算节点（增加 Worker）</p>
+</li>
+<li><p>当客户的请求量太大调度不过来时，可以增加 Scheduler</p>
+</li>
+</ol>
+<p><strong>Driver 框架</strong></p>
+<p>OpenStack 作为开放的 Infrastracture as a Service 云操作系统，支持业界各种优秀的技术。这些技术可能是开源免费的，也可能是商业收费的。 这种开放的架构使得 OpenStack 能够在技术上保持先进性，具有很强的竞争力，同时又不会造成厂商锁定（Lock-in）。</p>
+<p>那 OpenStack 的这种开放性体现在哪里呢？</p>
+<p>一个重要的方面就是采用基于 Driver 的框架。以 Nova 为例，OpenStack 的计算节点支持多种 Hypervisor。 包括 KVM, Hyper-V, VMWare, Xen, Docker, LXC 等。Nova-compute 为这些 Hypervisor 定义了统一的接口，hypervisor 只需要实现这些接口，就可以 driver 的形式即插即用到 OpenStack 中。 下面是 nova driver 的架构示意图</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFp0CQbZfhvePDaiaLHApfXweGlUiaBQz6jNXOAe1QnB3V4OGqsVQkPDUJQHicvTlx1lMNNeMxXWuasQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在 nova-compute 的配置文件 /etc/nova/nova.conf 中由 compute_driver 配置项指定该计算节点使用哪种 Hypervisor 的 driver</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFp0CQbZfhvePDaiaLHApfXwY03evSaDhos36slFHU9jNC3ibs5jhgF8PKcCpvC3juHeqhyh29Wiaoibg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">   </p>
+<p>在我们的环境中因为是 KVM，所以配置的是 Libvirt 的 driver。</p>
+<p>不知大家是否记得我们在学习 Glance 时谈到： OpenStack 支持多种 backend 来存放 image。 可以是本地文件系统，Cinder，Ceph，Swift 等。其实这也是一个 driver 架构。 只要符合 Glance 定义的规范，新的存储方式可以很方便的加入到 backend 支持列表中。在后面 Cinder 和 Neutron 中我们还会看到 driver 框架的应用。</p>
+<p><strong>Messaging 服务</strong></p>
+<p>在前面创建虚机的流程示意图中，我们看到 nova-* 子服务之间的调用严重依赖 Messaging。Messaging 是 nova-* 子服务交互的中枢。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFp0CQbZfhvePDaiaLHApfXwZ1HkUPq0ctJUDhLOG6jibliaH2xXFdmdPUpFrE8PFjgzsfmFA9t7ECJQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>以前没接触过分布式系统的同学可能会不太理解为什么不让 API 直接调用Scheduler，或是让Scheuler 直接调用 Compute，而是非要通过 Messaging 进行中转。 这里做一些解释。程序之间的调用通常分两种：同步调用和异步调用。</p>
+<p><strong>同步调用</strong></p>
+<p>API 直接调用 Scheduler 的接口是同步调用。 其特点是 API 发出请求后需要一直等待，直到 Scheduler 完成对 Compute 的调度，将结果返回给 API 后 API 才能够继续做后面的工作。</p>
+<p><strong>异步调用</strong></p>
+<p>API 通过 Messaging 间接调用 Scheduler 就是异步调用。 其特点是 API 发出请求后不需要等待，直接返回，继续做后面的工作。 Scheduler 从 Messaging 接收到请求后执行调度操作，完成后将结果也通过 Messaging 发送给 API。在 OpenStack 这类分布式系统中，通常采用异步调用的方式，其好处是：</p>
+<ol>
+<li><p>解耦各子服务。 子服务不需要知道其他服务在哪里运行，只需要发送消息给 Messaging 就能完成调用。</p>
+</li>
+<li><p>提高性能 异步调用使得调用者无需等待结果返回。这样可以继续执行更多的工作，提高系统总的吞吐量。</p>
+</li>
+<li><p>提高伸缩性 子服务可以根据需要进行扩展，启动更多的实例处理更多的请求，在提高可用性的同时也提高了整个系统的伸缩性。而且这种变化不会影响到其他子服务，也就是说变化对别人是透明的。</p>
+</li>
+</ol>
+<p>在后面各章节，我们都能看到 Messaging 的应用。</p>
+<p><strong>Database</strong></p>
+<p>OpenStack 各组件需要维护自己的状态信息。比如 Nova 中有虚机的规格、状态，这些信息都是在数据库中维护的。 每个 OpenStack 组件在 MySQL 中有自己的数据库。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFp0CQbZfhvePDaiaLHApfXwxQp6seHuX8ibGeqqCnu0EKCqiacKNvmlJ149MrdbdPOe1GmwEC3yEQPQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p><strong>小结</strong></p>
+<p>Nova 是 OpenStack 中最重要的组件，也是很典型的组件。Nova 充分体现了 OpenStack 的设计思路。 理解了这种思路，再来学习 OpenStack 的其他组件就能够举一反三，清晰容易很多。</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/UxQAxoSIhr3SOv0ISGTtYw">https://mp.weixin.qq.com/s/UxQAxoSIhr3SOv0ISGTtYw</a></p>
+<p>我们在后面 Cinder 和 Neutron 的学习中还会回顾这些设计思路。</p>
+<h1 id="存储Cinder"><a href="#存储Cinder" class="headerlink" title="存储Cinder"></a>存储Cinder</h1><h3 id="Cinder框架"><a href="#Cinder框架" class="headerlink" title="Cinder框架"></a>Cinder框架</h3><p>从本节开始我们学习 OpenStack 的 Block Storage Service，Cinder。</p>
+<p><strong>理解 Block Storage</strong></p>
+<p>操作系统获得存储空间的方式一般有两种：</p>
+<ol>
+<li><p>通过某种协议（SAS,SCSI,SAN,iSCSI 等）挂接裸硬盘，然后分区、格式化、创建文件系统；或者直接使用裸硬盘存储数据（数据库）</p>
+</li>
+<li><p>通过 NFS、CIFS 等 协议，mount 远程的文件系统</p>
+</li>
+</ol>
+<p>第一种裸硬盘的方式叫做 Block Storage（块存储），每个裸硬盘通常也称作 Volume（卷） 第二种叫做文件系统存储。NAS 和 NFS 服务器，以及各种分布式文件系统提供的都是这种存储。</p>
+<p><strong>理解 Block Storage Service</strong></p>
+<p>Block Storage Servicet 提供对 volume 从创建到删除整个生命周期的管理。从 instance 的角度看，挂载的每一个 Volume 都是一块硬盘。OpenStack 提供 Block Storage Service 的是 Cinder，其具体功能是：</p>
+<ol>
+<li><p>提供 REST API 使用户能够查询和管理 volume、volume snapshot 以及 volume type</p>
+</li>
+<li><p>提供 scheduler 调度 volume 创建请求，合理优化存储资源的分配</p>
+</li>
+<li><p>通过 driver 架构支持多种 back-end（后端）存储方式，包括 LVM，NFS，Ceph 和其他诸如 EMC、IBM 等商业存储产品和方案</p>
+</li>
+</ol>
+<p><strong>Cinder 架构</strong></p>
+<p>下图是 cinder 的逻辑架构图</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHLd9PmsqE1ZNftI1TE2l7CokOFtGNmp736wqAWfJwx8AnC714u6LtvHucmGWDZgNmFwe4G8G1Mww/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>Cinder 包含如下几个组件：</p>
+<p>**cinder-api<br>**接收 API 请求，调用 cinder-volume 。</p>
+<p>**cinder-volume<br>**管理 volume 的服务，与 volume provider 协调工作，管理 volume 的生命周期。运行 cinder-volume 服务的节点被称作为存储节点。</p>
+<p>**cinder-scheduler<br>**scheduler 通过调度算法选择最合适的存储节点创建 volume。</p>
+<p>**volume provider<br>**数据的存储设备，为 volume 提供物理存储空间。 cinder-volume 支持多种 volume provider，每种 volume provider 通过自己的 driver 与cinder-volume 协调工作。</p>
+<p>**Message Queue<br>**Cinder 各个子服务通过消息队列实现进程间通信和相互协作。因为有了消息队列，子服务之间实现了解耦，这种松散的结构也是分布式系统的重要特征。</p>
+<p><strong>Database Cinder</strong> </p>
+<p>有一些数据需要存放到数据库中，一般使用 MySQL。数据库是安装在控制节点上的，比如在我们的实验环境中，可以访问名称为“cinder”的数据库。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHLd9PmsqE1ZNftI1TE2l7CxMKsjeAZqnGWvOs48icEiam9KM9ISoHT9uTOFeLPkFKsZY9wErc96JCw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p><strong>物理部署方案</strong></p>
+<p>Cinder 的服务会部署在两类节点上，控制节点和存储节点。我们来看看控制节点 devstack-controller 上都运行了哪些 cinder-* 子服务。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHLd9PmsqE1ZNftI1TE2l7Cu6zMeoesOEYtxhAWLeNicpqd2C8KYqnrtpv7aCz8P0M6MtichO7n7Txg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>cinder-api 和 cinder-scheduler 部署在控制节点上，这个很合理。</p>
+<p>至于 cinder-volume 也在控制节点上可能有些同学就会迷糊了：cinder-volume 不是应该部署在存储节点上吗？</p>
+<p>要回答这个问题，首先要搞清楚一个事实： OpenStack 是分布式系统，其每个子服务都可以部署在任何地方，只要网络能够连通。无论是哪个节点，只要上面运行了 cinder-volume，它就是一个存储节点，当然，该节点上也可以运行其他 OpenStack服务。</p>
+<p>cinder-volume 是一顶存储节点帽子，cinder-api 是一顶控制节点帽子。在我们的环境中，devstack-controller 同时戴上了这两顶帽子，所以它既是控制节点，又是存储节点。当然，我们也可以用一个专门的节点来运行 cinder-volume。</p>
+<p>这再一次展示了 OpenStack 分布式架构部署上的灵活性： 可以将所有服务都放在一台物理机上，用作一个 All-in-One 的测试环境；而在生产环境中可以将服务部署在多台物理机上，获得更好的性能和高可用。</p>
+<p>RabbitMQ 和 MySQL 通常放在控制节点上。另外，也可以用 cinder service list 查看 cinder-* 子服务都分布在哪些节点上</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHLd9PmsqE1ZNftI1TE2l7CtOib4cKjOdhrG6PZdicOGic55SywOK57tWwpBB3dVEcmS0L6neVIpKsicw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>还有一个问题：volume provider 放在那里？</p>
+<p>一般来讲，volume provider 是独立的。cinder-volume 使用 driver 与 volume provider 通信并协调工作。所以只需要将 driver 与 cinder-volume 放到一起就可以了。在 cinder-volume 的源代码目录下有很多 driver，支持不同的 volume provider。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqHLd9PmsqE1ZNftI1TE2l7CLK2oSbyLhJKjzJwxibb4MCicP4tQZzcn7rNKzMK3Z6lLtlFWSSYQTWjg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>后面我们会以 LVM 和 NFS 这两种 volume provider 为例讨论 cinder-volume 的使用，其他 volume provider 可以查看 OpenStack 的 configuration 文档。</p>
+<p>下一节我们将讨论 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587767&idx=1&sn=e3535a2ccf793e5591d633cbd9d5879c&chksm=8d30812eba470838464262dc60bed1b50c4ad63342a7dae3a7b1af08ab4effcd463efbbe7209&scene=21#wechat_redirect">Cinder 的这些组件如何协调工作</a>。</p>
+<h3 id="Cinder-设计思想"><a href="#Cinder-设计思想" class="headerlink" title="Cinder 设计思想"></a>Cinder 设计思想</h3><p>上一节介绍了<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587138&idx=1&sn=eedfae7ccae28a5081342b29035cb578&scene=21#wechat_redirect"> Cinder 的架构</a>，这节讨论 Cinder 个组件如何协同工作及其设计思想。</p>
+<p><strong>从 volume 创建流程看 cinder-* 子服务如何协同工作</strong></p>
+<p>对于 Cinder 学习来说，Volume 创建是一个非常好的场景，涉及各个 cinder-* 子服务，下面是流程图。<img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFDVXiaL6zITRP8Ol2r6gWEVQp6lA7mLyiaWPV9ORJicCAQOQcrNXvV1rWF5MbjkcgyrUO15eG7fxxKQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ol>
+<li><p>客户（可以是 OpenStack 最终用户，也可以是其他程序）向 API（cinder-api）发送请求：“帮我创建一个 volume”</p>
+</li>
+<li><p>API 对请求做一些必要处理后，向 Messaging（RabbitMQ）发送了一条消息：“让 Scheduler 创建一个 volume”</p>
+</li>
+<li><p>Scheduler（cinder-scheduler）从 Messaging 获取到 API 发给它的消息，然后执行调度算法，从若干计存储点中选出节点 A</p>
+</li>
+<li><p>Scheduler 向 Messaging 发送了一条消息：“让存储节点 A 创建这个 volume”</p>
+</li>
+<li><p>存储节点 A 的 Volume（cinder-volume）从 Messaging 中获取到 Scheduler 发给它的消息，然后通过 driver 在 volume provider 上创建 volume。</p>
+</li>
+</ol>
+<p>上面是创建虚机最核心的几个步骤，当然省略了很多细节，我们会在后面的章节详细讨论。</p>
+<p><strong>Cinder 的设计思想</strong></p>
+<p>Cinder 延续了 Nova 的以及其他组件的设计思想。</p>
+<p><strong>API 前端服</strong>务</p>
+<p>cinder-api 作为 Cinder 组件对外的唯一窗口，向客户暴露 Cinder 能够提供的功能，当客户需要执行 volume 相关的操作，能且只能向 cinder-api 发送 REST 请求。这里的客户包括终端用户、命令行和 OpenStack 其他组件。</p>
+<p>设计 API 前端服务的好处在于：</p>
+<ol>
+<li>对外提供统一接口，隐藏实现细节</li>
+<li>API 提供 REST 标准调用服务，便于与第三方系统集成</li>
+<li>可以通过运行多个 API 服务实例轻松实现 API 的高可用，比如运行多个 cinder-api 进程</li>
+</ol>
+<p><strong>Scheduler 调度服务</strong></p>
+<p>Cinder 可以有多个存储节点，当需要创建 volume 时，cinder-scheduler 会根据存储节点的属性和资源使用情况选择一个最合适的节点来创建 volume。</p>
+<p>调度服务就好比是一个开发团队中的项目经理，当接到新的开发任务时，项目经理会根据任务的难度，每个团队成员目前的工作负荷和技能水平，将任务分配给最合适的开发人员。</p>
+<p><strong>Worker 工作服务</strong></p>
+<p>调度服务只管分配任务，真正执行任务的是 Worker 工作服务。</p>
+<p>在 Cinder 中，这个 Worker 就是 cinder-volume 了。这种 Scheduler 和 Worker 之间职能上的划分使得 OpenStack 非常容易扩展：当存储资源不够时可以增加存储节点（增加 Worker）。 当客户的请求量太大调度不过来时，可以增加 Scheduler。</p>
+<p><strong>Driver 框架</strong></p>
+<p>OpenStack 作为开放的 Infrastracture as a Service 云操作系统，支持业界各种优秀的技术，这些技术可能是开源免费的，也可能是商业收费的。</p>
+<p>这种开放的架构使得 OpenStack 保持技术上的先进性，具有很强的竞争力，同时又不会造成厂商锁定（Lock-in）。 那 OpenStack 的这种开放性体现在哪里呢？一个重要的方面就是采用基于 Driver 的框架。</p>
+<p>以 Cinder 为例，存储节点支持多种 volume provider，包括 LVM, NFS, Ceph, GlusterFS，以及 EMC, IBM 等商业存储系统。 cinder-volume 为这些 volume provider 定义了统一的 driver 接口，volume provider 只需要实现这些接口，就可以 driver 的形式即插即用到 OpenStack 中。下面是 cinder driver 的架构示意图：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFDVXiaL6zITRP8Ol2r6gWEVO8ia9mZVXLQvqohgOhQZgb2eZLIOMrgmibzAlR8PPfxmAl9w8DAj813Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在 cinder-volume 的配置文件 /etc/cinder/cinder.conf 中 volume_driver 配置项设置该存储节点使用哪种 volume provider 的 driver，下面的示例表示使用的是 LVM。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFDVXiaL6zITRP8Ol2r6gWEVvA8S0REdgtpFn7eH9QmZuAHjX8ibYDmgzicY4OuAIdXTVJGvc1Zaw2Mg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下一节我们将详细讨论 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587763&idx=1&sn=1374e3e2bcc453b782f0eb8a78f46ad6&chksm=8d30812aba47083cbe1f0aa93b3eff408590397eb2c88fe040eafd15b04888d0d1d116405d18&scene=21#wechat_redirect">Cinder 的每一个组件</a>。</p>
+<h3 id="Cinder-的组件"><a href="#Cinder-的组件" class="headerlink" title="Cinder 的组件"></a>Cinder 的组件</h3><p>从本节开始，我们将详细讲解 Cinder 的各个子服务。</p>
+<h4 id="cinder-api"><a href="#cinder-api" class="headerlink" title="cinder-api"></a>cinder-api</h4><p><strong>cinder-api</strong></p>
+<p>cinder-api 是整个 Cinder 组件的门户，所有 cinder 的请求都首先由 cinder-api 处理。cinder-api 向外界暴露若干 HTTP REST API 接口。在 keystone 中我们可以查询 cinder-api 的 endponits。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGTic0yDaDlEt7iaao8xIeJdWNgTGP6APlAdTUic8iaUfJicUTmC2wxlgbI4U5YE0oeqlGn5HWRgo2k9Mw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>客户端可以将请求发送到 endponits 指定的地址，向 cinder-api 请求操作。 当然，作为最终用户的我们不会直接发送 Rest API 请求。OpenStack CLI，Dashboard 和其他需要跟 Cinder 交换的组件会使用这些 API。</p>
+<p>cinder-api 对接收到的 HTTP API 请求会做如下处理：</p>
+<ol>
+<li>检查客户端传人的参数是否合法有效</li>
+<li>调用 cinder 其他子服务的处理客户端请求</li>
+<li>将 cinder 其他子服务返回的结果序列号并返回给客户端</li>
+</ol>
+<p>cinder-api 接受哪些请求呢？简单的说，只要是 Volume 生命周期相关的操作，cinder-api 都可以响应。大部分操作都可以在 Dashboard 上看到。</p>
+<p>打开 Volume 管理界面</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGTic0yDaDlEt7iaao8xIeJdWcA3ibeM5ibYRUtyDHUnMPDYdp6GBCiaeMJyS5U28G00yrVPibC6JlapZLQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>点击下拉箭头，列表中就是 cinder-api 可执行的操作。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGTic0yDaDlEt7iaao8xIeJdWsWcjBTZ10HDTQLCrJa9oaKG519iaibkxiazIdxPnDb8F6YXI1u28vvKlQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>cinder-scheduler</strong></p>
+<p>创建 Volume 时，cinder-scheduler 会基于容量、Volume Type 等条件选择出最合适的存储节点，然后让其创建 Volume。这个部分比较多，我们下一次单独讨论。</p>
+<p><strong>cinder-volume</strong></p>
+<p>cinder-volume 在存储节点上运行，OpenStack 对 Volume 的操作，最后都是交给 cinder-volume 来完成的。cinder-volume 自身并不管理真正的存储设备，存储设备是由 volume provider 管理的。cinder-volume 与 volume provider 一起实现 volume 生命周期的管理。</p>
+<p><strong>通过 Driver 架构支持多种 Volume Provider</strong></p>
+<p>接着的问题是：现在市面上有这么多块存储产品和方案（volume provider），cinder-volume 如何与它们配合呢？</p>
+<p>这就是我们之前讨论过的 Driver 架构。 cinder-volume 为这些 volume provider 定义了统一的接口，volume provider 只需要实现这些接口，就可以 Driver 的形式即插即用到 OpenStack 系统中。下面是 Cinder Driver 的架构示意图：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGTic0yDaDlEt7iaao8xIeJdWMdvTzYEk3Wng4wGlD0jXkCM5ultVo687vFCEW5YHCQtAT9aJTJhgQw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>我们可以在 /opt/stack/cinder/cinder/volume/drivers/ 目录下查看到 OpenStack 源代码中已经自带了很多 volume provider 的 Driver：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGTic0yDaDlEt7iaao8xIeJdW4AcbwbM5qKA2GPmohXPecWhicS4azKTp0piachMicCfOibotFogmyFjmnA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>存储节点在配置文件 /etc/cinder/cinder.conf 中用 volume_driver 选项配置使用的driver：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGTic0yDaDlEt7iaao8xIeJdWhtdibD5yEvCJq5oIs5AYbOKPOwpplIyibpQJKDZ0SQYSy4CXsVJgu8SQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这里 LVM 是我们使用的 volume provider。</p>
+<p><strong>定期向 OpenStack 报告计算节点的状态</strong></p>
+<p>在前面 cinder-scheduler 会用到 CapacityFilter 和 CapacityWeigher，它们都是通过存储节点的空闲容量来做筛选。 那这里有个问题：Cinder 是如何得知每个存储节点的空闲容量信息的呢？</p>
+<p>答案就是：<strong>cinder-volume 会定期向 Cinder 报告</strong>。</p>
+<p>从 cinder-volume 的日志 /opt/stack/logs/c-vol.log 可以发现每隔一段时间，cinder-volume 就会报告当前存储节点的资源使用情况。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqGTic0yDaDlEt7iaao8xIeJdWIvR1gI2IuO4vUajEQdXodwLMGGuzYN0FibZuXVL1Hvc3eQSTriaiazrQA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>因为在我们的实验环境中存储节点使用的是 LVM，所以在上面的日志看到存储节点通过“vgs”和”lvs”这两个命令获取 LVM 的容量使用信息。</p>
+<p><strong>实现 volume 生命周期管理</strong></p>
+<p>Cinder 对 volume 的生命周期的管理最终都是通过 cinder-volume 完成的，包括 volume 的 create、extend、attach、snapshot、delete 等，后面我们会详细讨论。下一节我们将详细讨论 cinder-scheduler 如何筛选 cinder-volume。</p>
+<h4 id="cinder-schduler"><a href="#cinder-schduler" class="headerlink" title="cinder-schduler"></a>cinder-schduler</h4><p>上一节我们详细讨论了 cinder-api 和 cinder-volume，今天讨论另一个重要的 Cinder 组件 cinder-scheduler。</p>
+<p>创建 Volume 时，cinder-scheduler 会基于容量、Volume Type 等条件选择出最合适的存储节点，然后让其创建 Volume。下面介绍 cinder-scheduler 是如何实现这个调度工作的。</p>
+<p>在 /etc/cinder/cinder.conf 中，cinder 通过 scheduler_driver， scheduler_default_filters 和 scheduler_default_weighers 这三个参数来配置 cinder-scheduler。</p>
+<p><strong>Filter scheduler</strong></p>
+<p>Filter scheduler 是 cinder-scheduler 默认的调度器。</p>
+<blockquote>
+<p>scheduler_driver=cinder.scheduler.filter_scheduler.FilterScheduler</p>
+</blockquote>
+<p>与 Nova 一样，Cinder 也允许使用第三方 scheduler，配置 scheduler_driver 即可。</p>
+<p>scheduler 调度过程如下：</p>
+<ol>
+<li>通过过滤器（filter）选择满足条件的存储节点（运行 cinder-volume）</li>
+<li>通过权重计算（weighting）选择最优（权重值最大）的存储节点。</li>
+</ol>
+<p>可见，cinder-scheduler 的运行机制与 nova-scheduler 完全一样。</p>
+<p><strong>Filter</strong></p>
+<p>当 Filter scheduler 需要执行调度操作时，会让 filter 对存储节点进行判断，filter 返回 True 或者 False。cinder.conf 中 scheduler_default_filters 选项指定 filter scheduler 使用的 filter，默认值为：</p>
+<blockquote>
+<p>scheduler_default_filters = AvailabilityZoneFilter, CapacityFilter, CapabilitiesFilter</p>
+</blockquote>
+<p>Filter scheduler 将按照上面的顺序依次过滤：</p>
+<p>AvailabilityZoneFilter</p>
+<p>为提高容灾性和提供隔离服务，可以将存储节点和计算节点划分到不同的 Availability Zone 中。例如把一个机架上的机器划分在一个 Availability Zone 中。OpenStack 默认有一个命名为“Nova”的 Availability Zone，所有的节点初始都是放在“Nova”中。用户可以根据需要创建自己的 Availability Zone。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFq5oB4FnarfMMyOP87ibqrQ843WbfXuLQ6DRgZs2Q1exiahGWI7VxXLxwbAJZZdtAT32CEcBDqVIXA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>创建 Volume 时，需要指定 Volume 所属的 Availability Zone。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFq5oB4FnarfMMyOP87ibqrQw12TOdvw9kZoh3pXicxQgTU14hqBOlJBEW0eUeYT49DeCFjcqzFgFag/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>cinder-scheduler 在做 filtering 时，会使用 AvailabilityZoneFilter 将不属于指定 Availability Zone 的存储节点过滤掉。</p>
+<p>CapacityFilter</p>
+<p>创建 Volume 时，用户会指定 Volume 的大小。CapacityFilter 的作用是将存储空间不能满足 Volume 创建需求的存储节点过滤掉。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFq5oB4FnarfMMyOP87ibqrQYaztxrefL4qKpgtTVVgB8ia2EKg3ic1hf6n6sIHNgxbIo3LqEGIn88Lw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>CapabilitiesFilter</p>
+<p>不同的 Volume Provider 有自己的特性（Capabilities），比如是否支持 thin provision 等。Cinder 允许用户创建 Volume 时通过 Volume Type 指定需要的 Capabilities。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFq5oB4FnarfMMyOP87ibqrQV1bHaphZrryjz3qf68GepQ1dic0F2FVzhVWVFAibp0iavC7SCLsFNWO3w/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Volume Type 可以根据需要定义若干 Capabilities，详细描述 Volume 的属性。VolumeVolume Type 的作用与 Nova 的 flavor 类似。</p>
+<p>Volume Type 在 Admin -&gt; System -&gt; Volume 菜单里管理</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFq5oB4FnarfMMyOP87ibqrQ0icjtiat2Tu6qj31O4ibZuYqQsrgSYH6G6bLeZvjfmgPG5XmRw3GiaGW0A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>通过 Volume Type 的 Extra Specs 定义 Capabilities</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFq5oB4FnarfMMyOP87ibqrQl1yS1ZUIUKfMhBq0hQf4icezugxpVbZDj4DrTRLngahRYtMlibb6iaq8A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Extra Specs 是用 Key-Value 的形式定义。 不同的 Volume Provider 支持的 Extra Specs 不同，需要参考 Volume Provider 的文档。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFq5oB4FnarfMMyOP87ibqrQn0Bttt8QrfiaibhlExOQic9mtjwSVibWqWwujMv7qDhFm6ics2EpztZwDcQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上图所示的 Volume Type 只有一个 Extra Specs “volume_backend_name”，这是最重要也是必须的 Extra Specs。</p>
+<p>cinder-volume 会在自己的配置文件 /etc/cinder/cinder.conf 中设置“volume_backend_name”这个参数，其作用是为存储节点的 Volume Provider 命名。这样，CapabilitiesFilter 就可以通过 Volume Type 的“volume_backend_name”筛选出指定的 Volume Provider。</p>
+<p>不同的存储节点可以在各自的 cinder.conf 中配置相同的 volume_backend_name，这是允许的。因为虽然存储节点不同，但它们可能使用的是一种 Volume Provider。</p>
+<p>如果在第一步 filtering 环节选出了多个存储节点，那么接下来的 weighting 环节会挑选出最合适的一个节点。</p>
+<p><strong>Weighter</strong></p>
+<p>Filter Scheduler 通过 scheduler_default_weighers 指定计算权重的 weigher，默认为 CapacityWeigher。</p>
+<blockquote>
+<p>scheduler_default_weighers = CapacityWeigher</p>
+</blockquote>
+<p>如命名所示，CapacityWeigher 基于存储节点的空闲容量计算权重值，空闲最多的胜出。下一节我们将开始通过各种场景学习 Cinder。</p>
+<h1 id="网络Neutron"><a href="#网络Neutron" class="headerlink" title="网络Neutron"></a>网络Neutron</h1><h3 id="Neutron概述"><a href="#Neutron概述" class="headerlink" title="Neutron概述"></a>Neutron概述</h3><p>从今天开始，我们将学习 OpenStack 的 Networking Service，Neutron。</p>
+<p>Neutron 的难度会比前面所有模块都大一些，内容也多一些。为了帮助大家更好的掌握 Neutorn，CloudMan 也会分析地更详细一些。</p>
+<p><strong>Neutron 概述</strong></p>
+<p>传统的网络管理方式很大程度上依赖于管理员手工配置和维护各种网络硬件设备；而云环境下的网络已经变得非常复杂，特别是在多租户场景里，用户随时都可能需要创建、修改和删除网络，网络的连通性和隔离不已经太可能通过手工配置来保证了。</p>
+<p>如何快速响应业务的需求对网络管理提出了更高的要求。传统的网络管理方式已经很难胜任这项工作，而“软件定义网络（software-defined networking, SDN）”所具有的灵活性和自动化优势使其成为云时代网络管理的主流。</p>
+<p>Neutron 的设计目标是实现“网络即服务（Networking as a Service）”。为了达到这一目标，在设计上遵循了基于 SDN 实现网络虚拟化的原则，在实现上充分利用了 Linux 系统上的各种网络相关的技术。</p>
+<p>在这一章，我们将讨论 Neutron 的功能和它的各个组件，学习部署和配置 OpenStack 网络的不同方法，会涉及软件和硬件设备多个层面。</p>
+<p><strong>Neutron 功能</strong></p>
+<p>Neutron 为整个 OpenStack 环境提供网络支持，包括二层交换，三层路由，负载均衡，防火墙和 VPN 等。Neutron 提供了一个灵活的框架，通过配置，无论是开源还是商业软件都可以被用来实现这些功能。</p>
+<p>二层交换 Switching</p>
+<p>Nova 的 Instance 是通过虚拟交换机连接到虚拟二层网络的。Neutron 支持多种虚拟交换机，包括 Linux 原生的 Linux Bridge 和 Open vSwitch。 Open vSwitch（OVS）是一个开源的虚拟交换机，它支持标准的管理接口和协议。</p>
+<p>利用 Linux Bridge 和 OVS，Neutron 除了可以创建传统的 VLAN 网络，还可以创建基于隧道技术的 Overlay 网络，比如 VxLAN 和 GRE（Linux Bridge 目前只支持 VxLAN）。在后面章节我们会学习如何使用和配置 Linux Bridge 和 Open vSwitch。</p>
+<p>三层路由 Routing</p>
+<p>Instance 可以配置不同网段的 IP，Neutron 的 router（虚拟路由器）实现 instance 跨网段通信。router 通过 IP forwarding，iptables 等技术来实现路由和 NAT。我们将在后面章节讨论如何在 Neutron 中配置 router 来实现 instance 之间，以及与外部网络的通信。</p>
+<p>负载均衡 Load Balancing</p>
+<p>Openstack 在 Grizzly 版本第一次引入了 Load-Balancing-as-a-Service（LBaaS），提供了将负载分发到多个 instance 的能力。LBaaS 支持多种负载均衡产品和方案，不同的实现以 Plugin 的形式集成到 Neutron，目前默认的 Plugin 是 HAProxy。我们会在后面章节学习 LBaaS 的使用和配置。</p>
+<p>防火墙 Firewalling</p>
+<p>Neutron 通过下面两种方式来保障 instance 和网络的安全性。</p>
+<p>Security Group </p>
+<p>通过 iptables 限制进出 instance 的网络包。</p>
+<p>Firewall-as-a-Service<br>WaaS，限制进出虚拟路由器的网络包，也是通过 iptables 实现。</p>
+<p>后面章节会详细讨论 Security 和 FWaaS。下一节我们会讨论 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587694&idx=1&sn=7d844a30662b9af11de26d7f4322e9c9&chksm=8d3080f7ba4709e12ea3c32c314cb5b93c3e23d751cda63114234821f9946ef5c4d3a4880f25&scene=21#wechat_redirect">Neutron 网络涉及的一些基本概念</a>，便于后面深入学习。</p>
+<h3 id="Neutron网络基本概念"><a href="#Neutron网络基本概念" class="headerlink" title="Neutron网络基本概念"></a>Neutron网络基本概念</h3><p>上次我们讨论了 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587201&idx=1&sn=d35b7e5932adf85fdcb744e9d91d6f8d&scene=21#wechat_redirect">Neutron 提供的功能</a>，今天我们学习 Neutron 模块几个重要的概念。Neutron 管理的网络资源包括 Network，subnet 和 port，下面依次介绍。</p>
+<p><strong>network</strong></p>
+<p>network 是一个隔离的二层广播域。Neutron 支持多种类型的 network，包括 local, flat, VLAN, VxLAN 和 GRE。</p>
+<p><strong>local</strong><br>local 网络与其他网络和节点隔离。local 网络中的 instance 只能与位于同一节点上同一网络的 instance 通信，local 网络主要用于单机测试。</p>
+<p><strong>flat</strong><br>flat 网络是无 vlan tagging 的网络。flat 网络中的 instance 能与位于同一网络的 instance 通信，并且可以跨多个节点。</p>
+<p><strong>vlan</strong><br>vlan 网络是具有 802.1q tagging 的网络。vlan 是一个二层的广播域，同一 vlan 中的 instance 可以通信，不同 vlan 只能通过 router 通信。vlan 网络可跨节点，是应用最广泛的网络类型。</p>
+<p><strong>vxlan</strong><br>vxlan 是基于隧道技术的 overlay 网络。vxlan 网络通过唯一的 segmentation ID（也叫 VNI）与其他 vxlan 网络区分。vxlan 中数据包会通过 VNI 封装成 UDP 包进行传输。因为二层的包通过封装在三层传输，能够克服 vlan 和物理网络基础设施的限制。</p>
+<p><strong>gre</strong><br>gre 是与 vxlan 类似的一种 overlay 网络。主要区别在于使用 IP 包而非 UDP 进行封装。</p>
+<p>不同 network 之间在二层上是隔离的。</p>
+<p>以 vlan 网络为例，network A 和 network B 会分配不同的 VLAN ID，这样就保证了 network A 中的广播包不会跑到 network B 中。当然，这里的隔离是指二层上的隔离，借助路由器不同 network 是可能在三层上通信的。</p>
+<p>network 必须属于某个 Project（ Tenant 租户），Project 中可以创建多个 network。 network 与 Project 之间是 1对多 关系。</p>
+<p><strong>subnet</strong></p>
+<p>subnet 是一个 IPv4 或者 IPv6 地址段。instance 的 IP 从 subnet 中分配。每个 subnet 需要定义 IP 地址的范围和掩码。</p>
+<p>network 与 subnet 是 1对多 关系。一个 subnet 只能属于某个 network；一个 network 可以有多个 subnet，这些 subnet 可以是不同的 IP 段，但不能重叠。下面的配置是有效的：</p>
+<p>network A  subnet A-a: 10.10.1.0/24  {“start”: “10.10.1.1”, “end”: “10.10.1.50”}</p>
+<p>​          subnet A-b: 10.10.2.0/24  {“start”: “10.10.2.1”, “end”: “10.10.2.50”}</p>
+<p>但下面的配置则无效，因为 subnet 有重叠</p>
+<p>networkA   subnet A-a: 10.10.1.0/24  {“start”: “10.10.1.1”, “end”: “10.10.1.50”}</p>
+<p>​          subnet A-b: 10.10.1.0/24  {“start”: “10.10.1.51”, “end”: “10.10.1.100”}</p>
+<p>这里不是判断 IP 是否有重叠，而是 subnet 的 CIDR 重叠（都是 10.10.1.0/24）。但是，如果 subnet 在不同的 network 中，CIDR 和 IP 都是可以重叠的，比如</p>
+<p>network A  subnet A-a: 10.10.1.0/24  {“start”: “10.10.1.1”, “end”: “10.10.1.50”}</p>
+<p>networkB   subnet B-a: 10.10.1.0/24  {“start”: “10.10.1.1”, “end”: “10.10.1.50”}</p>
+<p>这里大家不免会疑惑： 如果上面的IP地址是可以重叠的，那么就可能存在具有相同 IP 的两个 instance，这样会不会冲突？ 简单的回答是：不会！</p>
+<p>具体原因： 因为 Neutron 的 router 是通过 Linux network namespace 实现的。network namespace 是一种网络的隔离机制。通过它，每个 router 有自己独立的路由表。上面的配置有两种结果：</p>
+<ol>
+<li><p>如果两个 subnet 是通过同一个 router 路由，根据 router 的配置，只有指定的一个 subnet 可被路由。</p>
+</li>
+<li><p>如果上面的两个 subnet 是通过不同 router 路由，因为 router 的路由表是独立的，所以两个 subnet 都可以被路由。</p>
+</li>
+</ol>
+<p>这里只是先简单做个说明，我们会在后面三层路由的章节详细分析这种场景。</p>
+<p><strong>port</strong></p>
+<p>port 可以看做虚拟交换机上的一个端口。port 上定义了 MAC 地址和 IP 地址，当 instance 的虚拟网卡 VIF（Virtual Interface） 绑定到 port 时，port 会将 MAC 和 IP 分配给 VIF。</p>
+<p>subnet 与 port 是 1对多 关系。一个 port 必须属于某个 subnet；一个 subnet 可以有多个 port。</p>
+<p><strong>小节</strong></p>
+<p>下面总结了 Project，Network，Subnet，Port 和 VIF 之间关系。</p>
+<p>Project 1 : m Network 1 : m Subnet 1 : m Port 1 : 1 VIF m : 1 Instance</p>
+<p>下一节我们讨论 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587691&idx=1&sn=c71b110dade71c3e120ec6b2389b3e33&chksm=8d3080f2ba4709e44eb08c55223e141f7ed0e069ebd6f770b7770665e00ff72d48ce41596a0b&scene=21#wechat_redirect">Neutron 的架构</a>。</p>
+<h3 id="Neutron的架构"><a href="#Neutron的架构" class="headerlink" title="Neutron的架构"></a>Neutron的架构</h3><p>前面我们讨论了 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587204&idx=1&sn=9d4b36188bfd91a896d68062dad4ee83&scene=21#wechat_redirect">Neutron 的基本概念</a>，今天我们开始分析 Neutron 的架构。</p>
+<p><strong>Neutron 架构</strong></p>
+<p>与 OpenStack 的其他服务的设计思路一样，Neutron 也是采用分布式架构，由多个组件（子服务）共同对外提供网络服务。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEZ5ovWJOuB1iaq0vRiaplgJtus2jUWMVcnHbgjteEHz4rJoCsotcrR0C3hUoWiaC7DfpOqleG8lRVibA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Neutron 由如下组件构成：</p>
+<p>**Neutron Server<br>**对外提供 OpenStack 网络 API，接收请求，并调用 Plugin 处理请求。</p>
+<p>**Plugin<br>**处理 Neutron Server 发来的请求，维护 OpenStack 逻辑网络状态， 并调用 Agent 处理请求。</p>
+<p>**Agent<br>**处理 Plugin 的请求，负责在 network provider 上真正实现各种网络功能。</p>
+<p>**network provider<br>**提供网络服务的虚拟或物理网络设备，例如 Linux Bridge，Open vSwitch 或者其他支持 Neutron 的物理交换机。</p>
+<p>**Queue<br>**Neutron Server，Plugin 和 Agent 之间通过 Messaging Queue 通信和调用。</p>
+<p>**Database<br>**存放 OpenStack 的网络状态信息，包括 Network, Subnet, Port, Router 等。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqEZ5ovWJOuB1iaq0vRiaplgJtEbDQkCyia1o8QZwqWOJgmmDlrbN454daWqqvaRjbKZqu117AjDscfZQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Neutron 架构非常灵活，层次较多，目的是：</p>
+<ol>
+<li><p>为了支持各种现有或者将来会出现的优秀网络技术。</p>
+</li>
+<li><p>支持分布式部署，获得足够的扩展性。</p>
+</li>
+</ol>
+<p>通常鱼和熊掌不能兼得，虽然获得了这些优势，但这样使得 Neutron 更加复杂，更不容易理解。 后面我们会详细讨论 Neutron 的各个组件，但在这之前，非常有必要先通过一个例子了解这些组件各自的职责以及是如何协同工作。</p>
+<p>以创建一个 VLAN100 的 network 为例，假设 network provider 是 linux bridge， 流程如下：</p>
+<blockquote>
+<ol>
+<li><p>Neutron Server 接收到创建 network 的请求，通过 Message Queue（RabbitMQ）通知已注册的 Linux Bridge Plugin。</p>
+</li>
+<li><p>Plugin 将要创建的 network 的信息（例如名称、VLAN ID等）保存到数据库中，并通过 Message Queue 通知运行在各节点上的 Agent。</p>
+</li>
+<li><p>Agent 收到消息后会在节点上的物理网卡（比如 eth2）上创建 VLAN 设备（比如 eth2.100），并创建 bridge （比如 brqXXX） 桥接 VLAN 设备。</p>
+</li>
+</ol>
+</blockquote>
+<p>关于 linux bridge 如何实现 VLAN 大家可以参考本教程“预备知识-&gt;网络虚拟化”的相关章节。这里进行几点说明：</p>
+<ol>
+<li><p>plugin 解决的是 What 的问题，即网络要配置成什么样子？而至于如何配置 How 的工作则交由 agent 完成。</p>
+</li>
+<li><p>plugin，agent 和 network provider 是配套使用的，比如上例中 network provider 是 linux bridge，那么就得使用 linux bridge 的 plungin 和 agent；如果 network provider 换成了 OVS 或者物理交换机，plugin 和 agent 也得替换。</p>
+</li>
+<li><p>plugin 的一个主要的职责是在数据库中维护 Neutron 网络的状态信息，这就造成一个问题：所有 network provider 的 plugin 都要编写一套非常类似的数据库访问代码。为了解决这个问题，Neutron 在 Havana 版本实现了一个 ML2（Modular Layer 2）plugin，对 plgin 的功能进行抽象和封装。有了 ML2 plugin，各种 network provider 无需开发自己的 plugin，只需要针对 ML2 开发相应的 driver 就可以了，工作量和难度都大大减少。ML2 会在后面详细讨论。</p>
+</li>
+<li><p>plugin 按照功能分为两类： core plugin 和 service plugin。core plugin 维护 Neutron 的 netowrk, subnet 和 port 相关资源的信息，与 core plugin 对应的 agent 包括 linux bridge, OVS 等； service plugin 提供 routing, firewall, load balance 等服务，也有相应的 agent。后面也会分别详细讨论。</p>
+</li>
+</ol>
+<p>以上是Neutron的逻辑架构，下一节我们讨论 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587687&idx=1&sn=adf2078fa91f552a23dd406bf9c0d30d&chksm=8d3080feba4709e8fca066ec1371c51f9b3a89229cfeb81f886e6895f0c2509a29e840ab6d19&scene=21#wechat_redirect">Neutron 的物理部署方案</a>。</p>
+<h3 id="Neutron-物理部署方案"><a href="#Neutron-物理部署方案" class="headerlink" title="Neutron 物理部署方案"></a>Neutron 物理部署方案</h3><p>前面我们讨论了 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587207&idx=1&sn=2ad3cff789378312144d41ca2e9c1dc9&scene=21#wechat_redirect">Neutron 的架构</a>，本节讨论 Neutron 的物理部署方案：不同节点部署不同的 Neutron 服务组件。</p>
+<p><strong>方案1：控制节点 + 计算节点</strong></p>
+<p>在这个部署方案中，OpenStack 由控制节点和计算节点组成。</p>
+<p><strong>控制节点</strong><br>部署的服务包括：neutron server, core plugin 的 agent 和 service plugin 的 agent。</p>
+<p><strong>计算节点</strong><br>部署 core plugin 的agent，负责提供二层网络功能。</p>
+<p>这里有几点需要说明： </p>
+<p>\1. core plugin 和 service plugin 已经集成到 neutron server，不需要运行独立的 plugin 服务。</p>
+<p>\2. 控制节点和计算节点都需要部署 core plugin 的 agent，因为通过该 agent 控制节点与计算节点才能建立二层连接。</p>
+<p>\3. 可以部署多个控制节点和计算节点。</p>
+<p><img src="/2022/06/09/OpenStack/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+<p><strong>方案2：控制节点 + 网络节点 + 计算节点</strong></p>
+<p>在这个部署方案中，OpenStack 由控制节点，网络节点和计算节点组成。</p>
+<p>**控制节点<br>**</p>
+<p>部署 neutron server 服务。</p>
+<p>**网络节点<br>**部署的服务包括：core plugin 的 agent 和 service plugin 的 agent。</p>
+<p>**计算节点<br>**部署 core plugin 的agent，负责提供二层网络功能。</p>
+<p>这个方案的要点是将所有的 agent 从控制节点分离出来，部署到独立的网络节点上。</p>
+<ol>
+<li><p>控制节点只负责通过 neutron server 响应 API 请求。</p>
+</li>
+<li><p>由独立的网络节点实现数据的交换，路由以及 load balance等高级网络服务。</p>
+</li>
+<li><p>可以通过增加网络节点承担更大的负载。</p>
+</li>
+<li><p>可以部署多个控制节点、网络节点和计算节点。</p>
+</li>
+</ol>
+<p>该方案特别适合规模较大的 OpenStack 环境。</p>
+<p><img src="https://mmbiz.qlogo.cn/mmbiz/Hia4HVYXRicqHuicQalCOiaMzJkIfDGxicQibEt6Yiat5ia1Nae2zkDn7AnFDflibI8bHgibtV4EmGD8eXhycKbVU4FApZvg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&retryload=2" alt="图片"></p>
+<p>以上就是 Neutron 两种典型的部署方案，下一节我们开始讨论 Neutron 的各个服务组件。首先学习 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587683&idx=1&sn=3c5cadd759831abf596d53859cb64b9d&chksm=8d3080faba4709ec386d03890f7ccec74a9adfb69a943466626428b237d4a3929e372496e8db&scene=21#wechat_redirect">Neutron Server</a> 。</p>
+<h3 id="Neutron-Server-分层模型"><a href="#Neutron-Server-分层模型" class="headerlink" title="Neutron Server 分层模型"></a>Neutron Server 分层模型</h3><p>本节开始讨论 Neutron 的各个服务组件，首先学习 Neutron Server 。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqG2kaGXyYgYWVaMZBrLruk6LYphLicwibym5k79oEPDPAlrVCY9aQ9bDiahZQ2YTNZ8Ee6XgXqnhSGKQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上图是 Neutron Server 的分层结构，至上而下依次为：</p>
+<p>**Core API<br>**对外提供管理 network, subnet 和 port 的 RESTful API。</p>
+<p>**Extension API<br>**对外提供管理 router, load balance, firewall 等资源 的 RESTful API。</p>
+<p>**Commnon Service<br>**认证和校验 API 请求。</p>
+<p>**Neutron Core<br>**Neutron server 的核心处理程序，通过调用相应的 Plugin 处理请求。</p>
+<p>**Core Plugin API<br>**定义了 Core Plgin 的抽象功能集合，Neutron Core 通过该 API 调用相应的 Core Plgin。</p>
+<p>**Extension Plugin API<br>**定义了 Service Plgin 的抽象功能集合，Neutron Core 通过该 API 调用相应的 Service Plgin。</p>
+<p>**Core Plugin<br>**实现了 Core Plugin API，在数据库中维护 network, subnet 和 port 的状态，并负责调用相应的 agent 在 network provider 上执行相关操作，比如创建 network。</p>
+<p>**Service Plugin<br>**实现了 Extension Plugin API，在数据库中维护 router, load balance, security group 等资源的状态，并负责调用相应的 agent 在 network provider 上执行相关操作，比如创建 router。</p>
+<p>归纳起来，Neutron Server 包括两部分：<br>\1. 提供 API 服务。<br>\2. 运行 Plugin。</p>
+<p>即 <strong>Neutron Server = API + Plugins</strong></p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqG2kaGXyYgYWVaMZBrLruk6fRic3xJzD7tJjhr2g0OXKJaOz6DNopZv0JiaibdzBBNcZ4GJsOHh8JpQQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"><br>明白了 Neutron Server 的分层模型，我们就更容易理解 <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwMTM5MjUwMg==&mid=2653587682&idx=1&sn=bd57acc0560ce9bcdcc7781ed24067df&chksm=8d3080fbba4709ed1dd5ba820daa2c845d1aff1d4cd5670b74337df386f3fbf2544ab5fb65c0&scene=21#wechat_redirect">Neutron 是如何支持多种 network provider</a>。这一点我们放到下节详细讨论。</p>
+<h1 id="如何使用-OpenStack-CLI"><a href="#如何使用-OpenStack-CLI" class="headerlink" title="如何使用 OpenStack CLI"></a>如何使用 OpenStack CLI</h1><p>OpenStack 服务都有自己的 CLI。</p>
+<p>命令很好记，就是服务的名字，比如 Glance 就是 glance，Nova 就是 nova。</p>
+<p>但 Keystone 比较特殊，现在是用 openstack 来代替老版的 keystone 命令。 比如查询用户列表，如果用 keystone user-list</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFnjmCfCyrnKejYc9C8sHxoZ0O7zQTVVic7H0DDiccziaL8ZD3yc8yicn8D7j02Rr9I1G3MxZ2tIGJkvw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>会提示 keystone 已经 deprecated 了。 用 openstack 命令代替</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFnjmCfCyrnKejYc9C8sHxoY8lTica2iayAOzjcLnl7hcTKZMlXkg281SgwOxTFLvFAg4icLkJlREGQw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>不同服务用的命令虽然不同，但这些命令使用方式却非常类似，可以举一反三。</p>
+<p>\1. 执行命令之前，需要设置环境变量。</p>
+<p>这些变量包含用户名、Project、密码等； 如果不设置，每次执行命令都必须设置相关的命令行参数</p>
+<p>\2. 各个服务的命令都有增、删、改、查的操作</p>
+<p>其格式是</p>
+<blockquote>
+<p>CMD <obj>-create [parm1] [parm2]…<br>CMD <obj>-delete [parm]<br>CMD <obj>-update [parm1] [parm2]…<br>CMD <obj>-list CMD <obj>-show [parm]</obj></obj></obj></obj></obj></p>
+</blockquote>
+<p>例如 glance 管理的是 image，那么:<br>CMD 就是 glance，obj 就是 image，对应的命令就有</p>
+<blockquote>
+<p>glance image-create<br>glance image-delete<br>glance image-update<br>glance image-list<br>glance image-show</p>
+</blockquote>
+<p>再比如 neutron 负责管理网络和子网，那么：<br>CMD 就是 neutron；obj 就是 net 和 subnet 对应的命令就有</p>
+<p>网络相关操作</p>
+<blockquote>
+<p>neutron net-create<br>neutron net -delete<br>neutron net -update<br>neutron net -list<br>neutron net –show</p>
+</blockquote>
+<p>子网相关操作</p>
+<blockquote>
+<p>neutron subnet-create<br>neutron subnet -delete<br>neutron subnet -update<br>neutron subnet -list<br>neutron subnet–show</p>
+</blockquote>
+<p>有的命令 <obj> 可以省略，比如 nova 下面的操作都是针对 instance</obj></p>
+<blockquote>
+<p>nova boot<br>nova delete<br>nova list nova show</p>
+</blockquote>
+<p>\3. 每个对象都有 ID</p>
+<p>delete，show 等操作都以 ID 为参数，例如</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFnjmCfCyrnKejYc9C8sHxosDD7iaX5dVUBApKyE8J5Y6wzrJdoL8LRaicZUOibNGEsT4nwex8wtPia7g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>\4. 可用 help 查看命令的用法</p>
+<p>除了 delete，show 等操作只需要 ID 一个参数，其他操作可能需要更多的参数，用 help 查看所需的参数，格式是</p>
+<blockquote>
+<p>CMD help [SUB-CMD]</p>
+</blockquote>
+<p>例如查看 glance 都有哪些 SUB-CMD</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFnjmCfCyrnKejYc9C8sHxoiaouoAy9x9HeoGbAlbxeZV1icICxlOggtu8TQDjYngjbQaCbDUwkrMMg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>查看 glance image-update 的用法</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFnjmCfCyrnKejYc9C8sHxoC6wkrs2JreTTXg8acclN6D0QWgo1PBKibG9mXe2VkiaAJD0tUcibFsn4g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p><strong>如何 Troubleshooting</strong></p>
+<p>OpenStack 排查问题的方法主要是通过日志，Service 都有自己单独的日志。Glance 主要有两个日志，glance_api.log 和 glance_registry.log，保存在 /opt/stack/logs 目录里。devstack 的 screen 窗口已经帮我们打开了这两个日志，可以直接查看</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFnjmCfCyrnKejYc9C8sHxoHB1eic8Am009h7Yic2gice9UAZwjYickt0LGDBLPnfiawMPjyVQWzR24l6Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>g-api 窗口显示 glance-api 日志，记录 REST API 调用情况。<br>g-reg 窗口显示 glance-registry 日志，记录 Glance 服务处理请求的过程以及数据库操作。</p>
+<p>如果需要得到最详细的日志信息，可以在 /etc/glance/*.conf 中打开 debug 选项。 devstack 默认已经打开了 debug。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/Hia4HVYXRicqFnjmCfCyrnKejYc9C8sHxo4z8oFPdchEt1zJian8icia6mzphEE8FtzvicMflwHwh9PKLicpvsWprVFQA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
+<p>在非 devstack 安装中，日志在 /var/log/glance/ 目录里。</p>
+<p>packstack –allinone –os-neutron-l2-agent=openvswitch –os-neutron-ml2-mechanism-drivers=openvswitch –os-neutron-ml2-tenant-network-types=vxlan –os-neutron-ml2-type-drivers=vxlan,flat –provision-demo=n –os-neutron-ovs-bridge-mappings=extnet:br-ex –os-neutron-ovs-bridge-interfaces=br-ex:eno1 –keystone-admin-passwd=’cnlab.net’ –provision-demo=n  –nova-libvirt-virt-type=kvm –os-swift-storage-size=100G –cinder-volumes-size=500G</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/04/21/New-Computer-s-Test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3190,164 +3997,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Jiayi Liang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JiayiSpace">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/" class="post-title-link" itemprop="url">2021广州草莓音乐节</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-06 20:36:19" itemprop="dateCreated datePublished" datetime="2021-12-06T20:36:19+08:00">2021-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-07 21:15:02" itemprop="dateModified" datetime="2021-12-07T21:15:02+08:00">2021-12-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2021广州草莓音乐节"><a href="#2021广州草莓音乐节" class="headerlink" title="2021广州草莓音乐节"></a>2021广州草莓音乐节</h1><blockquote>
-<p>START</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_155712.jpg" alt="IMG_20211204_155712.jpg"> </p>
-<blockquote>
-<p>进场后听到的第一个乐队：超级斩Hyper slash，好像是广州的乐队，主唱在台上讲了不少粤语，风格是二次元+核，听不来，太吵了</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_160620.jpg" alt="IMG_20211204_160620.jpg"> </p>
-<blockquote>
-<p>然后就绕过去看阿肆了，虽然说觉得那个105度的蒸馏水有点傻逼，但是， 算了没但是。世界上另一个我 还有 那个吃炸鸡 也算还行把，现场不太稳有点</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_161929.jpg" alt="IMG_20211204_161929.jpg"> </p>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_162047.jpg" alt="IMG_20211204_162047.jpg"> </p>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_162329.jpg"> </p>
-<blockquote>
-<p> OK 下一位</p>
-</blockquote>
-<blockquote>
-<p>焦迈奇女粉太多了，李可说他可油，虽然有点小帅</p>
-<p>（忘记传照片了，就放两张转场的好了</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_164210.jpg" alt="IMG_20211204_164210.jpg"> </p>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_164632.jpg" alt="IMG_20211204_164632.jpg"> </p>
-<blockquote>
-<p> 到现在还没啥感觉，除了有点热，还没碰到炸场的乐队</p>
-</blockquote>
-<blockquote>
-<p>马赛克上场了，好像上过乐队的夏天，粉丝数量也还行，现场气氛也起来了点，朋友说那个戴帽子的和周迅好了，嘶，为啥女明星都喜欢找玩乐队的（我说的就是马思纯 and（到现在我还不知道到底是那个</p>
-</blockquote>
-<p> <img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_173732.jpg"> </p>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_174748.jpg"> </p>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_175443.jpg"> </p>
-<blockquote>
-<p>碰到的一个老爸带着他的小女儿</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_180921.jpg"></p>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_181218.jpg"> </p>
-<blockquote>
-<p> 中间还有几个乐队，李可听了会儿鲸浪whale wave, 说挺好听的。</p>
-<p> 我也还听不来，现场主唱发挥8太行。</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_184409.jpg"> </p>
-<blockquote>
-<p>The Next ! !   逃跑计划！</p>
-<p>听到他们开口，感觉就到位了，比下午的吊多了</p>
-<p>还有，为什么不唱夜空中最亮的星！！！</p>
-<p>他敢唱我就敢哭！！</p>
-<p>就告别的时候哼几句！！！阿！！</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_194524.jpg"></p>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_200021.jpg"> </p>
-<blockquote>
-<p>新专辑里的海鸥，演出现场很好看</p>
-<p>（倪力杨分享过，李可说这歌适合结婚时候放</p>
-<p>（我听了觉得挺好听了，然后没了</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_200803.jpg">  </p>
-<blockquote>
-<p> CHEMICAL BUS :</p>
-<p> I had a dream and I make it beautiful !</p>
-<p> This is a love just like chemical !</p>
-<p> 现场嗨炸了！</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_202635.jpg"></p>
-<blockquote>
-<p>旗子</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_203343_edit_75810530584264.jpg"></p>
-<blockquote>
-<p>朴树： 我不喜欢开演唱会</p>
-<p>和听CD没差，过场随便说两句就开唱，听爽了</p>
-<p>没有听到NewBoy，而是唱了Just那么年少（不管了，嗨就完了</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_204708.jpg"> </p>
-<blockquote>
-<p> 生如夏花一样绚烂</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_210129.jpg"> </p>
-<blockquote>
-<p>那片笑声让我想起我的那些花儿，在我生命每个角落静静为我开着</p>
-<p>我曾以为他们会永远陪在我身旁，可如今他们已经四散在天涯</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/Screenshot_20211207_210554_com.huawei.himovie.jpg"> </p>
-<blockquote>
-<p>现场气氛</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_211538.jpg"> </p>
-<blockquote>
-<p>感谢有你，明天再见</p>
-</blockquote>
-<p><img src="/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/IMG_20211204_215030.jpg"> </p>
-<blockquote>
-<p> END</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -3419,7 +4068,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -3428,7 +4077,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
