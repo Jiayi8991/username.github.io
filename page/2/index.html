@@ -160,6 +160,1092 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/" class="post-title-link" itemprop="url">搜索问题与图搜索</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-14 10:36:17" itemprop="dateCreated datePublished" datetime="2021-12-14T10:36:17+08:00">2021-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-19 17:50:44" itemprop="dateModified" datetime="2021-12-19T17:50:44+08:00">2021-12-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h1><ul>
+<li><strong>1. 状态</strong><ul>
+<li> 状态就是问题在任一确定时刻的状况,它表征了问题特征和结构等。状态在状态图中表示为节点。状态一般用一组数据表示。在程序中用字符、数字、记录、数组、结构、对象等表示</li>
+</ul>
+</li>
+<li><strong>2. 状态转换规则</strong><ul>
+<li> 状态转换规则就是能使问题状态改变的某种操作、规则、 行为、变换、关系、函数、算子、过程等等。状态转换规则也称为操作,问题的状态也只能经定义在其上的这种操作而改变。状态转换规则在状态图中表示为边。在程序中状态转换规则可用数据对、条件语句、规则、函数、过程等表示</li>
+</ul>
+</li>
+<li><strong>3. 状态图表示</strong><ul>
+<li>一个问题的状态图是一个三元组</li>
+<li>​           (<em>S, F, G</em>) </li>
+<li>其中S是问题的初始状态集合, F是问题的状态转换规则集合, G是问题的目标状态集合。 </li>
+<li>  一个问题的全体状态及其关系就构成一个空间, 称为状态空间。所以,状态图也称为状态空间图。</li>
+</ul>
+</li>
+</ul>
+<h2 id="启发式搜索"><a href="#启发式搜索" class="headerlink" title="启发式搜索"></a>启发式搜索</h2><p><strong>启发性信息：</strong></p>
+<ol>
+<li>用于扩展节点的选择, 即用于决定应先扩展哪一个节点, 以免盲目扩展。</li>
+<li>用于生成节点的选择,即用于决定应生成哪些后续节点,以免盲目地生成过多无用节点。</li>
+<li>用于删除节点的选择,即用于决定应删除哪些无用节点, 以免造成进一步的时空浪费。</li>
+</ol>
+<p><strong>启发函数（距离目标函数，表示与目标的距离，越小越好）：</strong></p>
+<ul>
+<li>启发函数是用来估计搜索树上节点<em>x</em>与目标节点<em>S**g</em>接近程度的一种函数, 通常记为<em>h</em>(<em>x</em>)。使用启发函数的搜索实际上也是一种深度优先搜索</li>
+</ul>
+<p><strong>启发式搜索算法：</strong></p>
+<ul>
+<li>全局择优搜索</li>
+<li>局部择优搜索</li>
+</ul>
+<p><strong>全局和局部：</strong></p>
+<ul>
+<li>全局：考虑Open表中所有节点</li>
+<li>局部： 仅仅考虑当前节点N的扩展子节点，且插入到Open表首部</li>
+</ul>
+<h3 id="全局择优搜索算法"><a href="#全局择优搜索算法" class="headerlink" title="全局择优搜索算法"></a>全局择优搜索算法</h3><ul>
+<li><strong>全局启发函数h(x)最小，即把当前节点子节点加入到Open表，再优选Open表中节点与目标节点距离小的节点）</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>步1 把初始节点<em>S</em>o放入<em>OPEN</em>表中,计算<em>h</em>(<em>S</em>o)。</li>
+<li>步2 若<em>OPEN</em>表为空,则搜索失败, 退出。 </li>
+<li>步3 移出<em>OPEN</em>表中第一个节点N放入CLOSED表中, 并冠以序号<em>n</em>。</li>
+<li>步4 若目标节点<em>S</em>g=<em>N</em>, 则搜索成功, 结束。 </li>
+<li>步5 若<em>N</em>不可扩展, 则转步2。</li>
+<li>步6 扩展<em>N</em>, 计算每个子节点<em>x</em>的函数值<em>h</em>(<em>x</em>), 并将所有子节点配以指向<em>N</em>的返回指针后放入<em>OPEN</em>表中, <strong>再对</strong><em><strong>OPEN</strong></em><strong>表中的所有节点按其启发函数值大小以升序排序</strong>,转步2。 </li>
+</ul>
+</blockquote>
+<p><strong>用全局择优搜索法解八数码难题（最好优先，实际上是一种深度优先搜索）</strong></p>
+<p><strong>例图：</strong></p>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1412-23-54.png">  </p>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1412-28-42.png">  </p>
+<h3 id="局部择优搜索算法"><a href="#局部择优搜索算法" class="headerlink" title="局部择优搜索算法"></a>局部择优搜索算法</h3><ul>
+<li><strong>局部启发函数h(x)最小，即优选当前节点子节点中与目标节点距离小的节点</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>步1 把初始节点<em>S</em>o放入<em>OPEN</em>表中,计算<em>h</em>(<em>S</em>o)。</li>
+<li> 步2 若<em>OPEN</em>表为空,则搜索失败, 退出。 </li>
+<li> 步3 移出<em>OPEN</em>表中第一个节点N放入CLOSED表中, 并冠以序号<em>n</em>。</li>
+<li> 步4 若目标节点<em>S</em>g=<em>N</em>, 则搜索成功, 结束。 </li>
+<li> 步5 若<em>N</em>不可扩展, 则转步2。</li>
+<li> 步6 扩展<em>N</em>, 计算每个子节点<em>x</em>的函数值<em>h</em>(<em>x</em>), 并将所有子节点配以指向<em>N</em>的返回指针后<strong>按照h(x)升序排序插入到OPEN表已有节点的前面</strong>,转步2。 </li>
+</ul>
+</blockquote>
+<h3 id="加权状态图搜索"><a href="#加权状态图搜索" class="headerlink" title="加权状态图搜索"></a>加权状态图搜索</h3><h4 id="分支界限法（全局代价最小）"><a href="#分支界限法（全局代价最小）" class="headerlink" title="分支界限法（全局代价最小）"></a>分支界限法（全局代价最小）</h4><ul>
+<li>基本思想是：<ul>
+<li>每次从<em>OPEN</em>表中选出**代价函数g(x)**值最小的节点进行考察, 而不管这个节点在搜索树的什么位置上。</li>
+</ul>
+</li>
+<li> 算法与前面的“全局择优法” 仅有引导搜索的函数不同，前者为启发函数<em>h</em>(<em>x</em>)，后者为代价<em>g</em>(<em>x</em>)。</li>
+<li> 但注意：代价值<em>g</em>(<em>x</em>)是从初始节点<em>S</em>o方向计算而来的,而启发函数值<em>h</em>(<em>x</em>)则是朝目标节点方向计算的。</li>
+</ul>
+<blockquote>
+<p> 所谓代价,可以是两点之间的距离、交通费用或所需时间等等</p>
+</blockquote>
+<blockquote>
+<p>通常用<em>g</em>(<em>x</em>)表示从初始节点<em>S</em>o到节点<em>x</em>的代价, 用<em>c</em>(<em>xi</em>,x j*)表示 父节点xi 到 子节点x j 的代价,即边(<em>xi</em>,<em>x</em>j)的代价, 所以</p>
+<ul>
+<li><em>g</em>(<em>x j</em>)＝<em>g</em>(<em>xi</em>)＋<em>c</em>(<em>x i</em>, <em>x j</em>) </li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>循环：</strong></li>
+<li><strong>每次处理Open表第一个节点，如果是目标节点就返回成功</strong></li>
+<li><strong>存下已处理的节点到Closed表</strong></li>
+<li><strong>找出当前节点的子节点，更新节点间关系</strong></li>
+<li><strong>按代价从小到大给选择下一个要处理的节点</strong></li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1415-43-38.png"> </p>
+<h4 id="最近择优法（瞎子爬山，局部代价最小）"><a href="#最近择优法（瞎子爬山，局部代价最小）" class="headerlink" title="最近择优法（瞎子爬山，局部代价最小）"></a>最近择优法（瞎子爬山，局部代价最小）</h4><ul>
+<li>把局部择优法算法中的<em>h</em>(<em>x</em>)换成<em>g</em>(<em>x</em>)就可得最近择优法的算法。 Open从右往前插入如右图</li>
+<li>这里由D计算出B的代价如果少于4，则应该代替Open表中原有的B并把B移动到前面来。这里从D算出来B的代价是3+2+4 &gt;4，所以不代替。</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1415-49-41.png"> </p>
+<h2 id="A算法和A-算法"><a href="#A算法和A-算法" class="headerlink" title="A算法和A*算法"></a>A算法和A*算法</h2><h3 id="估价函数"><a href="#估价函数" class="headerlink" title="估价函数"></a>估价函数</h3><ul>
+<li><em>f</em>(<em>x</em>)＝<em>g</em>(<em>x</em>)＋<em>h</em>(<em>x</em>) </li>
+</ul>
+<ol>
+<li>**代价函数g(x)**表示从起点到达目前节点x的代价函数，一般设置难度小，因为从起点到目前节点x的路径已经求出；</li>
+<li><strong>启发函数h(x</strong>)表示从目前节点到目标节点的距离函数，一般设置难度大，因为从目前节点到目标节点的路径正是我们要搜索的；</li>
+<li><strong>估价函数f(x)是代价函数g(x)和h(x)的折中</strong>。</li>
+</ol>
+<ol>
+<li>代价函数g(x)表示从起点到达目前节点x的代价函数，g(x)越小表示节点x越靠近初始节点，有利于搜索的横向搜索，可提高搜索的完备性，但影响搜索效率；</li>
+<li>启发函数h(x)表示从目前节点到目标节点的距离函数，h(x)越小表示距离目标越近，有利于搜索的纵向搜索，可提高搜索效率，但影响完备性；</li>
+<li>代价函数g(x)=0时，A算法退化成普通的启发式搜索，类似于深度优先；</li>
+<li>启发函数h(x)=0时，A算法退化成普通的加权状态图搜索，类似于广度优先。</li>
+</ol>
+<h3 id="A算法"><a href="#A算法" class="headerlink" title="A算法"></a>A算法</h3><ul>
+<li> <em>A</em> 算法是基于估价函数<em>f</em>(<em>x</em>)的一种加权状态图启发式搜索算法。其具体步骤如下： </li>
+<li>步1 把附有<em>f</em>(<em>S</em>o)的初始节点<em>S</em>o放入OPEN表。</li>
+<li> 步2 若OPEN表为空, 则搜索失败, 退出。 </li>
+<li> 步3 移出OPEN表中第一个节点<em>N</em>放入CLOSED表中, 并冠以顺序编号<em>n</em>。</li>
+<li> 步4 若目标节点<em>S**g</em>=<em>N</em>, 则搜索成功, 结束。 </li>
+<li> 步5 若<em>N</em>不可扩展, 则转步2。 </li>
+<li>步6 扩展<em>N</em>,生成一组附有<em>f</em>(<em>x</em>)的子节点,对这组子节点做如下处理： </li>
+<li> (1)考察是否有已在OPEN表或CLOSED表中存在的节点；若有则再考察其中有无N的先辈节点,若有则删除之；对于其余节点, 也删除之,但由于它们又被第二次生成, 因而需考虑是否修改已经存在于OPEN表或CLOSED表中的这些节点及其后裔的返回指针和<em>f</em>(<em>x</em>)值, 修改原则是“抄<em>f</em>(<em>x</em>)值小的路走”。</li>
+<li>   (2)对其余子节点配上指向<em>N</em>的返回指针后放入OPEN表中, 并对OPEN表按<em>f</em>(<em>x</em>)值以升序排序, 转步2。 </li>
+</ul>
+<h3 id="A-算法（最佳图搜索算法）"><a href="#A-算法（最佳图搜索算法）" class="headerlink" title="A*算法（最佳图搜索算法）"></a>A*算法（最佳图搜索算法）</h3><ul>
+<li>如果对上述A算法再限制其估价函数中的启发函数<em>h</em>(<em>x</em>)满足： 对所有的节点<em>x</em>均有<ul>
+<li>​                    <em>h</em>(<em>x</em>)≤d(<em>x</em>) </li>
+</ul>
+</li>
+<li>其中<strong>d(<em>x</em>)是最优解中从节点<em>x</em>到目标节点的启发函数（即节点x到目标节点的距离函数，最小启发函数值，实际上这个d(x)很难估计准确值）</strong>, <strong>即最佳路径上的实际代价</strong>，则它就称为A<em>算法。理论证明A</em>算法可以保证找到最优解。</li>
+<li>如果h(x)&lt; d(x)到目标状态的实际距离，这种情况下，搜索的点数多，搜索范围大，效率低。但能得到最优解。</li>
+<li>如果h(x)=d(x)，即距离估计h(x)等于最短距离，那么搜索将严格沿着最短路径进行， 此时的搜索效率是最高的。</li>
+<li>如果 h(x)&gt;d(x)，搜索的点数少，搜索范围小效率高，但不保证得到最优解。</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-27-22.png"> </p>
+<h2 id="小结：图的启发式搜索算法"><a href="#小结：图的启发式搜索算法" class="headerlink" title="小结：图的启发式搜索算法"></a>小结：图的启发式搜索算法</h2><ul>
+<li><strong>选择依据：</strong><ul>
+<li><strong>（1）启发函数（距离目标函数，表示与目标的距离）</strong></li>
+<li><strong>（2）代价函数 （表示已经付出代价的函数）</strong></li>
+</ul>
+</li>
+<li><strong>全局vs局部的在本课程状态图搜索中的不同：</strong><ul>
+<li><strong>全局：考虑Open表中所有节点</strong></li>
+<li><strong>局部：只考虑当前节点N的扩展子节点</strong></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>启发函数h(x)</th>
+<th><strong>代价函数</strong>g(x)</th>
+<th>估价函数f(x)=g(x)+h(x)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>全局</strong></td>
+<td><strong>全局择优</strong></td>
+<td><strong>分支界限</strong></td>
+<td><strong>A算法 ，A*算法</strong></td>
+</tr>
+<tr>
+<td><strong>局部</strong></td>
+<td><strong>局部择优</strong></td>
+<td><strong>最近择优</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="与或图"><a href="#与或图" class="headerlink" title="与或图"></a>与或图</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>状态图是与或图中的特例（与或图中的或图）  <ul>
+<li>搜索方式，解图（树）<ul>
+<li>状态图搜索只是简单不断扩展节点，与或图扩展子节点时需要判断初始节点是否可解</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> <img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-41-04.png"></p>
+<ul>
+<li>图中的弧线表示所连边为“与”关系,不带弧线的边为或关系。这个图中既有与关系又有或关系,因此被称为与或图</li>
+</ul>
+<h2 id="与或图搜索"><a href="#与或图搜索" class="headerlink" title="与或图搜索"></a>与或图搜索</h2><ul>
+<li><p><strong>1. 搜索方式,解图(树)</strong></p>
+<ul>
+<li> 整个状态图转换过程已知，搜索问题图的解图（树）。</li>
+<li>  解图（树）不一定是最优解。</li>
+</ul>
+</li>
+<li><p><strong>2. 可解性判别</strong></p>
+<ul>
+<li><strong>（参考右图：黑色节点表示可解）</strong></li>
+</ul>
+</li>
+<li><p> 一个节点的可解性判别准：</p>
+</li>
+<li><p>  (1) 一个节点是可解, 则节点须满足下列条件之一:     -   ① 终止节点是可解节点。（实心点，如t2, t3, t4)    -   ② 一个与节点可解, 当且仅当其子节点全都可解。(如5,2,1)    -   ③ 一个或节点可解, 只要其子节点至少有一个可解。(如4, 3) </p>
+</li>
+<li><p>  (2) 一个节点是不可解, 则节点须满足下列条件之一:     -   ① 非终止节点的端节点是不可解节点。 (空心叶子节点，如A, B)    -   ② 一个与节点不可解, 只要其子节点至少有一个不可解。（图中没有）    -   ③ 一个或节点不可解, 当且仅当其子节点全都不可解。 （图中没有）</p>
+</li>
+<li><p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-46-00.png"> </p>
+</li>
+<li><p><strong>3. 搜索策略</strong></p>
+<ul>
+<li> 与或图搜索也分为 盲目搜索 和 启发式搜索 两大类。</li>
+<li>前者又分为穷举搜索和盲目碰撞搜索。穷举搜索又分为深度优先和广度优先两种基本策略。</li>
+</ul>
+</li>
+<li><p><strong>4.状态变化需递推的穷举搜索算法</strong></p>
+<ul>
+<li> 步1 把初始节点Qo放入<em>OPEN</em>表。 </li>
+<li> 步2 移出<em>OPEN</em>表的第一个节点<em>N</em>放入<em>CLOSED</em>表, 并冠以序号<em>n</em>。 </li>
+<li> 步3 若节点N可扩展, 则做下列工作： </li>
+</ul>
+</li>
+<li><p> (1) 扩展N, 将其子节点配上指向父节点的指针后放入OPEN表。</p>
+</li>
+<li><p>放入尾部是宽度优先，放在前面是深度优先；</p>
+</li>
+<li><p>考虑Open表全部节点是全局算法，只考虑当前节点子节点是局部算法</p>
+</li>
+<li><p>  (2)<strong>判断可解性</strong>：考察这些子节点中是否有终止节点（从而有点类似深度优先）。 若有, 则标记它们为可解节点, 并将它们也放入CLOSED表, 然后由它们的可解反向推断其先辈节点的可解性, 并对其中的可解节点进行标记。 如果初始节点也被标记为可解节点, 则搜索成功,结束。</p>
+</li>
+<li><p> (3)删去OPEN表中那些具有可解先辈的节点(因为其先辈节点已经可解, 故已无再考察该节点的必要), 转步2。 </p>
+</li>
+<li><p>  步4 若N不可扩展, 则做下列工作：     -  (1)标记<em>N</em>为不可解节点, 然后由它的不可解反向推断其先辈节点的可解性, 并对其中的不可解节点进行标记。如果初始节点So也被标记为不可解节点, 则搜索失败, 退出。    -  (2)删去OPEN表中那些具有不可解先辈的节点(因为其先辈节点已不可解,故已无再考察这些节点的必要), 转步2。 </p>
+</li>
+</ul>
+<p><strong>穷举搜索算法例子：</strong></p>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-46-00.png"> </p>
+<ul>
+<li>设有与或树如图3-15所示, 其中1号节点为初始节点,<em>t</em>1、<em>t</em>2、<em>t</em>3、<em>t</em>4均为终止节点, A和B是不可解的端节点。 采用广度(优先)搜索策略, 搜索过程如下）： <ul>
+<li>（1）将初始节点1号节点移入Open表，再取出后扩展1号节点并移入Closed表, 得2号和3号节点, 依次放入OPEN表尾部。由于这两个节点都非终止节点, 所以接着扩展2号节点移入Closed表。此时OPEN表中只有3号节点。 </li>
+<li>（2）2号节点扩展后,得4号节点和<em>t</em>1节点。此时OPEN表中依次有3号、4号和<em>t</em>1节点。由于<em>t</em>1是终止节点,故标记它为可解节点, 并将<em>t</em>1从Open表移入CLOSED表, 再判断其先辈节点的可解性,但<em>t</em>1的父节点2是一个与节点, 故仅由t1的可解还不能确定2号节点可解。所以, 就继续搜索。</li>
+<li>(3) 扩展3号节点并移入Closed表,得5号节点和B节点加入到Open表。两者均非终止节点, 所以继续扩展4号节点。 </li>
+<li> (4) 4号节点扩展后得节点<em>A</em>和<em>t</em>2加入到Open表，<em>t</em>2是终止节点,标记为可解节点, 放入CLOSED表。这时其先辈节点4和2也为可解节点, 但1号节点还不能确定。这时从OPEN表中删去节点<em>A</em>,因为其父节点4已经可解。 </li>
+<li> (５) 扩展5号节点并移入Closed表得<em>t</em>3和<em>t</em>4。由于<em>t</em>3和<em>t</em>4都为终止节点(放入CLOSED表), 故可推得节点5、3、1均为可解节点。 搜索成功, 结束。 </li>
+<li> 这时,由CLOSED表便得到由节点1、2、3、4、5和<em>t</em>1、<em>t</em>2、 <em>t</em>3、<em>t</em>4构成的解树，如图3-15 中的粗线所示。</li>
+</ul>
+</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1416-57-12.png"> </li>
+</ul>
+<h2 id="启发式与或树搜索"><a href="#启发式与或树搜索" class="headerlink" title="启发式与或树搜索"></a>启发式与或树搜索</h2><p><strong>（针对图中根节点代价非完全已知，需要不停扩展）</strong></p>
+<ul>
+<li><strong>1. 解树的代价</strong></li>
+<li> <strong>2. 希望树</strong></li>
+<li>希望树的定义： <ul>
+<li>希望树是指搜索过程中最有可能成为最优解树的那棵树。</li>
+<li>与/或树的启发式搜索过程就是不断地选择、修正希望树的过程，在该过程中，希望树是不断变化的。它需要符合以下三个条件：<ol>
+<li>初始结点S0在希望树T</li>
+<li>如果n是具有子结点n1, n2, … , nk的或结点，则n的某个子结点ni在希望树T中的充分必要条件是<br><img src="https://img-blog.csdnimg.cn/20190613062929330.png" alt="在这里插入图片描述"> </li>
+<li>如果n是与结点，则n的全部子结点都在希望树T中。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>3. 与或树的有序搜索过程</strong></li>
+<li> 与或树的有序搜索过程是一个不断选择、修正希望树的过程。如果问题有解, 则经有序搜索将找到最优解树。 </li>
+<li> 其搜索过程如下： </li>
+<li> 步1 把初始节点Qo放入OPEN表中。 </li>
+<li> 步2 求出希望树T, 即根据当前搜索树中节点的代价g求出以Qo为根的希望树T。 </li>
+<li> 步3 依次把OPEN表中T的端节点N选出放入CLOSED表中。 </li>
+<li> 步4 如果节点N是终止节点, 则做下列工作： </li>
+<li>  (1) 标示N为可解节点。 </li>
+<li>  (2) 对T应用可解标记过程, 把N的先辈节点中的可解节点都标记为可解节点。 </li>
+<li>  (3) 若初始节点Qo能被标记为可解节点, 则T就是最优解树,成功退出。 </li>
+<li>  (4) 否则, 从OPEN表中删去具有可解先辈的所有节点</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20190613063108272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img"> </p>
+<p><img src="https://img-blog.csdnimg.cn/20190613063120609.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img">  </p>
+<p><img src="https://img-blog.csdnimg.cn/20190613063931341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img"> <img src="https://img-blog.csdnimg.cn/20190613063944722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N0YXJ0ZXJfX19fXw==,size_16,color_FFFFFF,t_70" alt="img"> </p>
+<h1 id="博弈树"><a href="#博弈树" class="headerlink" title="博弈树"></a>博弈树</h1><p><strong>博弈树是一类特殊的与或图</strong></p>
+<ul>
+<li>节点交替分为Max，Min 2种。Max与Min价值取向正好相反（想象2个人下棋，一个人走一步）。</li>
+<li>不方便区分为与或节点。节点可以看为都是或节点，按照不同代价选择路径。（也有资料说初始节点是或节点，然后与节点、或节点逐层交替出现）</li>
+<li>应用广泛：下棋，故障诊断，风险投资</li>
+</ul>
+<p><strong>基本搜索策略</strong></p>
+<ul>
+<li>极小极大搜索，生成整个搜索树，从底往根倒推</li>
+</ul>
+<p><strong>为了提高搜索速度，用到了剪枝</strong></p>
+<ul>
+<li>α-β剪枝: 剪枝; 搜索和生成同时进行</li>
+</ul>
+<h2 id="博弈问题"><a href="#博弈问题" class="headerlink" title="博弈问题"></a>博弈问题</h2><ul>
+<li>特点：<ul>
+<li>双人对弈：轮流下，一人走一步。</li>
+<li>信息完备：双方看到的信息一样</li>
+<li>零和：双方利益冲突，对一方有利则对另一方不利。一般对节点N取一个估价函数f(N)，一共两类节点：    <ul>
+<li>叫Max的极大节点追求最大化，有选择时肯定选值最大的；</li>
+<li>叫Min的极小节点追求最小化，有选择时肯定选值最小的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>两位选手对垒，轮流走步。这时每一方不仅知道对方过去已经走过的棋步，而且还能估计出对方未来可能的走步。对弈的结果是一方赢（另一方则输），或者双方和局。如象棋，围棋，五子棋，…</li>
+</ul>
+</li>
+<li><strong>完全信息博弈任务原型：</strong><ul>
+<li>给出（或逐步生成）一个博弈树，求出在指定搜索深度（层数）下的最佳路径和相应估价分数。比如下象棋，Max先走一步，Min再走一步，再轮到Max走，这时Max遇到的各个局面可以估分，再倒推回去Max的第一步应该选择走哪步最佳</li>
+</ul>
+</li>
+<li>采用剪枝的方法加快极小极大搜索方法的速度，最主要的是α-β剪枝</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1916-34-57.png"> </p>
+<p><strong>不完全信息博弈</strong></p>
+<ul>
+<li>不完全信息博弈<ul>
+<li>大部分纸牌游戏（如斗地主、拖拉机）</li>
+<li>大部分即时策略游戏（如红警、星际、帝国）<ul>
+<li>需要探路</li>
+<li>游戏还受手速（APM）等影响</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>博弈问题常常不能简单穷举，如中国象棋</strong></p>
+<ul>
+<li>一盘棋平均走50步，总状态数约为10的161次方。</li>
+<li>假设1毫微秒走一步，约需10的145次方年。</li>
+<li>结论：不可能穷举。</li>
+</ul>
+<h2 id="极小极大搜索方法"><a href="#极小极大搜索方法" class="headerlink" title="极小极大搜索方法"></a>极小极大搜索方法</h2><ul>
+<li><p>极小极大搜索方法是博弈树搜索的基本方法 。</p>
+</li>
+<li><p>首先假定，有一个评价函数可以对所有的棋局进行评估。当评价函数值大于0时，表示棋局对我方有利，对对方不利。当评价函数小于0时，表示棋局对我方不利，对对方有利。</p>
+</li>
+<li><p>方法：</p>
+<ul>
+<li>当轮到我方走棋时，首先按照一定的搜索深度生成出给定深度d以内的所有状态，计算所有叶节点的评价函数值。</li>
+<li>然后从d-1层节点开始逆向计算：对于我方要走的节点（用MAX标记，称为极大节点）取其子节点中的最大值为该节点的值（因为我方总是选择对我方有利的棋）。<ul>
+<li>补充注意：生成了深度d以内的整棵树</li>
+</ul>
+</li>
+<li>对于对方要走的节点（用MIN标记，称为极小节点）取其子节点中的最小值为该节点的值（对方总是选择对我方不利的棋）。</li>
+<li>一直到计算出根节点的值为止。获得根节点取值的那一分枝，即为所选择的最佳走步。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1916-51-23.png"></p>
+<ul>
+<li>因此，极小极大过程是一种假定对手每次回应都正确的情况下，如何从中找出对我方最有利的走步的搜索方法。 </li>
+<li>值得注意的是，不管设定的搜索深度是多少层，经过一次搜索以后，只决定了我方一步棋的走法。等到对方回应一步棋之后，需要在新的棋局下重新进行搜索，来决定下一步棋如何走。</li>
+</ul>
+<h3 id="静态估计函数f（x）"><a href="#静态估计函数f（x）" class="headerlink" title="静态估计函数f（x）"></a>静态估计函数f（x）</h3><ul>
+<li>一般规定有利于MAX的势态，f(p)取正值，有利于MIN的势态，f(p)取负值，势均力敌的势态，f(p)取0值。<ul>
+<li>若f(p)＝＋∞，则表示MAX赢，若f(p)＝－∞，则表示MIN赢。下面的讨论规定：顶节点深度d＝0，MAX代表程序方，MIN代表对手方，MAX先走。</li>
+</ul>
+</li>
+<li>当用端节点的静态估计函数f（p）求倒推值时，两位选手应采取不同的策略，从下往上逐层交替使用极小和极大的选值方法，故称极小极大过程。</li>
+</ul>
+<h3 id="α-β剪枝搜索过程"><a href="#α-β剪枝搜索过程" class="headerlink" title="α-β剪枝搜索过程"></a>α-β剪枝搜索过程</h3><ul>
+<li>能否在搜索深度不变的情况下，利用已有的搜索信息减少生成的节点数呢？ <ul>
+<li>MIN-MAX过程是把搜索树的生成和格局估值这两个过程分开来进行，即先生成全部搜索树，然后再进行端节点静态估值和倒推值计算，这显然会导致低效率。</li>
+</ul>
+</li>
+<li>实际上<strong>把生成和倒推估值结合起来进行，再根据一定的条件判定，有可能尽早修剪掉一些无用的分枝，同样可获得类似的效果，这就是α-β过程的基本思想</strong>。<ul>
+<li>注意： α-β剪枝搜索和生成扩展子节点是同步的。其得到的最优解结果与Min-Max过程一致</li>
+</ul>
+</li>
+<li>Min-Max过程和α-β剪枝搜索的结果都受生成/搜索策略顺序有关（比如选择广度优先或者深度优先，结果可能不一样） </li>
+</ul>
+<p><strong>例子</strong></p>
+<ul>
+<li>左边为原搜索树，右边为α-β剪枝搜索<ul>
+<li>极小值节点I的N子树被剪枝了（ α剪枝）</li>
+<li>极大值节点G的L子树被剪枝了（β剪枝）</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-02-42.png"> </p>
+<ul>
+<li><p>定义：</p>
+<ul>
+<li>Max节点的下界为，即Max确保能获得的最小得益。初始化为-inf。</li>
+<li>Min节点的上界为，即Min付出的上界代价保障。初始化为+inf。</li>
+<li>对于节点N的估计函数值f(N)，初始化α =-inf ≤ f(N) ≤ β=+inf</li>
+<li>若 α ≤ β则N有解。若 α &gt; β 则N无解，该节点N的其他未访问子树会被剪枝</li>
+<li>如图中节点I，从左子树DBE可以获得下界=3，并传送到右边的极小节点I，此时I的子节点M给了个上界=1。所以=3&gt; =1，下界大于上界 ，无解。搜索的目标就是确定尽可能紧的取值区间[α, β]</li>
+</ul>
+</li>
+<li><p> <img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-10-31.png"> </p>
+</li>
+<li><p>理解：</p>
+<ul>
+<li>极大节点N，从一个子树获得的α值和β值，可以传送给其子节点</li>
+<li>极大节点N 的α值只可能越改越大，否则极大节点N可以还选择原有α值</li>
+<li>极小节点M的β值只可能越改越小，否则极小节点M可以还选择原有β值</li>
+<li>从单边子节点往父节点推，极大值父节点只更改α值，极小值父节点只更改β值。</li>
+</ul>
+</li>
+</ul>
+<p><strong>α剪枝（发生在极小层节点，如图中的节点I， α 值来自父辈等祖先节点）</strong></p>
+<ul>
+<li>（1）α剪枝：若任一极小值层节点的β值小于或等于它任一先辈极大值层节点的α值，即α（先辈层）≥β（后继层），则可中止该极小值层中这个MIN节点以下的搜索过程。这个MIN节点最终的倒推值就确定为这个β值。</li>
+<li>从一个子树获得的极大节点的α值，可以传送给该节点的其他子树，从而选择α剪枝机会（课本说法，和“先辈”节点α值比较，是和所有先辈节点比较，而不是仅仅和父节点比较）。</li>
+<li>从单边子节点往父节点推，极大值父节点只更改α值，极小值父节点只更改β值。</li>
+</ul>
+<p><strong>β剪枝（发生在极大层节点，如图中的节点G ，β 值来自父辈等祖先节点）</strong></p>
+<ul>
+<li>（2）β剪枝：若任一极大值层节点的α值大于或等于它任一先辈极小值层节点的β值，即α（后继层）≥β（先辈层），则可以中止该极大值层中这个MAX节点以下的搜索过程。这个MAX节点的最终倒推值就确定为这个α值。</li>
+<li>从一个子树获得的极小节点的β值，可以传送给该节点的其他子节点，从而选择β剪枝机会（课本说法，和“先辈”节点β值比较，是和所有先辈节点比较，而不是仅仅和父节点比较）。</li>
+<li>从单边子节点往父节点推，极大值父节点只更改α值，极小值父节点只更改β值。</li>
+</ul>
+<blockquote>
+<p>整体过程：</p>
+</blockquote>
+<ul>
+<li><p>α - β搜索过程步骤1</p>
+<ul>
+<li>从根节点开始，初始化根节点的 α=-∞，β=∞，向左边的子节点展开。到D节点时，得到D的值为3（实际为估计而得），返回B节点，由于B节点是Min节点，所以更新B节点的β值为min(∞, 3)=3，如下图：</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-24-21.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤2</p>
+<ul>
+<li>接下来从B到E，E的值是6，再从E返回MIN节点B，min(3,6)仍为3。从B返回根节点A，A是 Max 节点，更新A的α值为 max(-∞, 3[B的β值])=3，如下图：</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-19.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤3</p>
+<ul>
+<li>接下来从根节点往右深入，把根节点的 β=∞, α=3 依次传给C、F、I，从 I 深入 M再返回时，I 是 MIN节点，更新 I 的 β = min(∞, 1) = 1。留意到此时 I 的 α=3 ＞ β，所以无需再探索 I 的剩余子节点，把未探索的子节点剪掉，如图3：</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-191.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤4</p>
+<ul>
+<li>从节点 I 返回到F，F 的 α 值仍为 max(3, 1)=3不变。从F到J再返回，更新 F 的 α = max(3, 5) = 5。从 F 返回 C，更新 C 的 β = min(∞, 5) = 5，如图4： </li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-197-27-41.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤5</p>
+<ul>
+<li>从 C 到 G，把 C 的 β=5, α=3 传给 G，从 G 到 K 再返回 G，更新 G 的 α = max(3, 6) = 6。注意到 G 的 α=6 ＞β，把 G 的其余子节点剪掉，如图5： </li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-28.png"> </li>
+</ul>
+</li>
+<li><p>α - β搜索过程步骤6</p>
+<ul>
+<li>从 G 返回 C，C 的 β = min(5, 6) = 5 不变。从 C 到 H 然后返回，C 的 β = min(5, 4) = 4。最后，从 C 返回根节点 A，A 是 Max 节点，A 的 α = max(3, 4[C的β值]) = 4，如图6。 实际上可以更精确，极大节点A的两个子节点范围(-inf, 3]和[3, 4]都确定了，所以此时A的α = β=4</li>
+<li><img src="/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/2021-12-1917-29-31.png"> </li>
+</ul>
+</li>
+</ul>
+<p>视频：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1a7411K7g1/?spm_id_from=333.788.recommend_more_video.1">https://www.bilibili.com/video/BV1a7411K7g1/?spm_id_from=333.788.recommend_more_video.1</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">算法设计与分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-07 16:10:39" itemprop="dateCreated datePublished" datetime="2021-12-07T16:10:39+08:00">2021-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-13 11:54:00" itemprop="dateModified" datetime="2022-01-13T11:54:00+08:00">2022-01-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="排序算法回顾"><a href="#排序算法回顾" class="headerlink" title="排序算法回顾"></a>排序算法回顾</h1><table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>(worst) time</th>
+<th>(best) time</th>
+<th>(avg) time</th>
+<th>method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MergeSort</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>divide &amp; conquer</td>
+</tr>
+<tr>
+<td>QuickSort</td>
+<td>n<sup>2</sup></td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>divide &amp; conquer</td>
+</tr>
+<tr>
+<td>InsertSort</td>
+<td>n<sup>2</sup></td>
+<td>n</td>
+<td>n<sup>2</sup></td>
+<td>insertion</td>
+</tr>
+<tr>
+<td>SelectSort</td>
+<td>n<sup>2</sup></td>
+<td>n<sup>2</sup></td>
+<td>n<sup>2</sup></td>
+<td>selection</td>
+</tr>
+<tr>
+<td>BubbleSort</td>
+<td>n<sup>2</sup></td>
+<td>n</td>
+<td>n<sup>2</sup></td>
+<td>swapping</td>
+</tr>
+<tr>
+<td>HeapSort</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>swapping</td>
+</tr>
+</tbody></table>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><ul>
+<li>a heap can be given by an array H[0..n-1] and an integer t. </li>
+<li>The children of node H[h] are H[2h+1] and H[2h+2].</li>
+<li>The parent of node H[h] is H[(h-1)/2]</li>
+</ul>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-07-16-23-32.png" alt="2021-12-07-16-23-32.png">  </p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/image-20211031131444192.png" alt="image-20211031131444192.png">  </p>
+<ul>
+<li>The height of a heap of n nodes is ≤ log<sub>2</sub> n .<ul>
+<li>  <img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-07-16-21-29.png" alt="2021-12-07-16-21-29.png"> </li>
+<li>1 + 2 + 22 + 23 + ‧‧‧ + 2h-1 = 2h - 1</li>
+<li>So n ≥ 2h – 1 + 1 = 2h, and h ≤ log<sub>2</sub> n </li>
+</ul>
+</li>
+</ul>
+<h4 id="FixHeap"><a href="#FixHeap" class="headerlink" title="FixHeap()"></a>FixHeap()</h4><ul>
+<li>FixHeap(H, t, i) takes <strong>time O(log n).</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h ≠ root &amp; h &gt; its parent) </span><br><span class="line">      while (h ≠ root &amp; h &gt; its parent) \\插入到数组最后 </span><br><span class="line">         swap h and its parent;</span><br><span class="line">    else </span><br><span class="line">      while (h ≠ leaf &amp; h &lt; its larger child)</span><br><span class="line">         swap h and its larger child.</span><br><span class="line">         </span><br><span class="line">        </span><br><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h &gt; 0 &amp; H[h] &gt; H[⌊(h-1)/2⌋]) </span><br><span class="line">      while (h &gt; 0 &amp; H[h] &gt; H[⌊(h-1)/2⌋]) </span><br><span class="line">         H[h] ↔ H[⌊(h-1)/2⌋];</span><br><span class="line">         h = ⌊(h-1)/2⌋</span><br><span class="line">    else</span><br><span class="line">      while (2h+1 ≤ t)</span><br><span class="line">         H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">         if (H[h] &lt; H[g])</span><br><span class="line">            H[h] ↔ H[g];</span><br><span class="line">            h = g; </span><br><span class="line">         else h = t.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// In HeapSort, only FixHeapD is needed</span><br><span class="line">FixHeapD(H, t, i)   // FixHeapD only moves down along the root/leaf path. </span><br><span class="line">1. h = i; </span><br><span class="line">2. while (2h+1 ≤ t)</span><br><span class="line">       H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">       if (H[h] &lt; H[g])</span><br><span class="line">          H[h] ↔ H[g];</span><br><span class="line">          h = g; </span><br><span class="line">       else h = t.</span><br></pre></td></tr></table></figure>
+
+<h4 id="SortHeap"><a href="#SortHeap" class="headerlink" title="SortHeap()"></a>SortHeap()</h4><ul>
+<li>Sorting a heap takes time O(n log n).</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">H[0..n-1] is a heap</span><br><span class="line">1. t = n-1; </span><br><span class="line">2. while (t &gt; 0) </span><br><span class="line">      H[1] ↔ H[t];</span><br><span class="line">      t = t – 1; </span><br><span class="line">      FixHeap(H, t, 0).</span><br></pre></td></tr></table></figure>
+
+<h4 id="MakeHeap"><a href="#MakeHeap" class="headerlink" title="MakeHeap()"></a>MakeHeap()</h4><ul>
+<li>time of MakeHeap: O(n log n)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (i = ⌊(n-2)/2⌋; i ≥ 0; i--)</span><br><span class="line">      FixHeapD(H, n-1, i).</span><br></pre></td></tr></table></figure>
+
+<h4 id="Main"><a href="#Main" class="headerlink" title="Main()"></a>Main()</h4><ul>
+<li><strong>HeapSort sorts an array of size n in time O(n log n).</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">FixHeapD(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. while (2h+1 ≤ t)</span><br><span class="line">       H[g] = max&#123;H[2h+1], H[2h+2]&#125;;</span><br><span class="line">       if (H[h] &lt; H[g])</span><br><span class="line">          H[h] ↔ H[g];</span><br><span class="line">          h = g; </span><br><span class="line">       else h = t.</span><br><span class="line"></span><br><span class="line">MakeHeap(H[0..n-1])</span><br><span class="line">\\ make array H[0..n-1] a heap</span><br><span class="line">1. for (i = ⌊(n-2)/2⌋; i ≥ 0; i--)</span><br><span class="line">      FixHeapD(H, n-1, i).</span><br><span class="line"></span><br><span class="line">SortHeap(H[0..n-1])</span><br><span class="line">\\ H[0..n-1] is a heap</span><br><span class="line">1. t = n-1; </span><br><span class="line">2. while (t &gt; 0) </span><br><span class="line">      H[0] ↔ H[t];</span><br><span class="line">      t = t – 1; </span><br><span class="line">      FixHeapD(H, t, 0).</span><br><span class="line"></span><br><span class="line">main HeapSort(H[0..n-1])</span><br><span class="line">\\ sort the array H[0..n-1]</span><br><span class="line">1. MakeHeap(H[0..n-1]);</span><br><span class="line">2. SortHeap(H[0..n-1]). </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="算法动图演示"><a href="#算法动图演示" class="headerlink" title="算法动图演示"></a>算法动图演示</h4><p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/849589-20171015231308699-356134237.gif" alt="849589-20171015231308699-356134237.gif"> ‘ ``</p>
+<h3 id="线性时间排序（Sorting-in-Linear-Time）"><a href="#线性时间排序（Sorting-in-Linear-Time）" class="headerlink" title="线性时间排序（Sorting in Linear Time）"></a>线性时间排序（Sorting in Linear Time）</h3><h4 id="计数排序（Courting-Sort）"><a href="#计数排序（Courting-Sort）" class="headerlink" title="计数排序（Courting Sort）"></a>计数排序（Courting Sort）</h4><blockquote>
+<ul>
+<li> `〔筆畫〕Algorithm. CountingSort</li>
+<li>Step 1. for each value v, count the number of copies of v in A[0..n-1]</li>
+<li>Step 2. for each A[i], count the number of elements in A[0..n-1] that are not larger than A[i] </li>
+<li>Step 3. use the information in step 2 to output a sorted list. </li>
+<li>计数排序的思想是：<ul>
+<li>在待排序序列中，如果我们能统计出有多少元素小于或等于某一个元素，我们也就知道了该元素的正确位置。</li>
+<li>例如，对于待排序序列{2,5,3,0,2,3,0,3}，我们统计出有8个元素小于等于5（包括5自己），那么5这个元素就应该被排序到第8位</li>
+<li>算法的步骤如下：<ul>
+<li>（1）找出待排序的数组中最大和最小的元素</li>
+<li>（2）统计数组中每个值为i的元素出现的次数，存入数组C的第i项</li>
+<li>（3）对所有的计数累加（从C中的第一个元素开始，每一项和前一项相加）</li>
+<li>（4）反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><strong>伪代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Algorithm. CountingSort(A[0..n-1])</span><br><span class="line"></span><br><span class="line">1. for (h=0; h&lt;k; h++) C[h] = 0;</span><br><span class="line">    for (i=0; i&lt;n; i++)</span><br><span class="line">       C[A[i]] = C[A[i]] + 1; </span><br><span class="line">2. for (h=1; h&lt;k; h++)</span><br><span class="line">       C[i] = C[i-1] + C[i]; </span><br><span class="line">3. for (i=n-1; i&gt;=0; i--)</span><br><span class="line">       C[A[i]] = C[A[i]] – 1.</span><br><span class="line">       B[C[A[i]]] = A[i];</span><br><span class="line">       </span><br><span class="line">其中数组A[1~n]是待排序数组；数组B[1~n]用来存放已排好序的元素。C[0~k]用来存放上面所说的统计数（具体的说C[i]就表示在数组A中，小于或等于i的元素的总个数）</span><br><span class="line"></span><br><span class="line">Algorithm. CountingSort</span><br><span class="line"></span><br><span class="line">- Step 1. for each value v, count the number of copies of v in A[0..n-1]</span><br><span class="line">- Step 2. for each A[i], count the number of elements in A[0..n-1] that are not larger than A[i] </span><br><span class="line">- Step 3. use the information in step 2 to output a sorted list. </span><br></pre></td></tr></table></figure>
+
+<p><strong>模拟计数排序过程：</strong></p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/1.png">  </p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/countingSort.gif"> </p>
+<h4 id="基数排序（Radix-Sort）"><a href="#基数排序（Radix-Sort）" class="headerlink" title="基数排序（Radix Sort）"></a>基数排序（Radix Sort）</h4><p><strong>基本思想</strong></p>
+<p>原理是将整数按<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E4%BD%8D%E6%95%B0&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:126116878%7D">位数</a>切割成不同的数字，然后按每个位数分别比较。基数排序的方式可以采用LSD（Least significant digital）或MSD（Most significant digital），LSD的排序方式由键值的最右边开始，而MSD则相反，由键值的最左边开始。</p>
+<ul>
+<li><strong>MSD</strong>：先从高位开始进行排序，在每个关键字上，可采用计数排序</li>
+<li><strong>LSD</strong>：先从低位开始进行排序，在每个关键字上，可采用桶排序</li>
+</ul>
+<p><strong>实现逻辑</strong></p>
+<blockquote>
+<p>① 将所有待比较数值（正整数）统一为同样的数位长度，数位较短的数前面补零。<br>② 从最低位开始，依次进行一次排序。<br>③ 这样从最低位排序一直到最高位排序完成以后, 数列就变成一个有序序列。</p>
+</blockquote>
+<p><strong>复杂度分析</strong></p>
+<blockquote>
+<p>时间复杂度：O(k*N)<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:126116878%7D">空间复杂度</a>：O(k + N)<br>稳定性：稳定</p>
+</blockquote>
+<p><strong>算法动画演示</strong></p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/radixSort.gif"> </p>
+<h4 id="桶排序（Bucket-sort）"><a href="#桶排序（Bucket-sort）" class="headerlink" title="桶排序（Bucket sort）"></a>桶排序（Bucket sort）</h4><p>桶排序是计数排序的升级版。</p>
+<p>桶排序的思想近乎彻底的<strong>分治思想</strong>。</p>
+<p><strong>step1:</strong> 桶排序假设待排序的一组数均匀独立的分布在一个范围中，并将这一范围划分成几个子范围（桶）。</p>
+<p><strong>step2:</strong> 然后基于某种映射函数f ，将待排序列的关键字 k 映射到第i个桶中 (即桶数组B 的下标i) ，那么该关键字k 就作为 B[i]中的元素 (每个桶B[i]都是一组大小为N/M 的序列 )。</p>
+<p><strong>step3:</strong> 接着将各个桶中的数据有序的合并起来 : 对每个桶B[i] 中的所有元素进行比较排序 (可以使用快排)。然后依次枚举输出 B[0]….B[M] 中的全部内容即是一个有序序列。</p>
+<blockquote>
+<p>补充： 映射函数一般是 f = array[i] / k; k^2 = n; n是所有元素个数</p>
+</blockquote>
+<p><strong>它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。</strong>为了使桶排序更加高效，我们需要做到这两点：</p>
+<ol>
+<li>在额外空间充足的情况下，尽量增大桶的数量</li>
+<li>使用的映射函数能够将输入的 N 个数据均匀的分配到 K 个桶中</li>
+</ol>
+<p>同时，对于桶中元素的排序，选择何种比较排序算法对于性能的影响至关重要。</p>
+<p><strong>1. 什么时候最快</strong></p>
+<p>当输入的数据可以均匀的分配到每一个桶中。</p>
+<p><strong>2. 什么时候最慢</strong></p>
+<p>当输入的数据被分配到了同一个桶中。</p>
+<p><strong>示意图</strong>1</p>
+<blockquote>
+<p>元素分布在桶中</p>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/Bucket_sort_1.svg_.png"> </p>
+<blockquote>
+<p>元素在每个桶中的排序</p>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/Bucket_sort_2.svg_.png"> </p>
+<p><strong>示意图2</strong></p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/v2-ff4cdccdb1ff6b90ecdb3fc4d361f725_r.jpg"> </p>
+<p><strong>复杂度分析</strong></p>
+<blockquote>
+<p>平均时间复杂度：O(n + k)<br>最佳时间复杂度：O(n + k)<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%9C%80%E5%B7%AE%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:125737294%7D">最差时间复杂度</a>：O(n ^ 2)<br>空间复杂度：O(n * k)<br>稳定性：稳定</p>
+</blockquote>
+<h4 id="上述三种排序算法小结："><a href="#上述三种排序算法小结：" class="headerlink" title="上述三种排序算法小结："></a>上述三种排序算法小结：</h4><p>基数排序与计数排序、桶排序这三种排序算法都利用了桶的概念，但对桶的使用方法上有明显差异：</p>
+<ul>
+<li>基数排序：根据键值的每位数字来分配桶；</li>
+<li>计数排序：每个桶只存储单一键值；</li>
+<li>桶排序：每个桶存储一定范围的数值；</li>
+</ul>
+<p>基数排序不是直接根据元素整体的大小进行元素比较，而是将原始列表元素分成多个部分，对每一部分按一定的规则进行排序，进而形成最终的有序列表。</p>
+<h1 id="图论部分算法"><a href="#图论部分算法" class="headerlink" title="图论部分算法"></a>图论部分算法</h1><h2 id="一些容易忘记的概念"><a href="#一些容易忘记的概念" class="headerlink" title="一些容易忘记的概念"></a>一些容易忘记的概念</h2><p><strong>连通</strong></p>
+<ul>
+<li>An undirected graph is connected if every pair of vertices is connected by a path. <ul>
+<li>如果每一对顶点都由一条路径连接，则无向图是连通的。</li>
+</ul>
+</li>
+</ul>
+<p><strong>森林</strong></p>
+<ul>
+<li>A forest is an acyclic graph (i.e., a graph without simple cycles). A tree is a connected acyclic graph. A tree of n vertices has n-1 edges. <ul>
+<li>森林是一个无循环图(即没有简单循环的图)。树是一个连通的无环图。有n个顶点的树有n-1条边。</li>
+</ul>
+</li>
+</ul>
+<p><strong>路径</strong></p>
+<ul>
+<li>A path P(v0, vk) from a vertex v0 to a vertex vk is a sequence {v0, v1, v2, …, vk} of vertices, where [vi-1, vi] are edges in G for i = 1, 2,…, k. The path P(v0, vk) is a cycle if v0 = vk. The path P(v0, vk) is simple if all vertices are distinct. The length of a path is defined as the number of edges in the <ul>
+<li>从顶点v0到顶点vk的路径P(v0, vk)是一个顶点序列{v0, v1, v2, vk}，其中[vi-1, vi]是G中的边(i = 1,2, k)。如果v0 = vk，路径P(v0, vk)是一个循环。如果所有顶点都是不同的，路径P(v0, vk)就很简单。路径的长度定义为路径中边的个数</li>
+</ul>
+</li>
+</ul>
+<p><strong>二分图（bipartite）</strong></p>
+<ul>
+<li>A graph G = (V, E) is bipartite if its vertex set V can be partitioned into two disjoint subsets V = R<img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAZCAYAAABZ5IzrAAAA90lEQVRIS+3VIUtDURiH8d8wCGITwW4aKJgsJjEMRMM+hMjQaDLJqiwPTJpWFhasfgOLn2AzGRQMMrNcOMIQ9d29MBlybj2H83/O877vuTVz9tXmjEcGiiryLwy18Ix+cNtF3OAIb5GZz/Uqhq4xwkUQspxAVvGSgb4xkA3lHvppMLp4xXkwOStpuopeGs9yys6wg2YQsose1qaFKfZVeYfW8YBNDH8Ju8UjTmYNVJx/iT000qv9NbONY2zh6S+AFnCFfXRwh3fUk5ENHOK+DEzVkk1mHOAU21hKJRokg1P/LiYPrNJDZS9dan8GinRlQ9lQZCBa/wApHTMa0RPaKgAAAABJRU5ErkJggg==" alt="img">B, R<img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAZCAYAAAAv3j5gAAAA2klEQVRIS+3Uv0qCURjH8Y9Liy1Cjl6AU1NeQ4SjczQFIg11Be1OLq01CtbgDXgJ0Q2IObgZDREuBnHiFSSINx7B6ZzlHDh/vud8nx+nYk+tsieODAqb3lVdFR20kMYzjPHy+0a7gE7xgAUm+EQTbYzQxWoDjILOMMRl0W8/oIEnvCOt+0qTEdAhpujh8Y+i1fCMPu6ioHNc4aQkGRe4xnEUNCh03JSAksI5DrCOqLsvDrgtASXFHzjCWwSUkvaK/4LqWGZQKktWFw5D6AePpC6DfgxkdaEgpE3f90o0Gph66HgAAAAASUVORK5CYII=" alt="img"> B = <img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAZCAYAAADuWXTMAAABZUlEQVQ4T93UP0iVURjH8c+VcpFK1CHcaisKHNVNByNI98YgkFoaajGIILFwbQtJEaKgyH/VUlv2d7tLtDVZo0ZBDorGE88b7325Q3CH4B544eWc53vO7/d7DqemhVFrgdVm8FEM4wg28Abb6EI3vkZWVc89uIuzWMcmjuEkpjGGT5iqwn0JPMdN/Cp14jjeYhfxv1OFX+AjbjVp3xVMppJ5xPdX9iDu4zT2KvA5zGUGB/EyrewXnmfwA7MVcACvMIH3ufYOl1Ev4Id4hGcluB8fcA2PS/MhOeqWC/gBnmA1i6Ilr/EUtytqFrEUtQV8I/1HWB2xa4ZzoUl4dZzH5wKOPkaLTuAOwuuZoiWlDYYy2KhvuCTh5RQOZbJblVN7EWFdzYMa4HGs5cKlvJYFP4J7WEhlf+YL2Z3hARcxioC/4Xv29CeuY6Wspny348JHcYwDaeFwKvjS7NFos8fgn97F/+f5NyvPRhqyABylAAAAAElFTkSuQmCC" alt="img">, such that every edge in G has one end in R and one end in B. In other words, the graph is 2-colorable<ul>
+<li>图G = (V, E)属于二分图，如果它的顶点集合V可以分割成两个不相交的子集V= R, R B , 这样每条边在G R和一端一端。换句话说,图为2-colorable</li>
+<li><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-08-15-28-26.png"> </li>
+</ul>
+</li>
+</ul>
+<p><strong>连通分量</strong></p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E5%90%91%E5%9B%BE/1680427">无向图</a>G的极大连通子图称为G的连通分量( Connected Component)。</p>
+<p>任何<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9E%E9%80%9A%E5%9B%BE/6460995">连通图</a>的连通分量只有一个，即是其自身，非连通的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E5%90%91%E5%9B%BE/1680427">无向图</a>有多个连通分量。</p>
+<ul>
+<li>Let G be an undirected graph. A connected component (CC) of G is a maximal subgraph that is connected. <ul>
+<li>设G是一个无向图。G的连通分量(CC)是一个极大的连通子图。</li>
+</ul>
+</li>
+</ul>
+<p><strong>强连通分量</strong></p>
+<p>在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%89%E5%90%91%E5%9B%BE/1852743">有向图</a>G中，如果两个顶点vi,vj间（vi&gt;vj）有一条从vi到vj的有向路径，同时还有一条从vj到vi的有向路径，则称两个顶点<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BC%BA%E8%BF%9E%E9%80%9A/1131406">强连通</a>(strongly connected)。</p>
+<p>如果有向图G的每两个顶点都强连通，称G是一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%9B%BE/6769617">强连通图</a>。</p>
+<p>有向图的极大强连通<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%90%E5%9B%BE/8737707">子图</a>，称为强连通分量。</p>
+<ul>
+<li>Let G be a directed graph. Two vertices v and w in G are in the same strongly connected component (scc) if in the graph G, there exist a (directed) path from v to w and a (directed) path from w to v.<ul>
+<li>设G是一个有向图。如果在图G中存在一条从v到w的(有向)路径和一条从w到v的(有向)路径，则图G中的两个顶点v和w在同一个强连通分量(scc)中。</li>
+</ul>
+</li>
+</ul>
+<h2 id="图的表示方法"><a href="#图的表示方法" class="headerlink" title="图的表示方法"></a>图的表示方法</h2><blockquote>
+<p>Graphs can be given by adjacency matrix or adjacency list. </p>
+</blockquote>
+<ul>
+<li><p>The adjacency matrix of a graph has value ai,j = 1 if vertices i and j share an edge; 0 otherwise. For a weighted graph, ai,j = wi,j, the weight of the edge. </p>
+<ul>
+<li>如果顶点i和j共用一条边，则图的邻接矩阵值为ai,j = 1;0。对于加权图，ai,j = wi,j，是边的权值。</li>
+</ul>
+</li>
+<li><p>The adjacency list of a graph G = (V,E) is an array Adj[1..|V|] of lists, where Adj[v] is a list of all vertices adjacent to vertex v. </p>
+<ul>
+<li>图G = (V,E)的邻接表是一个数组Adj[1..|V|]的列表，其中Adj[V]是与顶点V相邻的所有顶点的列表。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-08-15-15-25.png"> </p>
+<ul>
+<li><p>The adjacency matrix of a directed graph has value ai,j = 1 if [i, j] is an arc in the graph; 0 otherwise. For a weighted graph, ai,j = wi,j is the weight of the arc [i, j]. </p>
+<ul>
+<li>如果[i, j]是图中的弧，则有向图的邻接矩阵的值为ai,j = 1;0。对于加权图，ai,j = wi,j为弧[i, j]的权值。</li>
+</ul>
+</li>
+<li><p>The adjacency list of a directed graph G = (V,E) is an array Adj[1..|V|] of lists, where Adj[v] is a list of all arcs form v. </p>
+<ul>
+<li>有向图G = (V,E)的邻接表是一个数组Adj[1..]|V|]的列表，其中Adj[V]是所有弧形成V的列表</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-086-03-05.png"> </p>
+<h2 id="图的遍历（Traversing-a-graph）"><a href="#图的遍历（Traversing-a-graph）" class="headerlink" title="图的遍历（Traversing a graph）"></a>图的遍历（Traversing a graph）</h2><h3 id="广度优先遍历（BFS）"><a href="#广度优先遍历（BFS）" class="headerlink" title="广度优先遍历（BFS）"></a>广度优先遍历（BFS）</h3><ul>
+<li>Breadth-First-Search (BFS). Starting from a vertex s, traverse the graph vertices “level by level.”<ul>
+<li>广度优先搜索(BFS)。从顶点s开始，逐层遍历图顶点。</li>
+</ul>
+</li>
+</ul>
+<p><strong>伪代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BFS(G, s)  \\ Q is a queue</span><br><span class="line">1. for (each vertex v) color[v] = white;</span><br><span class="line">2. color[s] = gray; </span><br><span class="line">3. enqueue(Q, s); </span><br><span class="line">4. while (Q is not empty)</span><br><span class="line">      w = dequeue(Q);</span><br><span class="line">      for (each edge [w, v])</span><br><span class="line">        if (color[v] == white) </span><br><span class="line">           color[v] = gray; </span><br><span class="line">           enqueue(Q, s);</span><br><span class="line">      color[w] = black.</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<p><strong>动画展示</strong></p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/20191127135310793.gif"> </p>
+<h3 id="深度优先遍历（DFS）"><a href="#深度优先遍历（DFS）" class="headerlink" title="深度优先遍历（DFS）"></a>深度优先遍历（DFS）</h3><ul>
+<li>Depth-First-Search (DFS). Starting from a vertex s, explore the graph vertices as far as possible before backing tracking<ul>
+<li>深度优先搜索(DFS)。从一个顶点开始，在回溯跟踪之前尽可能地探索图的顶点</li>
+</ul>
+</li>
+</ul>
+<p><strong>伪代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">DFS(v)</span><br><span class="line">1. color[v] = gray; </span><br><span class="line">2. for (each edge [v, w])</span><br><span class="line">        if (color[w] == white) </span><br><span class="line">           DFS(w); </span><br><span class="line">3. color[v] = black.</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line">1. for (each vertex v) </span><br><span class="line">      color[v] = white;</span><br><span class="line">2. for (each vertex v)</span><br><span class="line">       if (color[v] == white) </span><br><span class="line">          DFS(v).   </span><br><span class="line">         </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Running Time = O(m + n): </li>
+<li>DFS(v) is called on each vertex exactly once.</li>
+<li>Charge the time of DFS(v)  to the vertex v, not including the recursive calls DFS(w) in DFS(v).<ul>
+<li>将DFS(v)的时间计费到顶点v，不包括DFS(v)中的递归调用DFS(w)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>动画展示</strong></p>
+<blockquote>
+<p>递归方法：</p>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/20191127135244696.gif"> </p>
+<blockquote>
+<p>非递归，利用了 栈 的思想</p>
+</blockquote>
+<p> <img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2019112716422925.gif"></p>
+<blockquote>
+<p>bfs 和 dfs的非递归遍历比较，可以看出，很相似，只不过一个用的栈一个用的队列</p>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2021-12-0815-37-08.png"> </p>
+<h2 id="DFS和DAG（有向无环图）"><a href="#DFS和DAG（有向无环图）" class="headerlink" title="DFS和DAG（有向无环图）"></a>DFS和DAG（有向无环图）</h2><h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><ul>
+<li>Topological Sorting</li>
+<li>Given a directed graph G, order the vertices of G into an array T[1..n] such that if [T[i], T[j]] is an arc, then i &lt; j, or report no such an order exists.<ul>
+<li>给定有向图G，将G的顶点排序到数组T[1..]n]这样，如果[T[i]， T[j]是一个弧，则i &lt; j，或报告不存在这样的顺序。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>拓扑排序是对DAG的顶点进行排序，使得对每一条有向边(u, v)，均有u（在排序记录中）比v先出现。亦可理解为对某点v而言，只有当v的所有源点均出现了，v才能出现。</li>
+</ul>
+<p>下图给出有向无环图的拓扑排序：</p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144326901-1530781288.png"> </p>
+<p>下图给出的顶点排序不是拓扑排序，因为顶点<code>D</code>的邻接点<code>E</code>比其先出现：</p>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/399159-20151229144340448-1796643731.png"> </p>
+<blockquote>
+<p>DFS判断是否有拓扑排序</p>
+<ul>
+<li>算法思想：</li>
+<li>let [v, w] be an arc in G.</li>
+<li>When we call DFS(v) on v, what is the color of w?<ul>
+<li>当我们对v调用DFS(v)时，w的颜色是什么</li>
+</ul>
+</li>
+<li>If color[w] = black, then w becomes black before v.<ul>
+<li>如果color[w] = black，则w在v之前变为黑色。</li>
+</ul>
+</li>
+<li>If color[w] = white, DFS(v) calls DFS(w), so w becomes black before v.<ul>
+<li>如果color[w] = white, DFS(v)调用DFS(w)，那么w在v之前变成黑色。</li>
+</ul>
+</li>
+<li>If color[w] = gray, then DFS(w) (recursively) calls DFS(v), so there is a path from w to v, which plus the arc [v, w] gives a cycle. So there is no topological order<ul>
+<li>如果color[w] = gray，那么DFS(w)(递归地)调用DFS(v)，所以有一条从w到v的路径，加上弧[v, w]就得到一个循环。所以没有拓扑顺序</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>代码实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">DFS(v)</span><br><span class="line">1. color[v] = gray; </span><br><span class="line">2. for (each arc [v, w])</span><br><span class="line">     if (color[w] == white) DFS(w)</span><br><span class="line">     else if (color[w] == gray)</span><br><span class="line">        Stop (“no topological order”); </span><br><span class="line">3. color[v] = black; T[t] = v; t = t - 1.</span><br><span class="line"></span><br><span class="line">T-Sort() \\ T[1..n] is the output array</span><br><span class="line">1. for (each vertex v) </span><br><span class="line">      color[v] = white;</span><br><span class="line">2. t = n; </span><br><span class="line">3. for (each vertex v)</span><br><span class="line">     if (color[v] == white) DFS(v).   </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>附： 非DFS方法</p>
+</blockquote>
+<p>动画演示：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html">https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html</a></p>
+<h3 id="寻找强连通分量"><a href="#寻找强连通分量" class="headerlink" title="寻找强连通分量"></a><strong>寻找强连通分量</strong></h3><h2 id="单源最短路径问题（Single-Source-Shortest-Path-Problem）"><a href="#单源最短路径问题（Single-Source-Shortest-Path-Problem）" class="headerlink" title="单源最短路径问题（Single-Source Shortest Path Problem）"></a>单源最短路径问题（Single-Source Shortest Path Problem）</h2><h3 id="Dijikstra算法"><a href="#Dijikstra算法" class="headerlink" title="Dijikstra算法"></a>Dijikstra算法</h3><ul>
+<li><p>Problem. Given a weighted graph G and two vertices s and t in G, find a shortest path from s to t in G</p>
+<ul>
+<li>问题: 给定一个加权图G和G中的两个顶点s和t，找出G中s到t的一条最短路径</li>
+</ul>
+</li>
+<li><p>Dijkstra’s Idea: start from the vertex s, gradually grow a tree rooted at s, by adding the vertex that currently “looks” the best</p>
+<ul>
+<li>Dijkstra的想法:从顶点s开始，通过添加当前看起来最好的顶点，逐渐生长出以s为根的树</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Dijkstra算法：</p>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-1115-52-29.png">  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Dijkstra(G, s, t)                                 complexity</span><br><span class="line">1. for (v=1; v≤n; v++) status[v] = unseen;           〇(n)</span><br><span class="line">2. status[s] = in-tree; dist[s] = 0;				 〇（1）</span><br><span class="line">3. for (each edge [s, w])							 〇（n）</span><br><span class="line">      status[w] = fringe; dad[w] = s;</span><br><span class="line">      dist[w] = wt(s, w);</span><br><span class="line">4. While (there are fringes)</span><br><span class="line">4.1   pick the fringe v of minimum dist[v];</span><br><span class="line">4.2   status[v] = in-tree;						   &lt;=n times</span><br><span class="line">4.3   for (each edge [v, w])						 〇（n）</span><br><span class="line">4.3.1   if (status[w] == unseen)					 〇（1）</span><br><span class="line">             status[w] = fringe; dad[w] = v; 		 〇（n）</span><br><span class="line">             dist[w] = dist[v] + wt(v, w);</span><br><span class="line">4.3.2   else if (status[w] == fringe) &amp; </span><br><span class="line">             (dist[w] &gt; dist[v] + wt(v, w))</span><br><span class="line">             dad[w] = v; </span><br><span class="line">             dist[w] = dist[v] + wt(v, w);</span><br><span class="line">5. The array dad[1..n] gives the path from s.  </span><br><span class="line">												Time= 〇(n^2)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 如果使用 min-heap 来存储 fringe</p>
+</blockquote>
+<ol>
+<li>RetrieveMin(H): find the minimum, and restore the heap; </li>
+<li>Insert(H, v): add a new fringe v and restore the heap;</li>
+<li>Delete(H, v): delete v and restore the heap.</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FixHeap(H, t, i)</span><br><span class="line">1. h = i; </span><br><span class="line">2. if (h&gt;0 &amp; H[h]&lt;H[⌊(h-1)/2⌋]) </span><br><span class="line">      while (h&gt;0 &amp; H[h]&lt;H[⌊(h-1)/2⌋]) </span><br><span class="line">         H[h] ↔ H[⌊(h-1)/2⌋];</span><br><span class="line">         h = ⌊(h-1)/2⌋</span><br><span class="line">    else</span><br><span class="line">      while (2h+1 ≤ t)</span><br><span class="line">         if (2h+1=t or H[2h+1]&lt;H[2h+2])</span><br><span class="line">            g = 2h+1;</span><br><span class="line">         else g = 2h+2;</span><br><span class="line">         if (H[h] &gt; H[g])</span><br><span class="line">            H[h] ↔ H[g];</span><br><span class="line">            h = g; </span><br><span class="line">         else break.                       time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RerieveMin(H, t)</span><br><span class="line">\\ get the minimum &amp; delete</span><br><span class="line">\\ it from the heap H[0..t]</span><br><span class="line">1. min = H[0]; </span><br><span class="line">2. H[0] = H[t]; t = t – 1;</span><br><span class="line">3. FixHeap(H, t, 0);</span><br><span class="line">4. output(min).                            time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Insert(H, t, v)</span><br><span class="line">\\ insert value v into</span><br><span class="line">\\ the heap H[0..t].</span><br><span class="line">1. t = t + 1;</span><br><span class="line">2. H[t] = v; </span><br><span class="line">3. FixHeap(H, t, t).				   	   time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Delete(H, t, i)</span><br><span class="line">\\ delete H[i] from</span><br><span class="line">\\ the heap H[0..t].</span><br><span class="line">1. H[i] = H[t];</span><br><span class="line">2. t = t - 1; </span><br><span class="line">3. FixHeap(H, t, i).                       time = 〇（log n）</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-116-20-00.png">   </p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Dijkstra(G, s, t)</span><br><span class="line">1. for (v=1; v≤n; v++) status[v] = unseen;</span><br><span class="line">2. status[s] = in-tree; dist[s] = 0; H = Φ;</span><br><span class="line">3. for (each edge [s, w])</span><br><span class="line">      status[w] = fringe; dad[w] = s;</span><br><span class="line">      dist[w] = wt(s, w); Insert(H, w); </span><br><span class="line">4. While (there are fringes)</span><br><span class="line">4.1   v = RetrieveMin(H);</span><br><span class="line">4.2   status[v] = in-tree;</span><br><span class="line">4.3   for (each edge [v, w])</span><br><span class="line">4.3.1   if (status[w] == unseen)</span><br><span class="line">             status[w] = fringe; dad[w] = v; </span><br><span class="line">             dist[w] = dist[v] + wt(v, w); </span><br><span class="line">             Insert(H, w);</span><br><span class="line">4.3.2   else if (status[w] == fringe) &amp;    </span><br><span class="line">             Delete(H, w); dad[w] = v;</span><br><span class="line">             dist[w] = dist[v] + wt(v, w);</span><br><span class="line">             Insert(H, v);</span><br><span class="line">5. The array dad[1..n] gives the path from s.         </span><br><span class="line"></span><br><span class="line">Time= 〇（m log n）</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Bellman-Ford算法"><a href="#Bellman-Ford算法" class="headerlink" title="Bellman-Ford算法"></a>Bellman-Ford算法</h3><p>如果图上出现了负的权值，那么使用dijikstra算法就会出错，这里介绍另外一个算法：</p>
+<ul>
+<li>Theorem. If there is no negative cycles in the graph G, then for a vertex v to which a shortest path from s consists of k edges, after at most k iterations of step 3, dist[v] becomes the length of the shortest path from s to v. <ul>
+<li>如果图 G 中不存在负环，则对于从 s 到t的最短路径由 k 条边组成的顶点 v，经过步骤 3 的最多 k 次迭代，dist[v] 变为从 s 到t的最短路径的长度v.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Therefore, n-1 iterations of step 3 will be sufficient to find a shortest path to every vertex from s. <ul>
+<li>因此，第3步的n-1次迭代将足以找到从s到每个顶点的最短路径。</li>
+</ul>
+</li>
+</ul>
+<p>TIps：The problem is meaningful only for directed graphs with no negative cycles.</p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Bellman-Ford(G, s, t)</span><br><span class="line">1. for (v=1; v≤n; v++) dist[v] = ∞;</span><br><span class="line">2. dist[s] = 0;</span><br><span class="line">3. loop n-1 times</span><br><span class="line">      for (each edge [v, w])</span><br><span class="line">         if (dist[w] &gt; dist[v] + wt(v, w))   </span><br><span class="line">                 dad[w] = v;</span><br><span class="line">                 dist[w] = dist[v] + wt(v, w);</span><br><span class="line">4. for (each edge [v, w])</span><br><span class="line">         if (dist[w] &gt; dist[v] + wt(v, w))   </span><br><span class="line">                 stop(“negative cycle”); </span><br><span class="line">5. The array dad[1..n] gives the path from s. </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="多源最短路径问题（All-Pairs-Shortest-Paths-Problem）"><a href="#多源最短路径问题（All-Pairs-Shortest-Paths-Problem）" class="headerlink" title="多源最短路径问题（All-Pairs Shortest Paths Problem）"></a>多源最短路径问题（All-Pairs Shortest Paths Problem）</h2><ul>
+<li>Problem. Given a (possibly negatively) weighted graph G in an adjacency matrix M, find the shortest path from s to t for all vertex pairs (s, t). <ul>
+<li>问题： 给定邻接矩阵M中的一个(可能是负的)加权图G，找出所有顶点对(s, t)，从s到t的最短路径。</li>
+<li>即给定任意两个点，一个出发点，一个到达点，求这两个点的之间的最短路径，就是任意两点最短路径问题，多源最短路径</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Fyd</p>
+</blockquote>
+<h2 id="最小生成树Minimun-Spanning-Tree"><a href="#最小生成树Minimun-Spanning-Tree" class="headerlink" title="最小生成树Minimun Spanning Tree"></a>最小生成树Minimun Spanning Tree</h2><blockquote>
+<p>参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Eb41177d1?from=search&amp;seid=9147041630400351432&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Eb41177d1?from=search&amp;seid=9147041630400351432&amp;spm_id_from=333.337.0.0</a></p>
+</blockquote>
+<ul>
+<li>Definition. Let G be a weighted graph. A spanning tree of G is a subgraph of G that is a tree and contains all vertices of G. The weight of a spanning tree T is the sum of weights of edges in T. <ul>
+<li>定义。设G是一个加权图。G的生成树是G的一个子图，它是一棵树，包含G的所有顶点。生成树T的权值是T中各边的权值之和</li>
+</ul>
+</li>
+<li>MST Problem. Given a weighted and undirected graph G, construct a minimum spanning tree of G, i.e., a spanning tree of G whose weight is the smallest over all spanning trees of G. <ul>
+<li>MST的问题。给定一个加权无向图G，构造G的最小生成树，即G的所有生成树中权值最小的生成树。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Dijkstra’s approach</p>
+<ul>
+<li>starting from any vertex s, grow a tree using the lightest edges</li>
+</ul>
+</blockquote>
+<p><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-1115-52-29.png">  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Prim(G)</span><br><span class="line">1. for (v=1; v≤n; v++) status[v] = unseen;</span><br><span class="line">2. pick any vertex s; status[s] = in-tree; </span><br><span class="line">3. for (each edge [s, w])</span><br><span class="line">      status[w] = fringe; dad[w] = s;</span><br><span class="line">      WEIGHT[w] = wt(s, w);</span><br><span class="line">4. While (there are fringes)</span><br><span class="line">4.1   pick the fringe v of minimum WEIGHT[v];</span><br><span class="line">4.2   status[v] = in-tree;</span><br><span class="line">4.3   for (each edge [v, w])</span><br><span class="line">4.3.1   if (status[w] == unseen)</span><br><span class="line">             status[w] = fringe; dad[w] = v; </span><br><span class="line">             WEIGHT[w] = wt(v, w);</span><br><span class="line">4.3.2   else if (status[w] == fringe) &amp; </span><br><span class="line">             (WEIGHT[w] &gt; wt(v, w))</span><br><span class="line">             dad[w] = v; </span><br><span class="line">             WEIGHT[w] = wt(v, w);</span><br><span class="line">5. The array dad[1..n] gives the path from s.      </span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>Kruskal’s approach</p>
+<ul>
+<li>Idea: repeatedly add the lightest edges to make a connected and acyclic graph that covers all vertices (i.e., a spanning tree).</li>
+<li>重复添加最轻的边，生成一个覆盖所有顶点的连通无环图(即生成树)</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Kruskal(G)</span><br><span class="line">1. sort the edges in nondecreasing order: </span><br><span class="line">      e1, e2, …, em;</span><br><span class="line">2. T = Φ;</span><br><span class="line">3. for (i = 1; i &lt;= m; i++) </span><br><span class="line">       let ei = [ui, vi]; </span><br><span class="line">       if (T + ei does not contain a cycle)</span><br><span class="line">           T = T + ei;</span><br><span class="line">4. return(T).</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>Questions:</p>
+</blockquote>
+<ol>
+<li><p>How do we represent T so that we can test efficiently if T + ei contains a cycle?</p>
+<p>我们如何表示T以便我们能有效地测试T + ei是否包含一个循环</p>
+<p>Q1: Since T is acyclic, a component of T is a tree. Thus, adding an edge to the same component makes a cycle while adding an edge connecting two different components does not make a cycle. Thus, for the edge to be added, we only need to check if its two ends are in the same component.</p>
+<p>因为T是无环的，所以T的一个分量就是树。因此，向同一个组件添加一条边构成一个循环，而向两个不同组件添加一条边则不构成一个循环。因此，对于要添加的边，我们只需要检查它的两端是否在同一个组件中。</p>
+</li>
+</ol>
+<ul>
+<li>We represent each component of T in a tree structure so that we can test if the two ends of an edge are in the component. 我们用树形结构表示T的每个分量，这样我们就可以测试一条边的两端是否在这个分量中</li>
+</ul>
+<h2 id="图匹配问题（Graph-Matching-（on-undirected-graph））"><a href="#图匹配问题（Graph-Matching-（on-undirected-graph））" class="headerlink" title="图匹配问题（Graph Matching （on undirected graph））"></a>图匹配问题（Graph Matching （on undirected graph））</h2><p>在无向图中匹配的定义：</p>
+<ul>
+<li>Definition. An edge set M in an undirected graph G is a matching in G if no two edges in M share a common end<ul>
+<li>定义。如果无向图G中没有两条边共用一个端点，则无向图G中的边集M就是一个匹配</li>
+<li><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-124-18-54.png">  </li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>The Maximum Matching Problem.</p>
+<p>最大匹配问题</p>
+<ul>
+<li>Given an undirected graph G, construct a maximum matching in G.</li>
+<li>给出一个无向图G，构造一个最大匹配。</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>Definitions. M: a matching in G. A vertex is matched if it is an end of an edge in M, otherwise, unmatched.</p>
+<ul>
+<li>定义。如果一个顶点是M中某条边的末端，那么它就被匹配，否则就是不匹配。</li>
+</ul>
+</li>
+<li><p>Definition. An augmenting path (w.r.t a matching M) starts and ends at unmatched vertices and goes alternatively with edges not in M and in M</p>
+<ul>
+<li>定义。一条增广路径(w.r.t，匹配M)开始和结束于不匹配的顶点，并交替地到达不在M和M中的边</li>
+<li><img src="/2021/12/07/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-01-14-19-39.png">  </li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>Theorem. A matching M is maximum if and only if there is no augmenting path w.r.t. M in G. <ul>
+<li>定理。当且仅当G中没有增广路径w.r.t. M时，匹配的M是最大的。</li>
+</ul>
+</li>
+<li>Proof. If M is max, then there is no augmenting path  otherwise, we would be able to construct a larger matching.<ul>
+<li>证明。如果M是最大值，那么就没有增广路径，否则我们就可以构造一个更大的匹配。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>Finding an augmenting path:  start from an unmatched vertex, try to find an augmenting path ending at another unmatched vertex.</p>
+<ul>
+<li>寻找增广路径:从一个不匹配的顶点开始，尝试找到一个在另一个不匹配的顶点结束的增广路径。</li>
+</ul>
+</li>
+<li><p>Pretty much similar to BFS but: at even levels, expand all possible ways, but at odd levels, expand on a single matching edge.</p>
+<ul>
+<li>与BFS非常相似，但是:在偶数层，扩展所有可能的方式，但在奇数层，扩展单个匹配边。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Augment(G, M) \\ Q is a queue</span><br><span class="line">1. for (each vertex v of G) level[v] = -1; </span><br><span class="line">2. for (each unmatched vertex v)</span><br><span class="line">       level[v] = 0; dad[v] = -1; Q ← v; </span><br><span class="line">3. while (Q ≠ Φ)</span><br><span class="line">      v ← Q; </span><br><span class="line">      if (level[v] is even)</span><br><span class="line">         for (each edge [v, w]) </span><br><span class="line">            if (level[w] == -1)</span><br><span class="line">               level[w] = level[v]+1; </span><br><span class="line">               dad[w] = v;  Q ← w; </span><br><span class="line">            else if (level[v] == level[w]) </span><br><span class="line">               return an augmenting path;</span><br><span class="line">      else \\ level[v] is odd</span><br><span class="line">         let [v, w] be the edge in M;</span><br><span class="line">         if (level[v] == level[w]) </span><br><span class="line">            return an augmenting path;</span><br><span class="line">         else level[w] = level[v]+1; </span><br><span class="line">                dad[w] = v;  Q ← w; </span><br><span class="line">4. Return (false)</span><br><span class="line"> </span><br><span class="line"> Time=〇（n+m）</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/06/2021%E5%B9%BF%E5%B7%9E%E8%8D%89%E8%8E%93%E9%9F%B3%E4%B9%90%E8%8A%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -888,7 +1974,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -897,7 +1983,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
