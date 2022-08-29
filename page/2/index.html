@@ -160,6 +160,830 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">机器学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-21 22:25:00" itemprop="dateCreated datePublished" datetime="2021-12-21T22:25:00+08:00">2021-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-18 17:49:06" itemprop="dateModified" datetime="2022-04-18T17:49:06+08:00">2022-04-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Introduction-介绍"><a href="#Introduction-介绍" class="headerlink" title="Introduction 介绍"></a>Introduction 介绍</h1><p><strong>定义：</strong></p>
+<ul>
+<li><p>Arthur Samuel (1959). </p>
+<ul>
+<li>Machine Learning: Field of study that gives computers the ability to learn without being explicitly programmed. 使计算机无需明确编程就能学习的研究领域。</li>
+</ul>
+</li>
+<li><p>Tom Mitchell (1998) </p>
+<ul>
+<li>Well-posed Learning Problem: A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E. </li>
+<li>一个计算机程序能够单独的从一些任务T和表现策略P中进行学习，看是否他在T或者是P中的表现随着经验E所提升</li>
+</ul>
+</li>
+</ul>
+<p><strong>机器学习算法：</strong></p>
+<ul>
+<li><p>Supervised learning       有监督学习</p>
+</li>
+<li><p>Unsupervised learning   无监督学习</p>
+<p>其他的一些算法： Reinforcement learning, recommender systems</p>
+</li>
+</ul>
+<h2 id="Supervised-learning-有监督学习"><a href="#Supervised-learning-有监督学习" class="headerlink" title="Supervised learning 有监督学习"></a>Supervised learning 有监督学习</h2><p><strong>定义：</strong></p>
+<blockquote>
+<p>In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output.</p>
+<p>译文：在有监督学习中，我们得到一个数据集，并且已经知道我们正确的输出应该是什么样子，因为我们知道输入和输出之间是有关系的。</p>
+</blockquote>
+<p>Supervised learning problems are categorized into “regression” and “classification” problems. </p>
+<ul>
+<li><p><strong>回归问题：</strong></p>
+</li>
+<li><p>In a regression problem, we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function.</p>
+<p>在一个回归问题中，我们试图预测连续输出的结果，这意味着我们试图将输入变量映射到某个连续函数。</p>
+</li>
+<li><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/1.png">  </p>
+</li>
+<li><p><strong>分类问题：</strong></p>
+</li>
+<li><p>In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories. </p>
+<p>在分类问题中，我们试图预测离散输出的结果。换句话说，我们试着将输入变量映射成离散的类别。</p>
+</li>
+<li><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2.png">  </p>
+</li>
+<li><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/3.png"> </p>
+</li>
+<li><p>通过很多的特征来学习寻找不同的分类</p>
+</li>
+</ul>
+<h2 id="Unsupervised-learning-无监督学习"><a href="#Unsupervised-learning-无监督学习" class="headerlink" title="Unsupervised learning 无监督学习"></a>Unsupervised learning 无监督学习</h2><p><strong>定义：</strong></p>
+<blockquote>
+<p>Unsupervised learning allows us to approach problems with little or no idea what our results should look like. We can derive structure from data where we don’t necessarily know the effect of the variables.</p>
+<p>无监督学习是指我们在处理问题时很少或根本不知道我们的结果应该是什么样子。我们可以从不需要知道变量影响的数据中推导出结构。</p>
+</blockquote>
+<ul>
+<li><p>We can derive this structure by clustering the data based on relationships among the variables in the data.</p>
+<p>我们可以根据数据中变量之间的关系对数据进行聚类，从而得出这种结构。</p>
+</li>
+<li><p>With unsupervised learning there is no feedback based on the prediction results.</p>
+<p>译文：在无监督学习中，没有基于预测结果的反馈。</p>
+</li>
+</ul>
+<p><strong>EXAMPLE：</strong></p>
+<ul>
+<li><p><strong>Clustering</strong>: Take a collection of 1,000,000 different genes, and find a way to automatically group these genes into groups that are somehow similar or related by different variables, such as lifespan, location, roles, and so on.</p>
+<p>聚类: 将100万个不同的基因集合起来，然后找到一种方法，自动将这些基因分组，这些分组在某种程度上与不同的变量(如寿命、位置、角色等)相似或相关。</p>
+</li>
+<li><p><strong>Non-clustering</strong>: The “Cocktail Party Algorithm”, allows you to find structure in a chaotic environment. (i.e. identifying individual voices and music from a mesh of sounds at a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cocktail_party_effect">cocktail party</a>).</p>
+</li>
+</ul>
+<h1 id="Model-and-Cost-Function-模型和代价函数"><a href="#Model-and-Cost-Function-模型和代价函数" class="headerlink" title="Model and Cost Function 模型和代价函数"></a>Model and Cost Function 模型和代价函数</h1><h2 id="回归模型展示"><a href="#回归模型展示" class="headerlink" title="回归模型展示"></a>回归模型展示</h2><p>To establish notation for future use, we’ll use x^(i) to denote the “input” variables (living area in this example), also called input features, and y^(i)to denote the “output” or target variable that we are trying to predict (price).<br>Note that the superscript “(i)” in the notation is simply an index into the training set, and has nothing to do with exponentiation. We will also use X to denote the space of input values, and Y to denote the space of output values. In this example, X = Y = ℝ. </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/4.png">  <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/5.png" style="zoom: 33%;">   </p>
+<p>输出结果是连续的，回归问题；</p>
+<p>输出结果是少的并且离散的，通过特征得到的，分类问题；</p>
+<p><strong>When the target variable that we’re trying to predict is continuous, such as in our housing example, we call the learning problem a regression problem.</strong> </p>
+<p><strong>When y can take on only a small number of discrete values (such as if, given the living area, we wanted to predict if a dwelling is a house or an apartment, say), we call it a classification problem.</strong></p>
+<h2 id="Cost-Function-代价函数"><a href="#Cost-Function-代价函数" class="headerlink" title="Cost Function 代价函数"></a>Cost Function 代价函数</h2><p><strong>定义：</strong></p>
+<blockquote>
+<p>We can measure the accuracy of our hypothesis function by using a <strong>cost function</strong>. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x’s and the actual output y’s.</p>
+<p>它取所有假设结果的平均差值(实际上是平均值的一个奇特版本)，输入是x，实际输出是y。</p>
+</blockquote>
+<p>EX：</p>
+<p>线性回归常用的代价函数：</p>
+<p>This function is otherwise called the “Squared error function”, or “Mean squared error”. </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/6.png">  </p>
+<p>简化版理解，将常数看做0</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/7.png">   </p>
+<p>theta 都不为零的情况下：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/8.png"></p>
+<p>用螺旋线来表示这个。同一个圈圈上的线表示是一样的J（theta）的值；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/9.png"> </p>
+<h1 id="parameter-learning-参数学习"><a href="#parameter-learning-参数学习" class="headerlink" title="parameter learning 参数学习"></a>parameter learning 参数学习</h1><h2 id="Gradient-Descent-梯度下降"><a href="#Gradient-Descent-梯度下降" class="headerlink" title="Gradient Descent  梯度下降"></a>Gradient Descent  梯度下降</h2><ul>
+<li><strong>梯度是什么？</strong><ul>
+<li><strong>在微积分里面，对多元函数的参数求∂偏导数，把求得的各个参数的偏导数以向量的形式写出来，就是梯度。。比如函数f(x,y), 分别对x,y求偏导数，求得的梯度向量就是(∂f/∂x, ∂f/∂y)T,简称grad f(x,y)或者▽f(x,y)。对于在点(x0,y0)的具体梯度向量就是(∂f/∂x0, ∂f/∂y0)T.或者▽f(x0,y0)，如果是3个参数的向量梯度，就是(∂f/∂x, ∂f/∂y，∂f/∂z)T,以此类推。</strong></li>
+</ul>
+</li>
+<li><strong>那么这个梯度向量求出来有什么意义呢？</strong><ul>
+<li><strong>他的意义从几何意义上讲，就是函数变化增加最快的地方。具体来说，对于函数f(x,y),在点(x0,y0)，沿着梯度向量的方向就是(∂f/∂x0, ∂f/∂y0)T的方向是f(x,y)增加最快的地方。或者说，沿着梯度向量的方向，更加容易找到函数的最大值。反过来说，沿着梯度向量相反的方向，也就是 -(∂f/∂x0, ∂f/∂y0)T的方向，梯度减少最快，也就是更加容易找到函数的最小值。</strong></li>
+</ul>
+</li>
+</ul>
+<p>Imagine that we graph our hypothesis function based on its fields <em>θ</em>0 and <em>θ</em>1 (actually we are graphing the cost function as a function of the parameter estimates). We are not graphing x and y itself, but the parameter range of our hypothesis function and the cost resulting from selecting a particular set of parameters.</p>
+<p>We put θ0 on the x axis and <em>θ</em>1 on the y axis, with the cost function on the vertical z axis. The points on our graph will be the result of the cost function using our hypothesis with those specific theta parameters. The graph below depicts such a setup.</p>
+<p>假设我们根据其场θ0和θ1绘制假设函数的图(实际上，我们将代价函数绘制为参数估计的函数)。我们画的不是x和y本身，而是假设函数的参数范围以及选择一组特定参数所产生的代价。</p>
+<p>θ*0在x轴上，θ1在y轴上，代价函数在垂直的z轴上。图上的点将是代价函数的结果使用我们的假设和特定的参数。下图描述了这样的设置。</p>
+<img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/10.png" style="zoom:67%;">  
+
+<p>The way we do this is by taking the derivative (the tangential line to a function) of our cost function. The slope of the tangent is the derivative at that point and it will give us a direction to move towards. We make steps down the cost function in the direction with the steepest descent. <strong>The size of each step is determined by the parameter α, which is called the learning rate.</strong> </p>
+<p>我们的方法是对代价函数求导(一个函数的切线)切线的斜率就是这一点的导数它会给我们一个移动的方向。我们让代价函数沿着下降速度最快的方向逐步下降。<strong>每一步的大小由参数α决定，该参数称为学习率。</strong>（学习率就像下山的步子，lr越大，步子越大，否则反之）</p>
+<p>For example, the distance between each ‘star’ in the graph above represents a step determined by our parameter α. A smaller α would result in a smaller step and a larger α results in a larger step. The direction in which the step is taken is determined by the partial derivative of J*(<em>θ</em>0,*θ1). Depending on where one starts on the graph, one could end up at different points. The image above shows us two different starting points that end up in two different places. </p>
+<p>例如，上图中每个“星”之间的距离代表了由参数α决定的一个步长。更小的α会导致更小的步骤，更大的α会导致更大的步骤。步进的方向由J(θ0，θ1) J(θ0，θ1)的偏导数决定。这取决于图的起始点，可能会在不同的点结束。上面的图像显示了两个不同的起点，在两个不同的地方结束。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/11.png">  </p>
+<p>At each iteration j, one should simultaneously update the parametersθ<em>1,<em>θ</em>2,…,<em>θ</em>n</em>. Updating a specific parameter prior to calculating another one on the j^(th) iteration would yield to a wrong implementation. </p>
+<p>在代价函数的每次迭代中，每个参数应该同步更新。</p>
+<img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/12.png" style="zoom:67%;">  
+
+
+
+<p><strong>简化版（只有一个参数改变）梯度下降算法，示例：</strong></p>
+<p> <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/13.png"> </p>
+<p>不管斜率是怎样的，theta总是会趋近于最小值的地方；</p>
+<p>On a side note, we should adjust our parameter \alpha<em>α</em> to ensure that the gradient descent algorithm converges in a reasonable time. Failure to converge or too much time to obtain the minimum value imply that our step size is wrong.</p>
+<p>另一方面，我们应该调整我们的参数alphaα（学习速率），以确保梯度下降算法在合理的时间收敛。不能收敛或花太多时间来获得最小值意味着我们的步长是错误的。</p>
+<img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/14.png" style="zoom:80%;">   
+
+<p>当斜率降到0的时候，就到达了局部最小处；</p>
+<p>并且斜率会自己变小，所以学习速率是固定的，梯度下降会随着斜率下降步子越来越小。</p>
+<img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/15.png" style="zoom:80%;">  
+
+<p><strong>梯度下降算法在线性回归中的示例：</strong></p>
+<p>When specifically applied to the case of linear regression, a new form of the gradient descent equation can be derived. We can substitute our actual cost function and our actual hypothesis function and modify the equation to :</p>
+<p>当具体应用于线性回归的情况下，可以导出一个新的形式的梯度下降方程。我们可以代入实际的代价函数和实际的假设函数并将方程修改为</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/16.png"> </p>
+<p>The point of all this is that if we start with a guess for our hypothesis and then repeatedly apply these gradient descent equations, our hypothesis will become more and more accurate.</p>
+<p>So, this is simply gradient descent on the original cost function J. <strong>This method looks at every example in the entire training set on every step</strong>, and is called <strong>batch gradient descent</strong>. </p>
+<p>Note that, while gradient descent can be susceptible to local minims in general, the optimization problem we have posed here for linear regression has only one global, and no other local, optima; thus gradient descent always converges (assuming the learning rate α is not too large) to the global minimum. Indeed, J is a convex quadratic function. Here is an example of gradient descent as it is run to minimize a quadratic function.</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/17.png">   </p>
+<h1 id="Multivariate-Linear-Regression-多元线性回归"><a href="#Multivariate-Linear-Regression-多元线性回归" class="headerlink" title="Multivariate Linear Regression 多元线性回归"></a>Multivariate Linear Regression 多元线性回归</h1><h2 id="Multiple-Features-多个特征"><a href="#Multiple-Features-多个特征" class="headerlink" title="Multiple Features 多个特征"></a>Multiple Features 多个特征</h2><blockquote>
+<p>Linear regression with multiple variables is also known as “multivariate linear regression”.</p>
+</blockquote>
+<p>We now introduce notation for equations where we can have any number of input variables.</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/18.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/19.png"> </p>
+<p>在房价的例子中，x1到x4都是影响y的特征</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/20.png">  </p>
+<p>可以用向量的内积来简化运算</p>
+<h2 id="Gradient-Descent-For-Multiple-Variables-多元的梯度下降算法"><a href="#Gradient-Descent-For-Multiple-Variables-多元的梯度下降算法" class="headerlink" title="Gradient Descent For Multiple Variables 多元的梯度下降算法"></a>Gradient Descent For Multiple Variables 多元的梯度下降算法</h2><p>The gradient descent equation itself is generally the same form; we just have to repeat it for our ‘n’ features:</p>
+<p>梯度下降方程本身通常是相同的形式;我们只需要为我们的“n”特性重复它</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/21.png">  </p>
+<p>The following image compares gradient descent with one variable to gradient descent with multiple variables: </p>
+<p>下图比较了单变量梯度下降和多变量梯度下降</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/22.png"> </p>
+<h2 id="Gradient-Descent-in-Practice-I-Feature-Scaling-特征缩放"><a href="#Gradient-Descent-in-Practice-I-Feature-Scaling-特征缩放" class="headerlink" title="Gradient Descent in Practice I - Feature Scaling 特征缩放"></a>Gradient Descent in Practice I - Feature Scaling 特征缩放</h2><ul>
+<li><strong>特征缩放是什么？</strong><ul>
+<li>特征缩放是用来标准化数据特征的范围。</li>
+<li>将各个特征的范围缩小到相近可以加速收敛的过程，进而加速学习的速度</li>
+</ul>
+</li>
+<li><strong>为什么要特征缩放？</strong><ul>
+<li>We can speed up gradient descent by having each of our input values in roughly the same range. This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven.</li>
+<li>我们可以通过让每个输入值在大致相同的范围内来加速梯度下降。这是因为θ在小范围会快速下降，而在大范围会缓慢下降，因此当变量非常不均匀时，θ会低效地振荡到最优。</li>
+</ul>
+</li>
+</ul>
+<p>​        <strong>因为特征的值范围特别大的话，theta的值也会变得偏大或者偏小，就会让螺旋图像下面图一的样子，又扁又长，就会经过更多次迭代才会到达代价最小的点</strong> <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/27.png">  </p>
+<p>一般情况下会将特征的范围缩至如下的情况：</p>
+<p>The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same. Ideally:</p>
+<p>​            −1 ≤ x*(<em>i) ≤ 1   or     −0.5 ≤x</em>(*i) ≤ 0.5</p>
+<p><strong>These aren’t exact requirements</strong>; we are only trying to speed things up. <strong>The goal is to get all input variables into roughly one of these ranges, give or take a few.</strong></p>
+<h3 id="mean-normalization-均值标准化"><a href="#mean-normalization-均值标准化" class="headerlink" title="mean normalization 均值标准化"></a>mean normalization 均值标准化</h3><p>Mean normalization involves <strong>subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero.</strong> To implement both of these techniques, adjust your input values as shown in this formula:</p>
+<p>均值标准化涉及到从一个输入变量的值中减去一个输入变量的平均值，从而得到一个新的输入变量的平均值为零。要实现这两种技术，请按照以下公式调整输入值</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/23.png">   </p>
+<h2 id="Gradient-Descent-in-Practice-II-Learning-Rate-学习速率"><a href="#Gradient-Descent-in-Practice-II-Learning-Rate-学习速率" class="headerlink" title="Gradient Descent in Practice II - Learning Rate 学习速率"></a>Gradient Descent in Practice II - Learning Rate 学习速率</h2><ul>
+<li><p>如何判断梯度下降算法是否正常工作：</p>
+<ul>
+<li><strong>Debugging gradient descent.</strong> Make a plot with <em>number of iterations</em> on the x-axis. Now plot the cost function, J(θ) over the number of iterations of gradient descent. If J(θ) ever increases, then you probably need to decrease α.</li>
+<li><strong>Automatic convergence test.</strong> Declare convergence if J(θ) decreases by less than E in one iteration, where E is some small value such as 10^{−3}10−3. However in practice it’s difficult to choose this threshold value.</li>
+</ul>
+</li>
+<li><p>学习速率设置对于学习算法的影响：</p>
+<ul>
+<li><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/24.png"> <ul>
+<li>It has been proven that if learning rate α is sufficiently small, then J(θ) will decrease on every iteration.</li>
+</ul>
+</li>
+<li><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/25.png"> </li>
+<li>SUMMARIZE：<ul>
+<li><strong>If <em>α</em> is too small: slow convergence.</strong> </li>
+<li><strong>If  <em>α</em> is too large: may not decrease on every iteration and thus may not converge.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Features-and-Polynomial-Regression-特征和多项式回归"><a href="#Features-and-Polynomial-Regression-特征和多项式回归" class="headerlink" title="Features and Polynomial Regression 特征和多项式回归"></a>Features and Polynomial Regression 特征和多项式回归</h2><p>We can improve our features and the form of our hypothesis function in a couple different ways.</p>
+<p><strong>我们可以通过改进特征 和 猜想的方程来优化模型，获得更好的结果。</strong></p>
+<ul>
+<li>We can <strong>combine</strong> multiple features into one. <ul>
+<li>For example, we can combine x_1<em>x</em>1 and x_2<em>x</em>2 into a new feature x_3<em>x</em>3 by taking x_1<em>x</em>1⋅x_2<em>x</em>2.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Polynomial-Regression-多项式回归"><a href="#Polynomial-Regression-多项式回归" class="headerlink" title="Polynomial Regression 多项式回归"></a><strong>Polynomial Regression</strong> 多项式回归</h3><p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
+<p>We can <strong>change the behavior or curve</strong> of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).</p>
+<p>我们可以通过将假设函数变成二次函数、三次函数或平方根函数(或任何其他形式)来改变它的行为或曲线。</p>
+<ul>
+<li><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/26.png"> </li>
+</ul>
+<h1 id="Computing-Parameters-Analytically-计算参数分析"><a href="#Computing-Parameters-Analytically-计算参数分析" class="headerlink" title="Computing Parameters Analytically 计算参数分析"></a>Computing Parameters Analytically 计算参数分析</h1><h2 id="Normal-Equation-正规方程"><a href="#Normal-Equation-正规方程" class="headerlink" title="Normal Equation 正规方程"></a>Normal Equation 正规方程</h2><blockquote>
+<p>正规方程法和梯度下降算法一样，都是求最小化的一种方法；</p>
+<p>不同的地方在于，正规方程法直接通过矩阵直接将最小化的参数分析计算出来，而不用通过迭代的方法去趋近于最小值；并且不用归一化</p>
+</blockquote>
+<p>This allows us to find the optimum theta without iteration. The normal equation formula is given below: </p>
+<p>这使得我们可以在不需要迭代的情况下找到最优的。常规方程公式如下</p>
+<blockquote>
+<p><em>θ</em>    = ( <em>X<sup>T</sup>X )<sup>−1</sup></em> * X<sup>T</sup> * y</p>
+</blockquote>
+<p> <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/28.png"> </p>
+<blockquote>
+<p>There is <strong>no need</strong> to do feature scaling with the normal equation.</p>
+</blockquote>
+<p>The following is a comparison of gradient descent and the normal equation:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Gradient Descent</th>
+<th align="left">Normal Equation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Need to choose alpha</td>
+<td align="left">No need to choose alpha</td>
+</tr>
+<tr>
+<td align="left">Needs many iterations</td>
+<td align="left">No need to iterate</td>
+</tr>
+<tr>
+<td align="left">O (kn^2)</td>
+<td align="left">O (n^3), need to calculate inverse of X^TX</td>
+</tr>
+<tr>
+<td align="left">Works well when n is large</td>
+<td align="left">Slow if n is very large</td>
+</tr>
+</tbody></table>
+<p>当特征变量不那么多的时候可以选择正规方程，因为可以更加快速的找到最优解，但是当特征变量很大的时候，比如超过了10000的时候，就可以考虑使用梯度下降，通过迭代的方法来找最优解。</p>
+<h2 id="Normal-Equation-Noninvertibility-不可逆的情况"><a href="#Normal-Equation-Noninvertibility-不可逆的情况" class="headerlink" title="Normal Equation Noninvertibility  不可逆的情况"></a>Normal Equation Noninvertibility  不可逆的情况</h2><p>When implementing the normal equation in octave <strong>we want to use the ‘pinv’ function rather than ‘inv.</strong></p>
+<p>‘ The ‘pinv’ function will give you a value of θ even if X<sup>T</sup>X is not invertible. </p>
+<p>If X<sup>T</sup>X is <strong>noninvertible,</strong> the common causes might be having :</p>
+<ul>
+<li>Redundant features, where two features are very closely related (i.e. they are linearly dependent)</li>
+<li>Too many features (e.g. m ≤ n). In this case, delete some features or use “regularization” (to be explained in a later lesson).</li>
+</ul>
+<p>Solutions to the above problems include deleting a feature that is linearly dependent with another or deleting one or more features when there are too many features.</p>
+<h1 id="Classification-and-Representation-分类和表示"><a href="#Classification-and-Representation-分类和表示" class="headerlink" title="Classification and Representation  分类和表示"></a>Classification and Representation  分类和表示</h1><h2 id="Classification-分类"><a href="#Classification-分类" class="headerlink" title="Classification 分类"></a>Classification 分类</h2><p>To attempt classification, one method is to use linear regression and map all predictions greater than 0.5 as a 1 and all less than 0.5 as a 0. However, this method doesn’t work well because classification is not actually a linear function.</p>
+<p>要尝试分类，一种方法是使用线性回归，将所有大于0.5的预测都映射为1，所有小于0.5的预测都映射为0。然而，这种方法并不能很好地工作，因为分类实际上不是一个线性函数。如下图所展示：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/29.png">   </p>
+<p>the <strong>binary classification</strong> <strong>problem</strong> in which y can take on only two values, 0 and 1. (Most of what we say here will also generalize to the multiple-class case.) </p>
+<p>二分类问题，其中y只能取两个值，0和1。(我们在这里所说的大部分内容也适用于多类情况。)</p>
+<h2 id="Hypothesis-Representation-假设函数表达式"><a href="#Hypothesis-Representation-假设函数表达式" class="headerlink" title="Hypothesis Representation 假设函数表达式"></a>Hypothesis Representation 假设函数表达式</h2><p> Intuitively, it also doesn’t make sense for hθ*(<em>x) to take values larger than 1 or smaller than 0 when we know that y ∈ {0, 1}. To fix this, let’s change the form for our hypotheses <em>hθ</em>(<em>x</em>) to satisfy 0≤</em>hθ*(<em>x</em>)≤1. </p>
+<p>直观地说，当我们知道y{0,1}时，hθ(x)取大于1或小于0的值也没有意义。为了解决这个问题，我们改变假设hθ(x)的形式来满足0 hθ(x) 1。</p>
+<p>This is accomplished by plugging  θ<sup>T</sup>x into the Logistic Function.</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/30.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/31.png">  </p>
+<p>The function g(z), shown here, maps any real number to the (0, 1) interval, making it useful for transforming an arbitrary-valued function into a function better suited for classification.</p>
+<p>函数g(z)，如图所示，将任意实数映射到(0,1)区间，这使得它可以将任意值函数转换为更适合分类的函数。</p>
+<p><strong>常常用于二分类问题；</strong></p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/32.png">  </p>
+<h2 id="Decision-Boundary-决策边界"><a href="#Decision-Boundary-决策边界" class="headerlink" title="Decision Boundary 决策边界"></a>Decision Boundary 决策边界</h2><p>为了在二分类的时候可以得到 0 或者是 1，我们可以将假设函数 H（x） &gt;=0.5 的 看作是 y = 1；</p>
+<p>将H（x）&lt; 0.5 的 看作为 y = 0；</p>
+<p>The way our logistic function g behaves is that when its input is greater than or equal to zero, its output is greater than or equal to 0.5:</p>
+<blockquote>
+<p>g ( z ) &gt;= 0.5</p>
+<p>when z &gt;= 0 </p>
+</blockquote>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/33.png">  </p>
+<blockquote>
+<p>The <strong>decision boundary</strong> is the line that separates the area where y = 0 and where y = 1. It is created by our hypothesis function.</p>
+<p>决策边界是 y = 0 和 y = 1 区域的分界线。它是由假设函数创建的。</p>
+</blockquote>
+<p>非线性决策边界 的例子：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/34.png">  </p>
+<h1 id="Logistic-Regression-Model-逻辑回归模型"><a href="#Logistic-Regression-Model-逻辑回归模型" class="headerlink" title="Logistic Regression Model 逻辑回归模型"></a>Logistic Regression Model 逻辑回归模型</h1><h2 id="Cost-Function-代价函数-1"><a href="#Cost-Function-代价函数-1" class="headerlink" title="Cost Function 代价函数"></a>Cost Function 代价函数</h2><p>We cannot use the same cost function that we use for linear regression because the Logistic Function will cause the output to be wavy, causing many local optima. In other words, it will not be a convex function.我们不能使用与线性回归相同的成本函数，因为Logistic函数会导致输出波动，导致许多局部最优值。换句话说，它不是一个凸函数。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/35.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/36.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/37.png"> </p>
+<p>If our correct answer ‘y’ is 0, then the cost function will be 0 if our hypothesis function also outputs 0. If our hypothesis approaches 1, then the cost function will approach infinity.</p>
+<ul>
+<li>如果我们的正确答案y是0，那么代价函数就是0如果我们的假设函数 输出也是0。如果我们的假设趋于1，那么代价函数将趋于无穷。</li>
+</ul>
+<p>If our correct answer ‘y’ is 1, then the cost function will be 0 if our hypothesis function outputs 1. If our hypothesis approaches 0, then the cost function will approach infinity.</p>
+<ul>
+<li>如果正确答案y是1，那么如果假设函数输出1代价函数就是0。如果我们的假设趋于0，那么代价函数将趋于无穷。</li>
+</ul>
+<p>Note that writing the cost function in this way guarantees that J(θ) is convex for logistic regression.</p>
+<ul>
+<li>注意，这样写代价函数保证了J(θ)在逻辑回归中是凸的。</li>
+</ul>
+<h2 id="Simplified-Cost-Function-and-Gradient-Descent-简化的代价函数和梯度下降"><a href="#Simplified-Cost-Function-and-Gradient-Descent-简化的代价函数和梯度下降" class="headerlink" title="Simplified Cost Function and Gradient Descent  简化的代价函数和梯度下降"></a>Simplified Cost Function and Gradient Descent  简化的代价函数和梯度下降</h2><p>We can compress our cost function’s two conditional cases into one case:</p>
+<blockquote>
+<p>逻辑回归简化后的代价函数：</p>
+<p>Cost(<em>hθ</em>(<em>x</em>),<em>y</em>) = −<em>y</em>log(<em>hθ</em>(<em>x</em>)) − (1−<em>y</em>)log(1−<em>hθ</em>(<em>x</em>))</p>
+</blockquote>
+<p>Notice that when y is equal to 1, then the second term (1−<em>y</em>)log(1−<em>hθ</em>(<em>x</em>)) will be zero and will not affect the result. If y is equal to 0, then the first term −<em>y</em>log(<em>hθ</em>(<em>x</em>)) will be zero and will not affect the result.注意，当y = 1时，第二项(1 y)log(1 hθ(x))为零，不会影响结果。如果y = 0，那么第一项ylog(hθ(x))为0，不会影响结果。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/38.png"> </p>
+<p>整体如下图所示：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/39.png">  </p>
+<p><strong>逻辑回归中的梯度下降：</strong></p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/40.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/41.png"> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/42.png">  </p>
+<h1 id="Multiclass-Classification-多类分类"><a href="#Multiclass-Classification-多类分类" class="headerlink" title="Multiclass Classification 多类分类"></a>Multiclass Classification 多类分类</h1><blockquote>
+<p>Multiclass Classification 本质上就是利用n个分类过滤器将一个类和其他样本分开，分n次；通过训练不同的过滤器后，在将x输入，看那个概率大就分到那个类</p>
+</blockquote>
+<p>Now we will approach the classification of data when we have more than two categories. Instead of y = {0,1} we will expand our definition so that y = {0,1…n}.</p>
+<p>现在，当我们有两个以上的类别时，我们将处理数据的分类。我们将扩展定义，使y ={0,1…n}，而不是y ={0,1}。</p>
+<p>Since y = {0,1…n}, we divide our problem into n+1 (+1 because the index starts at 0) binary classification problems; in each one, we predict the probability that ‘y’ is a member of one of our classes.</p>
+<p> <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/44.png"> </p>
+<p>We are basically choosing one class and then lumping all the others into a single second class. We do this repeatedly, applying binary logistic regression to each case, and then use the hypothesis that returned the highest value as our prediction.</p>
+<p>我们基本上是选择一个类，然后把所有其他类合并成一个单独的第二个类。我们重复这样做，对每个案例应用二元逻辑回归，然后使用返回最高值的假设作为我们的预测。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/43.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/45.png">  </p>
+<p><strong>To summarize:</strong> </p>
+<p>Train a logistic regression classifier hθ*(*x) for each class i to predict the probability that y = i. </p>
+<p>To make a prediction on a new x, pick the class i that maximizes   <em>hθ</em>(<em>x</em>)</p>
+<h1 id="Solving-the-Problem-of-Overfitting-过拟合的问题"><a href="#Solving-the-Problem-of-Overfitting-过拟合的问题" class="headerlink" title="Solving the Problem of Overfitting 过拟合的问题"></a>Solving the Problem of Overfitting 过拟合的问题</h1><h2 id="The-Problem-of-Overfitting"><a href="#The-Problem-of-Overfitting" class="headerlink" title="The Problem of Overfitting"></a>The Problem of Overfitting</h2><blockquote>
+<p>what is overfitting?</p>
+</blockquote>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/46.png">  </p>
+<ul>
+<li>欠拟合：Underfitting, or high bias, is when the form of our hypothesis function h maps poorly to the trend of the data. It is usually caused by a function that is too simple or uses too few features. </li>
+<li>过拟合：Overfitting, or high variance, is caused by a hypothesis function that fits the available data but does not generalize well to predict new data. It is usually caused by a complicated function that creates a lot of unnecessary curves and angles unrelated to the data.</li>
+</ul>
+<p>主要的两种解决方法：</p>
+<p>There are two main options to address the issue of overfitting:</p>
+<ol>
+<li>Reduce the number of features:</li>
+</ol>
+<ul>
+<li>Manually select which features to keep.</li>
+<li>Use a model selection algorithm (studied later in the course).</li>
+</ul>
+<ol start="2">
+<li>Regularization 正则化</li>
+</ol>
+<ul>
+<li>Keep all the features, but reduce the magnitude of parameters θj.</li>
+<li>Regularization works well when we have a lot of slightly useful features.</li>
+</ul>
+<h2 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h2><p><strong>If we have overfitting from our hypothesis function, we can reduce the weight that some of the terms in our function carry by increasing their cost.</strong></p>
+<p><strong>如果我们的假设函数存在过拟合，我们可以通过增加函数中某些项的代价来减少它们的权重。</strong></p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/47.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/48.png"> </p>
+<p>We could also regularize all of our theta parameters in a single summation as:</p>
+<p>我们也可以正则化所有的参数在一个求和中，如下：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/49.png">  </p>
+<p>The λ, or lambda, is the <strong>regularization parameter</strong>. It determines how much the costs of our theta parameters are inflated.</p>
+<p>λ，或lambda，是正则化参数。它决定了参数膨胀的代价有多大。</p>
+<p>Using the above cost function with the extra summation, we can smooth the output of our hypothesis function to reduce overfitting. If lambda is chosen to be too large, it may smooth out the function too much and cause underfitting.</p>
+<p>使用上面的代价函数和额外的求和，我们可以平滑我们的假设函数的输出，以减少过拟合。如果选择的lambda太大，可能会使函数过于平滑，导致欠拟合。</p>
+<h2 id="正则化的例子"><a href="#正则化的例子" class="headerlink" title="正则化的例子"></a>正则化的例子</h2><h3 id="Regularized-Linear-Regreesion-正则化的线性回归"><a href="#Regularized-Linear-Regreesion-正则化的线性回归" class="headerlink" title="Regularized Linear Regreesion 正则化的线性回归"></a>Regularized Linear Regreesion 正则化的线性回归</h3><blockquote>
+<p><strong>Gradient Descent</strong> </p>
+</blockquote>
+<p>We will modify our gradient descent function to separate out θ<em>0 from the rest of the parameters because we do not want to penalizeθ</em>0.我们将修改梯度下降函数，将θ0从其余参数中分离出来，因为我们不想惩罚θ0。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/50.png">  </p>
+<p>经过一些操作，可以变换为如下：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/51.png">  </p>
+<p><strong>The first term in the above equation, 1− α * λ/m will always be less than 1.</strong> </p>
+<p>Intuitively you can see it as reducing the value of θj by some amount on every update.</p>
+<p> <strong>Notice that the second term is now exactly the same as it was before.</strong></p>
+<blockquote>
+<p><strong>Normal Equation</strong>  在正规方程中 使用正则化</p>
+</blockquote>
+<p>Now let’s approach regularization using the alternate method of the non-iterative normal equation.</p>
+<p>To add in regularization, the equation is the same as our original, except that we add another term inside the parentheses:加入正则化，方程和原来一样，除了我们在括号里加了另一项</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/52.png">  </p>
+<p>Recall that if m &lt; n, then X<sup>T</sup>X is non-invertible. However, when we add the term λ⋅L, then X<sup>T</sup>X + λ⋅L becomes invertible.</p>
+<h3 id="Regularized-Logistic-Regression-正则化的逻辑回归"><a href="#Regularized-Logistic-Regression-正则化的逻辑回归" class="headerlink" title="Regularized Logistic Regression 正则化的逻辑回归"></a>Regularized Logistic Regression 正则化的逻辑回归</h3><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/53.png">  </p>
+<p>类似的，加入正则化项后的代价函数，如上图蓝色水笔所标记；</p>
+<p>与线性回归类似，梯度下降的算法是：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/54.png">    </p>
+<h1 id="Ex1-线性回归-–-Ex2-逻辑回归"><a href="#Ex1-线性回归-–-Ex2-逻辑回归" class="headerlink" title="Ex1 线性回归 – Ex2 逻辑回归"></a>Ex1 线性回归 – Ex2 逻辑回归</h1><p>线性回归： <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv1664490">https://www.bilibili.com/read/cv1664490</a></p>
+<h1 id="Neural-Networks-Representation-神经网络"><a href="#Neural-Networks-Representation-神经网络" class="headerlink" title="Neural Networks: Representation 神经网络"></a>Neural Networks: Representation 神经网络</h1><p><strong>什么是神经网络？</strong></p>
+<blockquote>
+<p>At a very simple level, neurons are basically computational units that take inputs (<strong>dendrites</strong>) as electrical inputs (called “spikes”) that are channeled to outputs (<strong>axons</strong>).</p>
+<p>在非常简单的层面上，神经元基本上是计算单位，将输入(树突)作为电输入(称为“spikes”)，然后传导到输出(轴突)。</p>
+</blockquote>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/58.png">  </p>
+<p>一个神经单元的逻辑模型：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/55.png">  </p>
+<p>In our model, our dendrites are like the input features x<em>1⋯</em>xn, and the output is the result of our hypothesis function. </p>
+<p>在我们的模型中，我们的树突就像输入特征x1…….xn，而输出是我们的假设函数的结果。</p>
+<p>In this model our <em>x</em>0 input node is sometimes called the “bias unit.” It is always equal to 1. </p>
+<p>在这个模型中，我们的x0输入节点有时被称为“偏差单位”。它总是等于1。</p>
+<p>In neural networks, we use the same logistic function as in classification, 1/ 1+e<sup>−θ<sup>T</sup>x</sup>,  yet we sometimes call it a sigmoid (logistic) <strong>activation</strong> function. In this situation, our “theta” parameters are sometimes called “weights”.</p>
+<p>在神经网络中，我们使用与分类相同的逻辑函数，1/ 1+e θTx，但我们有时称其为sigmoid(逻辑)激活函数。在这种情况下，我们的“θ”参数有时被称为“权值”。</p>
+<p><strong>输入层</strong>，  <strong>输出层</strong>  and <strong>隐藏层</strong></p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/56.png">  </p>
+<p>Our input nodes (layer 1), also known as the “input layer”, go into another node (layer 2), which finally outputs the hypothesis function, known as the “output layer”.</p>
+<p>我们的输入节点(layer 1)，也称为“输入层”，进入另一个节点(layer 2)，最后输出假设函数，称为“输出层”。</p>
+<p>We can have intermediate layers of nodes between the input and output layers called the “hidden layers.”</p>
+<p>我们可以在输入和输出层之间有称为“隐藏层”的中间节点层。</p>
+<p><strong>激活单元</strong></p>
+<p>In this example, we label these intermediate or “hidden” layer nodes a<sub>0</sub><sup>2</sup>  …… a<sub>n</sub><sup>2</sup>  and call them “activation units.”</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/57.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/59.png"> </p>
+<p>This is saying that we compute our activation nodes by using a 3×4 matrix of parameters. We apply each row of the parameters to our inputs to obtain the value for one activation node. 这就是说，我们通过使用一个参数矩阵来计算激活节点。我们将每一行参数应用于输入，以获得一个激活节点的值。</p>
+<p><strong>Our hypothesis output is the logistic function applied to the sum of the values of our activation nodes,</strong> which have been multiplied by yet another parameter matrix Θ<sup>(2)</sup> containing the weights for our second layer of nodes. </p>
+<p><strong>我们的假设输出是应用激活节点值和的logistic函数</strong>，这些值乘以另一个参数矩阵Θ(2)，该矩阵包含第二层节点的权值。</p>
+<p><strong>参数矩阵的维度：</strong></p>
+<p>The dimensions of these matrices of weights is determined as follows:</p>
+<blockquote>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/60.png">  </p>
+</blockquote>
+<p>一个神经单元的计算过程：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/61.png"> </p>
+<p> <strong>对于神经单元计算的向量化：</strong></p>
+<p> We’re going to define a new variable z<sub>k</sub><sup>(j)</sup> that encompasses the parameters inside our g function. </p>
+<p>我们将定义一个新的变量zk(j)，它包含了g函数中的参数。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/59.png"> </p>
+<p>In our previous example if we replaced by the variable z for all the parameters we would get:</p>
+<p>在我们之前的例子中，如果我们用变量z替换所有的参数，我们将得到： </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/62.png">   </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/64.png">  </p>
+<p>We are multiplying our matrix Θ<sup>(<em>j</em>−1)</sup> with dimensions sj×(n*+1) . This gives us our vector z*(<em>j</em>) with height s_j. </p>
+<p>Now we can get a vector of our activation nodes for layer j as follows:</p>
+<blockquote>
+<p>a^(j) = g(z^(j))</p>
+</blockquote>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/63.png">  </p>
+<p>Notice that in this <strong>last step</strong>, between layer j and layer j+1, we are doing <strong>exactly the same thing</strong> as we did in logistic regression. Adding all these intermediate layers in neural networks allows us to more elegantly produce interesting and more complex non-linear hypotheses. 注意最后一步，在j层和j+1层之间，我们做的和逻辑回归是一样的。在神经网络中加入所有这些中间层，可以让我们更优雅地产生有趣和复杂的非线性假设。</p>
+<h2 id="神经网络的实例应用"><a href="#神经网络的实例应用" class="headerlink" title="神经网络的实例应用"></a>神经网络的实例应用</h2><p>接下来的两个例子将会解释为什么神经网络算法可以适用于非线性回归的问题：</p>
+<p><strong>异或的模拟</strong>：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/66.png">   </p>
+<h3 id="例子1-模拟-AND-，OR-，-NOR-并加一个隐藏层得到-XNOR"><a href="#例子1-模拟-AND-，OR-，-NOR-并加一个隐藏层得到-XNOR" class="headerlink" title="例子1: 模拟 AND ，OR ， NOR 并加一个隐藏层得到 XNOR"></a>例子1: 模拟 AND ，OR ， NOR 并加一个隐藏层得到 XNOR</h3><p>A simple example of applying neural networks is by predicting x_1 AND x_2, which is the logical ‘and’ operator and is only true if both x_1 and x_2 are 1.</p>
+<p>应用神经网络的一个简单例子是通过预测x 1和x 2，这是逻辑的“和”运算符，只有当x 1和x 2都是1时才成立。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/65.png">  </p>
+<p>所以我们用一个小的神经网络而不是实际的和门构建了计算机的一个基本操作。</p>
+<p>神经网络也可以用来模拟所有其他逻辑门。</p>
+<p>下面是逻辑运算符’OR’的例子，表示x 1x 1为真或x 2x 2为真，或两者都为真</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/67.png">  </p>
+<p><strong>对于异或 XNOR 逻辑操作的模拟</strong>  </p>
+<p> <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/69.png"> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/68.png">  </p>
+<p>这样我们就有了使用带有两个节点的隐藏层的XNOR操作符! 以下是对上述算法的总结</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/70.png">  </p>
+<h3 id="例子2-多类问题的分类器"><a href="#例子2-多类问题的分类器" class="headerlink" title="例子2: 多类问题的分类器"></a>例子2: 多类问题的分类器</h3><p>To classify data into multiple classes, we let our hypothesis function return a vector of values. Say we wanted to classify our data into one of four categories. We will use the following example to see how this classification is done. This algorithm takes as input an image and classifies it accordingly: </p>
+<p>为了将数据分类为多个类，我们让假设函数返回一个值的向量。假设我们想将数据分为四类。我们将使用下面的示例来了解如何进行这种分类。该算法以图像作为输入，并对其进行相应的分类</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/71.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/72.png">  </p>
+<p>Each y<sup>(i)</sup> represents a different image corresponding to either a car, pedestrian, truck, or motorcycle.</p>
+<p>The inner layers, each provide us with some new information which leads to our final hypothesis function. </p>
+<p>隐藏层，每一层都为我们提供了一些新的信息这些信息会引导我们最终的假设函数。</p>
+<p>The setup looks like:</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/73.png">  </p>
+<h2 id="Cost-Function-代价函数-2"><a href="#Cost-Function-代价函数-2" class="headerlink" title="Cost Function  代价函数"></a>Cost Function  代价函数</h2><p>Let’s first define a few variables that we will need to use:</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/74.png">  </p>
+<p>对于神经网络的代价函数，实际上是逻辑回归的代价函数的泛化：</p>
+<p>回想一下逻辑回归的代价函数如下：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/75.png">  </p>
+<p>对比一下，神经网络的代价函数如下：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/76.png">  </p>
+<p>We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes.</p>
+<p>我们添加了一些嵌套的求和来说明我们的多个输出节点。在方程的第一部分，方括号之前，我们有一个额外的嵌套求和，它循环遍历输出节点的数量。</p>
+<p>In the regularization part, after the square brackets, we must account for multiple theta matrices. The number of columns in our current theta matrix is equal to the number of nodes in our current layer (including the bias unit). The number of rows in our current theta matrix is equal to the number of nodes in the next layer (excluding the bias unit). As before with logistic regression, we square every term.</p>
+<p>在正则化部分，方括号之后，我们必须考虑多个矩阵。当前矩阵中的列数等于当前层(包括偏置单元)中的节点数。当前矩阵的行数等于下一层的节点数(不包括偏置单元)。和以前使用逻辑回归时一样，我们将每一项平方。</p>
+<p>Note:</p>
+<ul>
+<li>the double sum simply adds up the logistic regression costs calculated for each cell in the output layer</li>
+<li>the triple sum simply adds up the squares of all the individual Θs in the entire network.</li>
+<li>the i in the triple sum does <strong>not</strong> refer to training example i</li>
+</ul>
+<h2 id="Back-Propagation-反向传播"><a href="#Back-Propagation-反向传播" class="headerlink" title="Back Propagation 反向传播"></a>Back Propagation 反向传播</h2><blockquote>
+<p>“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. </p>
+<p>“反向传播”是神经网络术语，用于最小化我们的成本函数，就像我们在逻辑回归和线性回归中所做的梯度下降一样。</p>
+</blockquote>
+<p>That is, we want to minimize our cost function J using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of J(Θ):</p>
+<p>也就是说，我们想要最小化代价函数J用的是一组最优的参数。在本节中，我们将研究用于计算J(Θ)的偏导数的方程。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/77.png"> </p>
+<p><strong>反向传播算法的基本流程如下所示：</strong></p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/78.png">  </p>
+<p><strong>反向传播的详细过程：</strong></p>
+<p><strong>Back propagation Algorithm</strong></p>
+<p>Given training set { ( <em>x</em>(1),<em>y</em>(1))⋯(<em>x</em>(<em>m</em>),<em>y</em>(<em>m</em>) ) }</p>
+<ul>
+<li>Set Δ<em>i</em>,<em>j</em>(<em>l</em>) := 0 for all (l,i,j), (hence you end up having a matrix full of zeros)</li>
+</ul>
+<p>For training example t =1 to m:</p>
+<ol>
+<li>Set a<sup>(1)</sup> := x<sup>(t)</sup>&gt;</li>
+<li>Perform forward propagation to compute <em>a</em><sup>(<em>l</em>)</sup> for l=2,3,…,L</li>
+</ol>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/79.png">    </p>
+<ol start="3">
+<li>Using y<sup>(<em>t</em>)</sup>, compute δ<sup>(L)</sup>&gt;=a<sup>(L)</sup>−y<sup>(<em>t</em>)</sup> </li>
+</ol>
+<p>Where L is our total number of layers and a<sup>(<em>L</em>)</sup> is the vector of outputs of the activation units for the last layer. So our “error values” for the last layer are simply the differences of our actual results in the last layer and the correct outputs in y. To get the delta values of the layers before the last layer, we can use an equation that steps us back from right to left:</p>
+<p>其中L是我们的总层数，a(L)是最后一层激活单元的输出向量。所以我们最后一层“错误的值”只是我们实际结果的差异在最后一层和正确输出y。之前的δ值层最后一层,我们可以使用一个方程的步骤从右到左:</p>
+<ol start="4">
+<li><p>The delta values of layer l are calculated by multiplying the delta values in the next layer with the theta matrix of layer l. We then element-wise multiply that with a function called g’, or g-prime, which is the derivative of the activation function g evaluated with the input values given by z^{(l)}<em>z</em>(<em>l</em>).</p>
+<p>他的δ值计算了层l乘以δ值在下一层一层的θ矩阵l。然后我们element-wise乘以这一函数g’,或g ‘,这是激活函数的导数g评估的输入值z<sup>(l)</sup></p>
+<p>g ‘的导数项也可以写成</p>
+<p>The g-prime derivative terms can also be written out as:</p>
+</li>
+</ol>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/80.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.png"> </p>
+<h1 id="Advices-for-Applying-Machine-learning-应用机器学习的建议"><a href="#Advices-for-Applying-Machine-learning-应用机器学习的建议" class="headerlink" title="Advices for Applying Machine learning 应用机器学习的建议"></a>Advices for Applying Machine learning 应用机器学习的建议</h1><h2 id="Evaluating-a-Hypothesis-评估一个假设函数"><a href="#Evaluating-a-Hypothesis-评估一个假设函数" class="headerlink" title="Evaluating a Hypothesis  评估一个假设函数"></a>Evaluating a Hypothesis  评估一个假设函数</h2><p>一旦我们通过下列方法解决了预测中的错误：</p>
+<p>Once we have done some trouble shooting for errors in our predictions by: </p>
+<ul>
+<li>Getting more training examples</li>
+<li>Trying smaller sets of features</li>
+<li>Trying additional features</li>
+<li>Trying polynomial features</li>
+<li>Increasing or decreasing λ</li>
+</ul>
+<p>We can move on to evaluate our new hypothesis.  就该开始评估我们的假设函数了</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.png">  </p>
+<p><strong>划分训练集和测试集</strong></p>
+<p>A hypothesis may have a low error for the training examples but still be inaccurate (because of overfitting). </p>
+<p>Thus, to evaluate a hypothesis, given a dataset of training examples, we can split up the data into two sets: a <strong>training set</strong> and a <strong>test set</strong>. </p>
+<p>Typically, the <strong>training set consists of 70 %</strong> of your data and the <strong>test set is the remaining 30 %</strong>. </p>
+<blockquote>
+<p><strong>The new procedure using these two sets is then:</strong></p>
+<ol>
+<li><strong>Learn Θ and minimize J<sub>train</sub>(Θ) using the training set</strong></li>
+<li><strong>Compute the test set error J<sub>test</sub>(Θ)</strong></li>
+</ol>
+</blockquote>
+<p>测试集误差计算：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.png">  </p>
+<h2 id="Model-Selection-and-Train-Validation-Test-Sets-模型选择和训练-验证-测试集"><a href="#Model-Selection-and-Train-Validation-Test-Sets-模型选择和训练-验证-测试集" class="headerlink" title="Model Selection and Train/Validation/Test Sets   模型选择和训练/验证/测试集"></a>Model Selection and Train/Validation/Test Sets   模型选择和训练/验证/测试集</h2><p>Just because a learning algorithm fits a training set well, that does not mean it is a good hypothesis. </p>
+<p>It could over fit and as a result your predictions on the test set would be poor. </p>
+<p>The error of your hypothesis as measured on the data set with which you trained the parameters will be lower than the error on any other data set. 在你训练参数的数据集上测量的假设的误差将低于任何其他数据集上的误差。</p>
+<p>Given many models with different polynomial degrees, we can use a systematic approach to identify the ‘best’ function. 给定许多具有不同多项式度的模型，我们可以使用系统的方法来确定“最佳”函数。</p>
+<p>In order to choose the model of your hypothesis, you can test each degree of polynomial and look at the error result.</p>
+<p>为了选择你的假设模型，你可以测试每一个多项式的次数，看看错误的结果。</p>
+<p><strong>模型选择</strong> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.png"> </p>
+<p>One way to break down our dataset into the three sets is:</p>
+<ul>
+<li>Training set: 60%</li>
+<li>Cross validation set: 20%</li>
+<li>Test set: 20%</li>
+</ul>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.png">  </p>
+<p>We can now calculate three separate error values for the three different sets using the following method:</p>
+<p>我们现在可以使用下面的方法为这三个不同的集合计算三个独立的误差值：</p>
+<ol>
+<li><p>Optimize the parameters in Θ using the training set for each polynomial degree.</p>
+<p>使用每个多项式度的训练集优化Θ中的参数</p>
+</li>
+<li><p>Find the polynomial degree d with the least error using the cross validation set.</p>
+<p>使用交叉验证集找出误差最小的多项式d次</p>
+</li>
+<li><p>Estimate the generalization error using the test set with J<sub>test</sub>&gt;(Θ(d)), (d = theta from polynomial with lower error);</p>
+<p>使用Jtest&gt;(Θ(d))测试集估计泛化误差，(d = theta from误差较小的多项式)</p>
+</li>
+</ol>
+<p>This way, the degree of the polynomial d has not been trained using the test set.</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.png">  </p>
+<h2 id="Diagnosing-Bias-vs-Variance-判断-偏差-误差"><a href="#Diagnosing-Bias-vs-Variance-判断-偏差-误差" class="headerlink" title="Diagnosing Bias vs. Variance 判断 偏差 / 误差"></a>Diagnosing Bias vs. Variance 判断 偏差 / 误差</h2><blockquote>
+<ul>
+<li>We need to distinguish whether <strong>bias</strong> or <strong>variance</strong> is the problem contributing to bad predictions.</li>
+<li>High bias is underfitting and high variance is overfitting. Ideally, we need to find a golden mean between these two.</li>
+<li>高偏差为欠拟合，高方差为过拟合。理想情况下，我们需要在这两者之间找到一个黄金平衡点。</li>
+</ul>
+</blockquote>
+<p><strong>High bias (underfitting)</strong>: both J<sub>train</sub>&gt;(Θ) and J<sub>CV</sub>(Θ) will be high. Also, J<sub>CV</sub>&gt;(Θ)≈J<sub>train</sub>(Θ).</p>
+<p><strong>High variance (overfitting)</strong>: J_{train}(\Theta)* will be low and J_{CV}(\Theta) will be much greater than J_{train}(\Theta)</p>
+<p> <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.png"> </p>
+<h2 id="Regularization-and-Bias-Variance-正则化和偏差误差"><a href="#Regularization-and-Bias-Variance-正则化和偏差误差" class="headerlink" title="Regularization and Bias/Variance 正则化和偏差误差"></a>Regularization and Bias/Variance 正则化和偏差误差</h2><p>In the figure above, we see that as λ increases, our fit becomes more rigid. On the other hand, as λ approaches 0, we tend to over overfit the data. So how do we choose our parameter <em>λ</em> to get it ‘just right’ ? In order to choose the model and the regularization term λ, we need to:</p>
+<ol>
+<li>Create a list of lambdas (i.e. λ∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24});</li>
+<li>Create a set of models with different degrees or any other variants.</li>
+<li>Iterate through the λs and for each <em>λ</em> go through all the models to learn some Θ.</li>
+<li>Compute the cross validation error using the learned Θ (computed with λ) on the J_{CV}(\Theta) without regularization or λ = 0.</li>
+<li>Select the best combo that produces the lowest error on the cross validation set.</li>
+<li>Using the best combo Θ and λ, apply it on J_{test}(\Theta) to see if it has a good generalization of the problem.</li>
+</ol>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/91.png"> </p>
+<h2 id="Learning-Curve-学习曲线"><a href="#Learning-Curve-学习曲线" class="headerlink" title="Learning Curve 学习曲线"></a>Learning Curve 学习曲线</h2><p>Training an algorithm on a very few number of data points (such as 1, 2 or 3) will easily have 0 errors because we can always find a quadratic curve that touches exactly those number of points. Hence:</p>
+<ul>
+<li>As the training set gets larger, the error for a quadratic function increases.<ul>
+<li>随着训练集的增大，二次函数的误差也会增大</li>
+</ul>
+</li>
+<li>The error value will plateau out after a certain m, or training set size.<ul>
+<li>误差值在达到一定的m或训练集大小后会趋于稳定</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.png">  </p>
+<h2 id="Deciding-What-to-Do-Next-Revisited-决定下一步做什么"><a href="#Deciding-What-to-Do-Next-Revisited-决定下一步做什么" class="headerlink" title="Deciding What to Do Next Revisited 决定下一步做什么"></a>Deciding What to Do Next Revisited 决定下一步做什么</h2><p>Our decision process can be broken down as follows:</p>
+<ul>
+<li><p><strong>Getting more training examples:</strong> Fixes high variance</p>
+</li>
+<li><p><strong>Trying smaller sets of features:</strong> Fixes high variance</p>
+</li>
+<li><p><strong>Adding features:</strong> Fixes high bias</p>
+</li>
+<li><p><strong>Adding polynomial features:</strong> Fixes high bias</p>
+</li>
+<li><p><strong>Decreasing λ:</strong> Fixes high bias</p>
+</li>
+<li><p><strong>Increasing λ:</strong> Fixes high variance.</p>
+</li>
+</ul>
+<h3 id="Diagnosing-Neural-Networks-对于神经网络来说"><a href="#Diagnosing-Neural-Networks-对于神经网络来说" class="headerlink" title="Diagnosing Neural Networks 对于神经网络来说"></a><strong>Diagnosing Neural Networks</strong> 对于神经网络来说</h3><ul>
+<li>A neural network with fewer parameters is <strong>prone to underfitting</strong>. It is also <strong>computationally cheaper</strong>.<ul>
+<li>参数较少的神经网络容易出现欠拟合现象。它在计算上也更简单</li>
+</ul>
+</li>
+<li>A large neural network with more parameters is <strong>prone to overfitting</strong>. It is also <strong>computationally expensive</strong>. In this case you can use regularization (increase λ) to address the overfitting.<ul>
+<li>具有较多参数的大型神经网络容易出现过拟合现象。它在计算上也很复杂。在这种情况下，你可以使用正则化(增加λ)来处理过拟合</li>
+</ul>
+</li>
+</ul>
+<p>Using a single hidden layer is a good starting default. You can train your neural network on a number of hidden layers using your cross validation set. You can then select the one that performs best. </p>
+<p>使用单个隐藏层是一个很好的初始默认值。您可以使用交叉验证集在多个隐藏层上训练神经网络。然后您可以选择性能最好的一个。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.png">  </p>
+<h1 id="Machine-Learning-System-Design-机器学习的系统设计"><a href="#Machine-Learning-System-Design-机器学习的系统设计" class="headerlink" title="Machine Learning System Design 机器学习的系统设计"></a>Machine Learning System Design 机器学习的系统设计</h1><h2 id="Building-a-Spam-Classifier-建造一个垃圾分类器"><a href="#Building-a-Spam-Classifier-建造一个垃圾分类器" class="headerlink" title="Building a Spam Classifier 建造一个垃圾分类器"></a>Building a Spam Classifier 建造一个垃圾分类器</h2><p>给定电子邮件的数据集，我们可以为每一封电子邮件构造一个向量。这个向量中的每一项都代表一个单词。向量通常包含10,000到50,000个条目，这些条目是通过在我们的数据集中找到最常使用的单词而收集的。如果在电子邮件中找到一个单词，我们将其相应的条目赋值为1，否则，如果没有找到，该条目将为0。一旦我们准备好了所有的x向量，我们训练我们的算法，最后，我们可以使用它来分类电子邮件是否是垃圾邮件。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/92.png">  </p>
+<p>So how could you spend your time to improve the accuracy of this classifier?</p>
+<ul>
+<li>Collect lots of data (for example “honeypot” project but doesn’t always work)</li>
+<li>Develop sophisticated features (for example: using email header data in spam emails)</li>
+<li>Develop algorithms to process your input in different ways (recognizing misspellings in spam).</li>
+</ul>
+<p>It is difficult to tell which of the options will be most helpful.</p>
+<h3 id="Error-Analysis-误差分析"><a href="#Error-Analysis-误差分析" class="headerlink" title="Error  Analysis 误差分析"></a>Error  Analysis 误差分析</h3><p>The recommended approach to solving machine learning problems is to:</p>
+<ul>
+<li><strong>Start with a simple algorithm, implement it quickly, and test it early on your cross validation data.</strong></li>
+<li><strong>Plot learning curves to decide if more data, more features, etc. are likely to help.</strong></li>
+<li><strong>Manually examine the errors on examples in the cross validation set and try to spot a trend where most of the errors were made.</strong></li>
+</ul>
+<p>​       例如，假设我们有500封电子邮件，而我们的算法将其中的100封错误分类。我们可以手动分析这100封邮件，并根据它们的类型对它们进行分类。然后，我们可以尝试想出新的线索和特征，来帮助我们正确地对这100封邮件进行分类。因此，如果我们错误分类的邮件大部分都是那些试图窃取密码的邮件，那么我们可以找到一些特定于这些邮件的特征，并将它们添加到我们的模型中。我们还可以看到根据词根对每个单词进行分类如何改变我们的错误率。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/93.png">  </p>
+<p>将误差结果作为一个单一的数值得到是非常重要的。否则就很难评估算法的性能。</p>
+<p>例如，如果我们使用词干分析(词干分析是将相同的单词以不同的形式(fail/fail /failed)处理为一个单词(fail)的过程，并且得到3%的错误率，而不是5%，那么我们一定要将其添加到我们的模型中。然而，如果我们试图区分大写字母和小写字母，最终得到3.2%的错误率，而不是3%，那么我们应该避免使用这个新特性。因此，我们应该尝试新事物，为我们的错误率获得一个数值，并根据我们的结果决定是否要保留新特性。</p>
+<h2 id="Handing-Skewed-Data-处理倾斜数据"><a href="#Handing-Skewed-Data-处理倾斜数据" class="headerlink" title="Handing Skewed Data 处理倾斜数据"></a>Handing Skewed Data 处理倾斜数据</h2><p>WHAT IS SKEWED DATA？</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/94.png">  </p>
+<p>拿这个癌症分类器的例子来说，如果我们设置一个忽略特征变量X的类，也就是说把所有的都看做是没有癌症的，那么他得到的结果却比运用了逻辑回归模型的结果还要好，这是不合理的，我们称这样的类叫做倾斜类。</p>
+<p>那么，该怎么处理倾斜类呢，我们可以换个角度来判断模型的误差：</p>
+<h3 id="Precision-Recall-准确率和召回"><a href="#Precision-Recall-准确率和召回" class="headerlink" title="Precision/Recall 准确率和召回"></a>Precision/Recall 准确率和召回</h3><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/95.png">  </p>
+<h2 id="Trading-off-precision-and-recall-权衡准确率和召回-F值"><a href="#Trading-off-precision-and-recall-权衡准确率和召回-F值" class="headerlink" title="Trading off precision and recall 权衡准确率和召回 / F值"></a>Trading off precision and recall 权衡准确率和召回 / F值</h2><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/96.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/97.png">  </p>
+<h2 id="Data-for-Machine-Learning-对于机器学习的数据"><a href="#Data-for-Machine-Learning-对于机器学习的数据" class="headerlink" title="Data  for Machine Learning 对于机器学习的数据"></a>Data  for Machine Learning 对于机器学习的数据</h2><p>对于机器学习来说，训练集的数据量的大小在某些情况下也是十分重要的，大量的数据对于算法的优化，可以使一个不太好的算法优化到一个足够好的地步。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/98.png">  </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/99.png">  </p>
+<p>总之就是拥有大量参数的算法，或者说有多层隐藏层的神经网络，使用小数据量的时候容易过拟合的算法，可以使用大量的数据进行优化，效果会比较显著；而对于参数较少，且对于预测结果影响不大的算法，加大数据集并不是一个好的选择，比如你只给房子的大小来预测房价。</p>
+<h1 id="Support-Vector-Machine-支持向量机"><a href="#Support-Vector-Machine-支持向量机" class="headerlink" title="Support Vector Machine 支持向量机"></a>Support Vector Machine 支持向量机</h1><h1 id="Unsupervised-Learning-无监督学习"><a href="#Unsupervised-Learning-无监督学习" class="headerlink" title="Unsupervised Learning 无监督学习"></a>Unsupervised Learning 无监督学习</h1><h2 id="Clustering-聚类"><a href="#Clustering-聚类" class="headerlink" title="Clustering 聚类"></a>Clustering 聚类</h2><h3 id="K-Means-Algorithm-K-均值算法"><a href="#K-Means-Algorithm-K-均值算法" class="headerlink" title="K-Means Algorithm  K-均值算法"></a>K-Means Algorithm  K-均值算法</h3><p><strong>算法思想：</strong></p>
+<p>预将数据分为K组，则随机选取K个对象作为初始的聚类中心，然后计算每个对象与各个种子聚类中心之间的距离，把每个对象分配给距离它最近的聚类中心。</p>
+<p>聚类中心以及分配给它们的对象就代表一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%81%9A%E7%B1%BB/593695">聚类</a>。每分配一个样本，聚类的聚类中心会根据聚类中现有的对象被重新计算。</p>
+<p>这个过程将不断重复直到满足某个终止条件。终止条件可以是没有（或最小数目）对象被重新分配给不同的聚类，没有（或最小数目）聚类中心再发生变化，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AF%AF%E5%B7%AE/738024">误差</a><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%B3%E6%96%B9%E5%92%8C/783894">平方和</a>局部最小。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/106.png">  </p>
+<p><strong>K-Means 算法步骤展示：</strong></p>
+<p>第一步： 选择Cluster centroids；</p>
+<img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/100.png" style="zoom: 50%;"> 
+
+<p>第二步： 根据输入的值按照离聚类的中心（cluster centroids）的距离，将输入值分到不同的Cluster当中；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/101.png">  </p>
+<p>第三步：根据不同的Cluster的中心不同，重新定义Cluster Centroids的位置；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/102.png">  </p>
+<p>第四步：重复第二步和第三步；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/103.png"> </p>
+<p>再次迭代2，3步</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/104.png"> </p>
+<p>第五步：等到N次迭代后，K-Means算法会将输入值稳定的分为不同的Clusters</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/105.png"> </p>
+<p><strong>K-Mean for non-separated clusters</strong></p>
+<p>对于未明显分开的聚类来说，也可以使用K-Means算法来进行分类；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/107.png">  </p>
+<h3 id="Optimazation-Objective-优化目标"><a href="#Optimazation-Objective-优化目标" class="headerlink" title="Optimazation Objective 优化目标"></a>Optimazation Objective 优化目标</h3><p>在之前所记录的回归算法中的优化都会有一个目标，比如代价函数损失函数之类；</p>
+<p>在K-Means算法中的优化目标如下：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/108.png">  </p>
+<p>范数，是具有“长度”概念的函数。上图中的优化目标函数中的范式就代表这 数据集中的点到该聚类中心的距离；</p>
+<p>下图中所代表的表示先计算一遍将u看作常数，x<sup>（i）</sup> 为变量的最优化的情况，在把u看作变量，x<sup>(i)</sup> 看做常数在计算一边的优化情况，随后进入下一轮迭代；<img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/109.png"> </p>
+<h3 id="Random-Initialization-随机初始化"><a href="#Random-Initialization-随机初始化" class="headerlink" title="Random Initialization 随机初始化"></a>Random Initialization 随机初始化</h3><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/110.png">  </p>
+<p>随机初始化的设定 Cluster Centroids 可能会因为各种原因，导致不能够完成最佳的聚类分类或者是卡到局部最优解处；如下图所示</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/111.png">  </p>
+<p>所以为了能够找到可以使优化目标到达最佳的初始点，或者说找到可以适当分类的初始点，我们可以多做几次初始化选择；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/112.png">  </p>
+<h3 id="Choosing-the-number-of-clusters-对于聚类中心个数的选择"><a href="#Choosing-the-number-of-clusters-对于聚类中心个数的选择" class="headerlink" title="Choosing the number of clusters 对于聚类中心个数的选择"></a>Choosing the number of clusters 对于聚类中心个数的选择</h3><p>常常我们在进行K-Means算法之前，我们需要决定多少个聚类中心，所以这里会有一个Elbow Method（手肘方法）来帮助我们判断，如下图中的第一个图，在K = 3 和 K = 4 之间有一个明显的拐点，所以这个K = 3可以当作优先考虑的点；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/113.png"> </p>
+<p>但是有时候这个手肘方法并不是那么的见效，可能像上图的第二的所展示的；那么这个时候，我们就要考虑到现实的意义了，比如说你现在做这个聚类的目的是什么，像T-shirt的分类，你可以分为三个，S M L，也可以进一步分为五个，XS S M L XL</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/119.png"> </p>
+<h1 id="Dimensionatity-Reduction-降维"><a href="#Dimensionatity-Reduction-降维" class="headerlink" title="Dimensionatity  Reduction 降维"></a>Dimensionatity  Reduction 降维</h1><blockquote>
+<p>降维：在<a href="https://link.zhihu.com/?target=https://zh.wikipedia.org/wiki/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>和<a href="https://link.zhihu.com/?target=https://zh.wikipedia.org/wiki/%E7%BB%9F%E8%AE%A1%E5%AD%A6">统计学</a>领域，<strong>降维</strong>是指在某些限定条件下，降低随机变量个数，得到一组“不相关”主变量的过程（较本质的解释）。</p>
+<p>换言之，降维其更深层次的意义在于<strong>有效信息的提取综合及无用信息的摈弃。</strong></p>
+<p>数据降维算法是机器学习算法中的大家族，与分类、回归、聚类等算法不同，它的目标是将向量投影到<strong>低维空间</strong>，以达到某种目的如可视化，或是做分类。</p>
+</blockquote>
+<p>为什么要降低维度？</p>
+<h2 id="Motivation-目的"><a href="#Motivation-目的" class="headerlink" title="Motivation 目的"></a>Motivation 目的</h2><h3 id="Data-Compression-数据压缩"><a href="#Data-Compression-数据压缩" class="headerlink" title="Data Compression 数据压缩"></a>Data Compression 数据压缩</h3><p>将二维的特征变量变为一维的特征变量，如下图中所示的 x1（cm） 和 x2（inches）表示的是都是长度，就可以将这两个特征变量降到一维的，用Z1（一条直线）来表示；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/114.png">   </p>
+<p>接下来是一个三维降到二维的例子；（实际上降维可以从很高维降到低维度）</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/115.png">  </p>
+<p>图中的三维特征变量，先从第一步未降维的点云降到第二步当中的压缩到一个平面当中，并用z1和z2来表示，在第三步当中用一个平面坐标轴表示；</p>
+<h3 id="Visualization-可视化"><a href="#Visualization-可视化" class="headerlink" title="Visualization 可视化"></a>Visualization 可视化</h3><p>降维的另外一个目的就是将原本高维的，不可视的数据集来降到2D or 3D来进行可视化；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/116.png">  </p>
+<p>如这个数据集当中，有50个特征变量，如GDP，人均GDP……..</p>
+<p>如果直接按照这个来进行，维度太高是不可以进行可视化的，那么我们就将特征变量降到2维的情况；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/117.png"> </p>
+<p>降维到2D后，就可以用z1 和 z2 来进行可视化表示，每个点就代表来一个国家；而z1 和 z2 很难赋予他一个准确的物理意义，可能z1是各个特征变量一起降维而得到的GDP ，z2 也是同样而得到的人均GDP。</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/118.png">  </p>
+<h2 id="PCA（Principal-Component-Analysis-problem-formula1on）主成分分析"><a href="#PCA（Principal-Component-Analysis-problem-formula1on）主成分分析" class="headerlink" title="PCA（Principal Component Analysis problem formula1on）主成分分析"></a>PCA（Principal Component Analysis problem formula1on）主成分分析</h2><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/120.png"> </p>
+<p>主成分分析是用来将原先高维的特征变量转化为低维的特征变量；</p>
+<p>通过正交变换将一组可能存在相关性的变量转换为一组线性不相关的变量，转换后的这组变量叫主成分。</p>
+<p>主成分分析是设法将原来众多具有一定相关性（比如P个指标），重新组合成一组新的互相无关的综合指标来代替原来的指标。</p>
+<p>主成分分析法是一种降维的统计方法，它借助于一个正交变换，将其分量相关的原随机向量转化成其分量不相关的新随机向量，这在代数上表现为将原随机向量的协方差阵变换成对角形阵，在几何上表现为将原坐标系变换成新的正交坐标系，使之指向样本点散布最开的p 个正交方向，然后对多维变量系统进行降维处理，使之能以一个较高的精度转换成低维变量系统，再通过构造适当的价值函数，进一步把低维系统转化成一维系统。</p>
+<p>PCA降维的目的，就是为了在尽量保证“信息量不丢失”的情况下，对原始特征进行降维，也就是尽可能将原始特征往具有最大投影信息量的维度上进行投影。将原特征投影到这些维度上，使降维后信息量损失最小。<img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/121.png"></p>
+<h3 id="求解步骤"><a href="#求解步骤" class="headerlink" title="求解步骤"></a>求解步骤</h3><blockquote>
+<p>去除平均值<br>计算协方差矩阵<br>计算协方差矩阵的特征值和特征向量<br>将特征值排序<br>保留前N个最大的特征值对应的特征向量<br>将原始特征转换到上面得到的N个特征向量构建的新空间中（最后两步，实现了特征压缩）</p>
+</blockquote>
+<p>Data Preprocessing 数据预处理</p>
+<p>  在进行算法之前要对数据进行预处理，进行均值归一化，有必要还需要使用特征缩放；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/122.png"> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/123.png"> </p>
+<p>u1 和 u2 是特征变量将要映射到的平面，而PCA算法需要将各个数据点映射到该平面上的距离最短</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/124.png"> </p>
+<p>在octave or matlab中 可以使用 svd 来计算协方差矩阵</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/125.png"> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/126.png"> </p>
+<h3 id="选择主成分的个数"><a href="#选择主成分的个数" class="headerlink" title="选择主成分的个数"></a>选择主成分的个数</h3><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/127.png"> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/128.png"> </p>
+<p>最后应该选择使 上述式子&lt;= 0.01 的 k 的最小的值；</p>
+<h1 id="Anomaly-Detection-误差检测"><a href="#Anomaly-Detection-误差检测" class="headerlink" title="Anomaly Detection 误差检测"></a>Anomaly Detection 误差检测</h1><h2 id="Density-Estimation-密度估计"><a href="#Density-Estimation-密度估计" class="headerlink" title="Density Estimation 密度估计"></a>Density Estimation 密度估计</h2><p>以航天发动机的例子来说明这个异常检测：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/129.png"> </p>
+<p>P（x）为检测的模型： <img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/130.png">  </p>
+<p>异常检测的例子：</p>
+<p>欺诈检测；工厂检测；电脑监控</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/131.png">  </p>
+<h2 id="Gassian-distribution-高斯分布"><a href="#Gassian-distribution-高斯分布" class="headerlink" title="Gassian distribution 高斯分布"></a>Gassian distribution 高斯分布</h2><p>高斯分布，不介绍了，主要就是有两个参树；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/132.png">  </p>
+<p> u /miu 代表了特征的平均值 ，variance 就是方差，和宽度有关系；</p>
+<p>下面有四个高斯分布的例子：</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/133.png">  </p>
+<p>mean 和 variance都是可以用公式来计算的；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/134.png">  </p>
+<h2 id="Algorithm-算法"><a href="#Algorithm-算法" class="headerlink" title="Algorithm 算法"></a>Algorithm 算法</h2><p>P（x）</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/135.png"></p>
+<blockquote>
+<p>Anomaly detection algorithm的步骤：</p>
+<ol>
+<li>选择你认为可能是异常例子的特点的特征x<sub>i</sub></li>
+<li>拟合出参数 u1，….,un; 方差1，……方差n</li>
+<li>给一个新的例子x，计算p（x）</li>
+</ol>
+</blockquote>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/136.png"> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/137.png"></p>
+<h2 id="Developing-and-evaluating-an-anomaly-detection-system-评估异常检测系统"><a href="#Developing-and-evaluating-an-anomaly-detection-system-评估异常检测系统" class="headerlink" title="Developing and evaluating an anomaly detection system 评估异常检测系统"></a>Developing and evaluating an anomaly detection system 评估异常检测系统</h2><p>对于任何事物来说，有一个可以用数值来表示的评估方案是非常重要的；</p>
+<p>下面是一个航天发动机的例子：</p>
+<p>粉色框框表示将交叉验证集和测试集放在一起了，不推荐这种做法；</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/138.png"> </p>
+<h3 id="Algorithm-evaluation-算法评估"><a href="#Algorithm-evaluation-算法评估" class="headerlink" title="Algorithm evaluation 算法评估"></a>Algorithm evaluation 算法评估</h3><p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/139.png">  </p>
+<h2 id="Choosing-what-features-to-use-选择特征变量"><a href="#Choosing-what-features-to-use-选择特征变量" class="headerlink" title="Choosing what features to use 选择特征变量"></a>Choosing what features to use 选择特征变量</h2><p>非高斯分布的特征变量的值可以经过变换</p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/140.png"> </p>
+<p><img src="/2021/12/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/141.png"> </p>
+<h1 id="Recommand-system-推荐系统"><a href="#Recommand-system-推荐系统" class="headerlink" title="Recommand system 推荐系统"></a>Recommand system 推荐系统</h1><h2 id="Predicting-Movie-Ratings-预测电影评分例子"><a href="#Predicting-Movie-Ratings-预测电影评分例子" class="headerlink" title="Predicting Movie Ratings 预测电影评分例子"></a>Predicting Movie Ratings 预测电影评分例子</h2><h2 id="Collaborative-Filtering-协同过滤"><a href="#Collaborative-Filtering-协同过滤" class="headerlink" title="Collaborative Filtering 协同过滤"></a>Collaborative Filtering 协同过滤</h2><h1 id="Large-Scale-Machine-Learning-大规模机器学习"><a href="#Large-Scale-Machine-Learning-大规模机器学习" class="headerlink" title="Large Scale Machine Learning 大规模机器学习"></a>Large Scale Machine Learning 大规模机器学习</h1><h2 id="Gradient-Descent-with-Large-Datasets"><a href="#Gradient-Descent-with-Large-Datasets" class="headerlink" title="Gradient Descent with Large Datasets"></a>Gradient Descent with Large Datasets</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/14/%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E4%B8%8E%E5%9B%BE%E6%90%9C%E7%B4%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1974,17 +2798,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">分类</span>
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
