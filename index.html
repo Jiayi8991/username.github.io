@@ -160,6 +160,208 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/" class="post-title-link" itemprop="url">傅里叶变换</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-30 10:42:28" itemprop="dateCreated datePublished" datetime="2022-08-30T10:42:28+08:00">2022-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-31 12:10:23" itemprop="dateModified" datetime="2022-08-31T12:10:23+08:00">2022-08-31</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="频域"><a href="#频域" class="headerlink" title="频域"></a>频域</h1><p>本文转载于：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19763358">https://zhuanlan.zhihu.com/p/19763358</a></p>
+<p>李永乐讲的傅立叶变换：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1A4411Y7vj?spm_id_from=333.337.search-card.all.click&amp;vd_source=fa800c4c8b55ad3e9b5e96670557580d">https://www.bilibili.com/video/BV1A4411Y7vj?spm_id_from=333.337.search-card.all.click&amp;vd_source=fa800c4c8b55ad3e9b5e96670557580d</a></p>
+<blockquote>
+<p>你眼中看似落叶纷飞变化无常的世界，实际只是躺在上帝怀中一份早已谱好的乐章。</p>
+</blockquote>
+<p>从我们出生，我们看到的世界都以时间贯穿，股票的走势、人的身高、汽车的轨迹都会随着时间发生改变。这种以时间作为参照来观察动态世界的方法我们称其为时域分析。而我们也想当然的认为，世间万物都在随着时间不停的改变，并且永远不会静止下来。但如果我告诉你，用另一种方法来观察世界的话，你会发现世界是永恒不变的，你会不会觉得我疯了？我没有疯，这个静止的世界就叫做频域。</p>
+<p>先举一个<strong>公式上并非很恰当</strong>，但意义上再贴切不过的例子：</p>
+<p>在你的理解中，一段音乐是什么呢？</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/1.png">  </p>
+<p>这是我们对音乐最普遍的理解，一个随着时间变化的震动。但我相信对于乐器小能手们来说，音乐更直观的理解是这样的：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/2.png">  </p>
+<p>上图是音乐在时域的样子，而下图则是音乐在频域的样子。</p>
+<p>将两个图进行简化：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/3.png">  </p>
+<p>在时域，我们观察到钢琴的琴弦一会上一会下的摆动，就如同一支股票的走势；而在频域，只有那一个永恒的音符。</p>
+<blockquote>
+<p><strong>任何周期函数，都可以看作是不同振幅，不同相位正弦波的叠加。</strong></p>
+<p>在第一个例子里我们可以理解为，利用对不同琴键不同力度，不同时间点的敲击，可以组合出任何一首乐曲。</p>
+</blockquote>
+<p>而贯穿时域与频域的方法之一，就是传说中的傅里叶分析。傅里叶分析可分为傅里叶级数（Fourier Serie）和傅里叶变换(Fourier Transformation)，我们从简单的开始谈起。</p>
+<h1 id="傅立叶级数-Fourier-Series-的频谱"><a href="#傅立叶级数-Fourier-Series-的频谱" class="headerlink" title="傅立叶级数(Fourier Series)的频谱"></a>傅立叶级数(Fourier Series)的频谱</h1><p>下面用一个例子来用正弦曲线波叠加出来一个带90度角的矩形波来，你会相信吗？你不会，就像当年的我一样。但是看看下图：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/4.png">  </p>
+<p>第一幅图是一个郁闷的正弦波cos（x）</p>
+<p>第二幅图是2个卖萌的正弦波的叠加cos(x)+a.cos(3x)</p>
+<p>第三幅图是4个发春的正弦波的叠加</p>
+<p>第四幅图是10个便秘的正弦波的叠加</p>
+<p>随着正弦波数量逐渐的增长，他们最终会叠加成一个标准的矩形，大家从中体会到了什么道理？</p>
+<p>（只要努力，弯的都能掰直！）</p>
+<p>随着叠加的递增，所有正弦波中上升的部分逐渐让原本缓慢增加的曲线不断变陡，而所有正弦波中下降的部分又抵消了上升到最高处时继续上升的部分使其变为水平线。一个矩形就这么叠加而成了。但是要多少个正弦波叠加起来才能形成一个标准90度角的矩形波呢？不幸的告诉大家，答案是无穷多个。（上帝：我能让你们猜着我？）</p>
+<p>不仅仅是矩形，你能想到的任何波形都是可以如此方法用正弦波叠加起来的。这是没<br>有接触过傅里叶分析的人在直觉上的第一个难点，但是一旦接受了这样的设定，游戏就开始有意思起来了。</p>
+<p>还是上图的正弦波累加成矩形波，我们换一个角度来看看：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/5.png">  </p>
+<p>在这几幅图中，最前面黑色的线就是所有正弦波叠加而成的总和，也就是越来越接近矩形波的那个图形。而后面依不同颜色排列而成的正弦波就是组合为矩形波的各个分量。这些正弦波按照频率从低到高从前向后排列开来，而每一个波的振幅都是不同的。一定有细心的读者发现了，每两个正弦波之间都还有一条直线，那并不是分割线，而是振幅为0的正弦波！也就是说，为了组成特殊的曲线，有些正弦波成分是不需要的。</p>
+<p>这里，不同频率的正弦波我们成为频率分量。</p>
+<p>如果我们把第一个频率最低的频率分量看作“1”，我们就有了构建频域的最基本单元。</p>
+<p>对于我们最常见的有理数轴，数字“1”就是有理数轴的基本单元。</p>
+<p>时域的基本单元就是“1秒”，如果我们将一个角频率为ω0的正弦波cos（ω0t）看作基础，那么频域的基本单元就是ω0。</p>
+<p>有了“1”，还要有“0”才能构成世界，那么频域的“0”是什么呢？cos（0t）就是一个周期无限长的正弦波，也就是一条直线！所以在频域，0频率也被称为直流分量，在傅里叶级数的叠加中，它仅仅影响全部波形相对于数轴整体向上或是向下而不改变波的形状。</p>
+<p>接下来，让我们回到初中，回忆一下已经死去的八戒，啊不，已经死去的老师是怎么定义正弦波的吧。</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/6.png">  </p>
+<p>正弦波就是一个圆周运动在一条直线上的投影。所以频域的基本单元也可以理解为一个始终在旋转的圆</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/Fourier_series_square_wave_circles_animation.gif">  <img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/Fourier_series_sawtooth_wave_circles_animation.gif">  </p>
+<p>介绍完了频域的基本组成单元，我们就可以看一看一个矩形波，在频域里的另一个模样了：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/7.png">  </p>
+<p>这就是矩形波在频域的样子，是不是完全认不出来了？教科书一般就给到这里然后留给了读者无穷的遐想，以及无穷的吐槽，其实教科书只要补一张图就足够了：频域图像，也就是俗称的频谱，就是——</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/8.png">  </p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/9.png">  </p>
+<p>可以发现，在频谱中，偶数项的振幅都是0，也就对应了图中的彩色直线。振幅为0的正弦波。动态图片如下：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/Fourier_series_and_transform.gif">  </p>
+<p>在讲相位谱之前，我们先回顾一下刚刚的这个例子究竟意味着什么。记得前面说过的那句“世界是静止的”吗？估计好多人对这句话都已经吐槽半天了。想象一下，世界上每一个看似混乱的表象，实际都是一条时间轴上不规则的曲线，但实际这些曲线都是由这些无穷无尽的正弦波组成。我们看似不规律的事情反而是规律的正弦波在时域上的投影，而正弦波又是一个旋转的圆在直线上的投影。那么你的脑海中会产生一个什么画面呢？</p>
+<p>我们眼中的世界就像皮影戏的大幕布，幕布的后面有无数的齿轮，大齿轮带动小齿轮，小齿轮再带动更小的。在最外面的小齿轮上有一个小人——那就是我们自己。我们只看到这个小人毫无规律的在幕布前表演，却无法预测他下一步会去哪。而幕布后面的齿轮却永远一直那样不停的旋转，永不停歇。这样说来有些宿命论的感觉。说实话，这种对人生的描绘是我一个朋友在我们都是高中生的时候感叹的，当时想想似懂非懂，直到有一天我学到了傅里叶级数……</p>
+<h1 id="傅立叶级数-Fourier-Series-的相位谱"><a href="#傅立叶级数-Fourier-Series-的相位谱" class="headerlink" title="傅立叶级数(Fourier Series)的相位谱"></a>傅立叶级数(Fourier Series)的相位谱</h1><p>上一章的关键词是：从侧面看。这一章的关键词是：从下面看。</p>
+<p>在这一章最开始，我想先回答很多人的一个问题：傅里叶分析究竟是干什么用的？这段相对比较枯燥，已经知道了的同学可以直接跳到下一个分割线。</p>
+<p>先说一个最直接的用途。无论听广播还是看电视，我们一定对一个词不陌生——频道。频道频道，就是频率的通道，不同的频道就是将不同的频率作为一个通道来进行信息传输。下面大家尝试一件事：</p>
+<p>先在纸上画一个sin（x），不一定标准，意思差不多就行。不是很难吧。</p>
+<p>好，接下去画一个sin（3x）+sin（5x）的图形。</p>
+<p>别说标准不标准了，曲线什么时候上升什么时候下降你都不一定画的对吧？</p>
+<p>好，画不出来不要紧，我把sin（3x）+sin（5x）的曲线给你，但是前提是你不知道这个曲线的方程式，现在需要你把sin（5x）给我从图里拿出去，看看剩下的是什么。这基本是不可能做到的。</p>
+<p>但是在频域呢？则简单的很，无非就是几条竖线而已。</p>
+<p>所以很多在时域看似不可能做到的数学操作，在频域相反很容易。这就是需要傅里叶变换的地方。尤其是从某条曲线中去除一些特定的频率成分，这在工程上称为滤波，是信号处理最重要的概念之一，只有在频域才能轻松的做到。</p>
+<p>再说一个更重要，但是稍微复杂一点的用途——求解微分方程。（这段有点难度，看不懂的可以直接跳过这段）微分方程的重要性不用我过多介绍了。各行各业都用的到。但是求解微分方程却是一件相当麻烦的事情。因为除了要计算加减乘除，还要计算微分积分。而傅里叶变换则可以让微分和积分在频域中变为乘法和除法，大学数学瞬间变小学算术有没有。</p>
+<p>傅里叶分析当然还有其他更重要的用途，我们随着讲随着提。</p>
+<p>————————————————————————————————————</p>
+<p>下面我们继续说相位谱：</p>
+<p>通过时域到频域的变换，我们得到了一个从侧面看的频谱，但是这个频谱并没有包含时域中全部的信息。因为频谱只代表每一个对应的正弦波的振幅是多少，而没有提到相位。基础的正弦波A.sin(wt+θ)中，振幅，频率，相位缺一不可，不同相位决定了波的位置，所以对于频域分析，仅仅有频谱（振幅谱）是不够的，我们还需要一个相位谱。那么这个相位谱在哪呢？我们看下图，这次为了避免图片太混论，我们用7个波叠加的图。</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/10.png">  </p>
+<p>鉴于正弦波是周期的，我们需要设定一个用来标记正弦波位置的东西。在图中就是那些小红点。小红点是距离频率轴最近的波峰，而这个波峰所处的位置离频率轴有多远呢？为了看的更清楚，我们将红色的点投影到下平面，投影点我们用粉色点来表示。当然，这些粉色的点只标注了波峰距离频率轴的距离，并不是相位。</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/11.png">  </p>
+<p>这里需要纠正一个概念：时间差并不是相位差。如果将全部周期看作2Pi或者360度的话，相位差则是时间差在一个周期中所占的比例。我们将时间差除周期再乘2Pi，就得到了相位差。</p>
+<p>在完整的立体图中，我们将投影得到的时间差依次除以所在频率的周期，就得到了最下面的相位谱。所以，频谱是从侧面看，相位谱是从下面看。</p>
+<p>注意到，相位谱中的相位除了0，就是Pi。因为cos（t+Pi）=-cos（t），所以实际上相位为Pi的波只是上下翻转了而已。对于周期方波的傅里叶级数，这样的相位谱已经是很简单的了。另外值得注意的是，由于cos（t+2Pi）=cos（t），所以相位差是周期的，pi和3pi，5pi，7pi都是相同的相位。人为定义相位谱的值域为(-pi，pi]，所以图中的相位差均为Pi。</p>
+<p>最后来一张大集合：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/12.png">  </p>
+<h1 id="傅立叶变换-Fourier-Transformation"><a href="#傅立叶变换-Fourier-Transformation" class="headerlink" title="傅立叶变换(Fourier Transformation)"></a>傅立叶变换(Fourier Transformation)</h1><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/21.png" style="zoom:150%;">  
+
+<p>实部为 频率的连续谱</p>
+<p>虚部为 相位的连续谱</p>
+<p>相信通过前面三章，大家对频域以及傅里叶级数都有了一个全新的认识。但是文章在一开始关于钢琴琴谱的例子我曾说过，这个栗子是一个公式错误，但是概念典型的例子。所谓的公式错误在哪里呢？</p>
+<p>傅里叶级数的本质是将一个周期的信号分解成无限多分开的（离散的）正弦波，但是宇宙似乎并不是周期的。</p>
+<p>比如傅里叶级数，在时域是一个周期且连续的函数，而在频域是一个非周期离散的函数。这句话比较绕嘴，实在看着费事可以干脆回忆第一章的图片。</p>
+<p>而在我们接下去要讲的傅里叶变换，则是将一个时域非周期的连续信号，转换为一个在频域非周期的连续信号。</p>
+<p>算了，还是上一张图方便大家理解吧：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/13.png">  </p>
+<p>所以说，钢琴谱其实并非一个连续的频谱，而是很多在时间上离散的频率，但是这样的一个贴切的比喻真的是很难找出第二个来了。</p>
+<p>因此在傅里叶变换在频域上就从离散谱变成了连续谱。那么连续谱是什么样子呢？</p>
+<blockquote>
+<p>你见过大海么？</p>
+</blockquote>
+<p>为了方便大家对比，我们这次从另一个角度来看频谱，还是傅里叶级数中用到最多的那幅图，我们从频率较高的方向看。</p>
+<p>以上是离散谱，那么连续谱是什么样子呢？</p>
+<p>尽情的发挥你的想象，想象这些离散的正弦波离得越来越近，逐渐变得连续……</p>
+<p>直到变得像波涛起伏的大海：</p>
+<p><img src="https://pic4.zhimg.com/ece53f825c6de629befba3de12f929a7_r.jpg" alt="img"></p>
+<p>很抱歉，为了能让这些波浪更清晰的看到，我没有选用正确的计算参数，而是选择了一些让图片更美观的参数，不然这图看起来就像屎一样了。</p>
+<p>不过通过这样两幅图去比较，大家应该可以理解如何从离散谱变成了连续谱的了吧？原来离散谱的叠加，变成了连续谱的累积。所以在计算上也从求和符号变成了积分符号。</p>
+<p>不过，这个故事还没有讲完，接下去，我保证让你看到一幅比上图更美丽壮观的图片，但是这里需要介绍到一个数学工具才能然故事继续，这个工具就是——</p>
+<h1 id="欧拉公式"><a href="#欧拉公式" class="headerlink" title="欧拉公式"></a>欧拉公式</h1><p>虚数i这个概念大家在高中就接触过，但那时我们只知道它是-1的平方根，可是它真正的意义是什么呢?</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/15.png">  </p>
+<p>这里有一条数轴，在数轴上有一个红色的线段，它的长度是1。当它乘以3的时候，它的长度发生了变化，变成了蓝色的线段，而当它乘以-1的时候，就变成了绿色的线段，或者说线段在数轴上围绕原点旋转了180度。</p>
+<p>我们知道乘-1其实就是乘了两次 i使线段旋转了180度，那么乘一次 i 呢——答案很简单——旋转了90度。</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/16.png">  </p>
+<p>同时，我们获得了一个垂直的虚数轴。实数轴与虚数轴共同构成了一个复数的平面，也称复平面。这样我们就了解到，乘虚数i的一个功能——旋转。</p>
+<p>现在，就有请宇宙第一耍帅公式欧拉公式隆重登场——</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/17.png">  </p>
+<p>这个公式在数学领域的意义要远大于傅里叶分析，但是乘它为宇宙第一耍帅公式是因为它的特殊形式——当x等于Pi的时候。</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/18.png">  </p>
+<p>这个公式关键的作用，是将正弦波统一成了简单的指数形式。我们来看看图像上的含义：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/19.png">   </p>
+<p>欧拉公式所描绘的，是一个随着时间变化，在复平面上做圆周运动的点，随着时间的改变，在时间轴上就成了一条螺旋线。如果只看它的实数部分，也就是螺旋线在左侧的投影，就是一个最基础的余弦函数。而右侧的投影则是一个正弦函数。</p>
+<h1 id="指数形式的傅立叶变换"><a href="#指数形式的傅立叶变换" class="headerlink" title="指数形式的傅立叶变换"></a>指数形式的傅立叶变换</h1><p>有了欧拉公式的帮助，我们便知道：<strong>正弦波的叠加</strong>，也可以理解为<strong>螺旋线的叠加</strong>在实数空间的投影。而螺旋线的叠加如果用一个形象的栗子来理解是什么呢？</p>
+<p><strong>光波</strong></p>
+<p>高中时我们就学过，自然光是由不同颜色的光叠加而成的，而最著名的实验就是牛顿师傅的三棱镜实验：</p>
+<p>所以其实我们在很早就接触到了光的频谱，只是并没有了解频谱更重要的意义。</p>
+<p>但不同的是，傅里叶变换出来的频谱不仅仅是可见光这样频率范围有限的叠加，而是频率从0到无穷所有频率的组合。</p>
+<p>这里，我们可以用两种方法来理解正弦波：</p>
+<p>第一种前面已经讲过了，就是螺旋线在实轴的投影。</p>
+<p>另一种需要借助欧拉公式的另一种形式去理解：</p>
+<p>e<sup>it</sup>=cos(t) + i*sin(t)<br>e<sup>-it</sup>=cos(t) - i *sin(t)</p>
+<p>将以上两式相加再除2，得到：</p>
+<p>cos(t)=e<sup>it</sup>+e<sup>-it</sup> / 2</p>
+<p>这个式子可以怎么理解呢？</p>
+<p>我们刚才讲过，e^(it)可以理解为一条逆时针旋转的螺旋线，那么e^(-it)则可以理解为一条顺时针旋转的螺旋线。而cos(t)则是这两条旋转方向不同的螺旋线叠加的一半，因为这两条螺旋线的虚数部分相互抵消掉了！</p>
+<p>举个例子的话，就是极化方向不同的两束光波，磁场抵消，电场加倍。</p>
+<p>这里，逆时针旋转的我们称为正频率，而顺时针旋转的我们称为负频率（注意不是复频率）。</p>
+<p>好了，刚才我们已经看到了大海——连续的傅里叶变换频谱，现在想一想，连续的螺旋线会是什么样子：</p>
+<p>想象一下再往下翻：</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/20.png">   </p>
+<p>那个像大海螺一样的图，为了方便观看，我仅仅展示了其中正频率的部分，负频率的部分没有显示出来。</p>
+<p>如果你认真去看，海螺图上的每一条螺旋线都是可以清楚的看到的，每一条螺旋线都有着不同的振幅（旋转半径），频率（旋转周期）以及相位。而将所有螺旋线连成平面，就是这幅海螺图了。</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ol>
+<li><p>声音的应用</p>
+<p>声波进行傅立叶变换，将其中的频率分出来，如低频是男声，高频是女声，或者噪音，进行区分</p>
+</li>
+<li><p>图像的处理</p>
+<p>光波或者图像，低频是轮廓部分，高频是细节部分，通过对于高频低频的过滤，可以进行图像的操作</p>
+<p><img src="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/22.png">  </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/08/29/CUDA%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3065,428 +3267,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2021/12/21/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9A%8F%E6%9C%BA%E4%BC%98%E5%8C%96%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Jiayi Liang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JiayiSpace">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/21/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9A%8F%E6%9C%BA%E4%BC%98%E5%8C%96%E6%90%9C%E7%B4%A2/" class="post-title-link" itemprop="url">基于遗传算法的随机优化搜索</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-21 22:25:00" itemprop="dateCreated datePublished" datetime="2021-12-21T22:25:00+08:00">2021-12-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-29 16:01:24" itemprop="dateModified" datetime="2022-08-29T16:01:24+08:00">2022-08-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h1 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="个体与种群"><a href="#个体与种群" class="headerlink" title="个体与种群"></a>个体与种群</h2><ul>
-<li>个体(individual/candidate) 就是模拟生物个体而对问题中的对象（一般就是问题的解）的一种称呼，一个个体也就是搜索空间中的一个点</li>
-<li>种群(population) 就是模拟生物种群而由若干个体组成的群体, 它一般是整个搜索空间的一个很小的子集。<ul>
-<li>生活例子：杂交水稻。</li>
-</ul>
-</li>
-</ul>
-<h2 id="适应度和适应度函数"><a href="#适应度和适应度函数" class="headerlink" title="适应度和适应度函数"></a>适应度和适应度函数</h2><ul>
-<li>   适应度(fitness)就是借鉴生物个体对环境的适应程度,而对问题中的个体对象所设计的表征其优劣的一种测度。</li>
-<li>   适应度函数(fitness function)就是问题中的 全体个体与其适应度之间的一个对应关系。它一般是一个实值函数。该函数就是遗传算法中<strong>指导搜索的评价函数（函数值越大越好）</strong>。 </li>
-</ul>
-<h2 id="染色体和基因"><a href="#染色体和基因" class="headerlink" title="染色体和基因"></a>染色体和基因</h2><ul>
-<li><p>染色体（chromosome）就是问题中个体的某种字符串形式的编码表示。字符串中的字符也就称为基因（gene）。</p>
-</li>
-<li><p>  例如：</p>
-</li>
-</ul>
-<p>  ​      个体     染色体</p>
-<p>  ​       9  —-  1001</p>
-<p>  ​      （2，5，6）—- 010 101 110</p>
-<h2 id="遗传操作"><a href="#遗传操作" class="headerlink" title="遗传操作"></a>遗传操作</h2><ul>
-<li>亦称遗传算子(genetic operator)，就是关于染色体的运算。遗传算法中有三种遗传操作: </li>
-<li>   选择-复制(selection-reproduction)</li>
-<li>   交叉(crossover，亦称交换、交配或杂交)</li>
-<li>   变异(mutation，亦称突变)</li>
-</ul>
-<h3 id="选择-复制"><a href="#选择-复制" class="headerlink" title="选择-复制"></a>选择-复制</h3><ul>
-<li>通常做法是：对于一个规模为<em>N</em>的种群<em>S</em>,按每个染色体x<sub>i</sub>∈<em>S</em>的选择概率<em>P</em>(x<sub>i</sub>)所决定的选中机会, 分<em>N</em>次从<em>S</em>中随机选定<em>N</em>个染色体, 并进行复制。    </li>
-</ul>
-<p><img src="/2021/12/21/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9A%8F%E6%9C%BA%E4%BC%98%E5%8C%96%E6%90%9C%E7%B4%A2/2021-12-2717-14-14.png"> </p>
-<h3 id="交叉"><a href="#交叉" class="headerlink" title="交叉"></a>交叉</h3><ul>
-<li><p> 交叉 就是互换两个染色体某些位上的基因。</p>
-</li>
-<li><p>​    例如, 设染色体 <em>s</em>1=01001011, <em>s</em>2=10010101, 交换其后4位基因, 即</p>
-<ul>
-<li><img src="/2021/12/21/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9A%8F%E6%9C%BA%E4%BC%98%E5%8C%96%E6%90%9C%E7%B4%A2/2021-12-2717-10-45.png"></li>
-<li><em>s</em>1′=01000101,  <em>s</em>2′=10011011</li>
-<li>可以看做是原染色体<em>s</em>1和<em>s</em>2的子代染色体</li>
-</ul>
-</li>
-</ul>
-<h3 id="变异"><a href="#变异" class="headerlink" title="变异"></a>变异</h3><ul>
-<li><p><strong>变异</strong> 就是改变染色体某个(些)位上的基因。</p>
-</li>
-<li><p>​    例如,  设染色体 <em>s</em>=11001101将其第三位上的0变为1, 即</p>
-<p>​       <em>s</em>=11001101 <strong>→</strong>11101101= <em>s</em>′</p>
-</li>
-<li><p>​    <em>s</em>′也可以看做是原染色体<em>s</em>的子代染色体</p>
-</li>
-</ul>
-<h1 id="基本遗传算法"><a href="#基本遗传算法" class="headerlink" title="基本遗传算法"></a>基本遗传算法</h1><p><img src="/2021/12/21/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9A%8F%E6%9C%BA%E4%BC%98%E5%8C%96%E6%90%9C%E7%B4%A2/2021-12-2717-15-13.png"> </p>
-<ul>
-<li><p>算法中的一些控制参数：</p>
-<ul>
-<li>  <strong>种群规模</strong>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </li>
-<li>  <strong>最大换代数</strong></li>
-<li>  <strong>交叉率</strong>(crossover rate)就是参加交叉运算的染色体个数占全体染色体总数的比例，记为<em>P</em>c,取值范围一般为0.4～0.99</li>
-<li>  <strong>变异率</strong>(mutation rate)是指发生变异的基因位数所占全体染色体的基因总位数的比例，记为<em>P</em>m，取值范围一般为0.0001～0.1</li>
-</ul>
-</li>
-<li><blockquote>
-<p>基本遗传算法</p>
-</blockquote>
-</li>
-<li><p> 步1 在搜索空间<em>U</em>上定义一个适应度函数<em>f</em>(<em>x</em>)，给定种群规模<em>N</em>，交叉率<em>P</em>c和变异率<em>P</em>m，代数<em>T</em>；</p>
-</li>
-<li><p> 步2 随机产生<em>U</em>中的<em>N</em>个个体<em>s</em>1, <em>s</em>2, …, <em>s</em>N，组成初始种群<em>S</em>={<em>s</em>1, <em>s</em>2, …, <em>s</em>N}，置代数计数器<em>t</em>=1；</p>
-</li>
-<li><p> 步3 计算<em>S</em>中每个个体的适应度f() ；</p>
-</li>
-<li><p> 步4 若终止条件满足，则取<em>S</em>中适应度最大的个体作为所求结果，算法结束。</p>
-</li>
-<li><p> 步5 按选择概率<em>P</em>(<em>x**i</em>)所决定的选中机会，每次从<em>S</em>中随机选定1个个体并将其染色体复制，共做<em>N</em>次，然后将复制所得的<em>N</em>个染色体组成群体<em>S</em>1；</p>
-</li>
-<li><p> 步6 按交叉率<em>P</em>c所决定的参加交叉的染色体数<em>c</em>，从<em>S</em>1中随机确定<em>c</em>个染色体，配对进行交叉操作，并用产生的新染色体代替原染色体，得群体<em>S</em>2；</p>
-</li>
-<li><p> 步7 按变异率<em>P</em>m所决定的变异次数<em>m</em>，从<em>S</em>2中随机确定<em>m</em>个染色体，分别进行变异操作，并用产生的新染色体代替原染色体，得群体<em>S</em>3；</p>
-</li>
-<li><p>步8 将群体<em>S</em>3作为新一代种群，即用<em>S</em>3代替<em>S</em>，<em>t</em> = <em>t</em>+1，转步3；</p>
-</li>
-</ul>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>如：利用遗传算法求解区间［0,31］上的二次函数<em>y</em>=x<sup>2</sup>的最大值。</p>
-<p>分析：</p>
-<ul>
-<li>原问题可转化为在区间［0, 31］中搜索能使y取最大值的点<em>a</em>的问题。那么，［0, 31］ 中的点<em>x</em>就是个体, 函数值<em>f</em>(<em>x</em>)恰好就可以作为<em>x</em>的适应度，区间［0, 31］就是一个(解)空间 。这样, 只要能给出个体<em>x</em>的适当染色体编码, 该问题就可以用遗传算法来解决。</li>
-</ul>
-<p>解：</p>
-<ul>
-<li><p>(1) 设定种群规模,编码染色体，产生初始种群。</p>
-</li>
-<li><p>  将种群规模设定为4；用5位二进制数编码染色体；取下列个体组成初始种群<em>S</em>1:</p>
-</li>
-<li><p>​           <em>s</em>1= 13 (01101), <em>s</em>2= 24 (11000)</p>
-</li>
-<li><p>​           <em>s</em>3= 8 (01000),  <em>s</em>4= 19 (10011) </p>
-</li>
-<li><p>(2) 定义适应度函数,</p>
-</li>
-<li><p>​        取适应度函数：<em>f</em> (<em>x</em>)=<em>x</em><sup>2</sup></p>
-</li>
-<li><p>(3) 计算各代种群中的各个体的适应度, 并对其染色体进行遗传操作,直到适应度最高的个体(即31（11111）)出现为止。</p>
-<p>首先计算种群<em>S</em>1中各个体</p>
-<p>​        <em>s</em>1= 13(01101),  <em>s</em>2= 24(11000)           </p>
-<p>​        <em>s</em>3= 8(01000),   <em>s</em>4= 19(10011)</p>
-<p>的适应度<em>f</em> (<em>s<sub>i</sub></em>) 。</p>
-<p>   容易求得</p>
-<p>​           <em>f</em> (<em>s</em>1) = <em>f</em>(13) = 132 = 169</p>
-<p>​            <em>f</em> (<em>s</em>2) = <em>f</em>(24) = 242 = 576</p>
-<p>​            <em>f</em> (<em>s</em>3) = <em>f</em>(8) = 82 = 64</p>
-<p>​            <em>f</em> (<em>s</em>4) = <em>f</em>(19) = 192 = 361</p>
-<ul>
-<li><p>再计算种群<em>S</em>1中各个体的选择概率</p>
-<ul>
-<li><p>选择概率的计算公式为<br>$$<br>P（xi）= f(xi)/ f（x）的和<br>$$</p>
-<ul>
-<li>由此可求得</li>
-<li>​            <em>P</em>(<em>s</em>1) = <em>P</em>(13) = 0.14</li>
-<li>​            <em>P</em>(<em>s</em>2) = <em>P</em>(24) = 0.49 </li>
-<li>​            <em>P</em>(<em>s</em>3) = <em>P</em>(8) = 0.06</li>
-<li>​            <em>P</em>(<em>s</em>4) = <em>P</em>(19) = 0.31</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><img src="/2021/12/21/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9A%8F%E6%9C%BA%E4%BC%98%E5%8C%96%E6%90%9C%E7%B4%A2/2021-12-2719-07-55.png"> </p>
-</li>
-<li><p>在算法中赌轮选择法可用下面的子过程来模拟: ① 在［0, 1］区间内产生一个均匀分布的随机数<em>r</em>。</p>
-</li>
-<li><p> ② 若<em>r</em>≤<em>q</em>1,则染色体<em>x</em>1被选中。</p>
-</li>
-<li><p>③ 若<em>q<sub>k-1</sub></em>&lt; r <em>≤*q<sub>k</sub> (2≤</em>k<em>≤</em>N*), 则染色体<em>x<sub>k</sub>被选中。 其中的</em>q<sub>i</sub>称为染色体<em>x<sub>i</sub> (<em>i</em>=1, 2, …, <em>n</em>)的*<em>积累概率</em></em>, 其计算公式为<br>$$<br>q i = P(x)到i的和<br>$$</p>
-</li>
-</ul>
-<blockquote>
-<p>第一轮</p>
-</blockquote>
-<p>  设从区间［0, 1］中产生4个随机数如下: </p>
-<p>  ​        <em>r</em>1 = 0.450126,  <em>r</em>2 = 0.110347 </p>
-<p>  ​        <em>r</em>3 = 0.572496,  <em>r</em>4 = 0.98503</p>
-<table>
-<thead>
-<tr>
-<th>染色体</th>
-<th>适应度</th>
-<th>选择概率</th>
-<th>积累概率</th>
-<th>选中次数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><em>s</em>1=01101(13)</td>
-<td>169</td>
-<td>0.14</td>
-<td>0.14</td>
-<td>1</td>
-</tr>
-<tr>
-<td><em>s</em>2=11000(24)</td>
-<td>576</td>
-<td>0.49</td>
-<td>0.63</td>
-<td>2</td>
-</tr>
-<tr>
-<td><em>s</em>3=01000(8)</td>
-<td>64</td>
-<td>0.06</td>
-<td>0.69</td>
-<td>0</td>
-</tr>
-<tr>
-<td><em>s</em>4=10011(19)</td>
-<td>361</td>
-<td>0.31</td>
-<td>1.00</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<blockquote>
-<ul>
-<li>适应度函数 y = x^2，选择概率：赌轮选择法</li>
-<li>积累概率：积累选择概率，根据积累概率区间选择染色体</li>
-</ul>
-</blockquote>
-<ul>
-<li>于是，经复制得群体：</li>
-<li><em>s</em>1<em>’</em> =11000（24）, <em>s</em>2<em>’</em> =01101（13） </li>
-<li><em>s</em>3<em>’</em> =11000（24）, <em>s</em>4<em>’</em> =10011（19）</li>
-</ul>
-</li>
-<li><p>交叉</p>
-</li>
-<li><p> 设交叉率<em>p**c</em>=100%，即<em>S</em>1中的全体染色体都参加交叉运算。</p>
-</li>
-<li><p>s1’ =11000（24）, s2’ =01101（13） </p>
-</li>
-<li><p>s3’ =11000（24）, s4’ =10011（19）</p>
-</li>
-<li><p>​    设<em>s</em>1<em>’</em>与<em>s</em>2<em>’</em>配对，<em>s</em>3<em>’</em>与<em>s</em>4<em>’</em>配对。分别交换后两位基因，得新染色体：</p>
-</li>
-<li><p>  <em>s</em>1<em>’’</em>=11001（25）, <em>s</em>2<em>’’</em>=01100（12）</p>
-</li>
-<li><p><em>s</em>3<em>’’</em>=11011（27）, <em>s</em>4<em>’’</em>=10000（16）</p>
-</li>
-<li><p>变异</p>
-</li>
-<li><p>​    设变异率<em>p**m</em>=0.001。</p>
-</li>
-<li><p>​    这样，群体<em>S</em>1中共有</p>
-</li>
-<li><p>​                5×4×0.001=0.02    位基因可以变异。</p>
-</li>
-<li><p>​     0.02位显然不足1位，所以本轮遗传操作不做变异。</p>
-<blockquote>
-<p>第二轮</p>
-</blockquote>
-</li>
-<li><p>于是，得到第二代种群<em>S</em>2：</p>
-</li>
-<li><p>​    <em>s</em>1=11001（25）, <em>s</em>2=01100（12）</p>
-</li>
-<li><p>​     <em>s</em>3=11011（27）, <em>s</em>4=10000（16）</p>
-</li>
-<li><p>如果从区间［0, 1］中产生4个随机数如下: </p>
-</li>
-<li><p>​        <em>r</em>1 = 0.450126,  <em>r</em>2 = 0.110347 </p>
-</li>
-<li><p>​        <em>r</em>3 = 0.572496,  <em>r</em>4 = 0.98503 </p>
-</li>
-<li><table>
-<thead>
-<tr>
-<th>染色体</th>
-<th>适应度</th>
-<th>选择概率</th>
-<th>积累概率</th>
-<th>选中次数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><em>s</em>1=11001(25)</td>
-<td>625</td>
-<td>0.36</td>
-<td>0.36</td>
-<td>1</td>
-</tr>
-<tr>
-<td><em>s</em>2=01100(12)</td>
-<td>144</td>
-<td>0.08</td>
-<td>0.44</td>
-<td>0</td>
-</tr>
-<tr>
-<td><em>s</em>3=11011(27)</td>
-<td>729</td>
-<td>0.41</td>
-<td>0.85</td>
-<td>2</td>
-</tr>
-<tr>
-<td><em>s</em>4=10000(16)</td>
-<td>256</td>
-<td>0.15</td>
-<td>1.00</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<ul>
-<li>假设这一轮选择-复制操作中，种群<em>S</em>2中的</li>
-<li><strong>4个染色体都被选中（小概率事件发生了）</strong>，则得到群体： </li>
-<li> <em>s</em>1<em>’</em>=11001（25）, <em>s</em>2<em>’</em>= 01100（12）</li>
-<li> <em>s</em>3<em>’</em>=11011（27）, <em>s</em>4<em>’</em>= 10000（16）</li>
-<li>做交叉运算，让<em>s</em>1<em>’</em>与<em>s</em>2<em>’</em>，<em>s</em>3<em>’</em>与<em>s</em>4<em>’</em> 分别交换后三位基因，得 </li>
-<li>   <em>s</em>1<em>’’</em> =11100（28）, <em>s</em>2<em>’’</em> = 01001（9）</li>
-<li>   <em>s</em>3<em>’’</em> =11000（24）, <em>s</em>4<em>’’</em> = 10011（19）</li>
-<li>这一轮仍然不会发生变异。</li>
-</ul>
-<blockquote>
-<p>第三轮</p>
-</blockquote>
-<ul>
-<li><p>于是，得第三代种群<em>S</em>3：</p>
-</li>
-<li><p> <em>s</em>1=11100（28）, <em>s</em>2=01001（9）</p>
-</li>
-<li><p> <em>s</em>3=11000（24）, <em>s</em>4=10011（19）</p>
-</li>
-<li><table>
-<thead>
-<tr>
-<th>染色体</th>
-<th>适应度</th>
-<th>选择概率</th>
-<th>积累概率</th>
-<th>估计的选中次数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><em>s</em>1=11100(28)</td>
-<td>784</td>
-<td>0.44</td>
-<td>0.44</td>
-<td>2</td>
-</tr>
-<tr>
-<td><em>s</em>2=01001(9)</td>
-<td>81</td>
-<td>0.04</td>
-<td>0.48</td>
-<td>0</td>
-</tr>
-<tr>
-<td><em>s</em>3=11000(24)</td>
-<td>576</td>
-<td>0.32</td>
-<td>0.80</td>
-<td>1</td>
-</tr>
-<tr>
-<td><em>s</em>4=10011(19)</td>
-<td>361</td>
-<td>0.20</td>
-<td>1.00</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<ul>
-<li>设这一轮的选择-复制结果为：</li>
-<li>​       <em>s</em>1<em>’</em>=11100（28）, <em>s</em>2<em>’</em>=11100（28）</li>
-<li>​       <em>s</em>3<em>’</em>=11000（24）, <em>s</em>4<em>’</em>=10011（19） </li>
-<li>做交叉运算，让<em>s</em>1<em>’</em>与<em>s</em>4<em>’</em>，<em>s</em>2<em>’</em>与<em>s</em>3<em>’</em> 分别交换后两位基因，得 </li>
-<li><em>s</em>1<em>’’</em>=11111（31）, <em>s</em>2<em>’’</em>=11100（28）</li>
-<li><em>s</em>3<em>’’</em>=11000（24）, <em>s</em>4<em>’’</em>=10000（16） </li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>第四轮</p>
-</blockquote>
-<ul>
-<li>于是，得第四代种群<em>S</em>4： </li>
-<li>​     <em>s</em>1=11111（31）, <em>s</em>2=11100（28）</li>
-<li>​     <em>s</em>3=11000（24）, <em>s</em>4=10000（16） </li>
-<li>显然，在这一代种群中已经出现了适应度最高的染色体<em>s</em>1=11111。于是，遗传操作终止，将染色体“11111”作为最终结果输出。</li>
-<li> 然后，将染色体“11111”解码为表现型，即得所求的最优解：31。</li>
-<li> 将31代入函数<em>y</em>=<em>x</em>2中，即得原问题的解，即函数<em>y</em>=<em>x</em>2的最大值为961。</li>
-</ul>
-</li>
-</ul>
-<h1 id="遗传算法的特点和优势"><a href="#遗传算法的特点和优势" class="headerlink" title="遗传算法的特点和优势"></a>遗传算法的特点和优势</h1><h2 id="遗传算法的主要特点"><a href="#遗传算法的主要特点" class="headerlink" title="遗传算法的主要特点"></a>遗传算法的主要特点</h2><ul>
-<li> 遗传算法一般是直接在解空间搜索, 而不像图搜索那样一般是在问题空间搜索, 最后才找到解。 </li>
-<li> 遗传算法的搜索随机地始于搜索空间的一个点集, 而不像图搜索那样固定地始于搜索空间的初始节点或终止节点, 所以遗传算法是一种随机搜索算法。</li>
-<li>遗传算法总是在寻找优解, 而不像图搜索那样并非总是要求优解, 而一般是设法尽快找到解, 所以遗传算法又是一种优化搜索算法。</li>
-<li> 遗传算法的搜索过程是从空间的一个点集(种群)到另一个点集(种群)的搜索,而不像图搜索那样一般是从空间的一个点到另一个点地搜索。 因而它实际是一种并行搜索, 适合大规模并行计算,而且这种种群到种群的搜索有能力跳出局部最优解。 </li>
-<li>遗传算法的适应性强, 除需知适应度函数外, 几乎不需要其他的先验知识。 </li>
-<li> 遗传算法长于全局搜索, 它不受搜索空间的限制性假设的约束,不要求连续性, 能以很大的概率从离散的、多极值的、 含有噪声的高维问题中找到全局最优解（但是不能保证一定找到最优解）</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -3558,7 +3338,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -3571,7 +3351,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
