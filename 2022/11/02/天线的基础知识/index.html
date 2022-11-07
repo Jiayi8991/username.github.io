@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi8991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="无线电波的基本知识  无线电波和光波一样，传播速度和传播媒介有关，公式为 V &#x3D; C&#x2F;（e）1&#x2F;2 , 其中 e 为传播媒介的相对介电常数，同时在传播中波也会衰弱，就像池塘中的涟漪     波长，频率 和 传播速度 ​    波长 &#x3D; 传播速度 &#x2F; 频率  因此同一频率的无线电波在不同的传播媒介中时，速度不同，因此波长不同  极化（polarisation）​        天线极化是描述天线辐射">
+<meta property="og:type" content="article">
+<meta property="og:title" content="天线的基础知识">
+<meta property="og:url" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="JiayiSpace">
+<meta property="og:description" content="无线电波的基本知识  无线电波和光波一样，传播速度和传播媒介有关，公式为 V &#x3D; C&#x2F;（e）1&#x2F;2 , 其中 e 为传播媒介的相对介电常数，同时在传播中波也会衰弱，就像池塘中的涟漪     波长，频率 和 传播速度 ​    波长 &#x3D; 传播速度 &#x2F; 频率  因此同一频率的无线电波在不同的传播媒介中时，速度不同，因此波长不同  极化（polarisation）​        天线极化是描述天线辐射">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-153816.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/4.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/9.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/10.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-172327.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/11.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-175548.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-180002.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-181604.png">
+<meta property="article:published_time" content="2022-11-02T07:36:30.000Z">
+<meta property="article:modified_time" content="2022-11-03T02:17:26.680Z">
+<meta property="article:author" content="Jiayi Liang">
+<meta property="article:tag" content="天线">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-153816.png">
+
+<link rel="canonical" href="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>天线的基础知识 | JiayiSpace</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JiayiSpace</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          天线的基础知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-02 15:36:30" itemprop="dateCreated datePublished" datetime="2022-11-02T15:36:30+08:00">2022-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-03 10:17:26" itemprop="dateModified" datetime="2022-11-03T10:17:26+08:00">2022-11-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="无线电波的基本知识"><a href="#无线电波的基本知识" class="headerlink" title="无线电波的基本知识"></a>无线电波的基本知识</h1><p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-153816.png"> </p>
+<p>无线电波和光波一样，传播速度和传播媒介有关，公式为 <strong>V = C/（e）<sup>1/2</sup></strong> , 其中 e 为传播媒介的相对介电常数，同时在传播中波也会衰弱，就像池塘中的涟漪</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2.png">  </p>
+<blockquote>
+<p>波长，频率 和 传播速度</p>
+<p>​    <strong>波长 = 传播速度 / 频率</strong> </p>
+<p>因此同一频率的无线电波在不同的传播媒介中时，速度不同，因此波长不同</p>
+</blockquote>
+<h2 id="极化（polarisation）"><a href="#极化（polarisation）" class="headerlink" title="极化（polarisation）"></a>极化（polarisation）</h2><p>​        天线极化是描述天线辐射电磁波矢量空间指向的参数。由于电场与磁场有恒定的关系，故<strong>一般都以电场矢量的空间指向</strong>作为天线辐射电磁波的<strong>极化方向</strong>。</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.png">  </p>
+<h3 id="极化的类型"><a href="#极化的类型" class="headerlink" title="极化的类型"></a>极化的类型</h3><p>​        表征均匀平面波的电场矢量（或磁场矢量）在空间指向变化的性质，通过一给定点上正弦波的电场矢量E末端的轨迹来具体说明。光学上称之为偏振。按电场矢量轨迹的特点它可分为 <em>线极化、圆极化 和 椭圆极化</em> 三种。</p>
+<p>​        线极化：电场矢量在空间的取向固定不变的电磁波叫线极化。有时以地面为参数，电场矢量方向与地面平行的叫水平极化，与地面垂直的叫垂直极化。<strong>电场矢量与传播方向构成的平面</strong>叫<strong>极化平面</strong>。垂直极化 和 水平极化波 需要用具有垂直特性 和 水平特性的天线来接收。</p>
+<p>​        圆极化：当无线电波的极化面与大地法线面之间的夹角从0~360度周期地变化，即电场大小不变，方向随时间变化，电场矢量末端的轨迹在垂直于传播方向的平面上投影是一个圆时，称为圆极化。在电场的水平分量和垂直分量振幅相等，相位相差90度或270度时，可以得到圆极化。圆极化，若极化面随时间旋转并与电磁波传播方向成右螺旋关系，称右圆极化；反之，若成左螺旋关系，称左圆极化。</p>
+<p>​        椭圆极化：若Ex和Ey幅度和相位差均不满足上述条件时，合成矢量端点的轨迹为一个椭圆。椭圆极化波的椭圆长短轴之比，称为轴比，当椭圆的轴比等于1，椭圆极化波即是圆极化波。当轴比为无穷时，电波的极化为线极化。</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/4.png">  </p>
+<p>  <img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.png">  </p>
+<h3 id="极化损失"><a href="#极化损失" class="headerlink" title="极化损失"></a>极化损失</h3><p>​    当来波的极化方向与接收天线的极化方向不一致的时候，在接收过程中通常要产生极化损失，例如：当用圆极化天线接收任意线极化波，或用线极化天线接收任一圆极化波时，都要产生3分贝的极化损失，就是只能收到来波的一半能量</p>
+<p>​        如若水平极化遇到垂直极化的接收天线，也就是他们是完全正交，接收天线完全接收不到来波的能量，那么称来波与接收天线极化是隔离的</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.png">  </p>
+<h1 id="天线辐射电磁波的基本原理"><a href="#天线辐射电磁波的基本原理" class="headerlink" title="天线辐射电磁波的基本原理"></a>天线辐射电磁波的基本原理</h1><p>导线载有交变电流时，就可以形成电磁波的辐射，辐射的能力和导线的长短形状有关。比如下图中，两个导线距离很近，电场被束缚在两导线之间，故辐射微弱；导线张开，电场散播在周围空间，所以辐射增强。</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.png">   </p>
+<p>天线有五个基本参数：方向性系数、天线效率、增益系数、辐射电阻和天线有效高度。这些参数是衡量天线质量好坏的重要指标。</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.png" style="zoom:67%;"><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/9.png" style="zoom: 67%;"></p>
+<h2 id="对称振子（半波振子）"><a href="#对称振子（半波振子）" class="headerlink" title="对称振子（半波振子）"></a>对称振子（半波振子）</h2><p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/10.png">   </p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-172327.png">  </p>
+<h2 id="天线的输入阻抗"><a href="#天线的输入阻抗" class="headerlink" title="天线的输入阻抗"></a>天线的输入阻抗</h2><blockquote>
+<p>定义： <strong>天线输入端的信号电压与信号电流之比，称作天线的输入阻抗。</strong></p>
+</blockquote>
+<p>输入阻抗具有电阻分量 R 和 电抗分量 X， 即 Z = R + j * X。 电抗分量的存在会减少天线从馈线对信号功率的提取，所以应该尽可能使电抗分量为零。</p>
+<p>一般，天线的输入阻抗是复数，实部称为输入电阻，以Ri表示；虚部称为输入电抗，以Xi表示。</p>
+<h2 id="天线的方向性"><a href="#天线的方向性" class="headerlink" title="天线的方向性"></a>天线的方向性</h2><p>​        方向性是指天线在一定方向辐射电磁波的能力。对于接收天线来说，方向性表示天线对不同方向传来的电波所具有的接收能力。由方向图表示，如下</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/11.png">  </p>
+<h2 id="天线增益（gain）"><a href="#天线增益（gain）" class="headerlink" title="天线增益（gain）"></a>天线增益（gain）</h2><p>​        天线增益是指：在输入功率相等的条件下，实际天线与理想的辐射单元在空间同一点处所产生的信号的功率密度之比。它定量的描述一个天线把输入功率集中辐射的程度。增益显然与天线方向图有密切的关系，方向图主瓣越窄，副瓣越小，增益越高。天线增益是用来衡量天线朝一个特定方向收发信号的能力，它是选择基站天线最重要的参数之一。</p>
+<p>​        另外，表示天线增益的参数有dBd和dBi。dBi是相对于点源天线的增益，在各方向的辐射是均匀的；dBd相对于对称阵子天线的增益dBi=dBd+2.15。相同的条件下，增益越高，电波传播的距离越远。 </p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-175548.png">  </p>
+<h2 id="带宽（天线的工作频率范围）"><a href="#带宽（天线的工作频率范围）" class="headerlink" title="带宽（天线的工作频率范围）"></a>带宽（天线的工作频率范围）</h2><p>​        无论是发射天线还是接收天线，他们总是在一定的频率范围内工作的，通常，工作在中心频率时天线所能输送的功率最大，偏离中心频率时它所输送的功率都将减小。据此可定义天线的频率带宽</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-180002.png">  </p>
+<h2 id="波束宽度"><a href="#波束宽度" class="headerlink" title="波束宽度"></a>波束宽度</h2><p>​        有时也称波束宽度。系指方向性图的主瓣宽度。一般是指半功率波瓣宽度。</p>
+<p>​        波瓣宽度是指天线方向图中低于主瓣峰值3dB处所形成的夹角宽度，又称波束宽度、主瓣宽度、半功率角，形成的夹角叫波瓣角。波瓣宽度分为水平波瓣宽度和垂直波瓣宽度，对应波瓣角也分为水平波瓣角和垂直波瓣角。波瓣宽度是定向天线常用的一个重要指标。</p>
+<p><img src="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/WX20221102-181604.png">  </p>
+<p>​        波瓣宽度越窄，方向性越好，作用距离越远，抗干扰能力越强。</p>
+<ul>
+<li>覆盖时主要考虑主瓣，旁瓣通常会对周边区域形成干扰，一般应用中都要增强主瓣，抑制旁瓣。但在天线近点位置需要考虑借助旁瓣来消除覆盖盲区。</li>
+<li>水平波瓣宽度（H－Plane Half Power beamwidth）决定了天线水平平面的波束宽度。宽度越宽，在扇区交界处的覆盖越好，但当提高天线倾角时，也越容易发生波束畸变，形成越区覆盖；反之宽度越窄，在扇区交界处覆盖就越差，提高天线倾角可以在一定程度上改善扇区交界处的覆盖，相对而言，不容易产生对其他小区的越区覆盖。市中心基站的站距小，天线倾角大，故应当采用水平波瓣宽度小的天线，郊区选用水平波瓣宽度大的天线。</li>
+<li>垂直波瓣宽度（V－Plane Half Power beamwidth）决定了天线垂直平面的波束宽度。垂直波瓣宽度越窄，偏离主波束方向时信号衰减越快，就越容易通过调整天线倾角（即俯仰角）准确控制覆盖范围，进而达到改善小区覆盖质量的目的。</li>
+</ul>
+<h2 id="接收灵敏度"><a href="#接收灵敏度" class="headerlink" title="接收灵敏度"></a>接收灵敏度</h2><p>接收灵敏度是指无线设备正常工作所需的天线口最小信号接收功率。系统间的干扰会导致无线设备灵敏度的下降，影响信号的正常接收，因此通常以无线设备灵敏度准则作为被干扰系统的保护准则。</p>
+<p>无线传输的接收灵敏度类似于人类的听力，在日常环境下，听力越好的人捕捉细小声音的能力越强。同理，无线设备接收灵敏度越高意味着可捕获弱信号的能力越强，若接收的信号能量小于它的接收灵敏度时，无线设备将不会接收到任何数据。</p>
+<p>影响因素</p>
+<ul>
+<li>带宽范围内的热噪声。</li>
+<li>系统的噪声系数。</li>
+<li>系统分析信号时需要的最小信噪比。</li>
+</ul>
+<p>计算公式</p>
+<p>S = 10lg(kTB)+ NF + SNR，即：接收灵敏度 = 10lg(带宽范围内的热噪声功率) + 系统噪声系数 + 解调所需信噪比。</p>
+<ul>
+<li>S：接收灵敏度，单位是dBm。接收灵敏度值越小，说明接收机的接收性能越好。接收灵敏度值越大，说明接收机的接收性能越差。</li>
+<li>k：波尔兹曼常数，单位是J/K。</li>
+<li>T：绝对温度，单位是K。环境温度越高，接收灵敏度就会变大，接收性能就会恶化，因此要尽量降低系统所在的环境温度。</li>
+<li>B：信号带宽，单位是Hz。信号带宽越大，系统的噪声系数越大，灵敏度就会变大，接收性能也会恶化。</li>
+<li>kTB：带宽范围内的热噪声功率，单位是W。</li>
+<li>NF：系统噪声系数，单位是dB。</li>
+<li>SNR：解调所需信噪比，单位是dB。解调所需的最小信噪比越小越好，这样可以增加系统的接收性能。最小信噪比要求和移动台的速度、所处的无线环境及所要求的通信质量有关，不同无线制式要求不同，同一无线制式的不同业务也不相同。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QE411979W/?spm_id_from=autoNext&amp;vd_source=fa800c4c8b55ad3e9b5e96670557580d">https://www.bilibili.com/video/BV1QE411979W/?spm_id_from=autoNext&amp;vd_source=fa800c4c8b55ad3e9b5e96670557580d</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ry4y1h7Ek/?spm_id_from=333.788.recommend_more_video.0&amp;vd_source=fa800c4c8b55ad3e9b5e96670557580d">https://www.bilibili.com/video/BV1ry4y1h7Ek/?spm_id_from=333.788.recommend_more_video.0&amp;vd_source=fa800c4c8b55ad3e9b5e96670557580d</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A9%E7%BA%BF/" rel="tag"># 天线</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/30/%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="prev" title="傅里叶变换">
+      <i class="fa fa-chevron-left"></i> 傅里叶变换
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/03/Beamforming/" rel="next" title="Beamforming Primer">
+      Beamforming Primer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%94%B5%E6%B3%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">无线电波的基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%81%E5%8C%96%EF%BC%88polarisation%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">极化（polarisation）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E5%8C%96%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">极化的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E5%8C%96%E6%8D%9F%E5%A4%B1"><span class="nav-number">1.1.2.</span> <span class="nav-text">极化损失</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A9%E7%BA%BF%E8%BE%90%E5%B0%84%E7%94%B5%E7%A3%81%E6%B3%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">天线辐射电磁波的基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E6%8C%AF%E5%AD%90%EF%BC%88%E5%8D%8A%E6%B3%A2%E6%8C%AF%E5%AD%90%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">对称振子（半波振子）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A9%E7%BA%BF%E7%9A%84%E8%BE%93%E5%85%A5%E9%98%BB%E6%8A%97"><span class="nav-number">2.2.</span> <span class="nav-text">天线的输入阻抗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A9%E7%BA%BF%E7%9A%84%E6%96%B9%E5%90%91%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">天线的方向性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A9%E7%BA%BF%E5%A2%9E%E7%9B%8A%EF%BC%88gain%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">天线增益（gain）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%A6%E5%AE%BD%EF%BC%88%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%B7%A5%E4%BD%9C%E9%A2%91%E7%8E%87%E8%8C%83%E5%9B%B4%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">带宽（天线的工作频率范围）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A2%E6%9D%9F%E5%AE%BD%E5%BA%A6"><span class="nav-number">2.6.</span> <span class="nav-text">波束宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E7%81%B5%E6%95%8F%E5%BA%A6"><span class="nav-number">2.7.</span> <span class="nav-text">接收灵敏度</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiayi Liang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Jiayi Liang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayi Liang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

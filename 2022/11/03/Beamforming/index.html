@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi8991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Introduction​        波束合成（波束成形）是将来自一组小型无定向天线的无线电信号组合起来，以模拟大型定向天线。模拟天线可以通过电子化手段进行指向，尽管天线不会物理移动。在通信中，波束成形用于将天线指向信号源，以减少干扰并提高通信质量。在测向（direction finding）应用中，波束成形可用于操纵天线以确定信号源的方向。 Antenna Radiation Pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Beamforming Primer">
+<meta property="og:url" content="https://jiayi8991.github.io/2022/11/03/Beamforming/index.html">
+<meta property="og:site_name" content="JiayiSpace">
+<meta property="og:description" content="Introduction​        波束合成（波束成形）是将来自一组小型无定向天线的无线电信号组合起来，以模拟大型定向天线。模拟天线可以通过电子化手段进行指向，尽管天线不会物理移动。在通信中，波束成形用于将天线指向信号源，以减少干扰并提高通信质量。在测向（direction finding）应用中，波束成形可用于操纵天线以确定信号源的方向。 Antenna Radiation Pattern">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-112518.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-112800.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-113035.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-113217.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-120943.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-122006.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-122121.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-144741.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-144839.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-184055.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-184133.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-184544.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-184624.png">
+<meta property="og:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221107-112040.png">
+<meta property="article:published_time" content="2022-11-03T02:18:00.000Z">
+<meta property="article:modified_time" content="2022-11-07T06:00:33.848Z">
+<meta property="article:author" content="Jiayi Liang">
+<meta property="article:tag" content="波束合成">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiayi8991.github.io/2022/11/03/Beamforming/WX20221104-112518.png">
+
+<link rel="canonical" href="https://jiayi8991.github.io/2022/11/03/Beamforming/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Beamforming Primer | JiayiSpace</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JiayiSpace</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayi8991.github.io/2022/11/03/Beamforming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jiayi Liang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiayiSpace">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Beamforming Primer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-03 10:18:00" itemprop="dateCreated datePublished" datetime="2022-11-03T10:18:00+08:00">2022-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-07 14:00:33" itemprop="dateModified" datetime="2022-11-07T14:00:33+08:00">2022-11-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>​        波束合成（波束成形）是将来自一组小型无定向天线的无线电信号组合起来，以模拟大型定向天线。模拟天线可以通过电子化手段进行指向，尽管天线不会物理移动。在通信中，波束成形用于将天线指向信号源，以减少干扰并提高通信质量。在测向（direction finding）应用中，波束成形可用于操纵天线以确定信号源的方向。</p>
+<h2 id="Antenna-Radiation-Patterns"><a href="#Antenna-Radiation-Patterns" class="headerlink" title="Antenna Radiation Patterns"></a>Antenna Radiation Patterns</h2><p>​        发射天线在某些方向上比其他方向产生更强的电磁波。场强与方向的关系图称为天线的 “辐射方向图”。接收与发射始终相同。</p>
+<p>​        在远离天线的一点处测得的电磁波是来自天线所有部分的辐射的总和。天线的每个小部分都辐射不同幅度和相位的波，并且这些波中的每一个都传播到接收器所在的点的不同距离。在某些方向上，这些波以建设性的方式添加以获得增益（gain）。在某些方向上，它们会破坏性地添加以造成损失（loss）。</p>
+<p>​        半波偶极子是一种简单的天线，由半波长的电线组成，在中心切割以连接电缆。下图显示了它的辐射模式。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-112518.png">   </p>
+<h2 id="Directional-Antenna"><a href="#Directional-Antenna" class="headerlink" title="Directional Antenna"></a>Directional Antenna</h2><p>​        定向天线是一种设计为在一个方向上具有增益而在另一个方向上具有损耗的天线。通过增加天线的尺寸来定向天线。这样可以将天线的辐射导体扩展到更大的距离，从而可以更好地控制相长干扰和相消干扰，以提供定向辐射方向图。</p>
+<p>​        简单地说，碟形卫星天线可以被认为是一个圆形表面，它从所有部分均等地辐射电磁波。如下图所示，它的中心 “光束” 高增益，对准卫星。随着碟形直径 (波长) 的增加，中心光束变窄。请注意，在中心梁的任一侧都有较小的光束，称为 “旁瓣”。信号强度为零的方向称为 “NULL”。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-112800.png">   </p>
+<h2 id="Linear-Arrays"><a href="#Linear-Arrays" class="headerlink" title="Linear Arrays"></a>Linear Arrays</h2><p>​        一个简单的定向天线由一个小型辐射天线元件的线性阵列组成，每个天线元件都来自一个发射器的相同信号 (相同的幅度和相位)。随着阵列总宽度的增加，中心光束变得更窄。随着元素数量的增加，旁瓣变小。</p>
+<p>​        下图是间隔1/2波长的4个元件 (小天线) 的线的辐射方向图。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-113035.png">  </p>
+<p>​        如果间隔增加到大于1/2波长，则大的旁瓣开始出现在辐射图案中。但是，由于天线的总长度增加了，中心波束变窄了。对于间隔为1个波长的4个元素，以下辐射图说明了这一点。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-113217.png">  </p>
+<p>​        通过保持总长度相同，并添加元素以减小间隔回到1/2波长，减小了旁瓣。以下是辐射方向图，如果在上面的天线上增加了3个元素以减小元素间距。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-120943.png">  </p>
+<h2 id="Electronically-Steered-Arrays"><a href="#Electronically-Steered-Arrays" class="headerlink" title="Electronically Steered Arrays"></a>Electronically Steered Arrays</h2><p>​        通过改变线性阵列中元素的信号相位，可以操纵其主光束。控制信号相位的最简单方法是系统地改变元件的电缆长度。电缆延迟信号，从而移相。但是，这不允许动态操纵天线。</p>
+<p>​        在电子控制阵列中，可编程电子移相器用于阵列中的每个元件。通过为每个元件编程所需的相移值来操纵天线。下面的光束图案用于8元素线性阵列，每个元素具有0.7 π 的渐进相移。中央光束已向左转向约45度。2π 的相移对应于一个波长或一个载波周期，更多的正值等价于说信号更早地传输。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-122006.png">  </p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-122121.png">  </p>
+<h2 id="Array-Configurations"><a href="#Array-Configurations" class="headerlink" title="Array Configurations"></a>Array Configurations</h2><p>​        天线阵列不需要是线性的。通常，天线元件排列成圆形，以便阵列可以在所有方向上同样良好地形成波束。在车辆上，天线元件可以放置在任何方便的位置和不同的高度以形成3维阵列。对于这些阵列，确定控制天线的相移比线性阵列更复杂。</p>
+<h2 id="Beamforming"><a href="#Beamforming" class="headerlink" title="Beamforming"></a>Beamforming</h2><p>​        在波束成形中，每个天线元件的幅度和相位都受到控制。与单独的相位控制相比，可以使用组合的幅度和相位控制来更好地调节旁瓣电平和转向零。每个天线的组合相对幅度a<sub>k</sub>和相移 θ<sub>k</sub>称为 “复数权重 ( complex weight ) ”，并由复数常数w<sub>k</sub>表示 (对于第k个天线)。</p>
+<p>​        无线电发射机的波束形成器将复权重应用于天线阵列的每个元件的发射信号 (移相并设置幅度)。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-144741.png">  </p>
+<p>​        用于无线电接收的波束形成器将复数权重施加到来自每个天线元件的信号，然后将所有信号求和为具有所需方向图的信号。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-144839.png">  </p>
+<h2 id="Digital-Beamforming"><a href="#Digital-Beamforming" class="headerlink" title="Digital Beamforming"></a>Digital Beamforming</h2><p>​        在数字波束成形中，每个天线元件的相移和幅度缩放以及用于接收的求和操作都是数字完成的。使用通用DSP或专用波束形成芯片。</p>
+<p>​        本讨论的其余部分集中在波束成形接收器上。数字处理要求使用A/D转换器将来自每个天线元件的信号数字化。由于高于短波频率 (&gt;30 MHz) 的无线电信号太高，无法以合理的成本直接数字化，因此数字波束成形接收器使用模拟 “RF转换器” 在A/D转换器之前将信号频率向下移位。下图显示了将整个蜂窝电话上行链路频带以824-849 MHz向下移动到1-26 MHz范围的转换器。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-184055.png">  </p>
+<p>一旦天线信号被数字化，它们就被传递到 “数字下变频器”，该变频器将无线电信道的中心频率降低到0Hz，并且仅通过一个信道所需的带宽。下变频器以低采样率产生 “正交” 基带输出。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-184133.png">  </p>
+<p>正交基带i和q分量可用于将无线电信号表示为具有实部和虚部的复矢量 (相量)。需要两个分量，以便可以表示正频率和负频率 (相对于信道中心频率)。</p>
+<p>s(t) = x(t) + j y(t)<br>s(t) is the complex baseband signal<br>x(t) = i(t) is the real part<br>y(t) = -q(t) is the imaginary part<br>j is √(-1)</p>
+<p>对于波束成形，将复杂的基带信号乘以复杂的权重，以应用每个天线元件所需的相移和幅度缩放。</p>
+<p>wk= ak ejsin(θk)<br>wk= ak cos(θk) + j ak sin(θk)<br>wk is complex weight for the kth antenna element<br>ak is the relative amplitude of the weight<br>θk is the phase shift of the weight</p>
+<p>通用DSP可以实现每个天线元件的复乘法:</p>
+<p>sk(t) wk = ak{ [xk(t) cos(θk) - yk(t) sin(θk)] + j [xk(t) sin(θk) + yk(t) cos(θk)] }</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-184544.png">  </p>
+<p>下图显示了一个完整的数字波束形成接收器。许多波束形成器可以共享一组天线元件，RF转换器和A/D转换器。所有RF转换器和A/D转换器共享公共振荡器，因此它们都产生相同的信号相移。在数字波束形成器中，所有数字下变频器共享一个公共时钟，并设置为相同的中心频率和带宽，并且它们的数字本地振荡器是同相的，因此所有相移都是相同的。每个DDC的基带输出乘以其天线元件的复权重，并将结果求和以产生一个具有方向特性的基带信号。然后，解调器将跟随从无线电信号中恢复信息。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221104-184624.png">  </p>
+<h2 id="Adaptive-Beamforming"><a href="#Adaptive-Beamforming" class="headerlink" title="Adaptive Beamforming"></a>Adaptive Beamforming</h2><p>仔细选择天线元件的复数权重w<sub>k</sub>，以在天线阵列的辐射方向图中给出所需的峰值和零点。在简单的情况下，可以选择权重以在某个方向上给出一个中心光束，如在测向应用中那样。然后可以缓慢地改变权重以操纵光束，直到出现最大信号强度并找到到信号源的方向。</p>
+<p>在用于通信的波束成形中，选择权重以给出使接收信号质量最大化的辐射方向图。通常，模式中的峰值指向信号源，并在干扰源和信号反射的方向上创建空值。</p>
+<p>自适应波束形成是动态更改复杂权重以最大程度地提高通信信道质量的过程。以下是一些常用的方法:</p>
+<p>​    最小均方误差            接收器已知所需接收信号波形的形状。调整复数权重以最小化波束形成器输出和预期信号波形之间的均方误差。</p>
+<p>​    最大信号干扰比        在接收机可以估计所需信号和干扰信号的强度的情况下，调整权重以使比率最大化。</p>
+<p>​    最小方差        当信号形状和源方向都已知时，选择权重以最小化波束形成器输出上的噪声。</p>
+<p>通常，在自适应波束形成器上设置约束，以使复权重在较差的信号条件下不会随机变化。一些无线电信号包括 “训练序列”，以便自适应波束形成器可以在传输有用信息之前快速优化其辐射方向图。</p>
+<h2 id="Smart-Antennas"><a href="#Smart-Antennas" class="headerlink" title="Smart Antennas"></a>Smart Antennas</h2><p>用于通信的自适应波束形成系统有时被称为 “智能天线” 系统。对于蜂窝电话，一个具有智能天线系统的基站可以通过在每个用户处操纵单个天线波束，在相同的频率上支持多个用户，只要他们在不同的方向上。这有时被称为 “空间域多址” (SDMA)。据估计，通过使用智能天线，蜂窝电话系统的容量可以增加一倍。</p>
+<h2 id="FFT’s-in-Beamforming"><a href="#FFT’s-in-Beamforming" class="headerlink" title="FFT’s in Beamforming"></a>FFT’s in Beamforming</h2><p>在数字波束形成中，许多波束形成器可以共享一组天线元件，rf转换器和A/D转换器。波束形成器的中心光束可能指向不同的方向。在必须同时形成一组固定的非重叠波束 (雷达，声纳，测向) 的情况下，FFT可以有效地实现许多波束形成器。</p>
+<p>下图显示了具有N个天线元件的FFT波束形成器。每个元素都需要一个数字下变频器。所有DDC同时产生一个基带样本，并且所有这些都一次传递给N点复数FFT。然后，FFT产生一组N个复数输出，每个输出都是不同光束的下一个基带样本。</p>
+<p><img src="/2022/11/03/Beamforming/WX20221107-112040.png"></p>
+<p>在这种情况下，正在执行 “空间FFT”: FFT正在处理在空间中 (不是在时间中) 分离的一组样本。因此，它的输出是一组在方向上 (而不是在频率上) 分离的样本。</p>
+<p>如上所示的FFT波束形成不灵活。对于线性阵列，N束是固定的，并且在方向上等距。它们的范围从阵列的宽边到-90度到90度。光束是正交的: 任何光束的中心峰在所有其他光束上都处于零值。这样的一组波束对雷达测绘很有用，但对通信不太有用。</p>
+<p>可以在通信中使用FFT进行波束形成。可以像以前一样使用复杂的权重和总和来组合一组FFT输出，以形成任意的辐射方向图。这被称为 “波束空间波束形成”。先前组合来自不同天线元件的基带信号的方法被称为 “单元空间波束形成”。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B3%A2%E6%9D%9F%E5%90%88%E6%88%90/" rel="tag"># 波束合成</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/02/%E5%A4%A9%E7%BA%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="天线的基础知识">
+      <i class="fa fa-chevron-left"></i> 天线的基础知识
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Antenna-Radiation-Patterns"><span class="nav-number">2.</span> <span class="nav-text">Antenna Radiation Patterns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Directional-Antenna"><span class="nav-number">3.</span> <span class="nav-text">Directional Antenna</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Arrays"><span class="nav-number">4.</span> <span class="nav-text">Linear Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Electronically-Steered-Arrays"><span class="nav-number">5.</span> <span class="nav-text">Electronically Steered Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-Configurations"><span class="nav-number">6.</span> <span class="nav-text">Array Configurations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beamforming"><span class="nav-number">7.</span> <span class="nav-text">Beamforming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Digital-Beamforming"><span class="nav-number">8.</span> <span class="nav-text">Digital Beamforming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaptive-Beamforming"><span class="nav-number">9.</span> <span class="nav-text">Adaptive Beamforming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Smart-Antennas"><span class="nav-number">10.</span> <span class="nav-text">Smart Antennas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT%E2%80%99s-in-Beamforming"><span class="nav-number">11.</span> <span class="nav-text">FFT’s in Beamforming</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiayi Liang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Jiayi Liang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiayi Liang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
